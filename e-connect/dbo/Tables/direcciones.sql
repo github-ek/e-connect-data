@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[direcciones] (
+    [id_direccion]            BIGINT           IDENTITY (1, 1) NOT NULL,
+    [estado]                  VARCHAR (50)     NOT NULL,
+    [id_cliente]              BIGINT           NOT NULL,
+    [tercero_codigo_alterno]  VARCHAR (20)     NOT NULL,
+    [tercero_nombre]          VARCHAR (100)    NOT NULL,
+    [tipo_geocodificacion]    VARCHAR (50)     NOT NULL,
+    [id_ciudad]               BIGINT           NOT NULL,
+    [direccion]               VARCHAR (150)    NOT NULL,
+    [direccion_estandarizada] VARCHAR (150)    NOT NULL,
+    [cx]                      DECIMAL (18, 15) NOT NULL,
+    [cy]                      DECIMAL (18, 15) NOT NULL,
+    [zona]                    VARCHAR (100)    NOT NULL,
+    [localidad]               VARCHAR (100)    NOT NULL,
+    [barrio]                  VARCHAR (100)    NOT NULL,
+    [activo]                  BIT              NOT NULL,
+    [version]                 INT              NOT NULL,
+    [usuario_creacion]        VARCHAR (50)     NOT NULL,
+    [fecha_creacion]          DATETIME2 (0)    NOT NULL,
+    [usuario_modificacion]    VARCHAR (50)     NOT NULL,
+    [fecha_modificacion]      DATETIME2 (0)    NOT NULL,
+    CONSTRAINT [PK_direcciones_georeferenciadas] PRIMARY KEY CLUSTERED ([id_direccion] ASC),
+    CONSTRAINT [FK_direcciones_ciudades] FOREIGN KEY ([id_ciudad]) REFERENCES [dbo].[ciudades] ([id_ciudad]),
+    CONSTRAINT [FK_direcciones_clientes] FOREIGN KEY ([id_cliente]) REFERENCES [dbo].[clientes] ([id_cliente])
+);
+

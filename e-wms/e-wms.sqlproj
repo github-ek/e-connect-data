@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>e_wms</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{717dab89-d6e8-4324-945e-a3ac4a02bd37}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>e_wms</RootNamespace>
+    <AssemblyName>e_wms</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\productos.sql" />
+    <Build Include="dbo\Tables\productos_medidas.sql" />
+    <Build Include="dbo\Tables\unidades.sql" />
+    <Build Include="dbo\Tables\clientes.sql" />
+    <Build Include="dbo\Tables\bodegas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarProductos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarClientes.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarBodegas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarUnidades.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarProductosMedidas.sql" />
+    <Build Include="dbo\Tables\ubicaciones.sql" />
+    <Build Include="dbo\Tables\salidas.sql" />
+    <Build Include="dbo\Tables\saldos_inventario.sql" />
+    <Build Include="dbo\Tables\entradas.sql" />
+    <Build Include="dbo\Tables\dias.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarUbicaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarSaldosInventario.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarProductosMedidasEliminados.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaCompareDevelopment.scmp" />
+    <None Include="SqlSchemaCompareProduccion.scmp" />
+    <None Include="SqlSchemaCompareTest.scmp" />
+    <None Include="e-wms.test.publish.xml" />
+    <None Include="e-wms.dev.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
+      <Name>e-integration</Name>
+      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-connect\e-connect.sqlproj">
+      <Name>e-connect</Name>
+      <Project>{b61ce68b-f831-41d8-895b-212a9697457c}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-config\e-config.sqlproj">
+      <Name>e-config</Name>
+      <Project>{609e6200-dbe9-49e6-bb9c-71ad502998bb}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConfig</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConfig">
+      <DefaultValue>e-config</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eConnect">
+      <DefaultValue>e-connect</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegration">
+      <DefaultValue>e-integration</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+</Project>

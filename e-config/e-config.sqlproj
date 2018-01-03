@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>e_config</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{609e6200-dbe9-49e6-bb9c-71ad502998bb}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>e_config</RootNamespace>
+    <AssemblyName>e_config</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Synonyms\" />
+    <Folder Include="wms\" />
+    <Folder Include="wms\Synonyms\" />
+    <Folder Include="satelite\" />
+    <Folder Include="satelite\Synonyms\" />
+    <Folder Include="hst\" />
+    <Folder Include="hst\Synonyms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\configuraciones.sql" />
+    <Build Include="dbo\Tables\grupos_configuracion.sql" />
+    <Build Include="Security\wms.sql" />
+    <Build Include="Security\satelite.sql" />
+    <Build Include="Security\hst.sql" />
+    <Build Include="dbo\Synonyms\dbo.wkohdr.sql" />
+    <Build Include="dbo\Synonyms\dbo.wkodtl.sql" />
+    <Build Include="dbo\Synonyms\dbo.wko_typ.sql" />
+    <Build Include="dbo\Synonyms\dbo.wh_uom.sql" />
+    <Build Include="dbo\Synonyms\dbo.wh.sql" />
+    <Build Include="dbo\Synonyms\dbo.supmst.sql" />
+    <Build Include="dbo\Synonyms\dbo.shipment_line.sql" />
+    <Build Include="dbo\Synonyms\dbo.rplwrk.sql" />
+    <Build Include="dbo\Synonyms\dbo.rimlin.sql" />
+    <Build Include="dbo\Synonyms\dbo.rimhdr.sql" />
+    <Build Include="dbo\Synonyms\dbo.Recibidos_Hist.sql" />
+    <Build Include="dbo\Synonyms\dbo.prtmst_view.sql" />
+    <Build Include="dbo\Synonyms\dbo.prtmst.sql" />
+    <Build Include="dbo\Synonyms\dbo.prtftp_dtl.sql" />
+    <Build Include="dbo\Synonyms\dbo.prtftp.sql" />
+    <Build Include="dbo\Synonyms\dbo.prtdsc.sql" />
+    <Build Include="dbo\Synonyms\dbo.pedidos_pendientes_lineas.sql" />
+    <Build Include="dbo\Synonyms\dbo.ord_line.sql" />
+    <Build Include="dbo\Synonyms\dbo.ord.sql" />
+    <Build Include="dbo\Synonyms\dbo.locmst.sql" />
+    <Build Include="dbo\Synonyms\dbo.invsub.sql" />
+    <Build Include="dbo\Synonyms\dbo.invlod.sql" />
+    <Build Include="dbo\Synonyms\dbo.invdtl.sql" />
+    <Build Include="dbo\Synonyms\dbo.hldhst.sql" />
+    <Build Include="dbo\Synonyms\dbo.dscmst.sql" />
+    <Build Include="dbo\Synonyms\dbo.despachos_Hist.sql" />
+    <Build Include="dbo\Synonyms\dbo.cstmst.sql" />
+    <Build Include="dbo\Synonyms\dbo.corteInv_Hist.sql" />
+    <Build Include="dbo\Synonyms\dbo.corte_saldos_inventario_wms.sql" />
+    <Build Include="dbo\Synonyms\dbo.client.sql" />
+    <Build Include="dbo\Synonyms\dbo.bomhdr.sql" />
+    <Build Include="dbo\Synonyms\dbo.bomdtl.sql" />
+    <Build Include="dbo\Synonyms\dbo.bldg_mst.sql" />
+    <Build Include="dbo\Synonyms\dbo.aremst.sql" />
+    <Build Include="dbo\Synonyms\dbo.alt_prtmst.sql" />
+    <Build Include="dbo\Synonyms\dbo.adrmst.sql" />
+    <Build Include="wms\Synonyms\wms.ubicaciones.sql" />
+    <Build Include="wms\Synonyms\wms.salidas.sql" />
+    <Build Include="wms\Synonyms\wms.entradas.sql" />
+    <Build Include="wms\Synonyms\wms.saldos_inventario.sql" />
+    <Build Include="satelite\Synonyms\satelite.wms_unidades.sql" />
+    <Build Include="satelite\Synonyms\satelite.wms_productos_unidades.sql" />
+    <Build Include="satelite\Synonyms\satelite.wms_productos.sql" />
+    <Build Include="satelite\Synonyms\satelite.wms_estados_inventario.sql" />
+    <Build Include="satelite\Synonyms\satelite.wms_bodegas.sql" />
+    <Build Include="satelite\Synonyms\satelite.tms_tipos_operacion.sql" />
+    <Build Include="satelite\Synonyms\satelite.tms_tipos_distribucion.sql" />
+    <Build Include="satelite\Synonyms\satelite.ordenes_ordenes.sql" />
+    <Build Include="satelite\Synonyms\satelite.oms_tipos_orden.sql" />
+    <Build Include="satelite\Synonyms\satelite.oms_estados_orden.sql" />
+    <Build Include="satelite\Synonyms\satelite.geo_paises.sql" />
+    <Build Include="satelite\Synonyms\satelite.geo_direcciones_georeferenciadas.sql" />
+    <Build Include="satelite\Synonyms\satelite.geo_departamentos.sql" />
+    <Build Include="satelite\Synonyms\satelite.geo_ciudades.sql" />
+    <Build Include="satelite\Synonyms\satelite.destinatarios_remitentes.sql" />
+    <Build Include="satelite\Synonyms\satelite.crm_tipos_servicios.sql" />
+    <Build Include="satelite\Synonyms\satelite.crm_segmentos.sql" />
+    <Build Include="satelite\Synonyms\satelite.crm_clientes_tipos_servicios.sql" />
+    <Build Include="satelite\Synonyms\satelite.crm_clientes_segmentos.sql" />
+    <Build Include="satelite\Synonyms\satelite.crm_clientes_ciudades.sql" />
+    <Build Include="satelite\Synonyms\satelite.crm_clientes_bodegas.sql" />
+    <Build Include="satelite\Synonyms\satelite.crm_clientes.sql" />
+    <Build Include="hst\Synonyms\hst.logs_salidas.sql" />
+    <Build Include="hst\Synonyms\hst.logs_entradas.sql" />
+    <Build Include="hst\Synonyms\hst.salidas.sql" />
+    <Build Include="hst\Synonyms\hst.entradas.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="e-config.dev.publish.xml" />
+    <None Include="SqlSchemaCompareDevelopment.scmp" />
+    <None Include="SqlSchemaCompareProduccion.scmp" />
+    <None Include="SqlSchemaCompareTest.scmp" />
+    <None Include="e-config.test.publish.xml" />
+  </ItemGroup>
+</Project>

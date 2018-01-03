@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[ordenes_alistamiento_ord_line] (
+    [id]                    BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_orden_alistamiento] BIGINT        NOT NULL,
+    [numero_linea]          INT           NOT NULL,
+    [ordlin]                NVARCHAR (10) NOT NULL,
+    [ordsln]                NVARCHAR (10) NOT NULL,
+    [prtnum]                NVARCHAR (50) NOT NULL,
+    [ordqty]                INT           NOT NULL,
+    [invsts]                NVARCHAR (4)  NOT NULL,
+    [invsts_prg]            NVARCHAR (4)  NOT NULL,
+    [splflg]                INT           NOT NULL,
+    [carcod]                NVARCHAR (10) NOT NULL,
+    [srvlvl]                NVARCHAR (10) NOT NULL,
+    [ordinv]                NVARCHAR (30) NOT NULL,
+    [dte_code]              NVARCHAR (5)  NOT NULL,
+    [pckgr1]                NVARCHAR (20) NOT NULL,
+    [pckgr2]                NVARCHAR (20) NOT NULL,
+    [pckgr3]                NVARCHAR (20) NOT NULL,
+    [pckgr4]                NVARCHAR (20) NOT NULL,
+    [version]               INT           NOT NULL,
+    [fecha_creacion]        DATETIME2 (0) NOT NULL,
+    [usuario_creacion]      VARCHAR (50)  NOT NULL,
+    [fecha_modificacion]    DATETIME2 (0) NOT NULL,
+    [usuario_modificacion]  VARCHAR (50)  NOT NULL,
+    CONSTRAINT [PK_ordenes_alistamiento_ord_line] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80)
+);
+

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>e_connect</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{b61ce68b-f831-41d8-895b-212a9697457c}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>e_connect</RootNamespace>
+    <AssemblyName>e_connect</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\ordenes_atributos.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura_materiales.sql" />
+    <Build Include="dbo\Tables\ordenes_contactos.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura_wkohdr.sql" />
+    <Build Include="dbo\Tables\ordenes_documentos.sql" />
+    <Build Include="dbo\Tables\ordenes_notas.sql" />
+    <Build Include="dbo\Tables\ordenes_alistamiento_lineas_originales.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura_lineas_originales.sql" />
+    <Build Include="dbo\Tables\ordenes_transporte.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo_lineas_originales.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura_wkodtl.sql" />
+    <Build Include="dbo\Tables\ordenes_alistamiento_ord_line.sql" />
+    <Build Include="dbo\Tables\preordenes_salida.sql" />
+    <Build Include="dbo\Tables\preordenes_venta.sql" />
+    <Build Include="dbo\Tables\__ordenes_venta_lineas.sql" />
+    <Build Include="dbo\Tables\__pedidos_lineas.sql" />
+    <Build Include="dbo\Tables\__pedidos_asignacion_inventario.sql" />
+    <Build Include="dbo\Tables\direcciones.sql" />
+    <Build Include="dbo\Tables\bodegas.sql" />
+    <Build Include="dbo\Tables\canales.sql" />
+    <Build Include="dbo\Tables\solicitudes_geocodificacion.sql" />
+    <Build Include="dbo\Tables\ciudades.sql" />
+    <Build Include="dbo\Tables\clientes.sql" />
+    <Build Include="dbo\Tables\lineas_negocio.sql" />
+    <Build Include="dbo\Tables\clientes_servicios.sql" />
+    <Build Include="dbo\Tables\departamentos.sql" />
+    <Build Include="dbo\Tables\solicitudes_cita.sql" />
+    <Build Include="dbo\Tables\unidades_negocio.sql" />
+    <Build Include="dbo\Tables\empresas.sql" />
+    <Build Include="dbo\Tables\estados_inventario.sql" />
+    <Build Include="dbo\Tables\tipos_ruta.sql" />
+    <Build Include="dbo\Tables\paises.sql" />
+    <Build Include="dbo\Tables\solicitudes_ruta.sql" />
+    <Build Include="dbo\Tables\productos.sql" />
+    <Build Include="dbo\Tables\tipos_remesa.sql" />
+    <Build Include="dbo\Tables\productos_atributos.sql" />
+    <Build Include="dbo\Tables\productos_codigos.sql" />
+    <Build Include="dbo\Tables\tipos_flete.sql" />
+    <Build Include="dbo\Tables\remesas_transporte.sql" />
+    <Build Include="dbo\Tables\puntos.sql" />
+    <Build Include="dbo\Tables\servicios.sql" />
+    <Build Include="dbo\Tables\terceros.sql" />
+    <Build Include="dbo\Tables\tipos_identificacion.sql" />
+    <Build Include="dbo\Tables\unidades_medida.sql" />
+    <Build Include="dbo\Tables\ordenes_alistamiento.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura.sql" />
+    <Build Include="dbo\Tables\ordenes_alistamiento_lineas.sql" />
+    <Build Include="dbo\Tables\ordenes.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo_lineas.sql" />
+    <Build Include="dbo\Tables\productos_medidas.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo_rcvlin.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura_lineas.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaCompareTest.scmp" />
+    <None Include="SqlSchemaCompareProduccion.scmp" />
+    <None Include="SqlSchemaCompareDevelopment.scmp" />
+    <None Include="e-connect.test.publish.xml" />
+    <None Include="e-connect.dev.publish.xml" />
+  </ItemGroup>
+</Project>
