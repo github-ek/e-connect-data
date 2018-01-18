@@ -51,7 +51,7 @@ BEGIN
              client_id
             ,wh_id
             ,ordnum
-            ,/*CAST(CASE WHEN SUM(CASE WHEN a.linsts IN ('C','B') THEN 0 ELSE 1 END) = 0 THEN 1 ELSE 0 END AS BIT)*/ 0 AS cerrada
+            ,CAST(CASE WHEN SUM(CASE WHEN a.estado = 'CERRADA' THEN 0 ELSE 1 END) = 0 THEN 1 ELSE 0 END AS BIT) AS cerrada
             ,MAX(a.fecha_modificacion) AS ultima_fecha_modificacion
         FROM dbo.salidas a
         WHERE

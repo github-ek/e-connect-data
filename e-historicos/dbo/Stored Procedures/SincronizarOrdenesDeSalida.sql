@@ -185,7 +185,7 @@ BEGIN TRY
             CAST(NULL AS BIGINT) AS id,
             a.operacion,
             'ABIERTA' AS estado,
-            CAST(0 AS BIT) AS cierre_notificado,
+            CAST(0 AS BIT) AS cambio_notificado,
             a.fecha_creacion,
             a.fecha_modificacion,
 
@@ -482,7 +482,7 @@ BEGIN TRY
              a.id
             ,a.operacion
             ,a.estado
-            ,a.cierre_notificado
+            ,a.cambio_notificado
             ,a.fecha_creacion
             ,a.fecha_modificacion
 
@@ -549,7 +549,7 @@ BEGIN TRY
              a.id
 			,a.operacion
             ,a.estado
-            ,a.cierre_notificado
+            ,a.cambio_notificado
             ,a.fecha_creacion
             ,a.fecha_modificacion
 

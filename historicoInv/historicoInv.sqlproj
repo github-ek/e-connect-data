@@ -61,9 +61,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-    <Folder Include="Security\" />
     <Folder Include="dbo\Stored Procedures\" />
-    <Folder Include="dbo\Synonyms\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\corte_wh_clientes.sql" />
@@ -98,10 +96,6 @@
     <Build Include="dbo\Stored Procedures\recepciones_sin_cerrar_sp.sql" />
     <Build Include="dbo\Stored Procedures\olas_pendientes_sp.sql" />
     <Build Include="dbo\Stored Procedures\test.sql" />
-    <Build Include="dbo\Synonyms\ord.sql" />
-    <Build Include="dbo\Synonyms\ord_line.sql" />
-    <Build Include="dbo\Synonyms\shipment_line.sql" />
-    <Build Include="dbo\Synonyms\shipment.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">

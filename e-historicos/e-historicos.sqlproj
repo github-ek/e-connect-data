@@ -65,7 +65,6 @@
     <Folder Include="logs\Tables\" />
     <Folder Include="Security\" />
     <Folder Include="dbo\Stored Procedures\" />
-    <Folder Include="dbo\Synonyms\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\ubicaciones.sql" />
@@ -79,8 +78,6 @@
     <Build Include="dbo\Tables\clientes_bodegas.sql" />
     <Build Include="dbo\Tables\bodegas.sql" />
     <Build Include="dbo\Tables\clientes.sql" />
-    <Build Include="Security\TACTIC_diegon.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="dbo\Stored Procedures\_SincronizarOrdenesDeSalida.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeSalida.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeEntrada.sql" />
@@ -94,7 +91,9 @@
     <None Include="e-historicos.publish.xml" />
     <None Include="e-historicos.dev.publish.xml" />
     <None Include="e-historicos.test.publish.xml" />
+    <None Include="SqlSchemaCompareDevelopment.scmp" />
     <None Include="SqlSchemaCompareProduction.scmp" />
+    <None Include="SqlSchemaCompareTest.scmp" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="historicoInv">
