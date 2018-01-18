@@ -100,6 +100,10 @@
       <DefaultValue>e-connect</DefaultValue>
       <Value>$(SqlCmdVar__6)</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eHistoricos">
+      <DefaultValue>eHistoricos</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eIntegration">
       <DefaultValue>e-integration</DefaultValue>
       <Value>$(SqlCmdVar__4)</Value>
@@ -107,6 +111,14 @@
     <SqlCmdVariable Include="eStage">
       <DefaultValue>e-stage</DefaultValue>
       <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <DefaultValue>ttcwmsprd</DefaultValue>
+      <Value>$(SqlCmdVar__9)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <DefaultValue>WMS_DB_SERVER</DefaultValue>
+      <Value>$(SqlCmdVar__10)</Value>
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +149,22 @@
       <Private>True</Private>
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
+      <Name>e-historicos</Name>
+      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
+      <Name>ttcwmsprd</Name>
+      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
     </ProjectReference>
   </ItemGroup>
 </Project>

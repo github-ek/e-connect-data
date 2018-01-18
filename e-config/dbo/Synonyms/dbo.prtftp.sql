@@ -1,2 +1,2 @@
-﻿CREATE SYNONYM [dbo].[prtftp] FOR [VIETNAM].[ttcwmsprd].[dbo].[prtftp];
+﻿CREATE SYNONYM [dbo].[prtftp] FOR [$(WMS_DB_SERVER)].[$(ttcwmsprd)].[dbo].[prtftp];
 

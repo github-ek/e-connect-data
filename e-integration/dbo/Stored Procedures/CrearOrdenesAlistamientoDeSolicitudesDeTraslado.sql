@@ -23,7 +23,7 @@ BEGIN TRY
             ,a.id_orden_origen
             ,a.numero_orden_origen
         INTO #base
-        FROM eConnect.dbo.solicitudes_ordenes a
+        FROM [$(eConnect)].dbo.solicitudes_ordenes a
         WHERE
             a.tipo_solicitud = 'TRASLADO'
         AND a.tipo_orden = 'ALISTAMIENTO'
@@ -71,11 +71,11 @@ BEGIN TRY
             ,SYSDATETIME() AS fecha_modificacion
         INTO #ordenes_alistamiento
         FROM #base a
-        INNER JOIN eConnect.dbo.solicitudes b ON
+        INNER JOIN [$(eConnect)].dbo.solicitudes b ON
             b.id_solicitud = a.id_solicitud
-        LEFT OUTER JOIN eConnect.dbo.solicitudes_transporte c ON
+        LEFT OUTER JOIN [$(eConnect)].dbo.solicitudes_transporte c ON
             c.id_solicitud = a.id_solicitud
-        LEFT OUTER JOIN eConnect.dbo.lineas_negocio d ON
+        LEFT OUTER JOIN [$(eConnect)].dbo.lineas_negocio d ON
             d.nombre = 'ALMACENAMIENTO'
             --TODO CAMBIAR LOS CODIGOSX
 
@@ -98,7 +98,7 @@ BEGIN TRY
             ,'' AS predistribucion
         INTO #ordenes_alistamiento_lineas
         FROM #base a
-        INNER JOIN eConnect.dbo.solicitudes_lineas b ON
+        INNER JOIN [$(eConnect)].dbo.solicitudes_lineas b ON
             b.id_solicitud = a.id_solicitud
 
         IF OBJECT_ID('tempdb..#solicitudes_ordenes') IS NOT NULL BEGIN
@@ -125,7 +125,7 @@ BEGIN TRY
     DECLARE @t AS TABLE(id_orden_alistamiento BIGINT,id_solicitud BIGINT)
     BEGIN
 
-        INSERT INTO eConnect.dbo.ordenes_alistamiento
+        INSERT INTO [$(eConnect)].dbo.ordenes_alistamiento
             (numero_orden
             ,estado
             ,id_linea_negocio
@@ -205,7 +205,7 @@ BEGIN TRY
         INNER JOIN @t b ON
             b.id_solicitud = a.id_solicitud
 
-        INSERT INTO eConnect.dbo.ordenes_alistamiento_lineas
+        INSERT INTO [$(eConnect)].dbo.ordenes_alistamiento_lineas
            (id_orden_alistamiento
            ,numero_linea
            ,id_producto
@@ -253,7 +253,7 @@ BEGIN TRY
             ,a.[version] = a.[version] + 1
             ,a.fecha_modificacion = SYSDATETIME()
             ,a.usuario_modificacion = SYSTEM_USER
-        FROM eConnect.dbo.solicitudes_ordenes a
+        FROM [$(eConnect)].dbo.solicitudes_ordenes a
         INNER JOIN #base b ON
             b.id = a.id
         INNER JOIN #ordenes_alistamiento C ON

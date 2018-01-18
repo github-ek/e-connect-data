@@ -11,7 +11,7 @@ BEGIN
     IF OBJECT_ID('tempdb..#bodegas') IS NOT NULL BEGIN
         DROP TABLE #bodegas
     END
-    /*
+
     ;WITH
     cte_00 AS
     (
@@ -439,15 +439,5 @@ BEGIN
         a.NUMERO_DE_DOCUMENTO_ORIGEN,
         a.orden,
         a.id
-    */
 END
 END
-
---SELECT 
---    * 
---FROM #salidas a 
---WHERE BODEGA_EK = 'MDE02'
---and PRODUCTO_CODIGO = '131018'
-
---SELECT * FROM salidas a WHERE ordnum = 'TC-1066376-FAC_MED-2040341'
---SELECT * FROM logs.salidas a WHERE ordnum = 'TC-1066376-FAC_MED-2040341'

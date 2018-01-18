@@ -80,7 +80,6 @@
     <Build Include="dbo\Tables\bodegas.sql" />
     <Build Include="dbo\Tables\clientes.sql" />
     <Build Include="Security\TACTIC_diegon.sql" />
-    <Build Include="Security\TACTIC_diegon_1.sql" />
     <Build Include="Security\RoleMemberships.sql" />
     <Build Include="dbo\Stored Procedures\_SincronizarOrdenesDeSalida.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeSalida.sql" />
@@ -92,23 +91,39 @@
     <Build Include="dbo\Tables\embarques.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="e-historicos.publish.xml" />
+    <None Include="e-historicos.dev.publish.xml" />
+    <None Include="e-historicos.test.publish.xml" />
+    <None Include="SqlSchemaCompareProduction.scmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="historicoInv">
+      <DefaultValue>historicoInv</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <DefaultValue>ttcwmsprd</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <DefaultValue>VIETNAM</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
       <Name>ttcwmsprd</Name>
       <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
       <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="ttcwmsprd">
-      <DefaultValue>ttcwmsprd</DefaultValue>
-      <Value>$(SqlCmdVar__1)</Value>
-    </SqlCmdVariable>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="e-historicos.publish.xml" />
-    <None Include="e-historicos.dev.publish.xml" />
-    <None Include="e-historicos.test.publish.xml" />
+    <ProjectReference Include="..\historicoInv\historicoInv.sqlproj">
+      <Name>historicoInv</Name>
+      <Project>{6eb7734c-a50f-49ca-91c4-79f0377d0a7f}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>historicoInv</DatabaseSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
 </Project>

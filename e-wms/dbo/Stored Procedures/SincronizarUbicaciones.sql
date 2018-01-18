@@ -17,7 +17,7 @@ BEGIN TRY
 		SET a.fecha_ultima_extraccion = @fecha_extraccion_actual
 		OUTPUT deleted.fecha_ultima_extraccion
 		INTO @t(fecha_extraccion_anterior)
-		FROM eIntegration.dbo.integraciones a
+		FROM [$(eIntegration)].dbo.integraciones a
 		WHERE
 			a.codigo = 'WMS_UBICACIONES'
         
@@ -47,8 +47,8 @@ BEGIN TRY
                 ,a.wrkzon
                 ,a.last_upd_dt
                 ,a.last_upd_user_id
-            FROM eConfig.wms.ubicaciones a
-            INNER JOIN tactic_connect.wms.bodegas b ON
+            FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ubicaciones a
+            INNER JOIN [$(eConnect)].dbo.bodegas b ON
                 b.codigo = a.wh_id
             WHERE
                 a.fecha_modificacion > @fecha_extraccion_anterior

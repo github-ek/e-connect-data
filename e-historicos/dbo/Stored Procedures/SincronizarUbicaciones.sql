@@ -7,7 +7,7 @@ BEGIN TRY
 	DECLARE @t AS TABLE(fecha_ultimo_pull DATETIME)
 	DECLARE @fecha_pull DATETIME
 	DECLARE @fecha_ultimo_pull DATETIME
-    /*
+
 	BEGIN TRANSACTION
 
 	--OBTENER FECHA DE ULTIMO PULL
@@ -43,8 +43,8 @@ BEGIN TRY
                 a.wrkzon,
                 COALESCE(a.last_upd_dt,a.ins_dt) AS last_upd_dt,
                 COALESCE(a.last_upd_user_id,a.ins_user_id) AS last_upd_user_id
-            FROM ttcwmsprd.dbo.locmst a
-            INNER JOIN ttcwmsprd.dbo.aremst b ON
+            FROM [$(ttcwmsprd)].dbo.locmst a
+            INNER JOIN [$(ttcwmsprd)].dbo.aremst b ON
                 a.wh_id = b.wh_id
             AND a.arecod = b.arecod
             WHERE 
@@ -265,7 +265,6 @@ BEGIN TRY
 	END
 
 	COMMIT TRANSACTION
-    */
 
 END TRY
 BEGIN CATCH
@@ -273,6 +272,3 @@ BEGIN CATCH
 	ROLLBACK TRANSACTION
     ;THROW;
 END CATCH
-
-
-EXEC [dbo].[SincronizarUbicaciones]

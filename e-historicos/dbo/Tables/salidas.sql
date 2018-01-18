@@ -2,7 +2,7 @@
     [id]                      BIGINT        IDENTITY (1, 1) NOT NULL,
     [operacion]               NVARCHAR (50) NOT NULL,
     [estado]                  NVARCHAR (50) NOT NULL,
-    [cierre_notificado]       BIT NOT NULL,
+    [cambio_notificado]       BIT NOT NULL,
     [fecha_creacion]          DATETIME      NOT NULL,
     [fecha_modificacion]      DATETIME      NOT NULL,
     [client_id]               NVARCHAR (32) NOT NULL,
@@ -29,4 +29,3 @@
     CONSTRAINT [PK_salidas] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80),
     CONSTRAINT [UK_salidas_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [ordnum] ASC, [ordlin] ASC) WITH (FILLFACTOR = 80)
 );
-

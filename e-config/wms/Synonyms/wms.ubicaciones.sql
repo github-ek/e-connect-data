@@ -1,2 +1,2 @@
-﻿CREATE SYNONYM [wms].[ubicaciones] FOR [VIETNAM].[eHistoricos].[dbo].[ubicaciones];
+﻿CREATE SYNONYM [wms].[ubicaciones] FOR [$(WMS_DB_SERVER)].[$(eHistoricos)].[dbo].[ubicaciones];
 

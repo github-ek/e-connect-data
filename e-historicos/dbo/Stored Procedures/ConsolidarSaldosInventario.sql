@@ -4,7 +4,7 @@ AS
 BEGIN TRY
     SET NOCOUNT ON;
     DECLARE @fecha_creacion DATETIME
-    /*
+
     BEGIN TRANSACTION
     -------------------------------------------------------------------------------------------------------------------
     -- Inicializando valores por defecto
@@ -51,15 +51,15 @@ BEGIN TRY
 		        d.stoloc,
                 a.lodnum,
                 c.cmpkey
-            FROM ttcwmsprd.dbo.invlod a
-            INNER JOIN ttcwmsprd.dbo.invsub b ON
+            FROM [$(ttcwmsprd)].dbo.invlod a
+            INNER JOIN [$(ttcwmsprd)].dbo.invsub b ON
                 a.lodnum = b.lodnum
-            INNER JOIN ttcwmsprd.dbo.invdtl c ON 
+            INNER JOIN [$(ttcwmsprd)].dbo.invdtl c ON 
                 c.subnum = b.subnum
-            INNER JOIN ttcwmsprd.dbo.locmst d ON 
+            INNER JOIN [$(ttcwmsprd)].dbo.locmst d ON 
                 d.stoloc = a.stoloc
             AND d.wh_id = a.wh_id
-            INNER JOIN ttcwmsprd.dbo.aremst e ON 
+            INNER JOIN [$(ttcwmsprd)].dbo.aremst e ON 
                 e.arecod = d.arecod
             AND e.wh_id = d.wh_id
             WHERE 
@@ -83,9 +83,9 @@ BEGIN TRY
         -------------------------------------------------------------------------------------------------------------------
         DELETE a
         FROM #saldos_inventario a
-        INNER JOIN ttcwmsprd.dbo.cmphdr b ON
+        INNER JOIN [$(ttcwmsprd)].dbo.cmphdr b ON
             b.cmpkey = a.cmpkey
-        INNER JOIN ttcwmsprd.dbo.wkohdr c ON 
+        INNER JOIN [$(ttcwmsprd)].dbo.wkohdr c ON 
             c.wh_id = b.wh_id
         AND c.client_id = b.client_id
         AND c.wkonum = b.wkonum
@@ -149,11 +149,11 @@ BEGIN TRY
     -------------------------------------------------------------------------------------------------------------------
     BEGIN
         DELETE a
-        FROM historicoInv.dbo.corteInv_Hist a
+        FROM [$(historicoInv)].dbo.corteinv_hist a
         WHERE
             a.fecha = @fecha_corte
 
-        INSERT INTO historicoInv.dbo.corteInv_Hist 
+        INSERT INTO [$(historicoInv)].dbo.corteinv_hist 
             (fecha
             ,prt_client_id
             ,wh_id
@@ -183,11 +183,11 @@ BEGIN TRY
         WHERE
             a.fecha_corte = @fecha_corte
 
-        EXEC historicoInv.[dbo].[corte_pedidos_pendientes_sp] @fecha_corte
+        EXEC [$(historicoInv)].[dbo].[corte_pedidos_pendientes_sp] @fecha_corte
     END
 
     COMMIT TRANSACTION
-    */
+
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()

@@ -20,7 +20,7 @@ BEGIN
         a.*
     INTO #deleted
     FROM #target a
-    LEFT OUTER JOIN tactic_connect.wms.productos_medidas b ON
+    LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas b ON
         b.id_producto = a.id_producto
     AND b.id_bodega = a.id_bodega
     AND b.nivel = a.uomlvl

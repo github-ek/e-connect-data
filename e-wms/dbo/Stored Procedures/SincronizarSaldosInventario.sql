@@ -18,7 +18,7 @@ BEGIN TRY
 		SET a.fecha_ultima_extraccion = @fecha_extraccion_actual
 		OUTPUT deleted.fecha_ultima_extraccion
 		INTO @t(fecha_extraccion_anterior)
-		FROM [$(eIntegration)]..dbo.integraciones a
+		FROM [$(eIntegration)].dbo.integraciones a
 		WHERE
 			a.codigo = 'WMS_SALDOS_INVENTARIOS'
         
@@ -74,7 +74,7 @@ BEGIN TRY
                 ,a.inv_attr_str7
                 ,a.stoloc
                 ,a.lodnum
-            FROM eConfig.wms.saldos_inventario a
+            FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.saldos_inventario a
             WHERE
                 a.fecha_corte = @fecha_corte
 

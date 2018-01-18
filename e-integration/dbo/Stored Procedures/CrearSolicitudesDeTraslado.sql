@@ -82,7 +82,7 @@ BEGIN TRY
             ,a.id_cliente
             ,a.numero_orden AS numero_solicitud
 
-            ,a.numero_linea
+            ,ROW_NUMBER() OVER(PARTITION BY a.id_cliente, a.numero_orden ORDER BY a.numero_linea) AS numero_linea
             ,a.id_producto
             ,a.producto_codigo_alterno AS producto_codigo
             ,COALESCE(b.nombre,'') AS producto_nombre

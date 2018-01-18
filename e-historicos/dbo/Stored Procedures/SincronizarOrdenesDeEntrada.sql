@@ -7,7 +7,7 @@ BEGIN TRY
 	DECLARE @t AS TABLE(fecha_ultimo_pull DATETIME)
 	DECLARE @fecha_pull DATETIME
 	DECLARE @fecha_ultimo_pull DATETIME
-    /*
+
 	BEGIN TRANSACTION
 
 	--OBTENER FECHA DE ULTIMO PULL
@@ -87,7 +87,7 @@ BEGIN TRY
                 a.supnum,
                 a.invnum,
                 a.trknum
-            FROM dbo.rcvinv a
+            FROM [$(ttcwmsprd)].dbo.rcvinv a
             INNER JOIN dbo.clientes b ON
                 b.client_id = a.client_id
             LEFT OUTER JOIN cte_00 c ON
@@ -184,23 +184,23 @@ BEGIN TRY
             COALESCE(e.mod_usr_id,'') AS trlr_mod_usr_id
         INTO #source
         FROM #rcv a
-        INNER JOIN dbo.rcvinv  b ON
+        INNER JOIN [$(ttcwmsprd)].dbo.rcvinv  b ON
             b.client_id = a.client_id
         AND b.wh_id = a.wh_id
         AND b.po_num = a.po_num
         AND b.supnum = a.supnum
         AND b.invnum = a.invnum
         AND b.trknum = a.trknum
-        INNER JOIN dbo.rcvlin c ON
+        INNER JOIN [$(ttcwmsprd)].dbo.rcvlin c ON
             c.client_id = b.client_id
         AND c.wh_id = b.wh_id
         AND c.supnum = b.supnum
         AND c.invnum = b.invnum
         AND c.trknum = b.trknum
-        INNER JOIN dbo.rcvtrk d ON 
+        INNER JOIN [$(ttcwmsprd)].dbo.rcvtrk d ON 
             d.wh_id = c.wh_id
         AND d.trknum = c.trknum
-        INNER JOIN dbo.trlr e ON 
+        INNER JOIN [$(ttcwmsprd)].dbo.trlr e ON 
             e.trlr_id = d.trlr_id
 
         CREATE UNIQUE INDEX ix_source_01 ON #source(client_id,wh_id,po_num,supnum,invnum,trknum,invlin,invsln,seqnum)
@@ -614,7 +614,7 @@ BEGIN TRY
 	END
 
 	COMMIT TRANSACTION
-    */
+
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()

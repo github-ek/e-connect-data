@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{0679373d-2f0a-4864-8180-1c981ea43bf5}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -62,6 +62,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Views\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\msg_id.sql" />
@@ -899,5 +900,50 @@
     <Build Include="dbo\Tables\pko_act_id.sql" />
     <Build Include="dbo\Tables\client_blng_uom.sql" />
     <Build Include="dbo\Tables\sys_dsc_mst.sql" />
+    <Build Include="dbo\Views\yard_loc_trlr_view.sql" />
+    <Build Include="dbo\Views\wrkopr_view.sql" />
+    <Build Include="dbo\Views\wkohdr_note_view.sql" />
+    <Build Include="dbo\Views\wkodtl_note_view.sql" />
+    <Build Include="dbo\Views\users_view.sql" />
+    <Build Include="dbo\Views\spcins_for_stop.sql" />
+    <Build Include="dbo\Views\spcins_for_shipment.sql" />
+    <Build Include="dbo\Views\shipping_pckwrk_view.sql" />
+    <Build Include="dbo\Views\ship_struct_view.sql" />
+    <Build Include="dbo\Views\rplsum_view.sql" />
+    <Build Include="dbo\Views\rplsts_view.sql" />
+    <Build Include="dbo\Views\rpl_slt_prf_view.sql" />
+    <Build Include="dbo\Views\role_definition.sql" />
+    <Build Include="dbo\Views\receipt_detail_view.sql" />
+    <Build Include="dbo\Views\prtmst_view.sql" />
+    <Build Include="dbo\Views\prtftp_view.sql" />
+    <Build Include="dbo\Views\prt_loc_ptw_view.sql" />
+    <Build Include="dbo\Views\poldat_view.sql" />
+    <Build Include="dbo\Views\pndinv_view.sql" />
+    <Build Include="dbo\Views\pnd_inv_sum_view.sql" />
+    <Build Include="dbo\Views\pckwrk_view.sql" />
+    <Build Include="dbo\Views\pcksum_view.sql" />
+    <Build Include="dbo\Views\oub_serv_plan_view.sql" />
+    <Build Include="dbo\Views\ord_note_view.sql" />
+    <Build Include="dbo\Views\ord_line_note_view.sql" />
+    <Build Include="dbo\Views\nxtloc_view.sql" />
+    <Build Include="dbo\Views\loclod_view.sql" />
+    <Build Include="dbo\Views\loc_early_dte_view.sql" />
+    <Build Include="dbo\Views\invloc_view.sql" />
+    <Build Include="dbo\Views\invloc.sql" />
+    <Build Include="dbo\Views\inventory_view.sql" />
+    <Build Include="dbo\Views\inventory_pckwrk_view.sql" />
+    <Build Include="dbo\Views\inv_sum_view.sql" />
+    <Build Include="dbo\Views\inv_snap_rimlin_rcvlin_view.sql" />
+    <Build Include="dbo\Views\inb_serv_plan_view.sql" />
+    <Build Include="dbo\Views\dual.sql" />
+    <Build Include="dbo\Views\cross_dock_view.sql" />
+    <Build Include="dbo\Views\countable_parts_view.sql" />
+    <Build Include="dbo\Views\countable_parts_byloc_view.sql" />
+    <Build Include="dbo\Views\com_inv_sum_view.sql" />
+    <Build Include="dbo\Views\cntsum_view.sql" />
+    <Build Include="dbo\Views\client_blng_inv.sql" />
+    <Build Include="dbo\Views\alloc_search_hdr_view.sql" />
+    <Build Include="dbo\Views\all_wko_notes_view.sql" />
+    <Build Include="dbo\Views\all_notes_view.sql" />
   </ItemGroup>
 </Project>

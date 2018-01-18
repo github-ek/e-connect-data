@@ -3,7 +3,7 @@
     [id]                      BIGINT        NOT NULL,
     [operacion]               NVARCHAR (50) NOT NULL,
     [estado]                  NVARCHAR (50) NOT NULL,
-    [cierre_notificado]       BIT NOT NULL,
+    [cambio_notificado]       BIT NOT NULL,
     [fecha_creacion]          DATETIME      NOT NULL,
     [fecha_modificacion]      DATETIME      NOT NULL,
     [client_id]               NVARCHAR (32) NOT NULL,
@@ -27,9 +27,6 @@
     [ordlin_mod_usr_id]       NVARCHAR (40) NOT NULL,
     [canpck_candte]           DATETIME      NOT NULL,
     [canpck_can_usr_id]       NVARCHAR (40) NOT NULL,
-    [lotnum]                  NVARCHAR (30) NOT NULL,
-    [lotnum_last_upd_dt]      DATETIME      NOT NULL,
-    [lotnum_last_upd_user_id] NVARCHAR (40) NOT NULL,
     CONSTRAINT [PK_salidas] PRIMARY KEY CLUSTERED ([id_log] ASC) WITH (FILLFACTOR = 80)
 );
 

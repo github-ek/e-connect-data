@@ -386,7 +386,7 @@ BEGIN TRY
 		INSERT INTO dbo.salidas
 			(operacion
             ,estado
-            ,cierre_notificado
+            ,cambio_notificado
             ,fecha_creacion
             ,fecha_modificacion
 
@@ -415,7 +415,7 @@ BEGIN TRY
 		SELECT
 			 a.operacion
             ,a.estado
-            ,a.cierre_notificado
+            ,a.cambio_notificado
             ,a.fecha_creacion
             ,a.fecha_modificacion
 
@@ -452,7 +452,7 @@ BEGIN TRY
 			(id
             ,operacion
             ,estado
-            ,cierre_notificado
+            ,cambio_notificado
             ,fecha_creacion
             ,fecha_modificacion
 
@@ -519,7 +519,7 @@ BEGIN TRY
 			(id
             ,operacion
             ,estado
-            ,cierre_notificado
+            ,cambio_notificado
             ,fecha_creacion
             ,fecha_modificacion
 
