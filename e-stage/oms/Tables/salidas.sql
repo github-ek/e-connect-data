@@ -58,3 +58,10 @@
     CONSTRAINT [PK_salidas] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80)
 );
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_salidas_01]
+    ON [oms].[salidas]([id_archivo] ASC);
+

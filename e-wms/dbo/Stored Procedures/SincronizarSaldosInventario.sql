@@ -18,7 +18,7 @@ BEGIN TRY
 		SET a.fecha_ultima_extraccion = @fecha_extraccion_actual
 		OUTPUT deleted.fecha_ultima_extraccion
 		INTO @t(fecha_extraccion_anterior)
-		FROM eIntegration.dbo.integraciones a
+		FROM [$(eIntegration)]..dbo.integraciones a
 		WHERE
 			a.codigo = 'WMS_SALDOS_INVENTARIOS'
         

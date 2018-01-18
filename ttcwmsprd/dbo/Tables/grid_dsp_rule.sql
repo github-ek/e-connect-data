@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[grid_dsp_rule] (
+    [appl_id]         NVARCHAR (20)  NOT NULL,
+    [frm_id]          NVARCHAR (40)  NOT NULL,
+    [lvl_id]          NVARCHAR (40)  DEFAULT (N'----') NOT NULL,
+    [grid_nam]        NVARCHAR (60)  NOT NULL,
+    [usr_id]          NVARCHAR (40)  NOT NULL,
+    [grid_fld_nam]    NVARCHAR (60)  NOT NULL,
+    [srt_seq]         INT            NOT NULL,
+    [dsp_rule_id]     NVARCHAR (20)  NULL,
+    [cmp_opr]         INT            NOT NULL,
+    [cmp_val]         NVARCHAR (200) NULL,
+    [max_val]         NVARCHAR (200) NULL,
+    [fore_color]      INT            NULL,
+    [back_color]      INT            NULL,
+    [fill_style]      INT            NULL,
+    [fill_color]      INT            NULL,
+    [font_name]       NVARCHAR (40)  NULL,
+    [font_bold]       INT            DEFAULT ((0)) NOT NULL,
+    [font_italic]     INT            DEFAULT ((0)) NOT NULL,
+    [font_strikethru] INT            DEFAULT ((0)) NOT NULL,
+    [font_underline]  INT            DEFAULT ((0)) NOT NULL,
+    [whole_row_flg]   INT            DEFAULT ((0)) NOT NULL,
+    [cmp_fld_flg]     INT            DEFAULT ((0)) NULL,
+    [grp_nam]         NVARCHAR (40)  NULL,
+    CONSTRAINT [grid_dsp_rule_pk] PRIMARY KEY CLUSTERED ([appl_id] ASC, [frm_id] ASC, [grid_nam] ASC, [lvl_id] ASC, [usr_id] ASC, [grid_fld_nam] ASC, [srt_seq] ASC) WITH (FILLFACTOR = 90)
+);
+

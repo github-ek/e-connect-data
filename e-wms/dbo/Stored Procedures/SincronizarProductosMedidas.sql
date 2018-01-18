@@ -115,7 +115,7 @@ BEGIN TRY
             ,id_cliente
             ,id_producto
             ,id_bodega
-            ,id_unidad
+            ,id_unidad_medida
             ,prt_client_id
             ,prtnum
             ,wh_id
@@ -136,7 +136,7 @@ BEGIN TRY
 		    ,t.fecha_modificacion = s.fecha_modificacion
 
             ,t.id_cliente = s.id_cliente
-            ,t.id_unidad = s.id_unidad
+            ,t.id_unidad = s.id_unidad_medida
             ,t.prt_client_id = s.prt_client_id
             ,t.ftpcod = s.ftpcod
             ,t.uomcod = s.uomcod

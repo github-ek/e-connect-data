@@ -14,3 +14,10 @@
     CONSTRAINT [FK_archivos_errores_archivos] FOREIGN KEY ([id_archivo]) REFERENCES [dbo].[archivos] ([id_archivo])
 );
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_archivos_errores]
+    ON [dbo].[archivos_errores]([id_archivo] ASC, [numero_linea] ASC);
+

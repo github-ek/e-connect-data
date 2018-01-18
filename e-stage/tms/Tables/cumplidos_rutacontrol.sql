@@ -28,6 +28,8 @@
     [usuario_creacion]                     VARCHAR (50)   NOT NULL,
     [fecha_modificacion]                   DATETIME2 (0)  NOT NULL,
     [usuario_modificacion]                 VARCHAR (50)   NOT NULL,
-    CONSTRAINT [PK_remesas_rutacontrol] PRIMARY KEY CLUSTERED ([id] ASC)
+    CONSTRAINT [PK_cumplidos_rutacontrol] PRIMARY KEY CLUSTERED ([id] ASC)
 );
+
+
 

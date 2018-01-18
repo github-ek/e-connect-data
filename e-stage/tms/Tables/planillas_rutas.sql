@@ -1,0 +1,26 @@
+﻿CREATE TABLE [tms].[planillas_rutas] (
+    [id]                      BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_archivo]              BIGINT        NOT NULL,
+    [estado]                  VARCHAR (50)  NOT NULL,
+    [numero_linea]            INT           NOT NULL,
+    [numero_ruta]             VARCHAR (20)  NOT NULL,
+    [fecha_ruta]              DATE          NOT NULL,
+    [placa]                   VARCHAR (20)  NOT NULL,
+    [transportador_nombre]    VARCHAR (100) NOT NULL,
+    [cliente_codigo]          VARCHAR (100) NOT NULL,
+    [numero_orden]            VARCHAR (20)  NOT NULL,
+    [numero_documento_remesa] VARCHAR (20)  NOT NULL,
+    [tercero_nombre]          VARCHAR (100) NOT NULL,
+    [ciudad_codigo_alterno]   VARCHAR (50)  NOT NULL,
+    [direccion]               VARCHAR (150) NOT NULL,
+    [id_cliente]              BIGINT        NULL,
+    [id_orden]                BIGINT        NULL,
+    [id_ciudad]               BIGINT        NULL,
+    [version]                 INT           NOT NULL,
+    [fecha_creacion]          DATETIME2 (0) NOT NULL,
+    [usuario_creacion]        VARCHAR (50)  NOT NULL,
+    [fecha_modificacion]      DATETIME2 (0) NOT NULL,
+    [usuario_modificacion]    VARCHAR (50)  NOT NULL,
+    CONSTRAINT [PK_planillas_ruta] PRIMARY KEY CLUSTERED ([id] ASC)
+);
+

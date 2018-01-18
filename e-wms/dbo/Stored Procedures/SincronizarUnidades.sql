@@ -55,7 +55,7 @@ BEGIN TRY
     BEGIN
         MERGE dbo.unidades AS t
         USING #source AS s ON 
-            s.id_unidad = t.id_unidad
+            s.id_unidad_medida = t.id_unidad
         WHEN NOT MATCHED BY TARGET THEN
 		    INSERT
 		    (operacion
@@ -69,7 +69,7 @@ BEGIN TRY
             ,fecha_modificacion
             ,fecha_modificacion
 
-            ,id_unidad
+            ,id_unidad_medida
             ,uomcod)
         WHEN MATCHED THEN
 		    UPDATE SET 

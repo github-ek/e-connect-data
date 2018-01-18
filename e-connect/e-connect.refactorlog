@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="8c8877e2-1512-4817-b689-0347b7a3385b" ChangeDateTime="01/16/2018 22:39:52">
+    <Property Name="ElementName" Value="[dbo].[ordenes].[id_orden]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ordenes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="id_solicitud" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ce26c03e-25f6-4faf-b2b0-282eb09a1f5a" ChangeDateTime="01/16/2018 22:40:02">
+    <Property Name="ElementName" Value="[dbo].[ordenes].[numero_orden]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ordenes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="numero_solicitud" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9139f6f2-5b1b-4579-b6e7-a73373ef51d0" ChangeDateTime="01/16/2018 22:40:12">
+    <Property Name="ElementName" Value="[dbo].[ordenes].[numero_orden_sin_prefijo]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ordenes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="numero_solicitud_sin_prefijo" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1c0f2ece-f3c5-4405-9330-88753a6b08f3" ChangeDateTime="01/16/2018 22:42:20">
+    <Property Name="ElementName" Value="[dbo].[ordenes].[numero_orden_anulado]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ordenes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="numero_solicitud_anulado" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="29849db4-fb5c-4544-8a7a-ff36eca20654" ChangeDateTime="01/16/2018 23:47:10">
+    <Property Name="ElementName" Value="[dbo].[ordenes_alistamiento_lineas_originales].[producto_codigo_alterno]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ordenes_alistamiento_lineas_originales]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="producto_codigo" />
+  </Operation>
+</Operations>

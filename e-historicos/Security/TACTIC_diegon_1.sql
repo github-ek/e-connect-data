@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [TACTIC\diegon]
+    FROM WINDOWS WITH DEFAULT_LANGUAGE = [us_english];
+

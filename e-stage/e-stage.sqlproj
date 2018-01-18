@@ -75,17 +75,16 @@
     <Build Include="oms\Tables\traslados.sql" />
     <Build Include="oms\Tables\recibos.sql" />
     <Build Include="oms\Tables\manufacturas.sql" />
-    <Build Include="tms\Tables\remesas_toursolver.sql" />
-    <Build Include="tms\Tables\remesas_manuales.sql" />
     <Build Include="tms\Tables\moviles_rutacontrol.sql" />
     <Build Include="wms\Tables\saldos_inventario.sql" />
-    <Build Include="dbo\Stored Procedures\Clean.sql" />
     <Build Include="Security\oms.sql" />
     <Build Include="Security\tms.sql" />
     <Build Include="Security\wms.sql" />
     <Build Include="tms\Tables\base_liquidaciones.sql" />
     <Build Include="tms\Tables\cumplidos_rutacontrol.sql" />
-    <Build Include="tms\Tables\planillas.sql" />
+    <Build Include="tms\Tables\planillas_rutas.sql" />
+    <Build Include="tms\Tables\programaciones_toursolver.sql" />
+    <Build Include="tms\Tables\programaciones_manuales.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDevelopment.scmp" />
@@ -95,18 +94,12 @@
     <None Include="e-integration.dev.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
-      <Name>e-integration</Name>
-      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SqlCmdVariable Include="eIntegration">
       <DefaultValue>e-integration</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="e-stage.refactorlog" />
   </ItemGroup>
 </Project>

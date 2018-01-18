@@ -1,0 +1,2 @@
+﻿CREATE USER [TACTIC\diegon] FOR LOGIN [TACTIC\diegon];
+

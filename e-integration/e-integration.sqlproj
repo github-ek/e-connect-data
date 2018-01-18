@@ -64,6 +64,7 @@
     <Folder Include="map\" />
     <Folder Include="map\Tables\" />
     <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tipos_archivo.sql" />
@@ -80,6 +81,9 @@
     <Build Include="dbo\Tables\archivos.sql" />
     <Build Include="map\Tables\mapas_valores.sql" />
     <Build Include="Security\map.sql" />
+    <Build Include="dbo\Stored Procedures\CrearSolicitudesDeTraslado.sql" />
+    <Build Include="dbo\Stored Procedures\Clean.sql" />
+    <Build Include="dbo\Stored Procedures\CrearOrdenesAlistamientoDeSolicitudesDeTraslado.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDevelopment.scmp" />
@@ -87,5 +91,31 @@
     <None Include="SqlSchemaCompareTest.scmp" />
     <None Include="e-integration.test.publish.xml" />
     <None Include="e-integration.dev.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\e-connect\e-connect.sqlproj">
+      <Name>e-connect</Name>
+      <Project>{b61ce68b-f831-41d8-895b-212a9697457c}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-stage\e-stage.sqlproj">
+      <Name>e-stage</Name>
+      <Project>{f5815067-f0b4-4cd2-8dec-df35eb5a3d75}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eStage</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConnect">
+      <DefaultValue>e-connect</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eStage">
+      <DefaultValue>e-stage</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

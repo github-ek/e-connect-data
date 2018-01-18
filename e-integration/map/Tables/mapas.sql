@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [map].[mapas] (
-    [id_mapa]              BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_mapa]              BIGINT        NOT NULL,
     [id_grupo_mapa]        BIGINT        NOT NULL,
     [codigo]               VARCHAR (50)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
@@ -16,4 +16,6 @@
     CONSTRAINT [FK_mapas_grupos_mapa] FOREIGN KEY ([id_grupo_mapa]) REFERENCES [map].[grupos_mapa] ([id_grupo_mapa]),
     CONSTRAINT [UK_mapas_01] UNIQUE NONCLUSTERED ([codigo] ASC)
 );
+
+
 
