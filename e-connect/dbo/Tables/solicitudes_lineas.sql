@@ -19,7 +19,7 @@
     [bodega_traslado_codigo_alterno]            VARCHAR (50)  NOT NULL,
     [estado_traslado_inventario_codigo_alterno] VARCHAR (50)  NOT NULL,
 
-    [version]                          INT           NOT NULL,
+    [version]                          INT           NOT NULL DEFAULT 0,
     [fecha_creacion]                   DATETIME2 (0) NOT NULL,
     [usuario_creacion]                 VARCHAR (50)  NOT NULL,
     [fecha_modificacion]               DATETIME2 (0) NOT NULL,

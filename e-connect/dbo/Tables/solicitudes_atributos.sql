@@ -4,7 +4,7 @@
     [numero_linea]         INT           NULL,
     [id_tipo_atributo_solicitud]     BIGINT NOT NULL,
     [valor]                VARCHAR (50)  NOT NULL,
-    [version]              INT           NOT NULL,
+    [version]              INT           NOT NULL DEFAULT 0,
     [usuario_creacion]     VARCHAR (50)  NOT NULL,
     [fecha_creacion]       DATETIME2 (0) NOT NULL,
     [usuario_modificacion] VARCHAR (50)  NOT NULL,

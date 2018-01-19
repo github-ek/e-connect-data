@@ -7,14 +7,14 @@ BEGIN TRY
 
     --CONSOLIDACION DE REGISTROS VALIDADOS
     BEGIN
-        IF OBJECT_ID('tempdb..#base') IS NOT NULL BEGIN
-            DROP TABLE #base
+        IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
+            DROP TABLE #source
         END
 
         SELECT 
              a.*
             ,ROW_NUMBER() OVER(PARTITION BY a.id_cliente, a.numero_orden ORDER BY a.numero_linea) AS orden
-        INTO #base
+        INTO #source
         FROM [$(eStage)].oms.traslados a
         WHERE
             a.estado = 'VALIDADO'
@@ -66,7 +66,7 @@ BEGIN TRY
             ,a.usuario_modificacion
             ,a.fecha_modificacion
         INTO #solicitudes
-        FROM #base a
+        FROM #source a
         WHERE
             a.orden = 1
 
@@ -105,7 +105,7 @@ BEGIN TRY
             ,a.usuario_modificacion
             ,a.fecha_modificacion
         INTO #solicitudes_lineas
-        FROM #base a
+        FROM #source a
         LEFT OUTER JOIN [$(eConnect)].dbo.productos b ON
             b.id_producto = a.id_producto
         LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas c ON
@@ -155,7 +155,7 @@ BEGIN TRY
             ,a.usuario_modificacion
             ,a.fecha_modificacion
         INTO #solicitudes_transporte
-        FROM #base a
+        FROM #source a
         INNER JOIN [$(eConnect)].dbo.bodegas b ON
             b.id_bodega = a.id_bodega_origen
         INNER JOIN [$(eConnect)].dbo.ciudades c ON
@@ -170,21 +170,25 @@ BEGIN TRY
         IF OBJECT_ID('tempdb..#solicitudes_ordenes') IS NOT NULL BEGIN
             DROP TABLE #solicitudes_ordenes
         END
-            
+
+        ;WITH
+        cte_00 AS
+        (
+            SELECT
+                CAST(tipo_orden AS VARCHAR(50)) AS tipo_orden
+            FROM 
+            (
+             VALUES
+                ('ALISTAMIENTO')
+            )a(tipo_orden)
+        )
         SELECT
              a.id_cliente
             ,a.numero_solicitud
-            
-            ,CAST('ALISTAMIENTO' AS VARCHAR(50)) AS tipo_orden
-            ,CAST(NULL AS BIGINT) AS id_orden
-            ,CAST('' AS VARCHAR(50)) AS numero_orden
-            ,CAST('' AS VARCHAR(50)) AS estado
-            ,CAST('NO_PROCESADA' AS VARCHAR(50)) AS resultado
-
-            ,CAST(NULL AS BIGINT) AS id_orden_origen
-            ,CAST('' AS VARCHAR(50)) AS numero_orden_origen
+            ,b.tipo_orden
         INTO #solicitudes_ordenes
-        FROM #solicitudes a
+        FROM #solicitudes a,cte_00 b
+
     END
 
     --CREACION DE LAS SOLICITUDES
@@ -197,6 +201,7 @@ BEGIN TRY
             ,prefijo
             ,numero_solicitud_sin_prefijo
             ,estado
+
             ,id_bodega
             ,id_bodega_traslado
             ,id_cliente
@@ -207,18 +212,22 @@ BEGIN TRY
             ,tercero_nombre
             ,id_canal
             ,canal_codigo_alterno
+
             ,fecha_minima_solicitada
             ,fecha_maxima_solicitada
             ,hora_minima_solicitada
             ,hora_maxima_solicitada
+
             ,requiere_transporte
             ,requiere_recaudo
             ,nota
+
             ,numero_solicitud_anulado
             ,id_causal_anulacion
             ,nota_anulacion
             ,usuario_anulacion
             ,fecha_anulacion
+
             ,[version]
             ,usuario_creacion
             ,fecha_creacion
@@ -232,6 +241,7 @@ BEGIN TRY
             ,prefijo
             ,numero_solicitud_sin_prefijo
             ,estado
+
             ,id_bodega
             ,id_bodega_traslado
             ,id_cliente
@@ -242,18 +252,22 @@ BEGIN TRY
             ,tercero_nombre
             ,id_canal
             ,canal_codigo_alterno
+
             ,fecha_minima_solicitada
             ,fecha_maxima_solicitada
             ,hora_minima_solicitada
             ,hora_maxima_solicitada
+
             ,requiere_transporte
             ,requiere_recaudo
             ,nota
+
             ,numero_solicitud_anulado
             ,id_causal_anulacion
             ,nota_anulacion
             ,usuario_anulacion
             ,fecha_anulacion
+
             ,[version]
             ,usuario_creacion
             ,fecha_creacion
@@ -277,8 +291,10 @@ BEGIN TRY
             ,id_estado_inventario
             ,id_unidad_medida
             ,cantidad
+
             ,lote
             ,valor_unitario_declarado
+
             ,cantidad_solicitada
             ,id_unidad_medida_solicitada
             ,unidad_medida_solicitada_codigo_alterno
@@ -286,6 +302,7 @@ BEGIN TRY
             ,estado_inventario_codigo_alterno
             ,bodega_traslado_codigo_alterno
             ,estado_traslado_inventario_codigo_alterno
+
             ,[version]
             ,fecha_creacion
             ,usuario_creacion
@@ -300,8 +317,10 @@ BEGIN TRY
             ,b.id_estado_inventario
             ,b.id_unidad_medida
             ,b.cantidad
+
             ,b.lote
             ,b.valor_unitario_declarado
+
             ,b.cantidad_solicitada
             ,b.id_unidad_medida_solicitada
             ,b.unidad_medida_solicitada_codigo_alterno
@@ -309,6 +328,7 @@ BEGIN TRY
             ,b.estado_inventario_codigo_alterno
             ,b.bodega_traslado_codigo_alterno
             ,b.estado_traslado_inventario_codigo_alterno
+
             ,b.[version]
             ,b.fecha_creacion
             ,b.usuario_creacion
@@ -323,6 +343,7 @@ BEGIN TRY
             (id_solicitud
             ,id_tipo_ruta
             ,id_tipo_vehiculo
+
             ,id_ciudad_remitente
             ,ciudad_remitente_codigo_alterno
             ,direccion_remitente
@@ -334,6 +355,7 @@ BEGIN TRY
             ,fecha_cita_remitente
             ,hora_cita_minima_remitente
             ,hora_cita_maxima_remitente
+
             ,id_ciudad_destinatario
             ,ciudad_destinatario_codigo_alterno
             ,direccion_destinatario
@@ -345,6 +367,7 @@ BEGIN TRY
             ,fecha_cita_destinatario
             ,hora_cita_minima_destinatario
             ,hora_cita_maxima_destinatario
+
             ,[version]
             ,usuario_creacion
             ,fecha_creacion
@@ -354,6 +377,7 @@ BEGIN TRY
              a.id_solicitud
             ,b.id_tipo_ruta
             ,b.id_tipo_vehiculo
+
             ,b.id_ciudad_remitente
             ,b.ciudad_remitente_codigo_alterno
             ,b.direccion_remitente
@@ -365,6 +389,7 @@ BEGIN TRY
             ,b.fecha_cita_remitente
             ,b.hora_cita_minima_remitente
             ,b.hora_cita_maxima_remitente
+
             ,b.id_ciudad_destinatario
             ,b.ciudad_destinatario_codigo_alterno
             ,b.direccion_destinatario
@@ -376,6 +401,7 @@ BEGIN TRY
             ,b.fecha_cita_destinatario
             ,b.hora_cita_minima_destinatario
             ,b.hora_cita_maxima_destinatario
+
             ,b.[version]
             ,b.usuario_creacion
             ,b.fecha_creacion
@@ -386,18 +412,22 @@ BEGIN TRY
             b.id_cliente = a.id_cliente
         AND b.numero_solicitud = a.numero_solicitud
     
+        UPDATE a
+        SET  a.estado = 'PROCESADO'
+            ,a.[version] = a.[version] + 1
+            ,a.fecha_modificacion = SYSDATETIME()
+            ,a.usuario_modificacion = SYSTEM_USER
+        FROM [$(eStage)].oms.traslados a
+        INNER JOIN #source b ON
+            b.id = a.id
+        WHERE
+            a.estado = 'VALIDADO'
+
         INSERT INTO [$(eConnect)].dbo.solicitudes_ordenes
-            (id_solicitud
-            ,tipo_solicitud
+            (tipo_solicitud
+            ,id_solicitud
             
             ,tipo_orden
-            ,id_orden
-            ,numero_orden
-            ,estado
-            ,resultado
-
-            ,id_orden_origen
-            ,numero_orden_origen
 
             ,[version]
             ,usuario_creacion
@@ -405,17 +435,10 @@ BEGIN TRY
             ,usuario_modificacion
             ,fecha_modificacion)
         SELECT
-             a.id_solicitud
-            ,a.tipo_solicitud
+             a.tipo_solicitud
+            ,a.id_solicitud
 
             ,b.tipo_orden
-            ,b.id_orden
-            ,b.numero_orden
-            ,b.estado
-            ,b.resultado
-            
-            ,b.id_orden_origen
-            ,b.numero_orden_origen
 
             ,a.[version]
             ,a.usuario_creacion
@@ -426,17 +449,6 @@ BEGIN TRY
         INNER JOIN #solicitudes_ordenes b ON
             b.id_cliente = a.id_cliente
         AND b.numero_solicitud = a.numero_solicitud
-    
-        UPDATE a
-        SET  a.estado = 'PROCESADO'
-            ,a.[version] = a.[version] + 1
-            ,a.fecha_modificacion = SYSDATETIME()
-            ,a.usuario_modificacion = SYSTEM_USER
-        FROM [$(eStage)].oms.traslados a
-        INNER JOIN #base b ON
-            b.id = a.id
-        WHERE
-            a.estado = 'VALIDADO'
     END
 
 	COMMIT TRANSACTION

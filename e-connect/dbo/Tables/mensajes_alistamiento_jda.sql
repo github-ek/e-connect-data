@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[mensajes_alistamiento_jda] (
-    [id]   BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_mensaje]   BIGINT        IDENTITY (1, 1) NOT NULL,
     [id_orden_alistamiento]   BIGINT        NOT NULL,
     [estado]                    VARCHAR(50)   NOT NULL,
-    [fecha_envio]               DATETIME2(0)   NOT NULL,
-    [fecha_confirmacion_envio]  DATETIME2(0)   NOT NULL,
+    [fecha_envio]               DATETIME2(0)   NULL,
+    [fecha_confirmacion_envio]  DATETIME2(0)   NULL,
 
     [whse_id]                   NVARCHAR (32) NOT NULL,
     [client_id]               NVARCHAR (32) NOT NULL,
@@ -21,12 +21,13 @@
     [rt_host_adr_id]          NVARCHAR (20) NOT NULL,
     [cpodte]                  DATETIME      NOT NULL,
 
-    [version]                  INT             NOT NULL,
+    [version]                  INT             NOT NULL DEFAULT 0,
     [fecha_creacion]           DATETIME2(0)   NOT NULL,
     [usuario_creacion]         VARCHAR(50)    NOT NULL,
     [fecha_modificacion]       DATETIME2(0)   NOT NULL,
     [usuario_modificacion]     VARCHAR(50)    NOT NULL,
 
-    CONSTRAINT [PK_mensajes_alistamiento_jda] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80)
+    CONSTRAINT [PK_mensajes_alistamiento_jda] PRIMARY KEY CLUSTERED ([id_mensaje] ASC) WITH (FILLFACTOR = 80), 
+    CONSTRAINT [FK_mensajes_alistamiento_jda_ordenes_alistamiento] FOREIGN KEY ([id_orden_alistamiento]) REFERENCES [ordenes_alistamiento]([id_orden_alistamiento])
 );
 

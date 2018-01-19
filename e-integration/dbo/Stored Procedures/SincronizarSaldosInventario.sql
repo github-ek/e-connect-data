@@ -18,7 +18,7 @@ BEGIN TRY
 		SET a.fecha_ultima_extraccion = @fecha_extraccion_actual
 		OUTPUT deleted.fecha_ultima_extraccion
 		INTO @t(fecha_extraccion_anterior)
-		FROM [$(eIntegration)].dbo.integraciones a
+		FROM dbo.integraciones a
 		WHERE
 			a.codigo = 'WMS_SALDOS_INVENTARIOS'
         
@@ -31,7 +31,7 @@ BEGIN TRY
     BEGIN
         DECLARE @fecha_corte DATE = @fecha_extraccion_anterior
         
-        SET IDENTITY_INSERT dbo.saldos_inventario ON
+        SET IDENTITY_INSERT [$(eWms)].dbo.saldos_inventario ON
 
         WHILE @fecha_corte <= @fecha_extraccion_actual
         BEGIN
@@ -40,11 +40,11 @@ BEGIN TRY
             SELECT @fecha_corte
 
             DELETE a
-            FROM dbo.saldos_inventario a
+            FROM [$(eWms)].dbo.saldos_inventario a
             WHERE
                 a.fecha_corte = @fecha_corte
 
-            INSERT INTO dbo.saldos_inventario
+            INSERT INTO [$(eWms)].dbo.saldos_inventario
                 (id
                 ,fecha_creacion
                 ,fecha_corte
@@ -82,7 +82,7 @@ BEGIN TRY
             COMMIT TRANSACTION
         END
     
-        SET IDENTITY_INSERT dbo.saldos_inventario OFF
+        SET IDENTITY_INSERT [$(eWms)].dbo.saldos_inventario OFF
     END
 	
 END TRY

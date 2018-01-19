@@ -1,5 +1,5 @@
 ﻿
-CREATE PROCEDURE [dbo].[SincronizarClientes]
+CREATE PROCEDURE [dbo].[SincronizarBodegas]
 AS
 BEGIN TRY
     SET NOCOUNT ON;
@@ -18,9 +18,9 @@ BEGIN TRY
 		SET a.fecha_ultima_extraccion = @fecha_extraccion_actual
 		OUTPUT deleted.fecha_ultima_extraccion
 		INTO @t(fecha_extraccion_anterior)
-		FROM [$(eIntegration)].dbo.integraciones a
+		FROM dbo.integraciones a
 		WHERE
-			a.codigo = 'WMS_CLIENTES'
+			a.codigo = 'WMS_BODEGAS'
         
         SELECT
 		    @fecha_extraccion_anterior = a.fecha_extraccion_anterior
@@ -38,12 +38,10 @@ BEGIN TRY
         (
             SELECT
                  SYSDATETIME() AS fecha_modificacion
-                ,a.id_cliente
-                ,CAST(a.codigo_alterno_wms AS NVARCHAR(32)) AS client_id
-                ,a.codigo
+                ,a.id_bodega
+                ,CAST(a.codigo AS NVARCHAR(32)) AS wh_id
                 ,a.nombre
-                ,a.numero_identificacion
-            FROM [$(eConnect)].dbo.clientes a
+            FROM [$(eConnect)].dbo.bodegas a
             WHERE
                 a.fecha_modificacion > @fecha_extraccion_anterior
             AND a.fecha_modificacion <= @fecha_extraccion_actual
@@ -56,39 +54,33 @@ BEGIN TRY
 
     --MERGE TARGET/SOURCE
     BEGIN
-        MERGE dbo.clientes AS t
+        MERGE [$(eWms)].dbo.bodegas AS t
         USING #source AS s ON 
-            s.id_cliente = t.id_cliente
+            s.id_bodega = t.id_bodega
         WHEN NOT MATCHED BY TARGET THEN
 		    INSERT
 		    (operacion
             ,fecha_creacion
             ,fecha_modificacion
 
-            ,id_cliente
-            ,client_id
-            ,codigo
-            ,nombre
-            ,numero_identificacion)
+            ,id_bodega
+            ,wh_id
+            ,nombre)
 		    VALUES
 		    ('C'
             ,fecha_modificacion
             ,fecha_modificacion
 
-            ,id_cliente
-            ,client_id
-            ,codigo
-            ,nombre
-            ,numero_identificacion)
+            ,id_bodega
+            ,wh_id
+            ,nombre)
         WHEN MATCHED THEN
 		    UPDATE SET 
 		     t.operacion = 'U'
 		    ,t.fecha_modificacion = s.fecha_modificacion
 
-		    ,t.client_id = s.client_id
-		    ,t.codigo = s.codigo
+		    ,t.wh_id = s.wh_id
             ,t.nombre = s.nombre
-            ,t.numero_identificacion = s.numero_identificacion
         ;
     END
 

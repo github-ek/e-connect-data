@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [dbo].[salidas] (
-    [id]                       BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id]                       BIGINT NOT NULL,
     [operacion]                NVARCHAR (50) NOT NULL,
     [estado]                  NVARCHAR (50) NOT NULL,
-    [cierre_notificado]       BIT NOT NULL,
+    [cambio_notificado]       BIT NOT NULL,
+    [cerrada_con_errores]   BIT NOT NULL,
     [fecha_creacion]           DATETIME      NOT NULL,
     [fecha_modificacion]       DATETIME      NOT NULL,
     [client_id]                NVARCHAR (32) NOT NULL,

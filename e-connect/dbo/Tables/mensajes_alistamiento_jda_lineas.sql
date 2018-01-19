@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[mensajes_alistamiento_jda_lineas]
 (
-    [id]   BIGINT        NOT NULL,
+    [id_mensaje]   BIGINT        NOT NULL,
     [numero_linea]          INT           NOT NULL,
     [ordlin]                NVARCHAR (10) NOT NULL,
     [ordsln]                NVARCHAR (10) NOT NULL,
@@ -18,6 +18,6 @@
     [pckgr2]                NVARCHAR (20) NOT NULL,
     [pckgr3]                NVARCHAR (20) NOT NULL,
     [pckgr4]                NVARCHAR (20) NOT NULL, 
-    CONSTRAINT [FK_mensajes_alistamiento_jda_lineas_mensajes_alistamiento_jda] FOREIGN KEY ([id]) REFERENCES [mensajes_alistamiento_jda]([id]), 
-    CONSTRAINT [PK_mensajes_alistamiento_jda_lineas] PRIMARY KEY ([id], [numero_linea]),
+    CONSTRAINT [PK_mensajes_alistamiento_jda_lineas] PRIMARY KEY ([id_mensaje], [numero_linea]),
+    CONSTRAINT [FK_mensajes_alistamiento_jda_lineas_mensajes_alistamiento_jda] FOREIGN KEY ([id_mensaje]) REFERENCES [mensajes_alistamiento_jda]([id_mensaje]), 
 )

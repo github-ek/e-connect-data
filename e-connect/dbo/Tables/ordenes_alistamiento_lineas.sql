@@ -15,7 +15,7 @@
     [lote]                     VARCHAR (30)    NOT NULL,
     [predistribucion]          VARCHAR (200)   NOT NULL,
 
-    [version]                  INT             NOT NULL,
+    [version]                  INT             NOT NULL DEFAULT 0,
     [fecha_creacion]           DATETIME2 (0)   NOT NULL,
     [usuario_creacion]         VARCHAR (50)    NOT NULL,
     [fecha_modificacion]       DATETIME2 (0)   NOT NULL,
@@ -24,6 +24,7 @@
     CONSTRAINT [FK_ordenes_alistamiento_lineas_ordenes_alistamiento] FOREIGN KEY ([id_orden_alistamiento]) REFERENCES [dbo].[ordenes_alistamiento] ([id_orden_alistamiento]),
     CONSTRAINT [FK_ordenes_alistamiento_lineas_productos] FOREIGN KEY ([id_producto]) REFERENCES [dbo].[productos] ([id_producto]),
     CONSTRAINT [FK_ordenes_alistamiento_lineas_estados_inventario] FOREIGN KEY ([id_estado_inventario]) REFERENCES [dbo].[estados_inventario] ([id_estado_inventario]),
-    CONSTRAINT [FK_ordenes_alistamiento_lineas_unidades_medida] FOREIGN KEY ([id_unidad_medida]) REFERENCES [dbo].[unidades_medida] ([id_unidad_medida]),
+    CONSTRAINT [FK_ordenes_alistamiento_lineas_unidades_medida] FOREIGN KEY ([id_unidad_medida]) REFERENCES [dbo].[unidades_medida] ([id_unidad_medida]), 
+    CONSTRAINT [UK_ordenes_alistamiento_lineas_01] UNIQUE ([id_orden_alistamiento],[numero_linea]), 
 );
 

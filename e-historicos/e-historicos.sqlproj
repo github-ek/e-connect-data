@@ -88,12 +88,12 @@
     <Build Include="dbo\Tables\embarques.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="e-historicos.publish.xml" />
-    <None Include="e-historicos.dev.publish.xml" />
-    <None Include="e-historicos.test.publish.xml" />
     <None Include="SqlSchemaCompareDevelopment.scmp" />
     <None Include="SqlSchemaCompareProduction.scmp" />
     <None Include="SqlSchemaCompareTest.scmp" />
+    <None Include="e-historicos.publish.xml" />
+    <None Include="e-historicos.dev.publish.xml" />
+    <None Include="e-historicos.tst.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="historicoInv">
@@ -102,27 +102,23 @@
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
       <DefaultValue>ttcwmsprd</DefaultValue>
-      <Value>$(SqlCmdVar__3)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>VIETNAM</DefaultValue>
-      <Value>$(SqlCmdVar__2)</Value>
+      <Value>$(SqlCmdVar__5)</Value>
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
-      <Name>ttcwmsprd</Name>
-      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\historicoInv\historicoInv.sqlproj">
       <Name>historicoInv</Name>
       <Project>{6eb7734c-a50f-49ca-91c4-79f0377d0a7f}</Project>
       <Private>True</Private>
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>historicoInv</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
+      <Name>ttcwmsprd</Name>
+      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
     </ProjectReference>
   </ItemGroup>
 </Project>

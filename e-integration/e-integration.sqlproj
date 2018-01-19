@@ -83,7 +83,18 @@
     <Build Include="Security\map.sql" />
     <Build Include="dbo\Stored Procedures\CrearSolicitudesDeTraslado.sql" />
     <Build Include="dbo\Stored Procedures\Clean.sql" />
-    <Build Include="dbo\Stored Procedures\CrearOrdenesAlistamientoDeSolicitudesDeTraslado.sql" />
+    <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesAlistamientoDeTraslados.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarBodegas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarClientes.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeSalida.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarProductos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarProductosMedidas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarProductosMedidasEliminados.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarSaldosInventario.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarUbicaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarUnidades.sql" />
+    <Build Include="dbo\Stored Procedures\CrearMensajesDeReciboDeTraslado.sql" />
+    <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDevelopment.scmp" />
@@ -107,15 +118,42 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eStage</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-wms\e-wms.sqlproj">
+      <Name>e-wms</Name>
+      <Project>{717dab89-d6e8-4324-945e-a3ac4a02bd37}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eWms</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
+      <Name>e-historicos</Name>
+      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>e-connect</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eHistoricos">
+      <DefaultValue>eHistoricos</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eStage">
       <DefaultValue>e-stage</DefaultValue>
       <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eWms">
+      <DefaultValue>eWms</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <DefaultValue>WMS_DB_SERVER</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

@@ -61,6 +61,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\solicitudes_atributos.sql" />
@@ -105,18 +106,21 @@
     <Build Include="dbo\Tables\tipos_identificacion.sql" />
     <Build Include="dbo\Tables\unidades_medida.sql" />
     <Build Include="dbo\Tables\mensajes_alistamiento_jda.sql" />
-    <Build Include="dbo\Tables\_ordenes_recibo.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo.sql" />
     <Build Include="dbo\Tables\_ordenes_manufactura.sql" />
     <Build Include="dbo\Tables\ordenes_alistamiento_lineas.sql" />
     <Build Include="dbo\Tables\solicitudes.sql" />
-    <Build Include="dbo\Tables\_ordenes_recibo_lineas.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo_lineas.sql" />
     <Build Include="dbo\Tables\productos_medidas.sql" />
-    <Build Include="dbo\Tables\_solicitudes_recibo_rcvlin.sql" />
+    <Build Include="dbo\Tables\mensajes_recibo_jda_lineas.sql" />
     <Build Include="dbo\Tables\_ordenes_manufactura_lineas.sql" />
     <Build Include="dbo\Tables\solicitudes_ordenes.sql" />
     <Build Include="dbo\Tables\mensajes_alistamiento_jda_lineas.sql" />
     <Build Include="dbo\Tables\ordenes_alistamiento.sql" />
     <Build Include="dbo\Tables\tipos_atributo_solicitud.sql" />
+    <Build Include="dbo\Stored Procedures\CrearOrdenesAlistamientoDeTraslados.sql" />
+    <Build Include="dbo\Stored Procedures\CrearOrdenesReciboDeTraslados.sql" />
+    <Build Include="dbo\Tables\mensajes_recibo_jda.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareWms.scmp" />

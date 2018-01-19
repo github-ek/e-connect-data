@@ -10,7 +10,7 @@ BEGIN
         ,a.id_bodega
         ,a.uomlvl
     INTO #target
-    FROM dbo.productos_medidas a 
+    FROM [$(eWms)].dbo.productos_medidas a 
 
     IF OBJECT_ID('tempdb..#deleted') IS NOT NULL BEGIN
 	    DROP TABLE #deleted
@@ -28,7 +28,7 @@ BEGIN
         b.id_producto IS NULL
 
     DELETE a
-    FROM dbo.productos_medidas a
+    FROM [$(eWms)].dbo.productos_medidas a
     INNER JOIN #deleted b ON
         b.id_producto = a.id_producto
     AND b.id_bodega = a.id_bodega

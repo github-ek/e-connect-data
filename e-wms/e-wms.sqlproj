@@ -61,7 +61,6 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-    <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Views\" />
   </ItemGroup>
   <ItemGroup>
@@ -70,19 +69,11 @@
     <Build Include="dbo\Tables\unidades.sql" />
     <Build Include="dbo\Tables\clientes.sql" />
     <Build Include="dbo\Tables\bodegas.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarProductos.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarClientes.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarBodegas.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarUnidades.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarProductosMedidas.sql" />
     <Build Include="dbo\Tables\ubicaciones.sql" />
     <Build Include="dbo\Tables\salidas.sql" />
     <Build Include="dbo\Tables\saldos_inventario.sql" />
     <Build Include="dbo\Tables\entradas.sql" />
     <Build Include="dbo\Tables\dias.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarUbicaciones.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarSaldosInventario.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarProductosMedidasEliminados.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDevelopment.scmp" />
@@ -92,79 +83,6 @@
     <None Include="e-wms.dev.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <SqlCmdVariable Include="eConfig">
-      <DefaultValue>e-config</DefaultValue>
-      <Value>$(SqlCmdVar__3)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="eConnect">
-      <DefaultValue>e-connect</DefaultValue>
-      <Value>$(SqlCmdVar__6)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="eHistoricos">
-      <DefaultValue>eHistoricos</DefaultValue>
-      <Value>$(SqlCmdVar__7)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="eIntegration">
-      <DefaultValue>e-integration</DefaultValue>
-      <Value>$(SqlCmdVar__4)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="eStage">
-      <DefaultValue>e-stage</DefaultValue>
-      <Value>$(SqlCmdVar__5)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="ttcwmsprd">
-      <DefaultValue>ttcwmsprd</DefaultValue>
-      <Value>$(SqlCmdVar__9)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>WMS_DB_SERVER</DefaultValue>
-      <Value>$(SqlCmdVar__10)</Value>
-    </SqlCmdVariable>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\e-config\e-config.sqlproj">
-      <Name>e-config</Name>
-      <Project>{609e6200-dbe9-49e6-bb9c-71ad502998bb}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eConfig</DatabaseSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
-      <Name>e-integration</Name>
-      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-stage\e-stage.sqlproj">
-      <Name>e-stage</Name>
-      <Project>{f5815067-f0b4-4cd2-8dec-df35eb5a3d75}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eStage</DatabaseSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-connect\e-connect.sqlproj">
-      <Name>e-connect</Name>
-      <Project>{b61ce68b-f831-41d8-895b-212a9697457c}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
-      <Name>e-historicos</Name>
-      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
-      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
-      <Name>ttcwmsprd</Name>
-      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
-      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
-    </ProjectReference>
+    <RefactorLog Include="e-wms.refactorlog" />
   </ItemGroup>
 </Project>

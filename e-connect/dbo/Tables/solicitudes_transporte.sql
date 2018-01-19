@@ -28,7 +28,7 @@
     [hora_cita_minima_destinatario]      TIME (0)      NULL,
     [hora_cita_maxima_destinatario]      TIME (0)      NULL,
 
-    [version]                            INT           NOT NULL,
+    [version]                            INT           NOT NULL DEFAULT 0,
     [usuario_creacion]                   VARCHAR (50)  NOT NULL,
     [fecha_creacion]                     DATETIME2 (0) NOT NULL,
     [usuario_modificacion]               VARCHAR (50)  NOT NULL,

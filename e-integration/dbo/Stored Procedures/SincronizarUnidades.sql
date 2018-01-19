@@ -18,7 +18,7 @@ BEGIN TRY
 		SET a.fecha_ultima_extraccion = @fecha_extraccion_actual
 		OUTPUT deleted.fecha_ultima_extraccion
 		INTO @t(fecha_extraccion_anterior)
-		FROM [$(eIntegration)].dbo.integraciones a
+		FROM dbo.integraciones a
 		WHERE
 			a.codigo = 'WMS_UNIDADES'
         
@@ -53,7 +53,7 @@ BEGIN TRY
 
     --MERGE TARGET/SOURCE
     BEGIN
-        MERGE dbo.unidades AS t
+        MERGE [$(eWms)].dbo.unidades AS t
         USING #source AS s ON 
             s.id_unidad_medida = t.id_unidad
         WHEN NOT MATCHED BY TARGET THEN
