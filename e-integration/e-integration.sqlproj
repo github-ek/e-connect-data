@@ -95,6 +95,9 @@
     <Build Include="dbo\Stored Procedures\SincronizarUnidades.sql" />
     <Build Include="dbo\Stored Procedures\CrearMensajesDeReciboDeTraslado.sql" />
     <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
+    <Build Include="dbo\Stored Procedures\EnviarMensajesDeRecibo.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeEntrada.sql" />
+    <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesReciboDeTraslados.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDevelopment.scmp" />
@@ -133,8 +136,19 @@
       <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-config\e-config.sqlproj">
+      <Name>e-config</Name>
+      <Project>{609e6200-dbe9-49e6-bb9c-71ad502998bb}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConfig</DatabaseSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <SqlCmdVariable Include="eConfig">
+      <DefaultValue>eConfig</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>e-connect</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>

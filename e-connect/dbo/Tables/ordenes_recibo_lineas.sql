@@ -9,8 +9,6 @@
     [id_unidad_medida]         BIGINT          NOT NULL,
 
     [unidades_solicitadas]     INT             NOT NULL,
-    [unidades_recibidas]       INT             NOT NULL,
-    [unidades_canceladas]      INT             NOT NULL,
 
     [lote]                     VARCHAR (30)    NOT NULL,
     [bl]                       VARCHAR (30)    NOT NULL,

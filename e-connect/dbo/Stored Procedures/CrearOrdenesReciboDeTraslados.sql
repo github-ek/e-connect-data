@@ -25,9 +25,11 @@ BEGIN TRY
         END
 
         SELECT
-             IDENTITY(BIGINT,1,1) AS id
+             b.id_orden_alistamiento
+
+            ,IDENTITY(BIGINT,1,1) AS id
             ,CAST(NULL AS BIGINT) AS id_orden_recibo
-            ,c.numero_orden
+            ,b.numero_orden
             ,'NO_PROCESADA' AS estado
 
             ,a.id_solicitud_orden
@@ -36,11 +38,11 @@ BEGIN TRY
     
             ,b.id_linea_negocio
             ,c.id_bodega_traslado AS id_bodega
-            ,c.id_cliente
-            ,c.id_servicio
-            ,c.id_tercero
-            ,c.tercero_identificacion
-            ,c.tercero_nombre
+            ,b.id_cliente
+            ,b.id_servicio
+            ,b.id_tercero
+            ,b.tercero_identificacion
+            ,b.tercero_nombre
     
             ,b.fecha_minima_solicitada
             ,b.fecha_maxima_solicitada
@@ -56,7 +58,7 @@ BEGIN TRY
         INTO #ordenes
         FROM #source a
         INNER JOIN dbo.ordenes_alistamiento b ON
-            b.id_solicitud_orden = a.id_orden_origen
+            b.id_orden_alistamiento = a.id_orden_origen
         INNER JOIN dbo.solicitudes c ON
             c.id_solicitud = a.id_solicitud
 
@@ -75,8 +77,6 @@ BEGIN TRY
             ,b.id_estado_inventario
             ,b.id_unidad_medida
             ,b.unidades_despachadas AS unidades_solicitadas
-            ,CAST(0 AS INT) AS unidades_recibidas
-            ,CAST(0 AS INT) AS unidades_canceladas
 
             ,b.lote
             ,'' AS bl
@@ -165,17 +165,15 @@ BEGIN TRY
            ,id_unidad_medida
 
            ,unidades_solicitadas
-           ,unidades_recibidas
-           ,unidades_canceladas
 
            ,lote
            ,bl
            ,contenedor
 
-           ,fecha_creacion
            ,usuario_creacion
-           ,fecha_modificacion
-           ,usuario_modificacion)
+           ,fecha_creacion
+           ,usuario_modificacion
+           ,fecha_modificacion)
         SELECT
              a.id_orden_recibo
             ,b.numero_linea
@@ -186,8 +184,6 @@ BEGIN TRY
             ,b.id_unidad_medida
 
             ,unidades_solicitadas
-            ,unidades_recibidas
-            ,unidades_canceladas
 
             ,lote
             ,bl

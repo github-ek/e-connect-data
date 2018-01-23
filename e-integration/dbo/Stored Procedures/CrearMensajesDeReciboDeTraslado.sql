@@ -38,7 +38,7 @@ BEGIN TRY
         INNER JOIN [$(eConnect)].dbo.solicitudes d ON
             d.id_solicitud = a.id_solicitud
         INNER JOIN [$(eConnect)].dbo.bodegas e ON
-            e.id_bodega = d.id_bodega_traslado
+            e.id_bodega = d.id_bodega
         WHERE
             a.estado = 'NO_PROCESADA'   
 

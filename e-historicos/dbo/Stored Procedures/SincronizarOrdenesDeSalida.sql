@@ -3,13 +3,13 @@ AS
 BEGIN TRY
     --SET NOCOUNT ON;
 
-    BEGIN TRANSACTION
-
 	DECLARE @t AS TABLE(fecha_ultimo_pull DATETIME)
 	DECLARE @fecha_pull DATETIME
 	DECLARE @fecha_ultimo_pull DATETIME
 
-	--OBTENER FECHA DE ULTIMO PULL
+    BEGIN TRANSACTION
+
+	--Obtener fecha de ultimo pull
 	BEGIN
 		SET @fecha_pull = GETDATE()
 
@@ -26,7 +26,7 @@ BEGIN TRY
 		FROM @t a
 	END
 
-    --CONSOLIDACION TARGET: Las ordenes que continuan ABIERTAS en la tabla destino
+    --CONSOLIDACION TARGET: Las ordenes que continúan ABIERTAS en la tabla destino
     BEGIN
 		IF OBJECT_ID('tempdb..#target') IS NOT NULL BEGIN
 			DROP TABLE #target
@@ -36,9 +36,7 @@ BEGIN TRY
         cte_00 AS
         (
             SELECT DISTINCT
-                a.client_id,
-                a.wh_id,
-                a.ordnum
+                 a.order_key
             FROM dbo.salidas a
             WHERE
                 a.estado = 'ABIERTA'
@@ -49,12 +47,10 @@ BEGIN TRY
         INTO #target
         FROM dbo.salidas a
         INNER JOIN cte_00 b ON
-            b.client_id = a.client_id
-        AND b.wh_id = a.wh_id
-        AND b.ordnum = a.ordnum
+            b.order_key = a.order_key
     END
 
-	--CONSOLIDACION ORD: Se toman del origen, las ordenes nuevas y/o modificadas recientemente y aquellas que crucen contra el target (ABIERTAS en el destino)
+	--CONSOLIDACION #source_ord: Del origen, se toman las ordenes nuevas y/o modificadas recientemente y aquellas que crucen contra el target (ABIERTAS en el destino)
 	BEGIN
 		IF OBJECT_ID('tempdb..#source_ord_line') IS NOT NULL BEGIN
 			DROP TABLE #source_ord_line
@@ -182,35 +178,43 @@ BEGIN TRY
             FROM #canpck a
         )
         SELECT
-            CAST(NULL AS BIGINT) AS id,
-            a.operacion,
-            'ABIERTA' AS estado,
-            CAST(0 AS BIT) AS cambio_notificado,
-            a.fecha_creacion,
-            a.fecha_modificacion,
+             CAST(NULL AS BIGINT) AS id
+            ,CONCAT(
+             b.client_id,'|'
+            ,b.wh_id,'|'
+            ,b.ordnum) AS order_key
+            ,c.ordlin AS line_key
 
-            b.client_id,
-            b.wh_id,
-            b.ordnum,
-            COALESCE(b.rmanum,'') AS rmanum,
-            b.ordtyp,
-            COALESCE(b.bus_grp,'') AS bus_grp,
-            COALESCE(b.stcust,'') AS stcust,
-            COALESCE(b.wave_flg,0) AS wave_flg,
-            b.adddte,
-            b.moddte,
-            b.mod_usr_id,
+            ,a.operacion
+            ,'ABIERTA' AS estado
+            ,CAST(0 AS BIT) AS cambio_notificado
+            ,a.fecha_creacion
+            ,a.fecha_modificacion
 
-            c.ordlin,
-            COALESCE(c.prtnum,'') AS prtnum,
-            c.invsts_prg,
-            c.ordqty,
-            c.shpqty,
-            COALESCE(d.remqty,0) AS remqty,
-            COALESCE(c.moddte,CAST('1900-01-01' AS DATETIME)) AS ordlin_moddte,
-            COALESCE(c.mod_usr_id,'') AS ordlin_mod_usr_id,
-            COALESCE(d.candte,CAST('1900-01-01' AS DATETIME)) AS canpck_candte,
-            COALESCE(d.can_usr_id,'') AS canpck_can_usr_id
+            ,b.client_id
+            ,b.wh_id
+            ,b.ordnum
+
+            ,COALESCE(b.rmanum,'') AS rmanum
+            ,b.ordtyp
+            ,COALESCE(b.bus_grp,'') AS bus_grp
+            ,COALESCE(b.stcust,'') AS stcust
+            ,COALESCE(b.wave_flg,0) AS wave_flg
+            ,b.adddte
+            ,b.moddte
+            ,b.mod_usr_id
+
+            ,c.ordlin
+
+            ,COALESCE(c.prtnum,'') AS prtnum
+            ,c.invsts_prg
+            ,c.ordqty
+            ,c.shpqty
+            ,COALESCE(d.remqty,0) AS remqty
+            ,COALESCE(c.moddte,CAST('1900-01-01' AS DATETIME)) AS ordlin_moddte
+            ,COALESCE(c.mod_usr_id,'') AS ordlin_mod_usr_id
+            ,COALESCE(d.candte,CAST('1900-01-01' AS DATETIME)) AS canpck_candte
+            ,COALESCE(d.can_usr_id,'') AS canpck_can_usr_id
         INTO #source
         FROM #source_ord a
         INNER JOIN [$(ttcwmsprd)].dbo.ord b ON
@@ -228,7 +232,7 @@ BEGIN TRY
         AND d.ordlin = c.ordlin
         AND d.orden = 1
 
-        CREATE UNIQUE INDEX ix_source_01 ON #source(client_id,wh_id,ordnum,ordlin)
+        CREATE UNIQUE INDEX ix_source_01 ON #source(order_key,line_key)
     END
 
     --DETECCION DE ORDENES CERRADAS
@@ -269,10 +273,8 @@ BEGIN TRY
             a.fecha_creacion = b.fecha_creacion
         FROM #source a
         INNER JOIN #target b ON
-			b.client_id = a.client_id
-		AND b.wh_id = a.wh_id
-		AND b.ordnum = a.ordnum
-		AND b.ordlin = a.ordlin
+            b.order_key = a.order_key
+        AND b.line_key = a.line_key
         WHERE NOT (
             b.moddte = a.moddte 
         AND b.ordlin_moddte = a.ordlin_moddte
@@ -283,10 +285,8 @@ BEGIN TRY
         SET a.operacion = 'C'
         FROM #source a
         LEFT OUTER JOIN #target b ON
-			b.client_id = a.client_id
-		AND b.wh_id = a.wh_id
-		AND b.ordnum = a.ordnum
-		AND b.ordlin = a.ordlin
+            b.order_key = a.order_key
+        AND b.line_key = a.line_key
         WHERE
             b.ordnum IS NULL
         
@@ -300,10 +300,8 @@ BEGIN TRY
             a.fecha_creacion = b.fecha_creacion
         FROM #source a
         INNER JOIN dbo.salidas b ON
-			b.client_id = a.client_id
-		AND b.wh_id = a.wh_id
-		AND b.ordnum = a.ordnum
-		AND b.ordlin = a.ordlin
+            b.order_key = a.order_key
+        AND b.line_key = a.line_key
         WHERE
             a.operacion = 'C'
     END
@@ -336,12 +334,10 @@ BEGIN TRY
                 a.*
             FROM #target a
             LEFT OUTER JOIN #source b ON
-			    b.client_id = a.client_id
-		    AND b.wh_id = a.wh_id
-		    AND b.ordnum = a.ordnum
-		    AND b.ordlin = a.ordlin
+                b.order_key = a.order_key
+            AND b.line_key = a.line_key
             WHERE
-                b.operacion IN  ('U') OR b.ordnum IS NULL
+                b.operacion IN  ('U') OR b.operacion IS NULL
             --Si un registro en target no cruza con source, es porque ha sido eliminado en el origen y deberá ser eliminado del destino
             --Si un registro en target cruza con source, y la operación es un UPDATE, deberá ser eliminado del destino y pasado al log
         ),
@@ -384,7 +380,9 @@ BEGIN TRY
 
         --CREATE
 		INSERT INTO dbo.salidas
-			(operacion
+			(order_key
+            ,line_key
+            ,operacion
             ,estado
             ,cambio_notificado
             ,fecha_creacion
@@ -413,34 +411,36 @@ BEGIN TRY
             ,canpck_candte
             ,canpck_can_usr_id)
 		SELECT
-			 a.operacion
-            ,a.estado
-            ,a.cambio_notificado
-            ,a.fecha_creacion
-            ,a.fecha_modificacion
+             order_key
+            ,line_key
+            ,operacion
+            ,estado
+            ,cambio_notificado
+            ,fecha_creacion
+            ,fecha_modificacion
 
-            ,a.client_id
-            ,a.wh_id
-            ,a.ordnum
-            ,a.rmanum
-            ,a.ordtyp
-            ,a.bus_grp
-            ,a.stcust
-            ,a.wave_flg
-            ,a.adddte
-            ,a.moddte
-            ,a.mod_usr_id
+            ,client_id
+            ,wh_id
+            ,ordnum
+            ,rmanum
+            ,ordtyp
+            ,bus_grp
+            ,stcust
+            ,wave_flg
+            ,adddte
+            ,moddte
+            ,mod_usr_id
 
-            ,a.ordlin
-            ,a.prtnum
-            ,a.invsts_prg
-            ,a.ordqty
-            ,a.shpqty
-            ,a.remqty
-            ,a.ordlin_moddte
-            ,a.ordlin_mod_usr_id
-            ,a.canpck_candte
-            ,a.canpck_can_usr_id
+            ,ordlin
+            ,prtnum
+            ,invsts_prg
+            ,ordqty
+            ,shpqty
+            ,remqty
+            ,ordlin_moddte
+            ,ordlin_mod_usr_id
+            ,canpck_candte
+            ,canpck_can_usr_id
 		FROM #inserted a
         WHERE
             a.operacion = 'C'
@@ -450,6 +450,8 @@ BEGIN TRY
 
 		INSERT INTO dbo.salidas
 			(id
+            ,order_key
+            ,line_key
             ,operacion
             ,estado
             ,cambio_notificado
@@ -479,35 +481,37 @@ BEGIN TRY
             ,canpck_candte
             ,canpck_can_usr_id)
 		SELECT
-             a.id
-            ,a.operacion
-            ,a.estado
-            ,a.cambio_notificado
-            ,a.fecha_creacion
-            ,a.fecha_modificacion
+             id
+            ,order_key
+            ,line_key
+            ,operacion
+            ,estado
+            ,cambio_notificado
+            ,fecha_creacion
+            ,fecha_modificacion
 
-            ,a.client_id
-            ,a.wh_id
-            ,a.ordnum
-            ,a.rmanum
-            ,a.ordtyp
-            ,a.bus_grp
-            ,a.stcust
-            ,a.wave_flg
-            ,a.adddte
-            ,a.moddte
-            ,a.mod_usr_id
+            ,client_id
+            ,wh_id
+            ,ordnum
+            ,rmanum
+            ,ordtyp
+            ,bus_grp
+            ,stcust
+            ,wave_flg
+            ,adddte
+            ,moddte
+            ,mod_usr_id
 
-            ,a.ordlin
-            ,a.prtnum
-            ,a.invsts_prg
-            ,a.ordqty
-            ,a.shpqty
-            ,a.remqty
-            ,a.ordlin_moddte
-            ,a.ordlin_mod_usr_id
-            ,a.canpck_candte
-            ,a.canpck_can_usr_id
+            ,ordlin
+            ,prtnum
+            ,invsts_prg
+            ,ordqty
+            ,shpqty
+            ,remqty
+            ,ordlin_moddte
+            ,ordlin_mod_usr_id
+            ,canpck_candte
+            ,canpck_can_usr_id
 		FROM #inserted a
         WHERE
             a.operacion = 'U'
@@ -517,6 +521,8 @@ BEGIN TRY
         --LOGS
 		INSERT INTO logs.salidas
 			(id
+            ,order_key
+            ,line_key
             ,operacion
             ,estado
             ,cambio_notificado
@@ -546,35 +552,37 @@ BEGIN TRY
             ,canpck_candte
             ,canpck_can_usr_id)
 		SELECT
-             a.id
-			,a.operacion
-            ,a.estado
-            ,a.cambio_notificado
-            ,a.fecha_creacion
-            ,a.fecha_modificacion
+             id
+            ,order_key
+            ,line_key
+            ,operacion
+            ,estado
+            ,cambio_notificado
+            ,fecha_creacion
+            ,fecha_modificacion
 
-            ,a.client_id
-            ,a.wh_id
-            ,a.ordnum
-            ,a.rmanum
-            ,a.ordtyp
-            ,a.bus_grp
-            ,a.stcust
-            ,a.wave_flg
-            ,a.adddte
-            ,a.moddte
-            ,a.mod_usr_id
+            ,client_id
+            ,wh_id
+            ,ordnum
+            ,rmanum
+            ,ordtyp
+            ,bus_grp
+            ,stcust
+            ,wave_flg
+            ,adddte
+            ,moddte
+            ,mod_usr_id
 
-            ,a.ordlin
-            ,a.prtnum
-            ,a.invsts_prg
-            ,a.ordqty
-            ,a.shpqty
-            ,a.remqty
-            ,a.ordlin_moddte
-            ,a.ordlin_mod_usr_id
-            ,a.canpck_candte
-            ,a.canpck_can_usr_id
+            ,ordlin
+            ,prtnum
+            ,invsts_prg
+            ,ordqty
+            ,shpqty
+            ,remqty
+            ,ordlin_moddte
+            ,ordlin_mod_usr_id
+            ,canpck_candte
+            ,canpck_can_usr_id
 		FROM #deleted a
 	END
 

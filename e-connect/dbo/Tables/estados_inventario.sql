@@ -2,6 +2,7 @@
     [id_estado_inventario] VARCHAR (4)   NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [descripcion]          VARCHAR (200) NOT NULL,
+    [prioridad_estampillado] INT           NULL,
     [ordinal]              INT           NOT NULL,
     [activo]               BIT           NOT NULL,
     [version]              INT           NOT NULL,

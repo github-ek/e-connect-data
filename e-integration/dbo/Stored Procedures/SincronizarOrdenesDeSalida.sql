@@ -33,6 +33,8 @@ BEGIN TRY
 
         INSERT INTO [$(eWms)].dbo.salidas
             (id
+            ,order_key
+            ,line_key
             ,operacion
             ,estado
             ,cambio_notificado
@@ -62,6 +64,8 @@ BEGIN TRY
             ,canpck_can_usr_id)
         SELECT
              id
+            ,order_key
+            ,line_key
             ,operacion
             ,estado
             ,cambio_notificado
