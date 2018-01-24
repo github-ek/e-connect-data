@@ -205,26 +205,16 @@ BEGIN
                     WHERE
                         a.id_orden_recibo = @id_orden
 
-				    --UPDATE t
-				    --SET t.id_estado_orden = 'EN_EJECCUCION',
-					   -- t.fecha_planeada_alistamiento = GETDATE(),
-					   -- t.orden_recibo_wms_generada = 1,
-					   -- t.fecha_actualizacion = SYSDATETIME(),
-					   -- t.usuario_actualizacion = SYSTEM_USER
-				    --FROM ordenes.ordenes t
-				    --WHERE 
-					   -- t.id_orden = @id_orden
-            
 				    COMMIT TRANSACTION
 			    END
 		    END TRY
 		    BEGIN CATCH
-       --         SET @ERROR = ERROR_MESSAGE()
+                DECLARE @ERROR NVARCHAR(4000) = ERROR_MESSAGE()
         
-			    --IF @@TRANCOUNT > 0 BEGIN
-				   -- ROLLBACK TRANSACTION
-			    --END;
-			    --PRINT 'OCURRIO EL SIGUIENTE ERROR AL GENERAR LA ORDEN '+@INVNUM+':'+@ERROR
+			    IF @@TRANCOUNT > 0 BEGIN
+				    ROLLBACK TRANSACTION
+			    END;
+			    PRINT 'OCURRIO EL SIGUIENTE ERROR AL GENERAR LA ORDEN '+@INVNUM+':'+@ERROR
 		    END CATCH
             
 		    FETCH NEXT FROM cursor_ordenes INTO @id_orden, @cliente_codigo, @servicio_codigo, @CLIENT_ID, @INVNUM

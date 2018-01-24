@@ -98,6 +98,8 @@
     <Build Include="dbo\Stored Procedures\EnviarMensajesDeRecibo.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeEntrada.sql" />
     <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesReciboDeTraslados.sql" />
+    <Build Include="dbo\Stored Procedures\CrearMensajesDeAbastecimientoGWS.sql" />
+    <Build Include="dbo\Stored Procedures\EnviarMensajesDeAbastecimientoGws.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDevelopment.scmp" />

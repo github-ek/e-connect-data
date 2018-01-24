@@ -122,6 +122,8 @@
     <Build Include="dbo\Stored Procedures\CrearOrdenesReciboDeTraslados.sql" />
     <Build Include="dbo\Tables\mensajes_recibo_jda.sql" />
     <Build Include="dbo\Tables\ordenes_recibo_lineas_confirmadas.sql" />
+    <Build Include="dbo\Tables\mensajes_abastecimientos_gws.sql" />
+    <Build Include="dbo\Tables\mensajes_abastecimientos_gws_lineas.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareWms.scmp" />
