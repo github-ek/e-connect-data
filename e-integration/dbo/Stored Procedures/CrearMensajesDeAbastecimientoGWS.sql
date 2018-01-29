@@ -326,7 +326,7 @@ BEGIN TRY
             FROM [$(eConnect)].dbo.ordenes_recibo a
             INNER JOIN #mensajes b ON
                 b.id_orden_recibo = a.id_orden_recibo
-            INNER JOIN eConnect.dbo.solicitudes_ordenes c ON
+            INNER JOIN [$(eConnect)].dbo.solicitudes_ordenes c ON
                 c.id_solicitud_orden = a.id_solicitud_orden
         END
     END

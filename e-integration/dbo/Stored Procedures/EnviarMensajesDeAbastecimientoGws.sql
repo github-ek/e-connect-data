@@ -80,7 +80,7 @@ BEGIN
 
         DECLARE cursor_mensajes CURSOR LOCAL FOR  
         SELECT
-             a.id_mensaje
+             a.id_mensaje 
             ,a.U_GW_NU_DOC_ORG
         FROM #mensajes a
         ORDER BY

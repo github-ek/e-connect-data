@@ -93,13 +93,16 @@
     <Build Include="dbo\Stored Procedures\SincronizarSaldosInventario.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarUbicaciones.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarUnidades.sql" />
-    <Build Include="dbo\Stored Procedures\CrearMensajesDeReciboDeTraslado.sql" />
+    <Build Include="dbo\Stored Procedures\CrearMensajesDeReciboJda.sql" />
     <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
     <Build Include="dbo\Stored Procedures\EnviarMensajesDeRecibo.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeEntrada.sql" />
     <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesReciboDeTraslados.sql" />
     <Build Include="dbo\Stored Procedures\CrearMensajesDeAbastecimientoGWS.sql" />
     <Build Include="dbo\Stored Procedures\EnviarMensajesDeAbastecimientoGws.sql" />
+    <Build Include="dbo\Stored Procedures\CrearMensajesDeManufacturaJda.sql" />
+    <Build Include="dbo\Stored Procedures\CrearMensajesDeAlistamientoJda.sql" />
+    <Build Include="dbo\Stored Procedures\EnviarMensajesDeAlistamientoJda.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDevelopment.scmp" />
@@ -145,6 +148,14 @@
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eConfig</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
+      <Name>ttcwmsprd</Name>
+      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConfig">
@@ -167,9 +178,13 @@
       <DefaultValue>eWms</DefaultValue>
       <Value>$(SqlCmdVar__3)</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <DefaultValue>ttcwmsprd</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
       <DefaultValue>WMS_DB_SERVER</DefaultValue>
-      <Value>$(SqlCmdVar__5)</Value>
+      <Value>$(SqlCmdVar__8)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

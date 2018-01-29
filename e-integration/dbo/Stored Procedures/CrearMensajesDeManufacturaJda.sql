@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[CrearMensajesDeReciboDeTraslado]
+﻿CREATE PROCEDURE [dbo].[CrearMensajesDeManufacturaJda]
 AS
 BEGIN TRY
     --SET NOCOUNT ON;
 
     BEGIN TRANSACTION
-
+    /*
     BEGIN
         IF OBJECT_ID('tempdb..#mensajes') IS NOT NULL BEGIN
             DROP TABLE #mensajes
@@ -13,7 +13,7 @@ BEGIN TRY
         SELECT
              IDENTITY(BIGINT,1,1) AS id
             ,CAST(NULL AS BIGINT) AS id_mensaje
-            ,a.id_orden_recibo
+            ,a.id_orden_manufactura
             ,'NO_PROCESADO' AS estado
 
             ,c.codigo AS whse_id
@@ -30,7 +30,7 @@ BEGIN TRY
             ,SYSTEM_USER AS usuario_modificacion
             ,SYSDATETIME() AS fecha_modificacion
         INTO #mensajes
-        FROM [$(eConnect)].dbo.ordenes_recibo a
+        FROM [$(eConnect)].dbo.ordenes_manufactura a
         INNER JOIN [$(eConnect)].dbo.clientes b ON
             b.id_cliente = a.id_cliente
         INNER JOIN [$(eConnect)].dbo.bodegas c ON
@@ -162,6 +162,7 @@ BEGIN TRY
         END
     END
 
+    */
 	COMMIT TRANSACTION
 END TRY
 BEGIN CATCH

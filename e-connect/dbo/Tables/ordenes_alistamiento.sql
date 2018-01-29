@@ -1,14 +1,13 @@
 ﻿CREATE TABLE [dbo].[ordenes_alistamiento]
 (
     [id_orden_alistamiento]    BIGINT        IDENTITY (1, 1) NOT NULL,
-    [numero_orden]             VARCHAR(50)  NOT NULL,
+    [numero_orden]             VARCHAR(35)  NOT NULL,
     [estado]                   VARCHAR(50)   NOT NULL,
+    [id_linea_negocio]         BIGINT        NOT NULL,
 
     [id_solicitud_orden]       BIGINT        NOT NULL,
     [id_solicitud]             BIGINT        NOT NULL,
-    [numero_solicitud]         VARCHAR (20)  NOT NULL,
 
-    [id_linea_negocio]         BIGINT        NOT NULL,
     [id_bodega]                BIGINT        NOT NULL,
     [id_cliente]               BIGINT        NOT NULL,
     [id_servicio]              BIGINT        NOT NULL,
@@ -25,7 +24,7 @@
     [hora_cita_entrega_minima]      TIME (0)      NULL,
     [hora_cita_entrega_maxima]      TIME (0)      NULL,
 
-    [requiere_transporte]      VARCHAR (1)   NOT NULL,
+    [requiere_transporte]      BIT   NOT NULL,
     [id_ciudad_destinatario]             BIGINT        NOT NULL,
     [direccion_destinatario]             VARCHAR (150) NOT NULL,
 
@@ -43,6 +42,7 @@
     [fecha_creacion]           DATETIME2 (0) NOT NULL,
     [usuario_modificacion]     VARCHAR (50)  NOT NULL,
     [fecha_modificacion]       DATETIME2 (0) NOT NULL, 
+
     CONSTRAINT [PK_ordenes_alistamiento] PRIMARY KEY CLUSTERED ([id_orden_alistamiento] ASC),
 	CONSTRAINT [FK_ordenes_alistamiento_lineas_negocio] FOREIGN KEY ([id_linea_negocio]) REFERENCES [dbo].[lineas_negocio] ([id_linea_negocio]),
 	CONSTRAINT [FK_ordenes_alistamiento_solicitudes] FOREIGN KEY ([id_solicitud]) REFERENCES [dbo].[solicitudes] ([id_solicitud]),

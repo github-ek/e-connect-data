@@ -15,10 +15,10 @@
     [invdte]                  NVARCHAR (20) NOT NULL,
 
     [version]                  INT             NOT NULL DEFAULT 0,
-    [fecha_creacion]           DATETIME2(0)   NOT NULL,
     [usuario_creacion]         VARCHAR(50)    NOT NULL,
-    [fecha_modificacion]       DATETIME2(0)   NOT NULL,
+    [fecha_creacion]           DATETIME2(0)   NOT NULL,
     [usuario_modificacion]     VARCHAR(50)    NOT NULL,
+    [fecha_modificacion]       DATETIME2(0)   NOT NULL,
 
     CONSTRAINT [PK_mensajes_recibo_jda] PRIMARY KEY CLUSTERED ([id_mensaje] ASC) WITH (FILLFACTOR = 80),
     CONSTRAINT [FK_mensajes_recibo_jda_ordenes_recibo] FOREIGN KEY ([id_orden_recibo]) REFERENCES [ordenes_recibo]([id_orden_recibo])

@@ -7,7 +7,6 @@
 
     [id_solicitud_orden]       BIGINT        NOT NULL,
     [id_solicitud]             BIGINT        NOT NULL,
-    [numero_solicitud]         VARCHAR (20)  NOT NULL,
 
     [id_bodega]               BIGINT        NOT NULL,
     [id_cliente]              BIGINT        NOT NULL,
@@ -31,9 +30,9 @@
 	[fecha_cierre] [datetime2](0) NULL,
 
     [version]                  INT           NOT NULL DEFAULT 0,
-    [usuario_creacion]         VARCHAR (50)  NOT NULL,
+    [usuario_creacion]         VARCHAR (50)  NOT NULL DEFAULT '',
     [fecha_creacion]           DATETIME2 (0) NOT NULL,
-    [usuario_modificacion]     VARCHAR (50)  NOT NULL,
+    [usuario_modificacion]     VARCHAR (50)  NOT NULL DEFAULT '',
     [fecha_modificacion]       DATETIME2 (0) NOT NULL, 
     
     CONSTRAINT [PK_ordenes_recibo] PRIMARY KEY CLUSTERED ([id_orden_recibo] ASC) WITH (FILLFACTOR = 80),

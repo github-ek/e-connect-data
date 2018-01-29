@@ -25,54 +25,54 @@ BEGIN
         WHERE
 	        a.estado = 'NO_PROCESADO'
 
-	    IF OBJECT_ID('tempdb..#CTRL_SEG') IS NOT NULL BEGIN
-            DROP TABLE #CTRL_SEG
+	    IF OBJECT_ID('tempdb..#ctrl_seg') IS NOT NULL BEGIN
+            DROP TABLE #ctrl_seg
         END
 
         
         SELECT
              id_orden_recibo
 
-            ,'ORDCOMP_ESB' AS TRNNAM
-		    ,'ESB2015.1' AS TRNVER
-            ,WHSE_ID
-        INTO #CTRL_SEG
+            ,'ORDCOMP_ESB' AS trnnam
+		    ,'ESB2015.1' AS trnver
+            ,whse_id
+        INTO #ctrl_seg
         FROM #mensajes a
 
-        IF OBJECT_ID('tempdb..#HEADER_SEG') IS NOT NULL BEGIN
-		    DROP TABLE #HEADER_SEG
+        IF OBJECT_ID('tempdb..#header_seg') IS NOT NULL BEGIN
+		    DROP TABLE #header_seg
         END
 
 		SELECT
              id_orden_recibo
             
-			,'CABECERA' AS SEGNAM
-            ,'A' AS TRNTYP
-			,INVNUM
-			,SUPNUM
-			,INVTYP
-			,CLIENT_ID
-			,RIMSTS
-			,INVDTE
-		INTO #HEADER_SEG
+			,'CABECERA' AS segnam
+            ,'A' AS trntyp
+			,invnum
+			,supnum
+			,invtyp
+			,client_id
+			,rimsts
+			,invdte
+		INTO #header_seg
 		FROM #mensajes a
 
-		IF OBJECT_ID('tempdb..#LINE_SEG') IS NOT NULL BEGIN
-			DROP TABLE #LINE_SEG
+		IF OBJECT_ID('tempdb..#line_seg') IS NOT NULL BEGIN
+			DROP TABLE #line_seg
 		END
 
 		SELECT
 			 id_orden_recibo
             
-			,'LINEA' AS SEGNAM
-			,INVLIN
-			,INVSLN
-			,PRTNUM
-			,LOTNUM
-			,EXPQTY
-			,RCVSTS
-			,INV_ATTR_STR7
-		INTO #LINE_SEG
+			,'LINEA' AS segnam
+			,invlin
+			,invsln
+			,prtnum
+			,lotnum
+			,expqty
+			,rcvsts
+			,inv_attr_str7
+		INTO #line_seg
 		FROM #mensajes a
         INNER JOIN [$(eConnect)].dbo.mensajes_recibo_jda_lineas b ON
             b.id_mensaje = a.id_mensaje
@@ -94,8 +94,8 @@ BEGIN
              a.id_orden_recibo
             ,a.cliente_codigo
 	        ,a.servicio_codigo
-	        ,a.CLIENT_ID
-	        ,a.INVNUM
+	        ,a.client_id
+	        ,a.invnum
         FROM #mensajes a
         ORDER BY
             a.id_orden_recibo
@@ -123,41 +123,41 @@ BEGIN
 					    @xml =
                         (
 				        SELECT
-					         TRNNAM
-					        ,TRNVER
-					        ,WHSE_ID
+					         trnnam
+					        ,trnver
+					        ,whse_id
 
-					        ,HEADER_SEG.SEGNAM
-					        ,TRNTYP
-					        ,INVNUM
-					        ,SUPNUM
-					        ,INVTYP
-					        ,CLIENT_ID
-					        ,RIMSTS
-					        ,INVDTE
+					        ,header_seg.segnam
+					        ,trntyp
+					        ,invnum
+					        ,supnum
+					        ,invtyp
+					        ,client_id
+					        ,rimsts
+					        ,invdte
 
-					        ,LINE_SEG.SEGNAM
-					        ,INVLIN
-					        ,INVSLN
-					        ,PRTNUM
-					        ,LOTNUM
-					        ,EXPQTY
-					        ,RCVSTS
-					        ,INV_ATTR_STR7
-				        FROM #CTRL_SEG AS CTRL_SEG
-				        INNER JOIN #HEADER_SEG AS HEADER_SEG ON
-					        HEADER_SEG.id_orden_recibo = CTRL_SEG.id_orden_recibo
-				        INNER JOIN #LINE_SEG AS LINE_SEG ON
-					        LINE_SEG.id_orden_recibo = CTRL_SEG.id_orden_recibo
+					        ,line_seg.segnam
+					        ,invlin
+					        ,invsln
+					        ,prtnum
+					        ,lotnum
+					        ,expqty
+					        ,rcvsts
+					        ,inv_attr_str7
+				        FROM #ctrl_seg AS ctrl_seg
+				        INNER JOIN #header_seg AS header_seg ON
+					        header_seg.id_orden_recibo = ctrl_seg.id_orden_recibo
+				        INNER JOIN #line_seg AS line_seg ON
+					        line_seg.id_orden_recibo = ctrl_seg.id_orden_recibo
 				        WHERE
-					        CTRL_SEG.id_orden_recibo = @id_orden
+					        ctrl_seg.id_orden_recibo = @id_orden
 				        ORDER BY
-					        INVNUM,INVLIN
+					        invnum,invlin
 				        FOR XML AUTO, ELEMENTS, ROOT('UC_RA_INB_IFD'), TYPE
 					        )
 
-				    SET @xml.modify('delete //LOTNUM[string-length()=0]')
-				    SET @xml.modify('delete //INV_ATTR_STR7[string-length()=0]')
+				    SET @xml.modify('delete //lotnum[string-length()=0]')
+				    SET @xml.modify('delete //inv_attr_str7[string-length()=0]')
 			    END
 				
 			    ------------------------------------------------------------------------------------------------------

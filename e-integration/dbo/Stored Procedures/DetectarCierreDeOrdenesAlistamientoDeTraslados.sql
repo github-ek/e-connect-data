@@ -22,7 +22,6 @@ BEGIN TRY
             ,e.id_solicitud_orden
             ,e.tipo_solicitud
             ,d.id_solicitud
-            ,d.numero_solicitud
             ,d.cerrada AS cerrada_en_destino
         INTO #source
         FROM [$(eWms)].dbo.salidas a
@@ -77,7 +76,6 @@ BEGIN TRY
             ,b.numero_linea
             ,b.id_producto
             ,b.producto_codigo
-            ,b.producto_nombre
             ,b.id_estado_inventario
             ,b.unidades_solicitadas
         INTO #target_lineas
@@ -106,7 +104,6 @@ BEGIN TRY
                 ,a.id
                 ,COALESCE(a.prtnum,'') AS prtnum
                 ,COALESCE(b.producto_codigo,'') AS producto_codigo
-                ,COALESCE(b.producto_nombre,'') AS producto_nombre
                 ,COALESCE(a.invsts_prg,'') AS invsts_prg
                 ,COALESCE(b.id_estado_inventario,'') AS id_estado_inventario
                 ,a.ordqty

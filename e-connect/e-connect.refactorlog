@@ -42,4 +42,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="id_solicitud_orden" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="05e65d9d-79c9-4c14-b592-3b0a4fb00872" ChangeDateTime="01/27/2018 09:07:02">
+    <Property Name="ElementName" Value="[dbo].[solicitudes].[tercero_codigo_alterno]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[solicitudes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="tercero_identificacion" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e5f083d3-4b5f-41da-8230-a750a5f32783" ChangeDateTime="01/27/2018 10:00:34">
+    <Property Name="ElementName" Value="[dbo].[solicitudes_lineas].[cantidad]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[solicitudes_lineas]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="unidades" />
+  </Operation>
 </Operations>

@@ -67,12 +67,12 @@
     <Build Include="dbo\Tables\solicitudes_atributos.sql" />
     <Build Include="dbo\Tables\_solicitudes_manufactura_materiales.sql" />
     <Build Include="dbo\Tables\___ordenes_contactos.sql" />
-    <Build Include="dbo\Tables\_solicitudes_manufactura_wkohdr.sql" />
-    <Build Include="dbo\Tables\___ordenes_documentos.sql" />
+    <Build Include="dbo\Tables\mensajes_manufacturas_jda.sql" />
+    <Build Include="dbo\Tables\solicitudes_documentos.sql" />
     <Build Include="dbo\Tables\___ordenes_notas.sql" />
     <Build Include="dbo\Tables\solicitudes_transporte.sql" />
     <Build Include="dbo\Tables\solicitudes_lineas.sql" />
-    <Build Include="dbo\Tables\_solicitudes_manufactura_wkodtl.sql" />
+    <Build Include="dbo\Tables\mensajes_manufacturas_jda_lineas.sql" />
     <Build Include="dbo\Tables\____preordenes_salida.sql" />
     <Build Include="dbo\Tables\____preordenes_venta.sql" />
     <Build Include="dbo\Tables\____ordenes_venta_lineas.sql" />
@@ -107,23 +107,25 @@
     <Build Include="dbo\Tables\unidades_medida.sql" />
     <Build Include="dbo\Tables\mensajes_alistamiento_jda.sql" />
     <Build Include="dbo\Tables\ordenes_recibo.sql" />
-    <Build Include="dbo\Tables\_ordenes_manufactura.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura.sql" />
     <Build Include="dbo\Tables\ordenes_alistamiento_lineas.sql" />
     <Build Include="dbo\Tables\solicitudes.sql" />
     <Build Include="dbo\Tables\ordenes_recibo_lineas.sql" />
     <Build Include="dbo\Tables\productos_medidas.sql" />
     <Build Include="dbo\Tables\mensajes_recibo_jda_lineas.sql" />
-    <Build Include="dbo\Tables\_ordenes_manufactura_lineas.sql" />
+    <Build Include="dbo\Tables\ordenes_manufactura_lineas.sql" />
     <Build Include="dbo\Tables\solicitudes_ordenes.sql" />
     <Build Include="dbo\Tables\mensajes_alistamiento_jda_lineas.sql" />
     <Build Include="dbo\Tables\ordenes_alistamiento.sql" />
     <Build Include="dbo\Tables\tipos_atributo_solicitud.sql" />
-    <Build Include="dbo\Stored Procedures\CrearOrdenesAlistamientoDeTraslados.sql" />
+    <Build Include="dbo\Stored Procedures\CrearOrdenesAlistamiento.sql" />
     <Build Include="dbo\Stored Procedures\CrearOrdenesReciboDeTraslados.sql" />
     <Build Include="dbo\Tables\mensajes_recibo_jda.sql" />
     <Build Include="dbo\Tables\ordenes_recibo_lineas_confirmadas.sql" />
     <Build Include="dbo\Tables\mensajes_abastecimientos_gws.sql" />
     <Build Include="dbo\Tables\mensajes_abastecimientos_gws_lineas.sql" />
+    <Build Include="dbo\Stored Procedures\CrearOrdenesManufacturaDeTraslados.sql" />
+    <Build Include="dbo\Tables\tipos_documento_solicitud.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareWms.scmp" />

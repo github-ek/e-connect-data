@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[CrearOrdenesAlistamientoDeTraslados]
+﻿CREATE PROCEDURE [dbo].[CrearOrdenesAlistamiento]
 AS
 BEGIN TRY
     --SET NOCOUNT ON;
 
     BEGIN TRANSACTION
 
-    --CONSOLIDACION DE REGISTROS VALIDADOS
+    --CONSOLIDACION DE INFORMACION DE NUEVAS ORDENES
     BEGIN
         IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
             DROP TABLE #source
@@ -15,8 +15,7 @@ BEGIN TRY
              a.*
         INTO #source
         FROM dbo.solicitudes_ordenes a
-        WHERE
-            a.tipo_solicitud = 'TRASLADO'
+        WHERE 0 = 0
         AND a.tipo_orden = 'ALISTAMIENTO'
         AND a.resultado = 'NO_PROCESADA'
 
@@ -27,19 +26,18 @@ BEGIN TRY
         SELECT
              IDENTITY(BIGINT,1,1) AS id
             ,CAST(NULL AS BIGINT) AS id_orden_alistamiento
-            ,CONCAT('EC-',b.id_solicitud,'-',b.numero_solicitud) AS numero_orden
+            ,CAST(CONCAT('TMP-',b.id_solicitud,'-',b.numero_solicitud) AS VARCHAR(35)) AS numero_orden
             ,'NO_PROCESADA' AS estado
+            ,d.id_linea_negocio
 
             ,a.id_solicitud_orden
             ,a.id_solicitud
-            ,b.numero_solicitud
 
-            ,d.id_linea_negocio
             ,b.id_bodega
             ,b.id_cliente
             ,b.id_servicio
             ,b.id_tercero
-            ,b.tercero_codigo_alterno AS tercero_identificacion
+            ,b.tercero_identificacion
             ,b.tercero_nombre
             ,b.id_canal
 
@@ -69,7 +67,6 @@ BEGIN TRY
             c.id_solicitud = a.id_solicitud
         INNER JOIN dbo.lineas_negocio d ON
             d.nombre = 'ALMACENAMIENTO'
-        --TODO CAMBIAR LOS CODIGOSX
 
         IF OBJECT_ID('tempdb..#ordenes_lineas') IS NOT NULL BEGIN
             DROP TABLE #ordenes_lineas
@@ -81,10 +78,9 @@ BEGIN TRY
             ,b.numero_linea
             ,b.id_producto
             ,b.producto_codigo
-            ,b.producto_nombre
             ,b.id_estado_inventario
             ,b.id_unidad_medida
-            ,b.cantidad AS unidades_solicitadas
+            ,b.unidades AS unidades_solicitadas
             ,CAST(0 AS INT) AS unidades_despachadas
             ,CAST(0 AS INT) AS unidades_canceladas
 
@@ -94,45 +90,20 @@ BEGIN TRY
         FROM #ordenes a
         INNER JOIN dbo.solicitudes_lineas b ON
             b.id_solicitud = a.id_solicitud
-
-        IF OBJECT_ID('tempdb..#solicitudes_ordenes') IS NOT NULL BEGIN
-            DROP TABLE #solicitudes_ordenes
-        END
-
-        ;WITH
-        cte_00 AS
-        (
-            SELECT
-                CAST(tipo_orden AS VARCHAR(50)) AS tipo_orden
-            FROM 
-            (
-             VALUES
-                ('PLANIFICACION_SECUNDARIA')
-            )a(tipo_orden)
-        )
-        SELECT
-             a.id_solicitud_orden
-            ,a.tipo_solicitud
-            ,a.id_solicitud
-
-            ,b.tipo_orden
-        INTO #solicitudes_ordenes
-        FROM #source a, cte_00 b
     END
 
-    --CREACION DE LAS SOLICITUDES
+    --CREACION DE LAS ORDENES
     BEGIN
-        DECLARE @t AS TABLE(id_orden_alistamiento BIGINT,id_solicitud_orden BIGINT)
+        DECLARE @t AS TABLE(id_solicitud_orden BIGINT,id_orden_alistamiento BIGINT)
 
         INSERT INTO dbo.ordenes_alistamiento
             (numero_orden
             ,estado
+            ,id_linea_negocio
 
             ,id_solicitud_orden
             ,id_solicitud
-            ,numero_solicitud
 
-            ,id_linea_negocio
             ,id_bodega
             ,id_cliente
             ,id_servicio
@@ -159,17 +130,16 @@ BEGIN TRY
             ,fecha_creacion
             ,usuario_modificacion
             ,fecha_modificacion)
-        OUTPUT inserted.id_orden_alistamiento,inserted.id_solicitud_orden
+        OUTPUT inserted.id_solicitud_orden,inserted.id_orden_alistamiento
         INTO @t
         SELECT
              numero_orden
             ,estado
+            ,id_linea_negocio
 
             ,id_solicitud_orden
             ,id_solicitud
-            ,numero_solicitud
 
-            ,id_linea_negocio
             ,id_bodega
             ,id_cliente
             ,id_servicio
@@ -199,17 +169,26 @@ BEGIN TRY
         FROM #ordenes a
 
         UPDATE a
-        SET a.id_orden_alistamiento = b.id_orden_alistamiento
+        SET  a.id_orden_alistamiento = b.id_orden_alistamiento
+            ,a.numero_orden = CONCAT('EC-',b.id_orden_alistamiento,'-',a.numero_solicitud)
         FROM #ordenes a 
         INNER JOIN @t b ON
             b.id_solicitud_orden = a.id_solicitud_orden
 
+        UPDATE a
+        SET
+            a.numero_orden = b.numero_orden
+        FROM dbo.ordenes_alistamiento a 
+        INNER JOIN #ordenes b ON
+            b.id_orden_alistamiento = a.id_orden_alistamiento
+
+
         INSERT INTO dbo.ordenes_alistamiento_lineas
            (id_orden_alistamiento
+
            ,numero_linea
            ,id_producto
            ,producto_codigo
-           ,producto_nombre
            ,id_estado_inventario
            ,id_unidad_medida
 
@@ -226,19 +205,19 @@ BEGIN TRY
            ,fecha_modificacion)
         SELECT
              a.id_orden_alistamiento
+
             ,b.numero_linea
             ,b.id_producto
             ,b.producto_codigo
-            ,b.producto_nombre
             ,b.id_estado_inventario
             ,b.id_unidad_medida
 
-            ,unidades_solicitadas
-            ,unidades_despachadas
-            ,unidades_canceladas
+            ,b.unidades_solicitadas
+            ,b.unidades_despachadas
+            ,b.unidades_canceladas
 
-            ,lote
-            ,predistribucion
+            ,b.lote
+            ,b.predistribucion
 
             ,a.usuario_creacion
             ,a.fecha_creacion
@@ -249,6 +228,7 @@ BEGIN TRY
             b.id = a.id
     END
 
+    --ACTUALIZAR PROGRAMACION DE ORDENES
     BEGIN
         UPDATE a
         SET  a.id_orden = b.id_orden_alistamiento
@@ -261,36 +241,6 @@ BEGIN TRY
             ,a.usuario_modificacion = b.usuario_modificacion
         FROM dbo.solicitudes_ordenes a
         INNER JOIN #ordenes b ON
-            b.id_solicitud_orden = a.id_solicitud_orden
-
-        INSERT INTO dbo.solicitudes_ordenes
-            (tipo_solicitud
-            ,id_solicitud
-            
-            ,tipo_orden
-
-            ,id_orden_origen
-            ,numero_orden_origen
-
-            ,usuario_creacion
-            ,fecha_creacion
-            ,usuario_modificacion
-            ,fecha_modificacion)
-        SELECT
-             b.tipo_solicitud
-            ,b.id_solicitud
-
-            ,b.tipo_orden
-            
-            ,a.id_orden_alistamiento AS id_orden_origen
-            ,a.numero_orden AS numero_orden_origen
-
-            ,a.usuario_creacion
-            ,a.fecha_creacion
-            ,a.usuario_modificacion
-            ,a.fecha_modificacion
-        FROM #ordenes a
-        INNER JOIN #solicitudes_ordenes b ON
             b.id_solicitud_orden = a.id_solicitud_orden
     END
 

@@ -17,10 +17,10 @@
     [unidades_sobrantes]       INT             NOT NULL,
 
     [version]                  INT             NOT NULL DEFAULT 0,
-    [fecha_creacion]           DATETIME2 (0)   NOT NULL,
     [usuario_creacion]         VARCHAR (50)    NOT NULL,
-    [fecha_modificacion]       DATETIME2 (0)   NOT NULL,
+    [fecha_creacion]           DATETIME2 (0)   NOT NULL,
     [usuario_modificacion]     VARCHAR (50)    NOT NULL,
+    [fecha_modificacion]       DATETIME2 (0)   NOT NULL,
     CONSTRAINT [PK_ordenes_recibo_lineas_confirmadas] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80),
     CONSTRAINT [FK_ordenes_recibo_lineas_confirmadas_recibo] FOREIGN KEY ([id_orden_recibo]) REFERENCES [dbo].[ordenes_recibo] ([id_orden_recibo]),
     CONSTRAINT [FK_ordenes_recibo_lineas_confirmadas_productos] FOREIGN KEY ([id_producto]) REFERENCES [dbo].[productos] ([id_producto]),

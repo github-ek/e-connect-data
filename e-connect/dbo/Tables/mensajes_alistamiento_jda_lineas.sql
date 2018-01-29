@@ -13,7 +13,6 @@
     [carcod]                NVARCHAR (10) NOT NULL,
     [srvlvl]                NVARCHAR (10) NOT NULL,
     [ordinv]                NVARCHAR (30) NOT NULL,
-    [dte_code]              NVARCHAR (5)  NOT NULL,
     [pckgr1]                NVARCHAR (20) NOT NULL,
     [pckgr2]                NVARCHAR (20) NOT NULL,
     [pckgr3]                NVARCHAR (20) NOT NULL,
