@@ -76,13 +76,11 @@
     <Build Include="dbo\Tables\dias.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlSchemaCompareDevelopment.scmp" />
-    <None Include="SqlSchemaCompareProduccion.scmp" />
-    <None Include="SqlSchemaCompareTest.scmp" />
-    <None Include="e-wms.test.publish.xml" />
+    <None Include="SqlSchemaCompareDev.scmp" />
+    <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="e-wms.tst.publish.xml" />
     <None Include="e-wms.dev.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="e-wms.refactorlog" />
+    <None Include="e-wms.prd.publish.xml" />
   </ItemGroup>
 </Project>

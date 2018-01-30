@@ -76,7 +76,6 @@ BEGIN TRY
                 ,b.prtnum
                 ,c.id_producto
                 ,c.codigo AS producto_codigo
-                ,c.nombre AS producto_nombre
 
                 ,b.rcvsts
                 ,d.id_estado_inventario
@@ -149,7 +148,6 @@ BEGIN TRY
             ,prtnum
             ,id_producto
             ,producto_codigo
-            ,producto_nombre
             ,rcvsts
             ,id_estado_inventario
             ,id_unidad_medida
@@ -204,7 +202,6 @@ BEGIN TRY
             ,a.numero_linea
             ,a.id_producto
             ,a.producto_codigo
-            ,a.producto_nombre
             ,a.id_estado_inventario
         INTO #source_lineas_salio_rentas_no_entro_rentas
         FROM #source_lineas a
@@ -298,7 +295,6 @@ BEGIN TRY
             ,linea_original
             ,id_producto
             ,producto_codigo
-            ,producto_nombre
             ,id_estado_inventario
             ,id_unidad_medida
             ,unidades_solicitadas
@@ -398,7 +394,6 @@ BEGIN TRY
             ,linea_original
             ,id_producto
             ,producto_codigo
-            ,producto_nombre
             ,id_estado_inventario
             ,id_unidad_medida
             ,unidades_solicitadas
@@ -417,7 +412,6 @@ BEGIN TRY
             ,linea_original
             ,id_producto
             ,producto_codigo
-            ,producto_nombre
             ,id_estado_inventario
             ,id_unidad_medida
             ,unidades_solicitadas

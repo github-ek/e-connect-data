@@ -87,17 +87,12 @@
     <Build Include="tms\Tables\programaciones_manuales.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlSchemaCompareDevelopment.scmp" />
-    <None Include="SqlSchemaCompareProduccion.scmp" />
-    <None Include="SqlSchemaCompareTest.scmp" />
-    <None Include="e-integration.test.publish.xml" />
-    <None Include="e-integration.dev.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="eIntegration">
-      <DefaultValue>e-integration</DefaultValue>
-      <Value>$(SqlCmdVar__1)</Value>
-    </SqlCmdVariable>
+    <None Include="SqlSchemaCompareDev.scmp" />
+    <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="e-stage.tst.publish.xml" />
+    <None Include="e-stage.dev.publish.xml" />
+    <None Include="e-stage.prd.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="e-stage.refactorlog" />

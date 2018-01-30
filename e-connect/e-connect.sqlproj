@@ -129,12 +129,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareWms.scmp" />
-    <None Include="SqlSchemaCompareTest.scmp" />
-    <None Include="SqlSchemaCompareDevelopment.scmp" />
-    <None Include="e-connect.test.publish.xml" />
+    <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="SqlSchemaCompareDev.scmp" />
+    <None Include="e-connect.tst.publish.xml" />
     <None Include="e-connect.dev.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="e-connect.refactorlog" />
+    <None Include="e-connect.prd.publish.xml" />
+    <None Include="SqlSchemaComparePrd.scmp" />
   </ItemGroup>
 </Project>
