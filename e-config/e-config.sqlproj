@@ -109,10 +109,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="e-config.dev.publish.xml" />
-    <None Include="SqlSchemaCompareDevelopment.scmp" />
-    <None Include="SqlSchemaCompareProduccion.scmp" />
-    <None Include="SqlSchemaCompareTest.scmp" />
-    <None Include="e-config.test.publish.xml" />
+    <None Include="SqlSchemaCompareDev.scmp" />
+    <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="e-config.tst.publish.xml" />
+    <None Include="e-config.prd.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">

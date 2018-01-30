@@ -98,8 +98,11 @@ BEGIN TRY
                 ,c.id_producto
                 ,c.producto_codigo
                 ,c.producto_nombre
-                ,c.id_estado_inventario
-                ,CONCAT(e.codigo,'-',c.id_estado_inventario) AS bodega_sap_codigo_alterno
+                ,CASE WHEN c.id_estado_inventario = 'REN' THEN 'A' ELSE c.id_estado_inventario END AS id_estado_inventario
+                ,CONCAT(e.codigo,'-',CASE WHEN c.id_estado_inventario = 'REN' THEN 'A' ELSE c.id_estado_inventario END) AS bodega_sap_codigo_alterno
+
+                --,c.id_estado_inventario
+                --,CONCAT(e.codigo,'-',c.id_estado_inventario) AS bodega_sap_codigo_alterno
                 ,c.unidades_conformes
             FROM [$(eConnect)].dbo.ordenes_recibo a
             INNER JOIN [$(eConnect)].dbo.solicitudes b ON
@@ -116,7 +119,7 @@ BEGIN TRY
             AND a.cierre_notificado = 0
         )
         SELECT
-                a.*
+             a.*
 
             ,b.valor AS ciudad_sap_destino
             ,c.valor AS serie_sap_destino

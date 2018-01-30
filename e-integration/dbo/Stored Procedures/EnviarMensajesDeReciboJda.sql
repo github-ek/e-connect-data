@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[EnviarMensajesDeRecibo]
+﻿CREATE PROCEDURE [dbo].[EnviarMensajesDeReciboJda]
 AS
 BEGIN
     --SET NOCOUNT ON;

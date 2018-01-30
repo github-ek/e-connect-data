@@ -129,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareWms.scmp" />
-    <None Include="SqlSchemaCompareProduccion.scmp" />
+    <None Include="SqlSchemaCompareTest.scmp" />
     <None Include="SqlSchemaCompareDevelopment.scmp" />
     <None Include="e-connect.test.publish.xml" />
     <None Include="e-connect.dev.publish.xml" />

@@ -128,8 +128,8 @@ BEGIN
                                 ,U_GW_PRE_DOC_ANT
                                 ,U_GW_NU_DOC_ANT
                             FROM #mensajes
-                            --WHERE
-                            --    id_mensaje = @id_mensaje
+                            WHERE
+                                id_mensaje = @id_mensaje
                             FOR XML PATH, ROOT('StockTransfer'), TYPE
                             )
                             ,(
@@ -143,8 +143,8 @@ BEGIN
                                 ,ProjectCode
                                 ,U_Comentariosl
                             FROM #mensajes_lineas 
-                            --WHERE
-                            --    id_mensaje = @id_mensaje
+                            WHERE
+                                id_mensaje = @id_mensaje
                             FOR XML PATH, ROOT('StockTransfer_Lines'), TYPE
                             )
                         FROM #AdmInfo

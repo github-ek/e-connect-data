@@ -140,56 +140,56 @@ BEGIN
 					    @xml =
                         (
                         SELECT
-                             TRNNAM
-                            ,TRNVER
-                            ,WHSE_ID
+                             trnnam
+                            ,trnver
+                            ,whse_id
 
-                            ,ORDER_SEG.SEGNAM
-                            ,TRNTYP
-                            ,CLIENT_ID
-                            ,ORDER_SEG.ORDNUM
-                            ,ORDTYP
-                            ,WH_ID
-                            ,SHIPBY
-                            ,RMANUM
-                            ,BUS_GRP
+                            ,order_seg.segnam
+                            ,trntyp
+                            ,client_id
+                            ,order_seg.ordnum
+                            ,ordtyp
+                            ,wh_id
+                            ,shipby
+                            ,rmanum
+                            ,bus_grp
 
-                            ,STCUST
-                            ,ST_HOST_ADR_ID
-                            ,RTCUST
-                            ,RT_HOST_ADR_ID
-                            ,BTCUST
-                            ,BT_HOST_ADR_ID
-                            ,CPODTE
+                            ,stcust
+                            ,st_host_adr_id
+                            ,rtcust
+                            ,rt_host_adr_id
+                            ,btcust
+                            ,bt_host_adr_id
+                            ,cpodte
 
-                            ,ORDER_LINE_SEG.SEGNAM
-                            ,PRT_CLIENT_ID
-                            ,WH_ID
-                            ,ORDER_LINE_SEG.ORDNUM 
-                            ,ORDLIN
-                            ,ORDSLN
-                            ,PRTNUM
-                            ,ORDQTY
-                            ,INVSTS
-                            ,INVSTS_PRG
-                            ,LOTNUM
-                            ,SPLFLG
-                            ,CARCOD
-                            ,SRVLVL
-                            ,ORDINV
-                            ,PCKGR1
-                            ,PCKGR2
-                            ,PCKGR3
-                            ,PCKGR4
-                        FROM #CTRL_SEG AS CTRL_SEG
-                        INNER JOIN #ORDER_SEG AS ORDER_SEG ON
+                            ,order_line_seg.segnam
+                            ,prt_client_id
+                            ,wh_id
+                            ,order_line_seg.ordnum 
+                            ,ordlin
+                            ,ordsln
+                            ,prtnum
+                            ,ordqty
+                            ,invsts
+                            ,invsts_prg
+                            ,lotnum
+                            ,splflg
+                            ,carcod
+                            ,srvlvl
+                            ,ordinv
+                            ,pckgr1
+                            ,pckgr2
+                            ,pckgr3
+                            ,pckgr4
+                        FROM #ctrl_seg AS CTRL_SEG
+                        INNER JOIN #order_seg AS ORDER_SEG ON
                             ORDER_SEG.id_mensaje = CTRL_SEG.id_mensaje
-                        INNER JOIN #LINE_SEG AS ORDER_LINE_SEG ON
+                        INNER JOIN #line_seg AS ORDER_LINE_SEG ON
                             ORDER_LINE_SEG.id_mensaje = CTRL_SEG.id_mensaje
                         WHERE
                             CTRL_SEG.id_mensaje = @id_mensaje
                         ORDER BY
-                            ORDER_SEG.ORDNUM,ORDLIN
+                            ORDER_SEG.ordnum,ordlin
                         FOR XML AUTO, ELEMENTS, ROOT('UC_X4_ORDENPEDIDO'), TYPE
 					        )
 
