@@ -1,7 +1,9 @@
-﻿CREATE TABLE [dbo].[bodegas] (
-    [id]                 BIGINT IDENTITY (1, 1) NOT NULL,
+﻿CREATE TABLE [logs].[bodegas]
+(
+    [id_log]             BIGINT         IDENTITY (1, 1) NOT NULL,
+    [id]                 BIGINT         NOT NULL,
     [operacion]          NVARCHAR (1) NOT NULL,
-    [cambio_notificado]  BIT NOT NULL DEFAULT 0,
+    [cambio_notificado]  BIT NOT NULL,
     [fecha_creacion]     DATETIME       NOT NULL,
     [fecha_modificacion] DATETIME       NOT NULL,
 
@@ -12,7 +14,5 @@
     [moddte]              DATETIME        NULL,
     [mod_usr_id]          NVARCHAR (40)   NULL,
 
-    CONSTRAINT [PK_bodegas] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [UK_bodegas_01] UNIQUE NONCLUSTERED ([wh_id])
-);
-
+    CONSTRAINT [PK_bodegas] PRIMARY KEY CLUSTERED ([id_log] ASC)
+)

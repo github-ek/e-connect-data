@@ -1,33 +1,15 @@
 ﻿
-CREATE PROCEDURE [dbo].[SincronizarUbicaciones]
+CREATE PROCEDURE [dbo].[SincronizarMaestroUbicaciones]
 AS
 BEGIN TRY
-    --SET NOCOUNT ON;
+	DECLARE @fecha_desde DATETIME
+	DECLARE @fecha_hasta DATETIME
 
-	DECLARE @t AS TABLE(fecha_ultimo_pull DATETIME)
-	DECLARE @fecha_pull DATETIME
-	DECLARE @fecha_ultimo_pull DATETIME
+    BEGIN TRANSACTION
 
-	BEGIN TRANSACTION
+    EXECUTE dbo.GetFechasIntegracion 'UBICACIONES', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
-	--OBTENER FECHA DE ULTIMO PULL
-	BEGIN
-		SET @fecha_pull = GETDATE()
-
-		UPDATE a
-		SET a.fecha_ultimo_pull = @fecha_pull
-		OUTPUT deleted.fecha_ultimo_pull
-		INTO @t(fecha_ultimo_pull)
-		FROM dbo.integraciones a
-		WHERE
-			a.codigo = 'UBICACIONES'
-
-        SELECT
-		    @fecha_ultimo_pull = a.fecha_ultimo_pull
-		FROM @t a
-	END
-
-	--CONSOLIDACION UBICACIONES
+    --CONSOLIDACION SOURCE
 	BEGIN
 		IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
 			DROP TABLE #source
@@ -41,8 +23,8 @@ BEGIN TRY
                 a.arecod,
                 a.stoloc,
                 a.wrkzon,
-                COALESCE(a.last_upd_dt,a.ins_dt) AS last_upd_dt,
-                COALESCE(a.last_upd_user_id,a.ins_user_id) AS last_upd_user_id
+                COALESCE(a.last_upd_dt,a.ins_dt,CAST('1900-01-01' AS DATETIME)) AS last_upd_dt,
+                COALESCE(a.last_upd_user_id,a.ins_user_id,'') AS last_upd_user_id
             FROM [$(ttcwmsprd)].dbo.locmst a
             INNER JOIN [$(ttcwmsprd)].dbo.aremst b ON
                 a.wh_id = b.wh_id
@@ -58,9 +40,10 @@ BEGIN TRY
         )
 		SELECT
             CAST(NULL AS BIGINT) AS id,
-            ' ' AS operacion,
-            @fecha_pull AS fecha_creacion,
-            @fecha_pull AS fecha_modificacion,
+            CAST('' AS NVARCHAR(1)) AS operacion,
+            CAST(0 AS BIT) AS cambio_notificado,
+            @fecha_hasta AS fecha_creacion,
+            @fecha_hasta AS fecha_modificacion,
 			a.*
 		INTO #source
 		FROM cte_00 a
@@ -75,108 +58,86 @@ BEGIN TRY
         FROM #source a
         INNER JOIN dbo.ubicaciones b ON
             b.wh_id = a.wh_id
-        AND b.arecod = a.arecod
         AND b.stoloc = a.stoloc
         WHERE NOT (
-            a.last_upd_dt = b.last_upd_dt
-        AND a.last_upd_user_id = b.last_upd_user_id)     
+            a.last_upd_dt = b.last_upd_dt)     
         
         UPDATE a
         SET a.operacion = 'C'
         FROM #source a
         LEFT OUTER JOIN dbo.ubicaciones b ON
             b.wh_id = a.wh_id
-        AND b.arecod = a.arecod
         AND b.stoloc = a.stoloc
         WHERE
             b.wh_id IS NULL
     END
 
-	--CONSOLIDACION DE REGISTROS inserted/deleted
+    --CONSOLIDACION DE REGISTROS inserted/deleted
     BEGIN
-		IF OBJECT_ID('tempdb..#not_in_source') IS NOT NULL BEGIN
-			DROP TABLE #not_in_source
+		IF OBJECT_ID('tempdb..#not_matched') IS NOT NULL BEGIN
+			DROP TABLE #not_matched
 		END
 
         SELECT
-            b.*
-        INTO #not_in_source
+            a.*
+        INTO #not_matched
         FROM dbo.ubicaciones a
         RIGHT OUTER JOIN #source b ON
             b.wh_id = a.wh_id
-        AND b.arecod = a.arecod
         AND b.stoloc = a.stoloc
         WHERE
             b.wh_id IS NULL
         AND a.operacion <> 'D'
+        --Se puede utilizar #source porque al crear esta tabla no se usa un filtro por fecha, por tanto siempre trae todos los datos disponibles
 
-        --Los registros de la tabla ubicaciones que 
-        --Se deben eliminar por id y cuyos datos se deben respaldar en las tablas de logs
-        --Estos registros seran reemplazados por los nuevos datos en #inserted
 		IF OBJECT_ID('tempdb..#deleted') IS NOT NULL BEGIN
 			DROP TABLE #deleted
 		END
 
         ;WITH
-        cte_00 AS
+        cte_matched AS
         (
             SELECT
                 b.*
             FROM #source a
             INNER JOIN dbo.ubicaciones b ON
                 b.wh_id = a.wh_id
-            AND b.arecod = a.arecod
             AND b.stoloc = a.stoloc
             WHERE
-                a.operacion IN  ('U','D')
+                a.operacion IN  ('U')
         ),
         cte_01 AS
         (
-            SELECT * FROM cte_00 a
+            SELECT * FROM cte_matched a
             UNION
-            SELECT * FROM #not_in_source
+            SELECT * FROM #not_matched
         )
         SELECT
             a.*
         INTO #deleted
         FROM cte_01 a
 
-        --Los registros nuevos C
-        --Los registros modificados U. Nuevos datos 
-        --Los registros eliminados D. Los datos eliminados con operacion D
         IF OBJECT_ID('tempdb..#inserted') IS NOT NULL BEGIN
 			DROP TABLE #inserted
 		END
 
+        UPDATE a
+        SET  operacion = 'D'
+            ,fecha_modificacion = @fecha_hasta
+        FROM #not_matched a
+
         ;WITH 
         cte_00 AS
         (
-            SELECT
-                a.id,
-                'D' AS operacion,
-                a.fecha_creacion,
-                @fecha_pull AS fecha_modificacion,
-
-                a.wh_id,
-                a.arecod,
-                a.stoloc,
-                a.wrkzon,
-                a.last_upd_dt,
-                a.last_upd_user_id
-            FROM #not_in_source a 
-        ),
-        cte_01 AS
-        (
             SELECT * FROM #source a WHERE a.operacion IN  ('C','U')
             UNION
-            SELECT * FROM cte_00 a
+            SELECT * FROM #not_matched a
         )
 		SELECT
 			a.*
 		INTO #inserted
-		FROM cte_01 a
+		FROM cte_00 a
     END
-    
     
     --ACTUALIZACION TARGET/LOGS
     BEGIN
@@ -189,6 +150,7 @@ BEGIN TRY
 			(operacion
             ,fecha_creacion
             ,fecha_modificacion
+
             ,wh_id
             ,arecod
             ,stoloc
@@ -196,15 +158,16 @@ BEGIN TRY
             ,last_upd_dt
             ,last_upd_user_id)
 		SELECT
-			 a.operacion
-            ,a.fecha_creacion
-            ,a.fecha_modificacion
-            ,a.wh_id
-            ,a.arecod
-            ,a.stoloc
-            ,a.wrkzon
-            ,a.last_upd_dt
-            ,a.last_upd_user_id
+			 operacion
+            ,fecha_creacion
+            ,fecha_modificacion
+
+            ,wh_id
+            ,arecod
+            ,stoloc
+            ,wrkzon
+            ,last_upd_dt
+            ,last_upd_user_id
 		FROM #inserted a
         WHERE
             a.operacion = 'C'
@@ -216,6 +179,7 @@ BEGIN TRY
             ,operacion
             ,fecha_creacion
             ,fecha_modificacion
+
             ,wh_id
             ,arecod
             ,stoloc
@@ -223,16 +187,17 @@ BEGIN TRY
             ,last_upd_dt
             ,last_upd_user_id)
 		SELECT
-             a.id
-            ,a.operacion
-            ,a.fecha_creacion
-            ,a.fecha_modificacion
-            ,a.wh_id
-            ,a.arecod
-            ,a.stoloc
-            ,a.wrkzon
-            ,a.last_upd_dt
-            ,a.last_upd_user_id
+             id
+            ,operacion
+            ,fecha_creacion
+            ,fecha_modificacion
+
+            ,wh_id
+            ,arecod
+            ,stoloc
+            ,wrkzon
+            ,last_upd_dt
+            ,last_upd_user_id
 		FROM #inserted a
         WHERE
             a.operacion IN ('U','D')
@@ -244,6 +209,7 @@ BEGIN TRY
             ,operacion
             ,fecha_creacion
             ,fecha_modificacion
+
             ,wh_id
             ,arecod
             ,stoloc
@@ -251,16 +217,17 @@ BEGIN TRY
             ,last_upd_dt
             ,last_upd_user_id)
 		SELECT
-             a.id
-            ,a.operacion
-            ,a.fecha_creacion
-            ,a.fecha_modificacion
-            ,a.wh_id
-            ,a.arecod
-            ,a.stoloc
-            ,a.wrkzon
-            ,a.last_upd_dt
-            ,a.last_upd_user_id
+             id
+            ,operacion
+            ,fecha_creacion
+            ,fecha_modificacion
+            
+            ,wh_id
+            ,arecod
+            ,stoloc
+            ,wrkzon
+            ,last_upd_dt
+            ,last_upd_user_id
 		FROM #deleted a
 	END
 

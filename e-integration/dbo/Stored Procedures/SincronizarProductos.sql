@@ -78,7 +78,7 @@ BEGIN TRY
             ,prt_client_id
             ,prtnum
             ,nombre)
-        WHEN MATCHED THEN
+        WHEN MATCHED AND t.fecha_modificacion <> s.fecha_modificacion THEN
 		    UPDATE SET 
 		     t.operacion = 'U'
 		    ,t.fecha_modificacion = s.fecha_modificacion

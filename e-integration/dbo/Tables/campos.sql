@@ -36,6 +36,7 @@
     [fecha_modificacion]                 DATETIME2 (0)   CONSTRAINT [DF_campos_fecha_modificacion] DEFAULT (sysdatetime()) NULL,
     CONSTRAINT [PK_campos] PRIMARY KEY CLUSTERED ([id_campo] ASC) WITH (FILLFACTOR = 80),
     CONSTRAINT [FK_campos_tipos_archivo] FOREIGN KEY ([id_tipo_archivo]) REFERENCES [dbo].[tipos_archivo] ([id_tipo_archivo]),
+    CONSTRAINT [FK_campos_mapas] FOREIGN KEY ([id_mapa]) REFERENCES [map].[mapas] ([id_mapa]),
     CONSTRAINT [UK_campos_01] UNIQUE NONCLUSTERED ([id_tipo_archivo] ASC, [codigo] ASC) WITH (FILLFACTOR = 80),
     CONSTRAINT [UK_campos_02] UNIQUE NONCLUSTERED ([id_tipo_archivo] ASC, [ordinal] ASC) WITH (FILLFACTOR = 80)
 );

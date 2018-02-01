@@ -32,6 +32,7 @@ BEGIN TRY
 
             ,a.id_solicitud_orden
             ,a.id_solicitud
+            ,b.numero_solicitud
 
             ,b.id_bodega
             ,b.id_cliente

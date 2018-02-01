@@ -2,7 +2,7 @@
 BEGIN
 DECLARE @fecha_desde AS DATE = CAST(GETDATE() - 30 AS DATE)
 DECLARE @ultima_fecha_modificacion AS DATE = CAST(DATEADD(DAY,-3,SYSDATETIME()) AS DATE)
-
+/*
 --SELECT @fecha_desde
 --SELECT @ultima_fecha_modificacion
 
@@ -440,4 +440,5 @@ BEGIN
         a.orden,
         a.id
 END
+*/
 END

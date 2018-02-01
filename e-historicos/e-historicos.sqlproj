@@ -83,14 +83,37 @@
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeEntrada.sql" />
     <Build Include="dbo\Stored Procedures\ConsultarMovimientosWms.sql" />
     <Build Include="dbo\Stored Procedures\ConsolidarSaldosInventario.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarUbicaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroUbicaciones.sql" />
     <Build Include="Security\logs.sql" />
     <Build Include="dbo\Tables\embarques.sql" />
+    <Build Include="logs\Tables\clientes.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroClientes.sql" />
+    <Build Include="dbo\Stored Procedures\GetFechasIntegracion.sql" />
+    <Build Include="logs\Tables\bodegas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroBodegas.sql" />
+    <Build Include="dbo\Tables\unidades_medida.sql" />
+    <Build Include="logs\Tables\unidades_medida.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroUnidadesMedida.sql" />
+    <Build Include="dbo\Tables\estados_inventario.sql" />
+    <Build Include="logs\Tables\estados_inventario.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroEstadosInventario.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductos.sql" />
+    <Build Include="dbo\Tables\productos.sql" />
+    <Build Include="logs\Tables\productos.sql" />
+    <Build Include="dbo\Tables\productos_medidas.sql" />
+    <Build Include="logs\Tables\productos_medidas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosMedidas.sql" />
+    <Build Include="dbo\Tables\productos_codigos.sql" />
+    <Build Include="logs\Tables\productos_codigos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosCodigos.sql" />
+    <Build Include="logs\Tables\productos_atributos.sql" />
+    <Build Include="dbo\Tables\productos_atributos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosAtributos.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlSchemaCompareDevelopment.scmp" />
-    <None Include="SqlSchemaCompareProduction.scmp" />
-    <None Include="SqlSchemaCompareTest.scmp" />
+    <None Include="SqlSchemaCompareDev.scmp" />
+    <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="e-historicos.publish.xml" />
     <None Include="e-historicos.dev.publish.xml" />
     <None Include="e-historicos.tst.publish.xml" />
@@ -120,5 +143,8 @@
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="e-historicos.refactorlog" />
   </ItemGroup>
 </Project>
