@@ -22,9 +22,9 @@ BEGIN TRY
                 ,a.prtnum
                 ,a.wh_id_tmpl AS  wh_id
 
-                ,a.dte_code
+                ,COALESCE(a.dte_code,'') AS dte_code
 	            ,a.lotflg
-                ,CAST(ROUND(a.untcst,0,0) AS BIGINT) AS untcst 
+                ,COALESCE(CAST(ROUND(a.untcst,0,0) AS BIGINT),0) AS untcst
 
 	            ,COALESCE(a.last_upd_dt,CAST('1900-01-01' AS DATETIME)) AS last_upd_dt
 	            ,COALESCE(a.last_upd_user_id,'') AS last_upd_user_id
@@ -33,34 +33,6 @@ BEGIN TRY
             AND a.wh_id_tmpl NOT IN ('----','WMD1')
             AND a.last_upd_dt >= @fecha_desde 
             AND a.last_upd_dt <= @fecha_hasta
-        ),
-        cte_01 AS
-        (
-            SELECT
-                 a.prt_client_id
-                ,a.prtnum
-                ,a.wh_id
-
-                ,CAST(a.dte_code AS NVARCHAR(50)) AS dte_code
-		        ,CAST(a.lotflg AS NVARCHAR(50)) AS lotflg
-                ,COALESCE(CAST(a.untcst AS NVARCHAR(50)),'') AS untcst
-
-                ,a.last_upd_dt
-                ,a.last_upd_user_id
-            FROM cte_00 a
-        ),
-        cte_02 AS
-        (
-            SELECT
-                 b.prt_client_id
-                ,b.prtnum
-                ,b.wh_id
-                ,UPPER(b.codigo) AS codigo
-                ,UPPER(b.valor) AS valor
-                ,b.last_upd_dt
-                ,b.last_upd_user_id
-            FROM cte_01 a
-            UNPIVOT (valor FOR codigo IN (dte_code,lotflg,untcst)) b
         )
 		SELECT
             CAST(NULL AS BIGINT) AS id,
@@ -70,9 +42,7 @@ BEGIN TRY
             @fecha_hasta AS fecha_modificacion,
 			a.*
 		INTO #source
-		FROM cte_02 a
-        WHERE 0 = 0
-        AND NOT (a.codigo IN ('UNTCST') AND a.valor IN (''))
+		FROM cte_00 a
     END
 
     --MERGE
@@ -86,9 +56,10 @@ BEGIN TRY
             b.prt_client_id = a.prt_client_id
         AND b.prtnum = a.prtnum
         AND b.wh_id = a.wh_id
-        AND b.codigo = a.codigo
         WHERE NOT (
-            a.valor = b.valor        
+            a.dte_code = b.dte_code      
+        AND a.lotflg = b.lotflg
+        AND a.untcst = b.untcst
         AND a.last_upd_dt = b.last_upd_dt)
         
         UPDATE a
@@ -98,7 +69,6 @@ BEGIN TRY
             b.prt_client_id = a.prt_client_id
         AND b.prtnum = a.prtnum
         AND b.wh_id = a.wh_id
-        AND b.codigo = a.codigo
         WHERE
             b.prt_client_id IS NULL
     END
@@ -113,8 +83,14 @@ BEGIN TRY
             a.*
         INTO #not_matched
         FROM dbo.productos_atributos a
-        WHERE 0 = 1
-        --CASO PARTICULAR: Debido al costo de calcular las eliminaciones lo mejor será recalcular periodicamente toda la tabla
+        LEFT OUTER JOIN [$(ttcwmsprd)].dbo.prtmst b ON
+            b.prt_client_id = a.prt_client_id
+        AND b.prtnum = a.prtnum
+        AND b.wh_id_tmpl = a.wh_id
+        AND b.wh_id_tmpl NOT IN ('----','WMD1')
+        WHERE
+            b.prt_client_id IS NULL
+        AND a.operacion <> 'D'
 
 		IF OBJECT_ID('tempdb..#deleted') IS NOT NULL BEGIN
 			DROP TABLE #deleted
@@ -130,7 +106,6 @@ BEGIN TRY
                 b.prt_client_id = a.prt_client_id
             AND b.prtnum = a.prtnum
             AND b.wh_id = a.wh_id
-            AND b.codigo = a.codigo
             WHERE
                 a.operacion IN  ('U')
         ),
@@ -182,8 +157,9 @@ BEGIN TRY
             ,prt_client_id
             ,prtnum
             ,wh_id
-            ,codigo
-            ,valor
+            ,dte_code
+            ,lotflg
+            ,untcst
 			,last_upd_dt
 			,last_upd_user_id)
 		SELECT
@@ -194,8 +170,9 @@ BEGIN TRY
             ,prt_client_id
             ,prtnum
             ,wh_id
-            ,codigo
-            ,valor
+            ,dte_code
+            ,lotflg
+            ,untcst
 			,last_upd_dt
 			,last_upd_user_id
 		FROM #inserted a
@@ -213,8 +190,9 @@ BEGIN TRY
             ,prt_client_id
             ,prtnum
             ,wh_id
-            ,codigo
-            ,valor
+            ,dte_code
+            ,lotflg
+            ,untcst
 			,last_upd_dt
 			,last_upd_user_id)
 		SELECT
@@ -226,8 +204,9 @@ BEGIN TRY
             ,prt_client_id
             ,prtnum
             ,wh_id
-            ,codigo
-            ,valor
+            ,dte_code
+            ,lotflg
+            ,untcst
 			,last_upd_dt
 			,last_upd_user_id
 		FROM #inserted a
@@ -246,8 +225,9 @@ BEGIN TRY
             ,prt_client_id
             ,prtnum
             ,wh_id
-            ,codigo
-            ,valor
+            ,dte_code
+            ,lotflg
+            ,untcst
 			,last_upd_dt
 			,last_upd_user_id)
 		SELECT
@@ -260,8 +240,9 @@ BEGIN TRY
             ,prt_client_id
             ,prtnum
             ,wh_id
-            ,codigo
-            ,valor
+            ,dte_code
+            ,lotflg
+            ,untcst
 			,last_upd_dt
 			,last_upd_user_id
 		FROM #deleted a

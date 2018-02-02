@@ -10,8 +10,10 @@
     [prt_client_id]     NVARCHAR (32) NOT NULL,
     [prtnum]            NVARCHAR (50) NOT NULL,
     [wh_id]             NVARCHAR (32) NOT NULL,
-    [codigo]            NVARCHAR (50) NOT NULL,
-    [valor]             NVARCHAR (50) NOT NULL,
+    [dte_code]          NVARCHAR (5) NOT NULL,
+    [lotflg]            INT NOT NULL,
+    [untcst]            BIGINT NOT NULL,
+
     [last_upd_dt] DATETIME NOT NULL, 
     [last_upd_user_id] NVARCHAR(40) NOT NULL, 
     CONSTRAINT [PK_productos_atributos] PRIMARY KEY CLUSTERED ([id_log] ASC)

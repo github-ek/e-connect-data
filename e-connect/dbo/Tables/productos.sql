@@ -3,6 +3,7 @@
     [id_cliente]           BIGINT        NOT NULL,
     [codigo]               VARCHAR (50)  NOT NULL,
     [nombre]               VARCHAR (250) NOT NULL,
+    [tipo_cobro]           VARCHAR (50) NOT NULL,
     [activo]               BIT           NOT NULL,
     [version]              INT           NOT NULL,
     [usuario_creacion]     VARCHAR (50)  NOT NULL,

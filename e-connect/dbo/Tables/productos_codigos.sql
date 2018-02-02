@@ -8,7 +8,7 @@
     [fecha_creacion]       DATETIME2 (0) NOT NULL,
     [usuario_modificacion] VARCHAR (50)  NOT NULL,
     [fecha_modificacion]   DATETIME2 (0) NOT NULL,
-    CONSTRAINT [PK_productos_codigos] PRIMARY KEY CLUSTERED ([id_producto] ASC, [codigo] ASC),
+    CONSTRAINT [PK_productos_codigos] PRIMARY KEY CLUSTERED ([id_producto], [codigo], [tipo_codigo]),
     CONSTRAINT [FK_productos_codigos_productos] FOREIGN KEY ([id_producto]) REFERENCES [dbo].[productos] ([id_producto])
 );
 

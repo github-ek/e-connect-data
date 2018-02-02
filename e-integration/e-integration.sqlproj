@@ -103,6 +103,14 @@
     <Build Include="dbo\Stored Procedures\CrearMensajesDeManufacturaJda.sql" />
     <Build Include="dbo\Stored Procedures\CrearMensajesDeAlistamientoJda.sql" />
     <Build Include="dbo\Stored Procedures\EnviarMensajesDeAlistamientoJda.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroClientes.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroBodegas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroUnidadesMedida.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroEstadosInventario.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosMedidas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosCodigos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosAtributos.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

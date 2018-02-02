@@ -20,6 +20,7 @@ BEGIN TRY
             SELECT 
                  a.prt_client_id
                 ,a.prtnum
+
                 ,COALESCE(a.dept_cod,'') AS dept_cod
 		        ,COALESCE(a.moddte,CAST('1900-01-01' AS DATETIME)) AS moddte
 		        ,COALESCE(a.mod_usr_id,'') AS mod_usr_id
@@ -37,6 +38,7 @@ BEGIN TRY
             SELECT
                  a.prt_client_id
                 ,a.prtnum
+
                 ,LEFT(COALESCE(b.lngdsc,''),200) AS lngdsc
                 ,a.dept_cod
                 ,a.moddte

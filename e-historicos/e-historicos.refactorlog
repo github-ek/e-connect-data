@@ -7,4 +7,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="dept_cod" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="e6296ee2-fbdd-4b19-94d2-98340a64f89d" ChangeDateTime="02/02/2018 15:54:12">
+    <Property Name="ElementName" Value="[dbo].[productos_atributos].[codigo]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[productos_atributos]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="dte_code" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0c16ea1f-5f04-4158-9f75-fa33bfbcd5be" ChangeDateTime="02/02/2018 15:54:16">
+    <Property Name="ElementName" Value="[dbo].[productos_atributos].[valor]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[productos_atributos]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="lotflg" />
+  </Operation>
 </Operations>
