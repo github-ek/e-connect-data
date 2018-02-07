@@ -10,6 +10,7 @@
     [client_id]     NVARCHAR (32) NOT NULL,
     [adrnam]        NVARCHAR (40) NOT NULL,
     [host_ext_id]   NVARCHAR (40) NOT NULL,
+    [activo] BIT NOT NULL, 
     CONSTRAINT [PK_clientes] PRIMARY KEY CLUSTERED ([id_log] ASC)
 
 )

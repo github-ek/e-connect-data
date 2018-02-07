@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarMaestroProductos]
 AS
 BEGIN TRY
-    SET NOCOUNT ON;
-
 	BEGIN TRANSACTION
     
     --CONSOLIDAR SOURCE

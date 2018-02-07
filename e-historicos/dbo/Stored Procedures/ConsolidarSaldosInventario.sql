@@ -67,11 +67,10 @@ BEGIN TRY
             AND e.adjflg = 0
             AND a.prmflg = 0
         )
-        SELECT 
-            a.*
+        SELECT
+            *
         INTO #saldos_inventario
         FROM cte_00 a
-        --WHERE NOT (prt_client_id = 'GLOBAL WINE & SPIRITS LTDA' AND wh_id = 'TL-BOG-ZF-01' AND stoloc like 'Z1-01A')
     END
 
     -------------------------------------------------------------------------------------------------------------------
@@ -79,7 +78,7 @@ BEGIN TRY
     -------------------------------------------------------------------------------------------------------------------
     BEGIN
         -------------------------------------------------------------------------------------------------------------------
-        -- Descartar los nuevos productos manufacturados en tanto su orden se encuentre en un estado no completado
+        -- Descartar los nuevos productos manufacturados en tanto su orden de manufactura se encuentre en un estado no completado
         -------------------------------------------------------------------------------------------------------------------
         DELETE a
         FROM #saldos_inventario a
@@ -116,32 +115,32 @@ BEGIN TRY
             ,stoloc
             ,lodnum)
         SELECT
-            @fecha_creacion,
-            @fecha_corte,
+             @fecha_creacion
+            ,@fecha_corte
 
-            a.prt_client_id,
-            a.wh_id,
-            a.prtnum,
-            a.invsts,
-            a.lotnum,
-            SUM(a.untqty) AS untqty,
-		    a.lst_arecod,
-		    a.expire_dte,
-		    a.inv_attr_str7,
-		    a.stoloc,
-            a.lodnum
+            ,prt_client_id
+            ,wh_id
+            ,prtnum
+            ,invsts
+            ,lotnum
+            ,SUM(untqty) AS untqty
+		    ,lst_arecod
+		    ,expire_dte
+		    ,inv_attr_str7
+		    ,stoloc
+            ,lodnum
         FROM #saldos_inventario a
         GROUP BY 
-            a.prt_client_id,
-            a.wh_id,
-            a.prtnum,
-            a.invsts,
-            a.lotnum,
-		    a.lst_arecod,
-		    a.expire_dte,
-		    a.inv_attr_str7,
-		    a.stoloc,
-            a.lodnum
+             prt_client_id
+            ,wh_id
+            ,prtnum
+            ,invsts
+            ,lotnum
+		    ,lst_arecod
+		    ,expire_dte
+		    ,inv_attr_str7
+		    ,stoloc
+            ,lodnum
     END
 
     -------------------------------------------------------------------------------------------------------------------

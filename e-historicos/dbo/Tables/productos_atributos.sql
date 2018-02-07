@@ -12,8 +12,8 @@
     [lotflg]            INT NOT NULL,
     [untcst]            BIGINT NOT NULL,
 
-    [last_upd_dt] DATETIME NOT NULL, 
-    [last_upd_user_id] NVARCHAR(40) NOT NULL, 
+    [moddte] DATETIME NOT NULL, 
+    [mod_usr_id] NVARCHAR(40) NOT NULL, 
     CONSTRAINT [PK_productos_atributos] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [UK_productos_atributos_01] UNIQUE NONCLUSTERED ([prt_client_id],[prtnum],[wh_id],[dte_code])
 );

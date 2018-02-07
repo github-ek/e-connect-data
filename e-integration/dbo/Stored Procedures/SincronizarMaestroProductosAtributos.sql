@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarMaestroProductosAtributos]
 AS
 BEGIN TRY
-    SET NOCOUNT ON;
-
 	BEGIN TRANSACTION
     
     --CONSOLIDAR SOURCE
@@ -25,8 +23,8 @@ BEGIN TRY
             ,CAST(a.dte_code AS VARCHAR(50)) AS dte_code
             ,CAST(a.lotflg AS VARCHAR(50)) AS lotflg
             ,CAST(a.untcst AS VARCHAR(50)) AS untcst
-            ,a.last_upd_dt
-            ,a.last_upd_user_id
+            ,a.moddte
+            ,a.mod_usr_id
         INTO #source
         FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.productos_atributos a
         WHERE   
@@ -53,8 +51,8 @@ BEGIN TRY
                 ,UPPER(b.codigo) AS codigo
                 ,UPPER(b.valor) AS valor
 
-                ,b.last_upd_dt
-                ,b.last_upd_user_id
+                ,b.moddte
+                ,b.mod_usr_id
             FROM #source a
             UNPIVOT (valor FOR codigo IN (dte_code,lotflg,untcst)) b
         )
@@ -85,8 +83,8 @@ BEGIN TRY
                 ,a.codigo
                 ,a.valor
                 
-                ,a.last_upd_user_id AS usuario_modificacion
-                ,CAST(a.last_upd_dt AS DATETIME2(0)) AS fecha_modificacion
+                ,a.mod_usr_id AS usuario_modificacion
+                ,CAST(a.moddte AS DATETIME2(0)) AS fecha_modificacion
 
                 ,b.id_cliente
                 ,c.id_producto

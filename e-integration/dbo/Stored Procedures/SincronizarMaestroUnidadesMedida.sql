@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarMaestroUnidadesMedida]
 AS
 BEGIN TRY
-    SET NOCOUNT ON;
-
 	BEGIN TRANSACTION
     
     --CONSOLIDAR SOURCE
@@ -68,7 +66,7 @@ BEGIN TRY
         (
             SELECT
                  a.*
-                ,CASE WHEN b.id_unidad_medida IS NULL THEN 1 ELSE 0 END AS nombre_existente
+                ,CASE WHEN b.id_unidad_medida IS NOT NULL THEN 1 ELSE 0 END AS nombre_existente
             FROM #target a
             LEFT OUTER JOIN [$(eConnect)].dbo.unidades_medida b ON
                 b.nombre = a.nombre

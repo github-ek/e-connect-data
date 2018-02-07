@@ -26,13 +26,13 @@ BEGIN TRY
 	            ,a.lotflg
                 ,COALESCE(CAST(ROUND(a.untcst,0,0) AS BIGINT),0) AS untcst
 
-	            ,COALESCE(a.last_upd_dt,CAST('1900-01-01' AS DATETIME)) AS last_upd_dt
-	            ,COALESCE(a.last_upd_user_id,'') AS last_upd_user_id
+	            ,COALESCE(a.moddte,CAST('1900-01-01' AS DATETIME)) AS moddte
+	            ,COALESCE(a.mod_usr_id,'') AS mod_usr_id
             FROM [$(ttcwmsprd)].dbo.prtmst a
             WHERE 0 = 0
             AND a.wh_id_tmpl NOT IN ('----','WMD1')
-            AND a.last_upd_dt >= @fecha_desde 
-            AND a.last_upd_dt <= @fecha_hasta
+            AND a.moddte >= @fecha_desde 
+            AND a.moddte <= @fecha_hasta
         )
 		SELECT
             CAST(NULL AS BIGINT) AS id,
@@ -60,7 +60,7 @@ BEGIN TRY
             a.dte_code = b.dte_code      
         AND a.lotflg = b.lotflg
         AND a.untcst = b.untcst
-        AND a.last_upd_dt = b.last_upd_dt)
+        AND a.moddte = b.moddte)
         
         UPDATE a
         SET a.operacion = 'C'
@@ -160,8 +160,8 @@ BEGIN TRY
             ,dte_code
             ,lotflg
             ,untcst
-			,last_upd_dt
-			,last_upd_user_id)
+			,moddte
+			,mod_usr_id)
 		SELECT
 			 operacion
             ,fecha_creacion
@@ -173,8 +173,8 @@ BEGIN TRY
             ,dte_code
             ,lotflg
             ,untcst
-			,last_upd_dt
-			,last_upd_user_id
+			,moddte
+			,mod_usr_id
 		FROM #inserted a
         WHERE
             a.operacion = 'C'
@@ -193,8 +193,8 @@ BEGIN TRY
             ,dte_code
             ,lotflg
             ,untcst
-			,last_upd_dt
-			,last_upd_user_id)
+			,moddte
+			,mod_usr_id)
 		SELECT
              id
             ,operacion
@@ -207,8 +207,8 @@ BEGIN TRY
             ,dte_code
             ,lotflg
             ,untcst
-			,last_upd_dt
-			,last_upd_user_id
+			,moddte
+			,mod_usr_id
 		FROM #inserted a
         WHERE
             a.operacion IN ('U','D')
@@ -228,8 +228,8 @@ BEGIN TRY
             ,dte_code
             ,lotflg
             ,untcst
-			,last_upd_dt
-			,last_upd_user_id)
+			,moddte
+			,mod_usr_id)
 		SELECT
              id
             ,operacion
@@ -243,8 +243,8 @@ BEGIN TRY
             ,dte_code
             ,lotflg
             ,untcst
-			,last_upd_dt
-			,last_upd_user_id
+			,moddte
+			,mod_usr_id
 		FROM #deleted a
 	END
     

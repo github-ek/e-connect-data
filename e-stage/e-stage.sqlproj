@@ -94,7 +94,4 @@
     <None Include="e-stage.dev.publish.xml" />
     <None Include="e-stage.prd.publish.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="e-stage.refactorlog" />
-  </ItemGroup>
 </Project>

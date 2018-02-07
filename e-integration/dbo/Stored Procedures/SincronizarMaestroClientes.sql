@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarMaestroClientes]
 AS
 BEGIN TRY
-    SET NOCOUNT ON;
-
 	BEGIN TRANSACTION
     
     --CONSOLIDAR SOURCE
@@ -39,7 +37,7 @@ BEGIN TRY
                 ,a.client_id AS codigo
                 ,a.adrnam AS nombre
                 ,'NI' AS tipo_identificacion
-                ,a.host_ext_id AS  numero_identificacion
+                ,LEFT(a.host_ext_id,20) AS  numero_identificacion
                 ,'' AS digito_verificacion
                 ,0 AS id_empresa
                 ,a.client_id AS codigo_alterno_wms

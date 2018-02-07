@@ -32,6 +32,8 @@ BEGIN TRY
             AND a.wh_id_tmpl NOT IN ('----','WMD1')
             AND a.moddte >= @fecha_desde
             AND a.moddte <= @fecha_hasta
+            --TODO
+            AND a.prtnum NOT LIKE '8411640000459_'
         ),
         cte_01 AS
         (

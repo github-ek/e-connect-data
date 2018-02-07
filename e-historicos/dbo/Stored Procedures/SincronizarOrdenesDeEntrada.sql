@@ -1,30 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarOrdenesDeEntrada]
 AS
 BEGIN TRY
-    --SET NOCOUNT ON;
+	DECLARE @fecha_desde DATETIME
+	DECLARE @fecha_hasta DATETIME
 
-	DECLARE @t AS TABLE(fecha_ultimo_pull DATETIME)
-	DECLARE @fecha_pull DATETIME
-	DECLARE @fecha_ultimo_pull DATETIME
+    BEGIN TRANSACTION
 
-	BEGIN TRANSACTION
-
-	--Obtener fecha de ultimo pull
-	BEGIN
-		SET @fecha_pull = GETDATE()
-
-		UPDATE a
-		SET a.fecha_ultimo_pull = @fecha_pull
-		OUTPUT deleted.fecha_ultimo_pull
-		INTO @t(fecha_ultimo_pull)
-		FROM dbo.integraciones a
-		WHERE
-			a.codigo = 'ENTRADAS'
-
-        SELECT
-		    @fecha_ultimo_pull = a.fecha_ultimo_pull
-		FROM @t a
-	END
+    EXECUTE dbo.GetFechasIntegracion 'ENTRADAS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION TARGET: Las ordenes que continúan ABIERTAS en la tabla destino
     BEGIN
@@ -67,9 +49,8 @@ BEGIN TRY
         INNER JOIN dbo.clientes b ON
             b.client_id = a.client_id
         WHERE 0 = 0
-        AND a.moddte >= @fecha_ultimo_pull
-        AND a.moddte < @fecha_pull
-
+        AND a.moddte >= @fecha_desde
+        AND a.moddte <= @fecha_hasta
 
 		IF OBJECT_ID('tempdb..#source_ord') IS NOT NULL BEGIN
 			DROP TABLE #source_ord
@@ -96,14 +77,14 @@ BEGIN TRY
         )
 		SELECT
             '' AS operacion,
-            @fecha_pull AS fecha_creacion,
-            @fecha_pull AS fecha_modificacion,
+            @fecha_hasta AS fecha_creacion,
+            @fecha_hasta AS fecha_modificacion,
 			a.*
 		INTO #source_ord
         FROM cte_00 a
     END
 
-	--CONSOLIDACION ORD: Del origen, se toman las ordenes nuevas y/o modificadas recientemente y aquellas que crucen contra el target (ABIERTAS en el destino)
+	--CONSOLIDACION SOURCE: Del origen, se toman las ordenes nuevas y/o modificadas recientemente y aquellas que crucen contra el target (ABIERTAS en el destino)
 	BEGIN
 		IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
 			DROP TABLE #source

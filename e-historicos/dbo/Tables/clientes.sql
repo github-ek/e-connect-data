@@ -8,6 +8,7 @@
     [client_id]     NVARCHAR (32) NOT NULL,
     [adrnam]        NVARCHAR (40) NOT NULL,
     [host_ext_id]   NVARCHAR (40) NOT NULL,
+    [activo] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_clientes] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [UK_clientes_01] UNIQUE NONCLUSTERED ([client_id])
 );

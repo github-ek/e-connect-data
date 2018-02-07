@@ -14,7 +14,7 @@
     [lotflg]            INT NOT NULL,
     [untcst]            BIGINT NOT NULL,
 
-    [last_upd_dt] DATETIME NOT NULL, 
-    [last_upd_user_id] NVARCHAR(40) NOT NULL, 
+    [moddte] DATETIME NOT NULL, 
+    [mod_usr_id] NVARCHAR(40) NOT NULL, 
     CONSTRAINT [PK_productos_atributos] PRIMARY KEY CLUSTERED ([id_log] ASC)
 )

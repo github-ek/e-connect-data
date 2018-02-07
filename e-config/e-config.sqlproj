@@ -143,7 +143,7 @@
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>WMS_DB_SERVER</DefaultValue>
+      <DefaultValue>VIETNAM</DefaultValue>
       <Value>$(SqlCmdVar__4)</Value>
     </SqlCmdVariable>
   </ItemGroup>

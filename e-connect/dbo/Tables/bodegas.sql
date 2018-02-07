@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[bodegas] (
     [id_bodega]            BIGINT        IDENTITY (1, 1) NOT NULL,
-    [codigo]               VARCHAR (20)  NOT NULL,
+    [codigo]               VARCHAR (32)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [id_ciudad]            BIGINT        NULL,
     [direccion]            VARCHAR (150) NOT NULL,
@@ -17,4 +17,6 @@
     CONSTRAINT [FK_bodegas_direcciones] FOREIGN KEY ([id_direccion]) REFERENCES [dbo].[direcciones] ([id_direccion]),
     CONSTRAINT [UK_bodegas_01] UNIQUE NONCLUSTERED ([codigo] ASC)
 );
+
+
 

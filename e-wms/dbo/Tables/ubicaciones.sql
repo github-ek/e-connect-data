@@ -16,6 +16,8 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [UK_ubicaciones_02]
     ON [dbo].[ubicaciones]([wh_id] ASC, [stoloc] ASC);

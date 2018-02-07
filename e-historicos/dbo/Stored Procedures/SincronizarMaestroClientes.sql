@@ -21,6 +21,7 @@ BEGIN TRY
                  a.client_id
                 ,UPPER(b.adrnam) AS adrnam
                 ,COALESCE(UPPER(b.host_ext_id),'') AS host_ext_id
+                ,CAST(0 AS BIT) AS activo
             FROM [$(ttcwmsprd)].dbo.client a
             INNER JOIN [$(ttcwmsprd)].dbo.adrmst b ON
                 b.adr_id = a.adr_id
@@ -136,7 +137,8 @@ BEGIN TRY
 
             ,client_id
             ,adrnam
-            ,host_ext_id)
+            ,host_ext_id
+            ,activo)
 		SELECT
 			 operacion
             ,fecha_creacion
@@ -145,6 +147,7 @@ BEGIN TRY
             ,client_id
             ,adrnam
             ,host_ext_id
+            ,activo
 		FROM #inserted a
         WHERE
             a.operacion = 'C'
@@ -159,7 +162,8 @@ BEGIN TRY
 
             ,client_id
             ,adrnam
-            ,host_ext_id)
+            ,host_ext_id
+            ,activo)
 		SELECT
              id
             ,operacion
@@ -169,6 +173,7 @@ BEGIN TRY
             ,client_id
             ,adrnam
             ,host_ext_id
+            ,activo
 		FROM #inserted a
         WHERE
             a.operacion IN ('U','D')
@@ -184,7 +189,8 @@ BEGIN TRY
 
             ,client_id
             ,adrnam
-            ,host_ext_id)
+            ,host_ext_id
+            ,activo)
 		SELECT
              id
             ,operacion
@@ -195,6 +201,7 @@ BEGIN TRY
             ,client_id
             ,adrnam
             ,host_ext_id
+            ,activo
 		FROM #deleted a
 	END
     

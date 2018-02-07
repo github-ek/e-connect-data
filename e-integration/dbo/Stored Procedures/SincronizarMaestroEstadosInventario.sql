@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarMaestroEstadosInventario]
 AS
 BEGIN TRY
-    SET NOCOUNT ON;
-
 	BEGIN TRANSACTION
     
     --CONSOLIDAR SOURCE
@@ -69,7 +67,7 @@ BEGIN TRY
             SELECT
                  a.*
 
-                ,CASE WHEN b.id_estado_inventario IS NULL THEN 1 ELSE 0 END AS nombre_existente
+                ,CASE WHEN b.id_estado_inventario IS NOT NULL THEN 1 ELSE 0 END AS nombre_existente
             FROM #target a
             LEFT OUTER JOIN [$(eConnect)].dbo.estados_inventario b ON
                 b.nombre = a.nombre

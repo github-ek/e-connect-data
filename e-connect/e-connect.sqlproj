@@ -128,7 +128,6 @@
     <Build Include="dbo\Tables\tipos_documento_solicitud.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlSchemaCompareWms.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="SqlSchemaCompareDev.scmp" />
     <None Include="e-connect.tst.publish.xml" />

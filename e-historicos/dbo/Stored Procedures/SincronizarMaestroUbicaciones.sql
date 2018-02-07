@@ -1,4 +1,5 @@
 ﻿
+
 CREATE PROCEDURE [dbo].[SincronizarMaestroUbicaciones]
 AS
 BEGIN TRY
@@ -207,6 +208,7 @@ BEGIN TRY
 		INSERT INTO logs.ubicaciones
 			(id
             ,operacion
+            ,cambio_notificado
             ,fecha_creacion
             ,fecha_modificacion
 
@@ -219,6 +221,7 @@ BEGIN TRY
 		SELECT
              id
             ,operacion
+            ,cambio_notificado
             ,fecha_creacion
             ,fecha_modificacion
             

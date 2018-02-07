@@ -1,30 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarOrdenesDeSalida]
 AS
 BEGIN TRY
-    --SET NOCOUNT ON;
-
-	DECLARE @t AS TABLE(fecha_ultimo_pull DATETIME)
-	DECLARE @fecha_pull DATETIME
-	DECLARE @fecha_ultimo_pull DATETIME
+	DECLARE @fecha_desde DATETIME
+	DECLARE @fecha_hasta DATETIME
 
     BEGIN TRANSACTION
 
-	--Obtener fecha de ultimo pull
-	BEGIN
-		SET @fecha_pull = GETDATE()
-
-		UPDATE a
-		SET a.fecha_ultimo_pull = @fecha_pull
-		OUTPUT deleted.fecha_ultimo_pull
-		INTO @t(fecha_ultimo_pull)
-		FROM dbo.integraciones a
-		WHERE
-			a.codigo = 'SALIDAS'
-
-        SELECT
-		    @fecha_ultimo_pull = a.fecha_ultimo_pull
-		FROM @t a
-	END
+    EXECUTE dbo.GetFechasIntegracion 'SALIDAS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION TARGET: Las ordenes que continúan ABIERTAS en la tabla destino
     BEGIN
@@ -65,8 +47,8 @@ BEGIN TRY
         INNER JOIN dbo.clientes b ON
             b.client_id = a.client_id
         WHERE 0 = 0
-        AND a.moddte >= @fecha_ultimo_pull
-        AND a.moddte < @fecha_pull
+        AND a.moddte >= @fecha_desde
+        AND a.moddte <= @fecha_hasta
 
 		IF OBJECT_ID('tempdb..#source_canpck') IS NOT NULL BEGIN
 			DROP TABLE #source_canpck
@@ -81,8 +63,8 @@ BEGIN TRY
         INNER JOIN dbo.clientes b ON
             b.client_id = a.client_id
         WHERE 0 = 0
-        AND a.candte >= @fecha_ultimo_pull
-        AND a.candte < @fecha_pull
+        AND a.candte >= @fecha_desde
+        AND a.candte <= @fecha_hasta
         AND a.cancod IN ('M-F','P-AV','P-NC','NO-DESP3')
 
 		IF OBJECT_ID('tempdb..#source_ord') IS NOT NULL BEGIN
@@ -111,9 +93,9 @@ BEGIN TRY
 		    FROM #source_canpck a
         )
 		SELECT
-            '' AS operacion,
-            @fecha_pull AS fecha_creacion,
-            @fecha_pull AS fecha_modificacion,
+            CAST('' AS NVARCHAR(1)) AS operacion,
+            @fecha_hasta AS fecha_creacion,
+            @fecha_hasta AS fecha_modificacion,
 			a.*
 		INTO #source_ord
         FROM cte_00 a
@@ -288,7 +270,7 @@ BEGIN TRY
             b.order_key = a.order_key
         AND b.line_key = a.line_key
         WHERE
-            b.ordnum IS NULL
+            b.order_key IS NULL
         
         --Un registro que hasta este punto corresponda a una operación CREATE (no cruzar contra el target), 
         --se debe cruzar contra todas las ordenes en el destino para verificar que no este cruzando contra una orden CERRADA

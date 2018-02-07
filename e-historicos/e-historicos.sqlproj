@@ -114,9 +114,8 @@
     <None Include="SqlSchemaCompareDev.scmp" />
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
-    <None Include="e-historicos.publish.xml" />
-    <None Include="e-historicos.dev.publish.xml" />
     <None Include="e-historicos.tst.publish.xml" />
+    <None Include="e-historicos.dev.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="historicoInv">
