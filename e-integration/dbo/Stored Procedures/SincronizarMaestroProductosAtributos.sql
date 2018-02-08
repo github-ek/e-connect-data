@@ -193,11 +193,37 @@ BEGIN TRY
 
     COMMIT TRANSACTION
 
-    UPDATE a
-    SET a.cambio_notificado = 1
-    FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.productos_atributos a
-    INNER JOIN #source b ON
-        b.id = a.id
+    --ACTUALIZAR SOURCE
+    BEGIN
+        WHILE 1 = 1 
+        BEGIN
+            IF OBJECT_ID('tempdb..#notificados') IS NOT NULL BEGIN
+                DROP TABLE #notificados
+            END
+
+            SELECT TOP 1000 
+                id
+            INTO #notificados
+            FROM #source 
+            WHERE 
+                cambio_notificado = 0
+            
+            IF NOT EXISTS(SELECT 1 FROM #notificados) BREAK
+
+            UPDATE a
+            SET a.cambio_notificado = 1
+            FROM #source a
+            INNER JOIN #notificados b ON
+                b.id = a.id
+
+            UPDATE a
+            SET a.cambio_notificado = 1
+            FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.productos_atributos a
+            INNER JOIN #notificados b ON
+                b.id = a.id
+        END
+    END
+
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()

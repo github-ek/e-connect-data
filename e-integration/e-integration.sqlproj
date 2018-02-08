@@ -95,7 +95,7 @@
     <Build Include="dbo\Stored Procedures\CrearMensajesDeReciboJda.sql" />
     <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
     <Build Include="dbo\Stored Procedures\EnviarMensajesDeReciboJda.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeEntrada.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeRecibo.sql" />
     <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesReciboDeTraslados.sql" />
     <Build Include="dbo\Stored Procedures\CrearMensajesDeAbastecimientoGWS.sql" />
     <Build Include="dbo\Stored Procedures\EnviarMensajesDeAbastecimientoGws.sql" />

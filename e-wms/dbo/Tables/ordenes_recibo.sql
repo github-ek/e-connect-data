@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[entradas] (
+﻿CREATE TABLE [dbo].[ordenes_recibo] (
     [id]                  BIGINT         NOT NULL,
     [order_key]           NVARCHAR (200) NOT NULL,
     [line_key]            NVARCHAR (50)  NOT NULL,
@@ -61,8 +61,8 @@
     [trlr_seal4]          NVARCHAR (30)  NOT NULL,
     [trlr_moddte]         DATETIME       NOT NULL,
     [trlr_mod_usr_id]     NVARCHAR (40)  NOT NULL,
-    CONSTRAINT [PK_entradas] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [UK_entradas_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [supnum] ASC, [invnum] ASC, [trknum] ASC, [invlin] ASC, [invsln] ASC, [seqnum] ASC)
+    CONSTRAINT [PK_ordenes_recibo] PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [UK_ordenes_recibo_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [supnum] ASC, [invnum] ASC, [trknum] ASC, [invlin] ASC, [invsln] ASC, [seqnum] ASC)
 );
 
 

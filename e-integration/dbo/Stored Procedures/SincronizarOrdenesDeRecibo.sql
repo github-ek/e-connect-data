@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[SincronizarOrdenesDeEntrada]
+﻿CREATE PROCEDURE [dbo].[SincronizarOrdenesDeRecibo]
 AS
 BEGIN TRY
     SET NOCOUNT ON;
@@ -13,7 +13,7 @@ BEGIN TRY
         SELECT 
             a.*
         INTO #source
-        FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.entradas a
+        FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ordenes_recibo a
         WHERE   
             a.cambio_notificado = 0
 
@@ -27,10 +27,10 @@ BEGIN TRY
         )
         DELETE b
         FROM cte_00 a
-        INNER JOIN [$(eWms)].dbo.entradas b ON
+        INNER JOIN [$(eWms)].dbo.ordenes_recibo b ON
             b.order_key = a.order_key
 
-        INSERT INTO [$(eWms)].dbo.entradas
+        INSERT INTO [$(eWms)].dbo.ordenes_recibo
             (id
             ,order_key
             ,line_key
@@ -162,11 +162,36 @@ BEGIN TRY
 
     COMMIT TRANSACTION
 
-    UPDATE a
-    SET a.cambio_notificado = 1
-    FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.entradas a
-    INNER JOIN #source b ON
-        b.id = a.id
+    --ACTUALIZAR SOURCE
+    BEGIN
+        WHILE 1 = 1 
+        BEGIN
+            IF OBJECT_ID('tempdb..#notificados') IS NOT NULL BEGIN
+                DROP TABLE #notificados
+            END
+
+            SELECT TOP 1000 
+                id
+            INTO #notificados
+            FROM #source 
+            WHERE 
+                cambio_notificado = 0
+            
+            IF NOT EXISTS(SELECT 1 FROM #notificados) BREAK
+
+            UPDATE a
+            SET a.cambio_notificado = 1
+            FROM #source a
+            INNER JOIN #notificados b ON
+                b.id = a.id
+
+            UPDATE a
+            SET a.cambio_notificado = 1
+            FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ordenes_recibo a
+            INNER JOIN #notificados b ON
+                b.id = a.id
+        END
+    END
 
 END TRY
 BEGIN CATCH

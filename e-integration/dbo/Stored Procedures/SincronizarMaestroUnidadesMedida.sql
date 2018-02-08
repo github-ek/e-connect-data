@@ -86,6 +86,7 @@ BEGIN TRY
             b.id = a.id
     END
 
+    --ACTUALIZAR TARGET
     BEGIN
         INSERT INTO [$(eConnect)].dbo.unidades_medida
            (codigo,nombre,descripcion,ordinal,activo,[version],usuario_creacion,fecha_creacion,usuario_modificacion,fecha_modificacion)
@@ -132,6 +133,7 @@ BEGIN TRY
 
     COMMIT TRANSACTION
 
+    --ACTUALIZAR SOURCE
     UPDATE a
     SET a.cambio_notificado = 1
     FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.unidades_medida a

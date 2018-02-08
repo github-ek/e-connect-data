@@ -1,3 +1,0 @@
-﻿CREATE SCHEMA [wms]
-    AUTHORIZATION [dbo];
-

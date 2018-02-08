@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[salidas] (
+﻿CREATE TABLE [dbo].[ordenes_salida] (
     [id]                  BIGINT         NOT NULL,
     [order_key]           NVARCHAR (200) NOT NULL,
     [line_key]            NVARCHAR (50)  NOT NULL,
@@ -29,8 +29,8 @@
     [ordlin_mod_usr_id]   NVARCHAR (40)  NOT NULL,
     [canpck_candte]       DATETIME       NOT NULL,
     [canpck_can_usr_id]   NVARCHAR (40)  NOT NULL,
-    CONSTRAINT [PK_salidas] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [UK_salidas_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [ordnum] ASC, [ordlin] ASC)
+    CONSTRAINT [PK_ordenes_salida] PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [UK_ordenes_salida_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [ordnum] ASC, [ordlin] ASC)
 );
 
 

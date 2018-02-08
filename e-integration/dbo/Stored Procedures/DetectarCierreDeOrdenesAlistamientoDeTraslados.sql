@@ -24,7 +24,7 @@ BEGIN TRY
             ,d.id_solicitud
             ,d.cerrada AS cerrada_en_destino
         INTO #source
-        FROM [$(eWms)].dbo.salidas a
+        FROM [$(eWms)].dbo.ordenes_salida a
         LEFT OUTER JOIN [$(eWms)].dbo.clientes b ON
             b.client_id = a.client_id
         LEFT OUTER JOIN [$(eWms)].dbo.bodegas c ON
@@ -57,7 +57,7 @@ BEGIN TRY
             ,b.ordlin_mod_usr_id
         INTO #source_lineas
         FROM #source a
-        INNER JOIN [$(eWms)].dbo.salidas b ON
+        INNER JOIN [$(eWms)].dbo.ordenes_salida b ON
             b.client_id = a.client_id 
         AND b.wh_id = a.wh_id
         AND b.ordnum = a.ordnum
@@ -141,12 +141,12 @@ BEGIN TRY
         AND b.ordnum = a.ordnum
     END
 
-    --UPDATE SALIDAS EN EWMS
+    --UPDATE ordenes_salida EN EWMS
     BEGIN
         UPDATE a
         SET  a.cambio_notificado = 1
             ,a.cerrada_con_errores = 0
-        FROM [$(eWms)].dbo.salidas a 
+        FROM [$(eWms)].dbo.ordenes_salida a 
         INNER JOIN #source_lineas b ON
             b.client_id = a.client_id
         AND b.wh_id = a.wh_id
@@ -155,7 +155,7 @@ BEGIN TRY
         UPDATE a
         SET  a.cambio_notificado = 1
             ,a.cerrada_con_errores = 1
-        FROM [$(eWms)].dbo.salidas a 
+        FROM [$(eWms)].dbo.ordenes_salida a 
         INNER JOIN #source_inconsistencias b ON
             b.client_id = a.client_id
         AND b.wh_id = a.wh_id

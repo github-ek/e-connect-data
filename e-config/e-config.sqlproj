@@ -63,15 +63,11 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-    <Folder Include="Security\" />
     <Folder Include="dbo\Synonyms\" />
-    <Folder Include="wms\" />
-    <Folder Include="wms\Synonyms\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\configuraciones.sql" />
     <Build Include="dbo\Tables\grupos_configuracion.sql" />
-    <Build Include="Security\wms.sql" />
     <Build Include="dbo\Synonyms\dbo.wkohdr.sql" />
     <Build Include="dbo\Synonyms\dbo.wkodtl.sql" />
     <Build Include="dbo\Synonyms\dbo.wko_typ.sql" />
@@ -102,10 +98,6 @@
     <Build Include="dbo\Synonyms\dbo.aremst.sql" />
     <Build Include="dbo\Synonyms\dbo.alt_prtmst.sql" />
     <Build Include="dbo\Synonyms\dbo.adrmst.sql" />
-    <Build Include="wms\Synonyms\wms.ubicaciones.sql" />
-    <Build Include="wms\Synonyms\wms.salidas.sql" />
-    <Build Include="wms\Synonyms\wms.entradas.sql" />
-    <Build Include="wms\Synonyms\wms.saldos_inventario.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="e-config.dev.publish.xml" />

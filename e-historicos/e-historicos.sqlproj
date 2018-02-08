@@ -70,17 +70,17 @@
     <Build Include="dbo\Tables\ubicaciones.sql" />
     <Build Include="logs\Tables\ubicaciones.sql" />
     <Build Include="dbo\Tables\integraciones.sql" />
-    <Build Include="dbo\Tables\salidas.sql" />
-    <Build Include="logs\Tables\salidas.sql" />
-    <Build Include="dbo\Tables\entradas.sql" />
-    <Build Include="logs\Tables\entradas.sql" />
+    <Build Include="dbo\Tables\ordenes_salida.sql" />
+    <Build Include="logs\Tables\ordenes_salida.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo.sql" />
+    <Build Include="logs\Tables\ordenes_recibo.sql" />
     <Build Include="dbo\Tables\saldos_inventario.sql" />
     <Build Include="dbo\Tables\clientes_bodegas.sql" />
     <Build Include="dbo\Tables\bodegas.sql" />
     <Build Include="dbo\Tables\clientes.sql" />
     <Build Include="dbo\Stored Procedures\_SincronizarOrdenesDeSalida.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeSalida.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeEntrada.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeRecibo.sql" />
     <Build Include="dbo\Stored Procedures\ConsultarMovimientosWms.sql" />
     <Build Include="dbo\Stored Procedures\ConsolidarSaldosInventario.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroUbicaciones.sql" />
@@ -142,8 +142,5 @@
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="e-historicos.refactorlog" />
   </ItemGroup>
 </Project>

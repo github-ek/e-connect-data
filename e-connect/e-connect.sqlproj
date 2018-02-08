@@ -72,7 +72,6 @@
     <Build Include="dbo\Tables\___ordenes_notas.sql" />
     <Build Include="dbo\Tables\solicitudes_transporte.sql" />
     <Build Include="dbo\Tables\solicitudes_lineas.sql" />
-    <Build Include="dbo\Tables\mensajes_manufacturas_jda_lineas.sql" />
     <Build Include="dbo\Tables\____preordenes_salida.sql" />
     <Build Include="dbo\Tables\____preordenes_venta.sql" />
     <Build Include="dbo\Tables\____ordenes_venta_lineas.sql" />
@@ -126,6 +125,7 @@
     <Build Include="dbo\Tables\mensajes_abastecimientos_gws_lineas.sql" />
     <Build Include="dbo\Stored Procedures\CrearOrdenesManufacturaDeTraslados.sql" />
     <Build Include="dbo\Tables\tipos_documento_solicitud.sql" />
+    <Build Include="dbo\Tables\mensajes_manufacturas_jda_lineas.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />

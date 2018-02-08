@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[SincronizarOrdenesDeEntrada]
+﻿CREATE PROCEDURE [dbo].[SincronizarOrdenesDeRecibo]
 AS
 BEGIN TRY
 	DECLARE @fecha_desde DATETIME
@@ -6,7 +6,7 @@ BEGIN TRY
 
     BEGIN TRANSACTION
 
-    EXECUTE dbo.GetFechasIntegracion 'ENTRADAS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
+    EXECUTE dbo.GetFechasIntegracion 'ordenes_recibo', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION TARGET: Las ordenes que continúan ABIERTAS en la tabla destino
     BEGIN
@@ -19,7 +19,7 @@ BEGIN TRY
         (
             SELECT DISTINCT
                  a.order_key
-            FROM dbo.entradas a
+            FROM dbo.ordenes_recibo a
             WHERE
                 a.estado = 'ABIERTA'
             AND a.fecha_creacion >= CAST(DATEADD(MONTH,-1,GETDATE()) AS DATE) 
@@ -27,7 +27,7 @@ BEGIN TRY
         SELECT
              a.*
         INTO #target
-        FROM dbo.entradas a
+        FROM dbo.ordenes_recibo a
         INNER JOIN cte_00 b ON
             b.order_key = a.order_key
     END
@@ -242,7 +242,7 @@ BEGIN TRY
             a.operacion = 'E',
             a.fecha_creacion = b.fecha_creacion
         FROM #source a
-        INNER JOIN dbo.entradas b ON
+        INNER JOIN dbo.ordenes_recibo b ON
             b.order_key = a.order_key
         AND b.line_key = a.line_key
         WHERE
@@ -315,14 +315,14 @@ BEGIN TRY
         --Eliminar del destino todos los registros que esten en el consolidado de eliminados, excepto los errores por cambios posteriores al cierre. 
         --De este modo en la tabla destino solo queda la version con la que se hizo el cierre de la orden.
 		DELETE a
-		FROM dbo.entradas a
+		FROM dbo.ordenes_recibo a
 		INNER JOIN #deleted b ON
 			b.id = a.id
         WHERE
             a.operacion NOT IN ('E')
         
         --CREATE
-		INSERT INTO dbo.entradas
+		INSERT INTO dbo.ordenes_recibo
 			(order_key
             ,line_key
             ,operacion
@@ -457,9 +457,9 @@ BEGIN TRY
             a.operacion = 'C'
 
         --UPDATE
-        SET IDENTITY_INSERT dbo.entradas ON
+        SET IDENTITY_INSERT dbo.ordenes_recibo ON
 
-		INSERT INTO dbo.entradas
+		INSERT INTO dbo.ordenes_recibo
 			(id
             ,order_key
             ,line_key
@@ -595,10 +595,10 @@ BEGIN TRY
         WHERE
             a.operacion = 'U'
 
-        SET IDENTITY_INSERT dbo.entradas OFF
+        SET IDENTITY_INSERT dbo.ordenes_recibo OFF
 
         --LOGS
-		INSERT INTO logs.entradas
+		INSERT INTO logs.ordenes_recibo
 			(id
             ,order_key
             ,line_key

@@ -68,9 +68,9 @@
     <Build Include="dbo\Tables\clientes.sql" />
     <Build Include="dbo\Tables\bodegas.sql" />
     <Build Include="dbo\Tables\ubicaciones.sql" />
-    <Build Include="dbo\Tables\salidas.sql" />
+    <Build Include="dbo\Tables\ordenes_salida.sql" />
     <Build Include="dbo\Tables\saldos_inventario.sql" />
-    <Build Include="dbo\Tables\entradas.sql" />
+    <Build Include="dbo\Tables\ordenes_recibo.sql" />
     <Build Include="dbo\Tables\dias.sql" />
     <Build Include="dbo\Tables\unidades_medida.sql" />
   </ItemGroup>

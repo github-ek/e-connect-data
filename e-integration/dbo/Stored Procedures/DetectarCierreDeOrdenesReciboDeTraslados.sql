@@ -38,7 +38,7 @@ BEGIN TRY
             ,a.close_dte
             ,a.dispatch_dte
         INTO #source
-        FROM [$(eWms)].dbo.entradas a
+        FROM [$(eWms)].dbo.ordenes_recibo a
         LEFT OUTER JOIN [$(eWms)].dbo.clientes b ON
             b.client_id = a.client_id
         LEFT OUTER JOIN [$(eWms)].dbo.bodegas c ON
@@ -92,7 +92,7 @@ BEGIN TRY
                 ,b.rcvlin_moddte AS fecha_modificacion
                 ,b.rcvlin_mod_usr_id AS usuario_modificacion
             FROM #source a
-            INNER JOIN [$(eWms)].dbo.entradas b ON
+            INNER JOIN [$(eWms)].dbo.ordenes_recibo b ON
                 b.order_key = a.order_key
             LEFT OUTER JOIN [$(eConnect)].dbo.productos c ON
                 c.id_cliente = a.id_cliente
@@ -265,19 +265,19 @@ BEGIN TRY
             b.id_orden_recibo = a.id_orden_recibo
     END
 
-    --UPDATE ENTRADAS EN [$(eWms)].
+    --UPDATE ordenes_recibo EN [$(eWms)].
     BEGIN
         UPDATE a
         SET  a.cambio_notificado = 1
             ,a.cerrada_con_errores = 0
-        FROM [$(eWms)].dbo.entradas a 
+        FROM [$(eWms)].dbo.ordenes_recibo a 
         INNER JOIN #source_lineas b ON
             b.order_key = a.order_key
 
         UPDATE a
         SET  a.cambio_notificado = 1
             ,a.cerrada_con_errores = 1
-        FROM [$(eWms)].dbo.entradas a 
+        FROM [$(eWms)].dbo.ordenes_recibo a 
         INNER JOIN #source_inconsistencias b ON
             b.order_key = a.order_key
     END

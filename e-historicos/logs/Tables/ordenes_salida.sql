@@ -1,4 +1,4 @@
-﻿CREATE TABLE [logs].[salidas] (
+﻿CREATE TABLE [logs].[ordenes_salida] (
     [id_log]                  BIGINT        IDENTITY (1, 1) NOT NULL,
     [id]                      BIGINT        NOT NULL,
 	[order_key]          NVARCHAR(200) NOT NULL,
@@ -33,6 +33,6 @@
     [canpck_candte]           DATETIME      NOT NULL,
     [canpck_can_usr_id]       NVARCHAR (40) NOT NULL,
 
-    CONSTRAINT [PK_salidas] PRIMARY KEY CLUSTERED ([id_log] ASC) WITH (FILLFACTOR = 80)
+    CONSTRAINT [PK_ordenes_salida] PRIMARY KEY CLUSTERED ([id_log] ASC) WITH (FILLFACTOR = 80)
 );
 

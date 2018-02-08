@@ -1,5 +1,6 @@
-﻿CREATE TABLE [dbo].[entradas] (
-    [id]                 BIGINT IDENTITY (1, 1) NOT NULL,
+﻿CREATE TABLE [logs].[ordenes_recibo] (
+    [id_log]             BIGINT         IDENTITY (1, 1) NOT NULL,
+    [id]                 BIGINT         NOT NULL,
 	[order_key]          NVARCHAR(200) NOT NULL,
 	[line_key]           NVARCHAR(50) NOT NULL,
     [operacion]          NVARCHAR (1) NOT NULL,
@@ -64,7 +65,5 @@
     [trlr_seal4]         NVARCHAR (30)  NOT NULL,
     [trlr_moddte]        DATETIME       NOT NULL,
     [trlr_mod_usr_id]    NVARCHAR (40)  NOT NULL,
-    CONSTRAINT [PK_entradas] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [UK_entradas_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [supnum] ASC, [invnum] ASC, [trknum] ASC, [invlin] ASC, [invsln] ASC, [seqnum] ASC)
+    CONSTRAINT [PK_ordenes_recibo] PRIMARY KEY CLUSTERED ([id_log] ASC)
 );
-
