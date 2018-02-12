@@ -14,4 +14,4 @@
     [last_upd_dt]       DATETIME        NOT NULL,
     [last_upd_user_id]  NVARCHAR (40)   NOT NULL,
     CONSTRAINT [PK_productos_codigos] PRIMARY KEY CLUSTERED ([id_log] ASC)
-)
+) ON [PRIMARY]

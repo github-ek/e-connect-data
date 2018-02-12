@@ -13,4 +13,4 @@
     [activo] BIT NOT NULL, 
     CONSTRAINT [PK_clientes] PRIMARY KEY CLUSTERED ([id_log] ASC)
 
-)
+) ON [PRIMARY]

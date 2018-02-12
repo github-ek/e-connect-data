@@ -18,9 +18,6 @@ BEGIN TRY
         FROM [$(eStage)].oms.traslados a
         WHERE
             a.estado = 'VALIDADO'
-        --TODO QUITAR
-        AND a.id_cliente = 18
-        AND a.prefijo_orden <> ''
 
         IF OBJECT_ID('tempdb..#solicitudes') IS NOT NULL BEGIN
             DROP TABLE #solicitudes
@@ -151,7 +148,7 @@ BEGIN TRY
         INNER JOIN [$(eConnect)].dbo.bodegas d ON
             d.id_bodega = a.id_bodega_traslado
         INNER JOIN [$(eConnect)].dbo.ciudades e ON
-            e.id_ciudad = b.id_ciudad
+            e.id_ciudad = d.id_ciudad
     END
 
     --CREACION DE LAS SOLICITUDES

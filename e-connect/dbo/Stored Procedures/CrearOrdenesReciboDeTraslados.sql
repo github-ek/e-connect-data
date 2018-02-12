@@ -85,6 +85,8 @@ BEGIN TRY
         FROM #ordenes a
         INNER JOIN dbo.ordenes_alistamiento_lineas b ON
             b.id_orden_alistamiento = a.id_orden_alistamiento
+
+
     END
 
     --CREACION DE LAS SOLICITUDES

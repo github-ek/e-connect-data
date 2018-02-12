@@ -5,8 +5,9 @@
     [operacion]             NVARCHAR (1) NOT NULL,
     [estado]                NVARCHAR (50) NOT NULL,
     [cambio_notificado]     BIT NOT NULL,
-    [fecha_creacion]        DATETIME       NOT NULL,
-    [fecha_modificacion]    DATETIME       NOT NULL,
+    [cerrada_con_errores] BIT            NOT NULL,
+    [fecha_creacion]      DATETIME       NOT NULL,
+    [fecha_modificacion]  DATETIME       NOT NULL,
 
     [ship_id]               NVARCHAR (30) NOT NULL,
 

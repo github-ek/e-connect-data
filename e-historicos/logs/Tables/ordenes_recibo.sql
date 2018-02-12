@@ -66,4 +66,4 @@
     [trlr_moddte]        DATETIME       NOT NULL,
     [trlr_mod_usr_id]    NVARCHAR (40)  NOT NULL,
     CONSTRAINT [PK_ordenes_recibo] PRIMARY KEY CLUSTERED ([id_log] ASC)
-);
+)ON [PRIMARY]

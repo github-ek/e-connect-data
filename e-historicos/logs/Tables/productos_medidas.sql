@@ -26,4 +26,4 @@
     [prtftp_last_upd_dt]       DATETIME        NOT NULL,
     [prtftp_last_upd_user_id]  NVARCHAR (40)   NOT NULL,
     CONSTRAINT [PK_productos_medidas] PRIMARY KEY CLUSTERED ([id_log] ASC)
-)
+) ON [PRIMARY]

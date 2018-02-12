@@ -2,6 +2,7 @@
     [id]                 BIGINT        IDENTITY (1, 1) NOT NULL,
 	[order_key]          NVARCHAR(200) NOT NULL,
 	[line_key]           NVARCHAR(50) NOT NULL,
+
     [operacion]          NVARCHAR (1) NOT NULL,
     [estado]             NVARCHAR (50) NOT NULL,
     [cambio_notificado]  BIT NOT NULL,

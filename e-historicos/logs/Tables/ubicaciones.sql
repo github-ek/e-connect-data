@@ -13,5 +13,5 @@
     [last_upd_dt]        DATETIME      NULL,
     [last_upd_user_id]   NVARCHAR (40) NULL,
     CONSTRAINT [PK_ubicaciones] PRIMARY KEY CLUSTERED ([id_log] ASC) WITH (FILLFACTOR = 80)
-);
+) ON [PRIMARY]
 

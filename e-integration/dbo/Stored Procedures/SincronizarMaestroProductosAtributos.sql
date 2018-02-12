@@ -221,6 +221,7 @@ BEGIN TRY
             FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.productos_atributos a
             INNER JOIN #notificados b ON
                 b.id = a.id
+            AND a.cambio_notificado = 0
         END
     END
 

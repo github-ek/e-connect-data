@@ -111,6 +111,7 @@
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosCodigos.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosAtributos.sql" />
     <Build Include="dbo\Stored Procedures\CrearSolicitudesDeEstampillado.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEmbarques.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

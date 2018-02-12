@@ -96,11 +96,30 @@ BEGIN TRY
 			DROP TABLE #not_matched
 		END
 
+        ;WITH
+        cte_00 AS
+        (
+            SELECT
+                 a.prt_client_id
+                ,a.prtnum
+                ,a.wh_id
+                ,a.uomcod
+                ,a.ftpcod
+            FROM [$(ttcwmsprd)].dbo.prtftp_dtl a
+            INNER JOIN [$(ttcwmsprd)].dbo.prtftp b ON
+                b.prt_client_id = a.prt_client_id
+            AND b.prtnum = a.prtnum
+            AND b.wh_id = a.wh_id
+            AND b.ftpcod = a.ftpcod
+            AND b.defftp_flg = 1
+            WHERE 0 = 0
+            AND a.wh_id NOT IN ('----','WMD1')
+        )
         SELECT
             a.*
         INTO #not_matched
         FROM dbo.productos_medidas a
-        LEFT OUTER JOIN [$(ttcwmsprd)].dbo.prtftp_dtl b ON
+        LEFT OUTER JOIN cte_00 b ON
             b.prt_client_id = a.prt_client_id
         AND b.prtnum = a.prtnum
         AND b.wh_id = a.wh_id

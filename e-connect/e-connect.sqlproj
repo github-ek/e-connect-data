@@ -126,6 +126,8 @@
     <Build Include="dbo\Stored Procedures\CrearOrdenesManufacturaDeTraslados.sql" />
     <Build Include="dbo\Tables\tipos_documento_solicitud.sql" />
     <Build Include="dbo\Tables\mensajes_manufacturas_jda_lineas.sql" />
+    <Build Include="dbo\Tables\embarques.sql" />
+    <Build Include="dbo\Tables\embarques_lineas.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />

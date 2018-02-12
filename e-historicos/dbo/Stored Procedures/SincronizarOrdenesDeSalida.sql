@@ -6,7 +6,7 @@ BEGIN TRY
 
     BEGIN TRANSACTION
 
-    EXECUTE dbo.GetFechasIntegracion 'ordenes_salida', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
+    EXECUTE dbo.GetFechasIntegracion 'SALIDAS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION TARGET: Las ordenes que continúan ABIERTAS en la tabla destino
     BEGIN

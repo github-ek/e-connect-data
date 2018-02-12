@@ -15,4 +15,4 @@
     [mod_usr_id]          NVARCHAR (40)   NULL,
 
     CONSTRAINT [PK_bodegas] PRIMARY KEY CLUSTERED ([id_log] ASC)
-)
+) ON [PRIMARY]

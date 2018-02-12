@@ -109,6 +109,9 @@
     <Build Include="logs\Tables\productos_atributos.sql" />
     <Build Include="dbo\Tables\productos_atributos.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosAtributos.sql" />
+    <Build Include="logs\Tables\embarques.sql" />
+    <Build Include="dbo\Tables\embarques_lineas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEmbarques.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

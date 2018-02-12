@@ -14,5 +14,4 @@
     [moddte]               DATETIME        NOT NULL,
     [mod_usr_id]           NVARCHAR (40)   NOT NULL,
     CONSTRAINT [PK_productos] PRIMARY KEY CLUSTERED ([id_log] ASC)
-
-)
+)ON [PRIMARY]

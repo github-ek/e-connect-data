@@ -11,5 +11,4 @@
     [lngdsc]              NVARCHAR (100)  NOT NULL,
 
     CONSTRAINT [PK_estados_inventario] PRIMARY KEY CLUSTERED ([id_log] ASC)
-
-)
+) ON [PRIMARY]

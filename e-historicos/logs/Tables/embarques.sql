@@ -1,6 +1,7 @@
-﻿CREATE TABLE [dbo].[embarques]
+﻿CREATE TABLE [logs].[embarques]
 (
-	[id]                    BIGINT IDENTITY (1, 1) NOT NULL,
+    [id_log]                    BIGINT IDENTITY (1, 1) NOT NULL,
+    [id]                        BIGINT NOT NULL,
     [record_key]            NVARCHAR(30) NOT NULL,
     [operacion]             NVARCHAR (1) NOT NULL,
     [estado]                NVARCHAR (50) NOT NULL,
@@ -24,12 +25,10 @@
     [driver_nam]            NVARCHAR (40) NOT NULL,
     [driver_lic_num]        NVARCHAR (40) NOT NULL,
     [tractor_num]           NVARCHAR (10) NOT NULL,
-    [arrdte]           	    DATETIME NULL,
-    [close_dte]           	DATETIME NULL,
-    [dispatch_dte]          DATETIME NULL,
+    [arrdte]           	    DATETIME NOT NULL,
+    [close_dte]           	DATETIME NOT NULL,
+    [dispatch_dte]          DATETIME NOT NULL,
     [trlr_moddte]           DATETIME NOT NULL,
     [trlr_mod_usr_id]       NVARCHAR (40) NOT NULL,
-    CONSTRAINT [PK_embarques] PRIMARY KEY CLUSTERED ([id] ASC) ON [PRIMARY],
-    CONSTRAINT [UK_embarques_01] UNIQUE NONCLUSTERED ([ship_id] ASC) ON [PRIMARY],
-    CONSTRAINT [UK_embarques_02] UNIQUE NONCLUSTERED ([record_key] ASC) ON [PRIMARY]
+    CONSTRAINT [PK_embarques] PRIMARY KEY CLUSTERED ([id_log] ASC) WITH (FILLFACTOR = 80)
 ) ON [PRIMARY]

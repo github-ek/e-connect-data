@@ -11,5 +11,4 @@
     [lngdsc]              NVARCHAR (100)  NOT NULL,
 
     CONSTRAINT [PK_unidades_medida] PRIMARY KEY CLUSTERED ([id_log] ASC)
-
-)
+) ON [PRIMARY]
