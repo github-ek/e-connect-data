@@ -151,6 +151,8 @@ BEGIN TRY
             e.id_ciudad = d.id_ciudad
     END
 
+    --DETECCION DE INCONSISTENCIAS
+
     --CREACION DE LAS SOLICITUDES
     BEGIN
         DECLARE @t AS TABLE(id_cliente BIGINT,numero_solicitud VARCHAR(20),id_solicitud BIGINT)

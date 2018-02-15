@@ -50,7 +50,6 @@ BEGIN TRY
             e.id_canal = a.id_canal
         WHERE
             a.estado = 'NO_PROCESADA'
-        AND a.id_orden_alistamiento > 26
 
         IF OBJECT_ID('tempdb..#mensajes_cstmst') IS NOT NULL BEGIN
             DROP TABLE #mensajes_cstmst

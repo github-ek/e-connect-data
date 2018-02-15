@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="64b87dff-3325-49a8-9536-2687cbba6993" ChangeDateTime="02/15/2018 07:12:17">
+    <Property Name="ElementName" Value="[dbo].[ordenes_salida].[order_key]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ordenes_salida]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="record_key" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d39b1643-08d1-48e5-b57a-4bcac0624b56" ChangeDateTime="02/15/2018 07:12:28">
+    <Property Name="ElementName" Value="[dbo].[ordenes_recibo].[order_key]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ordenes_recibo]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="record_key" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7a2b8ce4-3f42-46fe-ad5b-1d9da6e0d7e4" ChangeDateTime="02/15/2018 07:36:51">
+    <Property Name="ElementName" Value="[logs].[ordenes_salida].[order_key]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[logs].[ordenes_salida]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="record_key" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="93fa18f1-0334-4f2e-8ce7-d2ad4a702c4e" ChangeDateTime="02/15/2018 07:40:07">
+    <Property Name="ElementName" Value="[logs].[ordenes_recibo].[order_key]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[logs].[ordenes_recibo]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="record_key" />
+  </Operation>
+</Operations>

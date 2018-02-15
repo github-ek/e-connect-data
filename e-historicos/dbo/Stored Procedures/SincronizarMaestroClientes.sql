@@ -21,7 +21,7 @@ BEGIN TRY
                  a.client_id
                 ,UPPER(b.adrnam) AS adrnam
                 ,COALESCE(UPPER(b.host_ext_id),'') AS host_ext_id
-                ,CAST(0 AS BIT) AS activo
+                ,CAST(1 AS BIT) AS activo
             FROM [$(ttcwmsprd)].dbo.client a
             INNER JOIN [$(ttcwmsprd)].dbo.adrmst b ON
                 b.adr_id = a.adr_id

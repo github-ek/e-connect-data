@@ -18,7 +18,7 @@ BEGIN TRY
         cte_00 AS
         (
             SELECT DISTINCT
-                 a.order_key
+                 a.record_key
             FROM dbo.ordenes_recibo a
             WHERE
                 a.estado = 'ABIERTA'
@@ -29,10 +29,12 @@ BEGIN TRY
         INTO #target
         FROM dbo.ordenes_recibo a
         INNER JOIN cte_00 b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
+
+        CREATE UNIQUE INDEX ix_target_01 ON #target(record_key,line_key)
     END
     
-    --CONSOLIDACION #source_ord: Del origen, se toman las ordenes nuevas y/o modificadas recientemente y aquellas que crucen contra el target (ABIERTAS en el destino)
+    --CONSOLIDACION #source_ord: Del origen, se toman los registros nuevos y/o modificados recientemente y aquellos que crucen contra el target (ABIERTAS en el destino)
 	BEGIN
 		IF OBJECT_ID('tempdb..#source_rcvlin') IS NOT NULL BEGIN
 			DROP TABLE #source_rcvlin
@@ -76,7 +78,7 @@ BEGIN TRY
 		    FROM #source_rcvlin a
         )
 		SELECT
-            '' AS operacion,
+            CAST('' AS NVARCHAR(1)) AS operacion,
             @fecha_hasta AS fecha_creacion,
             @fecha_hasta AS fecha_modificacion,
 			a.*
@@ -92,16 +94,8 @@ BEGIN TRY
 
 		SELECT
              CAST(NULL AS BIGINT) AS id
-            ,CONCAT(
-             b.client_id,'|'
-            ,b.wh_id,'|'
-            ,b.supnum,'|'
-            ,b.invnum,'|'
-            ,b.trknum) AS order_key
-            ,CONCAT(
-             c.invlin,'|'
-            ,c.invsln,'|'
-            ,c.seqnum) AS line_key
+            ,CONCAT(b.client_id,'|',b.wh_id,'|',b.supnum,'|',b.invnum,'|',b.trknum) AS record_key
+            ,CONCAT(c.invlin,'|',c.invsln,'|',c.seqnum) AS line_key
 
             ,a.operacion
             ,'ABIERTA' AS estado
@@ -186,10 +180,11 @@ BEGIN TRY
         INNER JOIN [$(ttcwmsprd)].dbo.trlr e ON 
             e.trlr_id = d.trlr_id
 
-        CREATE UNIQUE INDEX ix_source_01 ON #source(order_key,line_key)
+        CREATE UNIQUE INDEX ix_source_01 ON #source(client_id,wh_id,supnum,invnum,trknum,invlin,invsln,seqnum)
+        CREATE UNIQUE INDEX ix_source_02 ON #source(record_key,line_key)
     END
 
-    --DETECCION DE ORDENES CERRADAS
+    --DETECCION DE REGISTROS CERRADOS
     BEGIN
         --Cuando el estado (rcvtrk_stat) del rcvtrk del rcvinv sea igual C,
         --en ese momento la orden pasará al estado CERRADA
@@ -209,7 +204,7 @@ BEGIN TRY
             a.fecha_creacion = b.fecha_creacion
         FROM #source a
         INNER JOIN #target b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE NOT (
             b.moddte = a.moddte 
@@ -228,10 +223,10 @@ BEGIN TRY
         SET a.operacion = 'C'
         FROM #source a
         LEFT OUTER JOIN #target b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE
-            b.order_key IS NULL
+            b.record_key IS NULL
 
         --Un registro que hasta este punto corresponda a una operación CREATE (no cruzar contra el target), 
         --se debe cruzar contra todas las ordenes en el destino para verificar que no este cruzando contra una orden CERRADA
@@ -243,7 +238,7 @@ BEGIN TRY
             a.fecha_creacion = b.fecha_creacion
         FROM #source a
         INNER JOIN dbo.ordenes_recibo b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE
             a.operacion = 'C'
@@ -277,7 +272,7 @@ BEGIN TRY
                 a.*
             FROM #target a
             LEFT OUTER JOIN #source b ON
-                b.order_key = a.order_key
+                b.record_key = a.record_key
             AND b.line_key = a.line_key
             WHERE
                 b.operacion IN  ('U') OR b.operacion IS NULL
@@ -323,7 +318,7 @@ BEGIN TRY
         
         --CREATE
 		INSERT INTO dbo.ordenes_recibo
-			(order_key
+			(record_key
             ,line_key
             ,operacion
             ,estado
@@ -388,7 +383,7 @@ BEGIN TRY
             ,trlr_moddte
             ,trlr_mod_usr_id)
 		SELECT
-             order_key
+             record_key
             ,line_key
             ,operacion
             ,estado
@@ -461,7 +456,7 @@ BEGIN TRY
 
 		INSERT INTO dbo.ordenes_recibo
 			(id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -527,7 +522,7 @@ BEGIN TRY
             ,trlr_mod_usr_id)
 		SELECT
              id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -600,7 +595,7 @@ BEGIN TRY
         --LOGS
 		INSERT INTO logs.ordenes_recibo
 			(id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -666,7 +661,7 @@ BEGIN TRY
             ,trlr_mod_usr_id)
 		SELECT
              id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado

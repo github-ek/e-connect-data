@@ -8,7 +8,7 @@ BEGIN TRY
 
     EXECUTE dbo.GetFechasIntegracion 'EMBARQUES', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
-    --CONSOLIDACION TARGET: Las ordenes que continúan ABIERTAS en la tabla destino
+    --CONSOLIDACION TARGET: Los embarques que continúan ABIERTAS en la tabla destino
     BEGIN
 		IF OBJECT_ID('tempdb..#target') IS NOT NULL BEGIN
 			DROP TABLE #target
@@ -25,7 +25,7 @@ BEGIN TRY
         CREATE UNIQUE INDEX ix_target_01 ON #target(record_key)
     END
 
-	--CONSOLIDACION #source_shipment: Del origen, se toman las ordenes nuevas y/o modificadas recientemente y aquellas que crucen contra el target (ABIERTAS en el destino)
+	--CONSOLIDACION #source_shipment: Del origen, se toman los registros nuevos y/o modificados recientemente y aquellos que crucen contra el target (ABIERTAS en el destino)
 	BEGIN
         IF OBJECT_ID('tempdb..#source_shipment') IS NOT NULL BEGIN
 			DROP TABLE #source_shipment
@@ -115,8 +115,8 @@ BEGIN TRY
         WHERE
             b.shpsts IN ('B','C')
 
-        CREATE UNIQUE INDEX ix_source_01 ON #source(record_key)
-        CREATE UNIQUE INDEX ix_source_02 ON #source(ship_id)
+        CREATE UNIQUE INDEX ix_source_01 ON #source(ship_id)
+        CREATE UNIQUE INDEX ix_source_02 ON #source(record_key)
 
         IF OBJECT_ID('tempdb..#source_lines') IS NOT NULL BEGIN
 			DROP TABLE #source_lines
@@ -124,6 +124,7 @@ BEGIN TRY
 
         SELECT
              a.record_key
+            ,CONCAT(b.ship_line_id,'|',c.dtlnum) AS line_key
 
             ,b.ship_id
             ,b.ship_line_id
@@ -133,6 +134,7 @@ BEGIN TRY
             ,b.wh_id
             ,b.ordnum
             ,b.ordlin
+            ,c.prtnum
             ,b.linsts
 
             ,b.shpqty
@@ -149,10 +151,12 @@ BEGIN TRY
             c.ship_line_id = b.ship_line_id
     
         CREATE UNIQUE INDEX ix_source_lines_01 ON #source_lines(ship_id,ship_line_id,dtlnum)
+        CREATE UNIQUE INDEX ix_source_lines_02 ON #source_lines(record_key,line_key)
     END
 
-    --DETECCION DE CIERRES
+    --DETECCION DE REGISTROS CERRADOS
     BEGIN
+        --Cuando el embarque haya sido cancelado o cargado completamente
         UPDATE a
         SET a.estado = 'CERRADA'
         FROM #source a
@@ -484,6 +488,7 @@ BEGIN TRY
     BEGIN
         INSERT INTO dbo.embarques_lineas
             (record_key
+            ,line_key
 
             ,ship_id
             ,ship_line_id
@@ -493,6 +498,7 @@ BEGIN TRY
             ,wh_id
             ,ordnum
             ,ordlin
+            ,prtnum
             ,linsts
 
             ,shpqty
@@ -503,6 +509,7 @@ BEGIN TRY
             ,mod_usr_id)
         SELECT
              record_key
+            ,line_key
 
             ,ship_id
             ,ship_line_id
@@ -512,6 +519,7 @@ BEGIN TRY
             ,wh_id
             ,ordnum
             ,ordlin
+            ,prtnum
             ,linsts
 
             ,shpqty

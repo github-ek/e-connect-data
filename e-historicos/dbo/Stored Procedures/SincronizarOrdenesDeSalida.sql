@@ -18,7 +18,7 @@ BEGIN TRY
         cte_00 AS
         (
             SELECT DISTINCT
-                 a.order_key
+                 a.record_key
             FROM dbo.ordenes_salida a
             WHERE
                 a.estado = 'ABIERTA'
@@ -29,10 +29,12 @@ BEGIN TRY
         INTO #target
         FROM dbo.ordenes_salida a
         INNER JOIN cte_00 b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
+
+        CREATE UNIQUE INDEX ix_target_01 ON #target(record_key,line_key)
     END
 
-	--CONSOLIDACION #source_ord: Del origen, se toman las ordenes nuevas y/o modificadas recientemente y aquellas que crucen contra el target (ABIERTAS en el destino)
+    --CONSOLIDACION #source_ord: Del origen, se toman los registros nuevos y/o modificados recientemente y aquellos que crucen contra el target (ABIERTAS en el destino)
 	BEGIN
 		IF OBJECT_ID('tempdb..#source_ord_line') IS NOT NULL BEGIN
 			DROP TABLE #source_ord_line
@@ -161,10 +163,7 @@ BEGIN TRY
         )
         SELECT
              CAST(NULL AS BIGINT) AS id
-            ,CONCAT(
-             b.client_id,'|'
-            ,b.wh_id,'|'
-            ,b.ordnum) AS order_key
+            ,CONCAT(b.client_id,'|',b.wh_id,'|',b.ordnum) AS record_key
             ,c.ordlin AS line_key
 
             ,a.operacion
@@ -214,10 +213,11 @@ BEGIN TRY
         AND d.ordlin = c.ordlin
         AND d.orden = 1
 
-        CREATE UNIQUE INDEX ix_source_01 ON #source(order_key,line_key)
+        CREATE UNIQUE INDEX ix_source_01 ON #source(client_id, wh_id, ordnum, ordlin)
+        CREATE UNIQUE INDEX ix_source_02 ON #source(record_key,line_key)
     END
 
-    --DETECCION DE ORDENES CERRADAS
+    --DETECCION DE REGISTROS CERRADOS
     BEGIN
         --Cuando la cantidad solicitada (ordqty) sea igual a la cantidad despachada(shpqty) y la cancelada (remqty)
         --para todas las linea de una orden. En ese momento la orden pasará al estado CERRADA
@@ -255,7 +255,7 @@ BEGIN TRY
             a.fecha_creacion = b.fecha_creacion
         FROM #source a
         INNER JOIN #target b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE NOT (
             b.moddte = a.moddte 
@@ -267,10 +267,10 @@ BEGIN TRY
         SET a.operacion = 'C'
         FROM #source a
         LEFT OUTER JOIN #target b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE
-            b.order_key IS NULL
+            b.record_key IS NULL
         
         --Un registro que hasta este punto corresponda a una operación CREATE (no cruzar contra el target), 
         --se debe cruzar contra todas las ordenes en el destino para verificar que no este cruzando contra una orden CERRADA
@@ -282,7 +282,7 @@ BEGIN TRY
             a.fecha_creacion = b.fecha_creacion
         FROM #source a
         INNER JOIN dbo.ordenes_salida b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE
             a.operacion = 'C'
@@ -316,7 +316,7 @@ BEGIN TRY
                 a.*
             FROM #target a
             LEFT OUTER JOIN #source b ON
-                b.order_key = a.order_key
+                b.record_key = a.record_key
             AND b.line_key = a.line_key
             WHERE
                 b.operacion IN  ('U') OR b.operacion IS NULL
@@ -362,7 +362,7 @@ BEGIN TRY
 
         --CREATE
 		INSERT INTO dbo.ordenes_salida
-			(order_key
+			(record_key
             ,line_key
             ,operacion
             ,estado
@@ -393,7 +393,7 @@ BEGIN TRY
             ,canpck_candte
             ,canpck_can_usr_id)
 		SELECT
-             order_key
+             record_key
             ,line_key
             ,operacion
             ,estado
@@ -432,7 +432,7 @@ BEGIN TRY
 
 		INSERT INTO dbo.ordenes_salida
 			(id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -464,7 +464,7 @@ BEGIN TRY
             ,canpck_can_usr_id)
 		SELECT
              id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -503,7 +503,7 @@ BEGIN TRY
         --LOGS
 		INSERT INTO logs.ordenes_salida
 			(id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -535,7 +535,7 @@ BEGIN TRY
             ,canpck_can_usr_id)
 		SELECT
              id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
