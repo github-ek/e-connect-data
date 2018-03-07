@@ -7,7 +7,6 @@
 
     [id_solicitud_orden]       BIGINT        NOT NULL,
     [id_solicitud]             BIGINT        NOT NULL,
-    [numero_solicitud]         VARCHAR (20)  NOT NULL,
 
     [id_bodega]               BIGINT          NOT NULL,
     [id_cliente]              BIGINT          NOT NULL,

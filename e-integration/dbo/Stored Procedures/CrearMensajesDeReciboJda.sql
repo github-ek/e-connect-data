@@ -21,7 +21,7 @@ BEGIN TRY
             ,b.codigo_alterno_wms AS client_id
             ,'TRS' AS invtyp
             ,a.numero_orden AS invnum
-            ,e.codigo AS wh_id
+            ,c.codigo AS wh_id
             ,'OPEN' AS rimsts
             ,e.codigo AS supnum
             ,REPLACE(CONVERT(VARCHAR(10),a.fecha_maxima_solicitada,120),'-','') AS invdte

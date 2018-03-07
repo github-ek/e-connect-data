@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[DetectarCierreDeOrdenesAlistamientoDeTraslados]
+﻿CREATE PROCEDURE [dbo].[DetectarCierreDeOrdenesAlistamiento]
 AS
 BEGIN TRY
     --SET NOCOUNT ON;
@@ -18,6 +18,7 @@ BEGIN TRY
             ,a.wh_id
             ,d.id_orden_alistamiento
             ,a.ordnum
+            ,a.ordtyp
             ,d.estado
             ,e.id_solicitud_orden
             ,e.tipo_solicitud
@@ -35,8 +36,7 @@ BEGIN TRY
         AND d.numero_orden = a.ordnum
         LEFT OUTER JOIN [$(eConnect)].dbo.solicitudes_ordenes e ON
             e.id_solicitud_orden = d.id_solicitud_orden
-        WHERE
-            a.ordtyp = 'TRS'
+        WHERE 1 = 1
         AND a.estado = 'CERRADA'
         AND a.cambio_notificado = 0
 
@@ -177,11 +177,12 @@ BEGIN TRY
                 ,a.id_solicitud
                 ,a.id_orden_alistamiento
                 ,a.ordnum AS numero_orden
+                ,a.ordtyp
                 ,SUM(a.remqty) OVER(PARTITION BY a.id_orden_alistamiento) AS remqty
                 ,a.ordlin_moddte
                 ,a.ordlin_mod_usr_id
                 ,ROW_NUMBER() OVER(PARTITION BY a.id_orden_alistamiento ORDER BY a.ordlin_moddte DESC) AS orden
-            FROM #source_lineas a    
+            FROM #source_lineas a
         )
         SELECT
              a.id_solicitud_orden
@@ -189,6 +190,7 @@ BEGIN TRY
             ,a.id_solicitud
             ,a.id_orden_alistamiento
             ,a.numero_orden
+            ,a.ordtyp
             ,CASE WHEN a.remqty = 0 THEN 'DESPACHADA' ELSE 'DESPACHADA_CON_NOVEDADES' END AS estado
             ,CASE WHEN a.remqty = 0 THEN 'OK' ELSE 'NOVEDADES' END AS resultado
             ,a.ordlin_moddte
@@ -203,6 +205,8 @@ BEGIN TRY
              a.estado = b.estado
             ,a.cerrada = 1
             ,a.cierre_notificado = 0
+            ,a.usuario_cierre = b.ordlin_mod_usr_id
+            ,a.fecha_cierre = b.ordlin_moddte
 
             ,a.[version] = a.[version] + 1
             ,a.usuario_modificacion = b.ordlin_mod_usr_id
@@ -265,6 +269,8 @@ BEGIN TRY
             ,a.ordlin_moddte AS fecha_modificacion
         INTO #solicitudes_ordenes
         FROM #ordenes_alistamiento a,cte_00 b
+        WHERE
+            a.ordtyp = 'TRS'
 
         INSERT INTO [$(eConnect)].dbo.solicitudes_ordenes
             (tipo_solicitud

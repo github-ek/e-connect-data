@@ -11,11 +11,11 @@ BEGIN TRY
         END
 
         SELECT
-                a.fecha_creacion
+             a.fecha_creacion
             ,a.fecha_modificacion
 
             ,a.id_cliente
-            ,CAST(a.codigo AS NVARCHAR(32)) AS client_id
+            ,CAST(a.codigo_alterno_wms AS NVARCHAR(32)) AS client_id
             ,a.codigo
             ,a.nombre
             ,a.numero_identificacion

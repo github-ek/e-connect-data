@@ -7,12 +7,12 @@ BEGIN TRY
     
     --CONSOLIDAR DATOS DE E-WMS
     BEGIN
-        IF OBJECT_ID('tempdb.#source') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
 	        DROP TABLE #source
         END
 
         SELECT DISTINCT
-             a.order_key
+             a.record_key
             
             ,a.client_id
             ,b.id_cliente
@@ -53,7 +53,7 @@ BEGIN TRY
         AND a.estado = 'CERRADA'
         AND a.cambio_notificado = 0
 
-        IF OBJECT_ID('tempdb.#source_lineas') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#source_lineas') IS NOT NULL BEGIN
 	        DROP TABLE #source_lineas
         END
 
@@ -65,7 +65,7 @@ BEGIN TRY
                 ,a.id_bodega
                 ,a.id_orden_recibo
                 
-                ,b.order_key
+                ,b.record_key
                 ,b.line_key
                 ,b.id
                 ,b.invlin
@@ -93,7 +93,7 @@ BEGIN TRY
                 ,b.rcvlin_mod_usr_id AS usuario_modificacion
             FROM #source a
             INNER JOIN [$(eWms)].dbo.ordenes_recibo b ON
-                b.order_key = a.order_key
+                b.record_key = a.record_key
             LEFT OUTER JOIN [$(eConnect)].dbo.productos c ON
                 c.id_cliente = a.id_cliente
             AND c.codigo = b.prtnum
@@ -137,7 +137,7 @@ BEGIN TRY
              id_cliente
             ,id_bodega
             ,id_orden_recibo
-            ,order_key
+            ,record_key
             ,line_key
             ,id
             ,invlin
@@ -169,7 +169,7 @@ BEGIN TRY
         WHERE
             a.orden_unidad_medida = 1
 
-        IF OBJECT_ID('tempdb.#source_lineas_productos_rentas') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#source_lineas_productos_rentas') IS NOT NULL BEGIN
 	        DROP TABLE #source_lineas_productos_rentas
         END
     
@@ -183,7 +183,6 @@ BEGIN TRY
         WHERE
             a.linea_original = 1
 
-
         UPDATE a
         SET a.requiere_estampillado = 1
         FROM #source a
@@ -193,7 +192,7 @@ BEGIN TRY
 
     --DETECTAR INCONSISTENCIAS   
     BEGIN
-        IF OBJECT_ID('tempdb.#source_lineas_salio_rentas_no_entro_rentas') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#source_lineas_salio_rentas_no_entro_rentas') IS NOT NULL BEGIN
 	        DROP TABLE #source_lineas_salio_rentas_no_entro_rentas
         END
 
@@ -214,7 +213,7 @@ BEGIN TRY
         WHERE
             a.linea_original = 0
 
-        IF OBJECT_ID('tempdb.#source_inconsistencias') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#source_inconsistencias') IS NOT NULL BEGIN
 	        DROP TABLE #source_inconsistencias
         END
 
@@ -226,8 +225,8 @@ BEGIN TRY
 
                 ,CASE WHEN a.id_cliente IS NULL                                             THEN 1 ELSE 0 END AS cliente_no_existe
                 ,CASE WHEN a.id_bodega IS NULL                                              THEN 1 ELSE 0 END AS bodega_no_existe
-                ,CASE WHEN a.id_orden_recibo IS NULL                                        THEN 1 ELSE 0 END AS orden_no_existe
-                ,CASE WHEN a.cerrada_en_destino = 1                                         THEN 1 ELSE 0 END AS orden_cerrada_en_destino
+                ,CASE WHEN a.id_cliente IS NOT NULL AND a.id_bodega IS NOT NULL AND a.id_orden_recibo IS NULL THEN 1 ELSE 0 END AS orden_no_existe
+                ,CASE WHEN a.id_orden_recibo IS NOT NULL AND a.cerrada_en_destino = 1       THEN 1 ELSE 0 END AS orden_cerrada_en_destino
                 ,CASE WHEN a.id_orden_recibo IS NOT NULL AND b.id_producto IS NULL          THEN 1 ELSE 0 END AS producto_no_existe
                 ,CASE WHEN a.id_orden_recibo IS NOT NULL AND b.id_estado_inventario IS NULL THEN 1 ELSE 0 END AS estado_no_existe
                 ,CASE WHEN a.id_orden_recibo IS NOT NULL AND b.unidades_recibidas IS NULL   THEN 1 ELSE 0 END AS unidad_recibo_no_existe
@@ -247,7 +246,7 @@ BEGIN TRY
             cliente_no_existe + 
             bodega_no_existe + 
             orden_no_existe + 
-            orden_cerrada_en_destino + 
+            orden_cerrada_en_destino +
             producto_no_existe + 
             estado_no_existe + 
             unidad_recibo_no_existe +
@@ -256,7 +255,7 @@ BEGIN TRY
         DELETE a
         FROM #source a
         INNER JOIN #source_inconsistencias b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
 
         --TODO enviar errores a una tabla de error en errores
         DELETE a
@@ -272,20 +271,20 @@ BEGIN TRY
             ,a.cerrada_con_errores = 0
         FROM [$(eWms)].dbo.ordenes_recibo a 
         INNER JOIN #source_lineas b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
 
         UPDATE a
         SET  a.cambio_notificado = 1
             ,a.cerrada_con_errores = 1
         FROM [$(eWms)].dbo.ordenes_recibo a 
         INNER JOIN #source_inconsistencias b ON
-            b.order_key = a.order_key
+            b.record_key = a.record_key
     END
 
     --PRE UPDATE ORDENES 
     BEGIN
 
-        IF OBJECT_ID('tempdb.#ordenes_recibo_lineas_confirmadas') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#ordenes_recibo_lineas_confirmadas') IS NOT NULL BEGIN
 	        DROP TABLE #ordenes_recibo_lineas_confirmadas
         END
 
@@ -311,7 +310,7 @@ BEGIN TRY
         INTO #ordenes_recibo_lineas_confirmadas
         FROM #source_lineas a 
 
-        IF OBJECT_ID('tempdb.#ordenes_recibo') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#ordenes_recibo') IS NOT NULL BEGIN
 	        DROP TABLE #ordenes_recibo
         END
 
@@ -345,7 +344,7 @@ BEGIN TRY
         WHERE
             a.orden_modificacion = 1
 
-        IF OBJECT_ID('tempdb.#solicitudes_ordenes') IS NOT NULL BEGIN
+        IF OBJECT_ID('tempdb..#solicitudes_ordenes') IS NOT NULL BEGIN
 	        DROP TABLE #solicitudes_ordenes
         END
 

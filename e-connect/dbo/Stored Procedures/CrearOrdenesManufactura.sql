@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[CrearOrdenesManufacturaDeTraslados]
+﻿CREATE PROCEDURE [dbo].[CrearOrdenesManufactura]
 AS
 BEGIN TRY
     --SET NOCOUNT ON;
@@ -15,9 +15,8 @@ BEGIN TRY
              a.*
         INTO #source
         FROM dbo.solicitudes_ordenes a
-        WHERE
-            a.tipo_solicitud = 'TRASLADO'
-        AND a.tipo_orden = 'ESTAMPILLADO'
+        WHERE 1 = 1
+        AND a.tipo_solicitud = 'MANUFACTURA'
         AND a.resultado = 'NO_PROCESADA'
         
         IF OBJECT_ID('tempdb..#ordenes') IS NOT NULL BEGIN
@@ -34,7 +33,6 @@ BEGIN TRY
 
             ,a.id_solicitud_orden
             ,a.id_solicitud
-            ,b.numero_solicitud
 
             ,b.id_bodega
             ,b.id_cliente
@@ -54,7 +52,7 @@ BEGIN TRY
         INNER JOIN dbo.solicitudes b ON
             b.id_solicitud = a.id_solicitud
         INNER JOIN dbo.lineas_negocio d ON
-            d.nombre = 'ALMACENAMIENTO'
+            d.nombre = 'MAQUILA'
 
         IF OBJECT_ID('tempdb..#ordenes_lineas') IS NOT NULL BEGIN
             DROP TABLE #ordenes_lineas
@@ -68,11 +66,10 @@ BEGIN TRY
 
             ,b.id_producto
             ,b.producto_codigo
-            ,b.producto_nombre
             ,b.id_estado_inventario
             ,b.id_unidad_medida
 
-            ,b.cantidad AS unidades_solicitadas
+            ,b.unidades AS unidades_solicitadas
             ,CAST(0 AS INT) AS unidades_manufacturadas
             ,CAST(0 AS INT) AS unidades_canceladas
             
@@ -95,7 +92,6 @@ BEGIN TRY
 
             ,id_solicitud_orden
             ,id_solicitud
-            ,numero_solicitud
 
             ,id_bodega
             ,id_cliente
@@ -118,7 +114,6 @@ BEGIN TRY
 
             ,id_solicitud_orden
             ,id_solicitud
-            ,numero_solicitud
 
             ,id_bodega
             ,id_cliente
@@ -146,7 +141,6 @@ BEGIN TRY
 
             ,id_producto
             ,producto_codigo
-            ,producto_nombre
             ,id_estado_inventario
             ,id_unidad_medida
 
@@ -167,7 +161,6 @@ BEGIN TRY
 
             ,b.id_producto
             ,b.producto_codigo
-            ,b.producto_nombre
             ,b.id_estado_inventario
             ,b.id_unidad_medida
 

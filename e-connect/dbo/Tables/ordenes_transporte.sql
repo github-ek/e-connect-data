@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[__remesas_transporte] (
+﻿CREATE TABLE [dbo].[ordenes_transporte] (
     [id_remesa_transporte]          BIGINT        IDENTITY (1, 1) NOT NULL,
     [id_orden_transporte]           BIGINT        NOT NULL,
     [id_tipo_documento]             VARCHAR (20)  NOT NULL,
@@ -54,11 +54,11 @@
     [fecha_creacion]                DATETIME2 (0) NOT NULL,
     [usuario_modificacion]          VARCHAR (50)  NOT NULL,
     [fecha_modificacion]            DATETIME2 (0) NOT NULL,
-    CONSTRAINT [PK_remesas_transporte] PRIMARY KEY CLUSTERED ([id_remesa_transporte] ASC) WITH (FILLFACTOR = 80),
-    CONSTRAINT [FK_remesas_transporte_bodegas] FOREIGN KEY ([id_bodega]) REFERENCES [dbo].[bodegas] ([id_bodega]),
-    CONSTRAINT [FK_remesas_transporte_canales] FOREIGN KEY ([id_canal]) REFERENCES [dbo].[canales] ([id_canal]),
-    CONSTRAINT [FK_remesas_transporte_clientes] FOREIGN KEY ([id_cliente]) REFERENCES [dbo].[clientes] ([id_cliente]),
-    CONSTRAINT [FK_remesas_transporte_servicios] FOREIGN KEY ([id_servicio]) REFERENCES [dbo].[servicios] ([id_servicio]),
-    CONSTRAINT [FK_remesas_transporte_tipos_identificacion] FOREIGN KEY ([id_tipo_documento]) REFERENCES [dbo].[tipos_identificacion] ([id_tipo_identificacion])
+    CONSTRAINT [PK_ordenes_transporte] PRIMARY KEY CLUSTERED ([id_remesa_transporte] ASC) WITH (FILLFACTOR = 80),
+    CONSTRAINT [FK_ordenes_transporte_bodegas] FOREIGN KEY ([id_bodega]) REFERENCES [dbo].[bodegas] ([id_bodega]),
+    CONSTRAINT [FK_ordenes_transporte_canales] FOREIGN KEY ([id_canal]) REFERENCES [dbo].[canales] ([id_canal]),
+    CONSTRAINT [FK_ordenes_transporte_clientes] FOREIGN KEY ([id_cliente]) REFERENCES [dbo].[clientes] ([id_cliente]),
+    CONSTRAINT [FK_ordenes_transporte_servicios] FOREIGN KEY ([id_servicio]) REFERENCES [dbo].[servicios] ([id_servicio]),
+    CONSTRAINT [FK_ordenes_transporte_tipos_identificacion] FOREIGN KEY ([id_tipo_documento]) REFERENCES [dbo].[tipos_identificacion] ([id_tipo_identificacion])
 );
 

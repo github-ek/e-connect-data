@@ -126,7 +126,7 @@ BEGIN TRY
                 ,a.can_usr_id
                 ,ROW_NUMBER() OVER(PARTITION BY a.client_id, a.wh_id, a.ordnum, a.ordlin, a.cancod ORDER BY a.candte DESC) AS orden
             FROM [$(ttcwmsprd)].dbo.canpck a
-            INNER JOIN #source_canpck b ON
+            INNER JOIN #source_ord b ON
                 b.client_id = a.client_id
             AND b.wh_id	= a.wh_id
             AND b.ordnum = a.ordnum
@@ -258,7 +258,8 @@ BEGIN TRY
             b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE NOT (
-            b.moddte = a.moddte 
+            b.estado = a.estado
+        AND b.moddte = a.moddte 
         AND b.ordlin_moddte = a.ordlin_moddte
         AND b.canpck_candte = a.canpck_candte)     
         

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[ordenes_alistamiento]
 (
-    [id_orden_alistamiento]    BIGINT        IDENTITY (1, 1) NOT NULL,
-    [numero_orden]             VARCHAR(35)  NOT NULL,
+    [id_orden_alistamiento]    BIGINT       IDENTITY (1, 1) NOT NULL,
+    [numero_orden]             VARCHAR(35)   NOT NULL,
     [estado]                   VARCHAR(50)   NOT NULL,
     [id_linea_negocio]         BIGINT        NOT NULL,
 
@@ -20,22 +20,22 @@
     [fecha_maxima_solicitada]  DATE          NOT NULL,
     [hora_minima_solicitada]   TIME (0)      NULL,
     [hora_maxima_solicitada]   TIME (0)      NULL,
-    [fecha_cita_entrega]            DATE          NULL,
-    [hora_cita_entrega_minima]      TIME (0)      NULL,
-    [hora_cita_entrega_maxima]      TIME (0)      NULL,
+    [fecha_cita_entrega]       DATE          NULL,
+    [hora_cita_entrega_minima] TIME (0)      NULL,
+    [hora_cita_entrega_maxima] TIME (0)      NULL,
 
     [requiere_transporte]      BIT   NOT NULL,
-    [id_ciudad_destinatario]             BIGINT        NOT NULL,
-    [direccion_destinatario]             VARCHAR (150) NOT NULL,
+    [id_ciudad_destinatario]   BIGINT        NOT NULL,
+    [direccion_destinatario]   VARCHAR (150) NOT NULL,
 
     [nota]                     VARCHAR (200) NOT NULL,
 
-	[id_causal_anulacion] [bigint] NULL,
-	[nota_cierre] [varchar](200) NOT NULL DEFAULT '',
+	[id_causal_anulacion]      BIGINT NULL,
+	[nota_cierre]              VARCHAR(200) NOT NULL DEFAULT '',
     [cerrada]                  BIT NOT NULL DEFAULT 0,
     [cierre_notificado]        BIT NOT NULL DEFAULT 0,
-	[usuario_cierre] [varchar](50) NOT NULL DEFAULT '',
-	[fecha_cierre] [datetime2](0) NULL ,
+	[usuario_cierre]           VARCHAR(50) NOT NULL DEFAULT '',
+	[fecha_cierre]             DATETIME2(0) NULL ,
 
     [version]                  INT           NOT NULL DEFAULT 0,
     [usuario_creacion]         VARCHAR (50)  NOT NULL,
@@ -50,6 +50,7 @@
 
     CONSTRAINT [FK_ordenes_alistamiento_bodegas] FOREIGN KEY ([id_bodega]) REFERENCES [dbo].[bodegas] ([id_bodega]),
     CONSTRAINT [FK_ordenes_alistamiento_canales] FOREIGN KEY ([id_canal]) REFERENCES [dbo].[canales] ([id_canal]),
+    CONSTRAINT [FK_ordenes_alistamiento_ciudades] FOREIGN KEY ([id_ciudad_destinatario]) REFERENCES [dbo].[ciudades] ([id_ciudad]),
     CONSTRAINT [FK_ordenes_alistamiento_clientes] FOREIGN KEY ([id_cliente]) REFERENCES [dbo].[clientes] ([id_cliente]),
     CONSTRAINT [FK_ordenes_alistamiento_servicios] FOREIGN KEY ([id_servicio]) REFERENCES [dbo].[servicios] ([id_servicio]),
     CONSTRAINT [FK_ordenes_alistamiento_terceros] FOREIGN KEY ([id_tercero]) REFERENCES [dbo].[terceros] ([id_tercero]), 

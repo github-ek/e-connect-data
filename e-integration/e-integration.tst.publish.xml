@@ -8,7 +8,11 @@
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
-    <DropObjectsNotInSource>True</DropObjectsNotInSource>
+    <DropObjectsNotInSource>False</DropObjectsNotInSource>
+    <ExcludeUsers>False</ExcludeUsers>
+    <ExcludeServerRoles>False</ExcludeServerRoles>
+    <IgnoreRoleMembership>False</IgnoreRoleMembership>
+    <ExcludeLogins>False</ExcludeLogins>
   </PropertyGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConfig">

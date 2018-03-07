@@ -6,7 +6,6 @@
     [numero_linea]            INT           NOT NULL,
     [id_producto]             BIGINT          NOT NULL,
     [producto_codigo]         VARCHAR (50)    NOT NULL,
-    [producto_nombre]         VARCHAR (250)  NOT NULL,
     [id_estado_inventario]    VARCHAR (4)   NOT NULL,
     [id_unidad_medida]        BIGINT          NOT NULL,
 

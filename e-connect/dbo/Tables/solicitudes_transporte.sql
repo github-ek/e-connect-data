@@ -33,6 +33,15 @@
     [fecha_creacion]                     DATETIME2 (0) NOT NULL,
     [usuario_modificacion]               VARCHAR (50)  NOT NULL,
     [fecha_modificacion]                 DATETIME2 (0) NOT NULL,
-    CONSTRAINT [PK_solicitudes_transporte] PRIMARY KEY CLUSTERED ([id_solicitud_transporte] ASC) WITH (FILLFACTOR = 80)
+    CONSTRAINT [PK_solicitudes_transporte] PRIMARY KEY CLUSTERED ([id_solicitud_transporte] ASC) WITH (FILLFACTOR = 80),
+    CONSTRAINT [FK_solicitudes_transporte_ciudades_destinatario] FOREIGN KEY ([id_ciudad_destinatario]) REFERENCES [dbo].[ciudades] ([id_ciudad]),
+    CONSTRAINT [FK_solicitudes_transporte_ciudades_remitente] FOREIGN KEY ([id_ciudad_remitente]) REFERENCES [dbo].[ciudades] ([id_ciudad]),
+    CONSTRAINT [FK_solicitudes_transporte_direcciones_destinatario] FOREIGN KEY ([id_direccion_destinatario]) REFERENCES [dbo].[direcciones] ([id_direccion]),
+    CONSTRAINT [FK_solicitudes_transporte_direcciones_remitente] FOREIGN KEY ([id_direccion_remitente]) REFERENCES [dbo].[direcciones] ([id_direccion]),
+    CONSTRAINT [FK_solicitudes_transporte_puntos_destinatario] FOREIGN KEY ([id_punto_destinatario]) REFERENCES [dbo].[puntos] ([id_punto]),
+    CONSTRAINT [FK_solicitudes_transporte_puntos_remitente] FOREIGN KEY ([id_punto_remitente]) REFERENCES [dbo].[puntos] ([id_punto]),
+    CONSTRAINT [FK_solicitudes_transporte_solicitudes] FOREIGN KEY ([id_solicitud]) REFERENCES [dbo].[solicitudes] ([id_solicitud]),
+    CONSTRAINT [FK_solicitudes_transporte_tipos_ruta] FOREIGN KEY ([id_tipo_ruta]) REFERENCES [dbo].[tipos_ruta] ([id_tipo_ruta]),
+    CONSTRAINT [FK_solicitudes_transporte_tipos_vehiculo] FOREIGN KEY ([id_tipo_vehiculo]) REFERENCES [dbo].[tipos_vehiculo] ([id_tipo_vehiculo])
 );
 

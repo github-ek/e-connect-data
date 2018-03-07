@@ -10,30 +10,37 @@ BEGIN TRY
             DROP TABLE #source
         END
 
+        ;WITH
+        cte_00 AS
+        (
+            SELECT DISTINCT
+                a.record_key
+            FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ordenes_salida a
+            WHERE   
+                a.cambio_notificado = 0
+        )
         SELECT 
             a.*
         INTO #source
         FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ordenes_salida a
-        WHERE   
-            a.cambio_notificado = 0
-
+        INNER JOIN cte_00 b ON
+            b.record_key = a.record_key
 
         ;WITH
         cte_00 AS
         (
             SELECT DISTINCT
-                a.client_id,a.ordnum 
+                a.record_key
             FROM #source a
         )
         DELETE b
         FROM cte_00 a
         INNER JOIN [$(eWms)].dbo.ordenes_salida b ON
-            b.client_id = a.client_id
-        AND b.ordnum = a.ordnum
+            b.record_key = a.record_key
 
         INSERT INTO [$(eWms)].dbo.ordenes_salida
             (id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -41,9 +48,11 @@ BEGIN TRY
             ,cerrada_con_errores
             ,fecha_creacion
             ,fecha_modificacion
+
             ,client_id
             ,wh_id
             ,ordnum
+
             ,rmanum
             ,ordtyp
             ,bus_grp
@@ -52,6 +61,7 @@ BEGIN TRY
             ,adddte
             ,moddte
             ,mod_usr_id
+
             ,ordlin
             ,prtnum
             ,invsts_prg
@@ -64,7 +74,7 @@ BEGIN TRY
             ,canpck_can_usr_id)
         SELECT
              id
-            ,order_key
+            ,record_key
             ,line_key
             ,operacion
             ,estado
@@ -72,9 +82,11 @@ BEGIN TRY
             ,CAST(0 AS BIT) AS cerrada_con_errores
             ,fecha_creacion
             ,fecha_modificacion
+
             ,client_id
             ,wh_id
             ,ordnum
+
             ,rmanum
             ,ordtyp
             ,bus_grp
@@ -83,6 +95,7 @@ BEGIN TRY
             ,adddte
             ,moddte
             ,mod_usr_id
+
             ,ordlin
             ,prtnum
             ,invsts_prg
@@ -107,29 +120,42 @@ BEGIN TRY
                 DROP TABLE #notificados
             END
 
-            SELECT TOP 1000 
-                id
+            SELECT DISTINCT
+                record_key,fecha_modificacion
             INTO #notificados
-            FROM #source 
+            FROM #source a
             WHERE 
                 cambio_notificado = 0
+            ORDER BY record_key
+            OFFSET 0 ROWS
+            FETCH NEXT 1000 ROWS ONLY;
             
-            IF NOT EXISTS(SELECT 1 FROM #notificados) BREAK
+            IF @@ROWCOUNT = 0 BREAK
+
+            BEGIN TRY
+                UPDATE a
+                SET a.cambio_notificado = 1
+                FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ordenes_salida a
+                INNER JOIN #notificados b ON
+                    b.record_key = a.record_key
+                AND b.fecha_modificacion = a.fecha_modificacion
+                WHERE
+                    a.cambio_notificado = 0
+            END TRY
+            BEGIN CATCH
+                NOOP:
+            END CATCH
 
             UPDATE a
             SET a.cambio_notificado = 1
             FROM #source a
             INNER JOIN #notificados b ON
-                b.id = a.id
-
-            UPDATE a
-            SET a.cambio_notificado = 1
-            FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ordenes_salida a
-            INNER JOIN #notificados b ON
-                b.id = a.id
+                b.record_key = a.record_key
+            AND b.fecha_modificacion = a.fecha_modificacion
+            WHERE
+                a.cambio_notificado = 0
         END
     END
-
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()

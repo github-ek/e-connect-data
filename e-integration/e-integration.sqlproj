@@ -83,7 +83,7 @@
     <Build Include="Security\map.sql" />
     <Build Include="dbo\Stored Procedures\CrearSolicitudesDeTraslado.sql" />
     <Build Include="dbo\Stored Procedures\Clean.sql" />
-    <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesAlistamientoDeTraslados.sql" />
+    <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesAlistamiento.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroBodegas.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroClientes.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeSalida.sql" />
@@ -110,8 +110,9 @@
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosMedidas.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosCodigos.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosAtributos.sql" />
-    <Build Include="dbo\Stored Procedures\CrearSolicitudesDeEstampillado.sql" />
+    <Build Include="dbo\Stored Procedures\CrearSolicitudesDeManufactura.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarEmbarques.sql" />
+    <Build Include="dbo\Stored Procedures\DetectarCierreDeEmbarques.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

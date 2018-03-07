@@ -98,7 +98,7 @@
     <Build Include="dbo\Tables\productos_atributos.sql" />
     <Build Include="dbo\Tables\productos_codigos.sql" />
     <Build Include="dbo\Tables\tipos_flete.sql" />
-    <Build Include="dbo\Tables\__remesas_transporte.sql" />
+    <Build Include="dbo\Tables\remesas_programadas.sql" />
     <Build Include="dbo\Tables\puntos.sql" />
     <Build Include="dbo\Tables\servicios.sql" />
     <Build Include="dbo\Tables\terceros.sql" />
@@ -123,11 +123,15 @@
     <Build Include="dbo\Tables\ordenes_recibo_lineas_confirmadas.sql" />
     <Build Include="dbo\Tables\mensajes_abastecimientos_gws.sql" />
     <Build Include="dbo\Tables\mensajes_abastecimientos_gws_lineas.sql" />
-    <Build Include="dbo\Stored Procedures\CrearOrdenesManufacturaDeTraslados.sql" />
+    <Build Include="dbo\Stored Procedures\CrearOrdenesManufactura.sql" />
     <Build Include="dbo\Tables\tipos_documento_solicitud.sql" />
     <Build Include="dbo\Tables\mensajes_manufacturas_jda_lineas.sql" />
     <Build Include="dbo\Tables\embarques.sql" />
     <Build Include="dbo\Tables\embarques_lineas.sql" />
+    <Build Include="dbo\Tables\tipos_vehiculo.sql" />
+    <Build Include="dbo\Tables\remesas_lineas.sql" />
+    <Build Include="dbo\Tables\remesas.sql" />
+    <Build Include="dbo\Tables\ordenes_transporte.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />

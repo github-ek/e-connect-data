@@ -6,95 +6,182 @@ BEGIN TRY
 	BEGIN TRANSACTION
 
     BEGIN
-        IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
-            DROP TABLE #source
+        IF OBJECT_ID('tempdb..#source_lineas') IS NOT NULL BEGIN
+            DROP TABLE #source_lineas
         END
 
         SELECT 
-            a.*
-        INTO #source
-        FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.embarques a
-        WHERE   
-            a.cambio_notificado = 0
+             a.*
 
-
-        ;WITH
-        cte_00 AS
-        (
-            SELECT DISTINCT
-                a.client_id,a.ordnum 
-            FROM #source a
-        )
-        DELETE b
-        FROM cte_00 a
-        INNER JOIN [$(eWms)].dbo.ordenes_salida b ON
-            b.client_id = a.client_id
-        AND b.ordnum = a.ordnum
-
-        INSERT INTO [$(eWms)].dbo.ordenes_salida
-            (id
-            ,order_key
             ,line_key
-            ,operacion
-            ,estado
-            ,cambio_notificado
-            ,cerrada_con_errores
-            ,fecha_creacion
-            ,fecha_modificacion
+            ,ship_line_id
+            ,dtlnum
             ,client_id
             ,wh_id
             ,ordnum
-            ,rmanum
-            ,ordtyp
-            ,bus_grp
-            ,stcust
-            ,wave_flg
-            ,adddte
-            ,moddte
-            ,mod_usr_id
             ,ordlin
             ,prtnum
-            ,invsts_prg
-            ,ordqty
+            ,linsts
             ,shpqty
-            ,remqty
-            ,ordlin_moddte
-            ,ordlin_mod_usr_id
-            ,canpck_candte
-            ,canpck_can_usr_id)
-        SELECT
+            ,lotnum
+            ,untqty
+            ,moddte
+            ,mod_usr_id
+        INTO #source_lineas
+        FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.embarques a
+        LEFT OUTER JOIN [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.embarques_lineas b ON
+            b.record_key = a.record_key
+        WHERE   
+            a.cambio_notificado = 0
+
+        CREATE INDEX ix_source_01 ON #source_lineas(record_key)
+
+        IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
+            DROP TABLE #source
+        END
+        
+        SELECT DISTINCT
              id
-            ,order_key
-            ,line_key
+            ,record_key
             ,operacion
             ,estado
             ,cambio_notificado
             ,CAST(0 AS BIT) AS cerrada_con_errores
             ,fecha_creacion
             ,fecha_modificacion
+
+            ,ship_id
+            ,shpsts
+            ,shipment_moddte
+            ,shipment_mod_usr_id
+            ,trlr_id
+            ,trlr_stat
+            ,trlr_typ
+            ,trlr_seal1
+            ,trlr_seal2
+            ,trlr_seal3
+            ,trlr_seal4
+            ,driver_nam
+            ,driver_lic_num
+            ,tractor_num
+            ,arrdte
+            ,close_dte
+            ,dispatch_dte
+            ,trlr_moddte
+            ,trlr_mod_usr_id
+        INTO #source
+        FROM #source_lineas 
+    
+        CREATE UNIQUE INDEX ix_source_01 ON #source(record_key)
+    END
+
+    BEGIN
+
+        DELETE a
+        FROM [$(eWms)].dbo.embarques a
+        INNER JOIN #source b ON
+            b.record_key = a.record_key
+
+        DELETE a
+        FROM [$(eWms)].dbo.embarques_lineas a
+        INNER JOIN #source b ON
+            b.record_key = a.record_key
+
+        INSERT INTO [$(eWms)].dbo.embarques
+            (record_key
+            ,operacion
+            ,estado
+            ,cambio_notificado
+            ,cerrada_con_errores
+            ,fecha_creacion
+            ,fecha_modificacion
+
+            ,ship_id
+            ,shpsts
+            ,shipment_moddte
+            ,shipment_mod_usr_id
+            ,trlr_id
+            ,trlr_stat
+            ,trlr_typ
+            ,trlr_seal1
+            ,trlr_seal2
+            ,trlr_seal3
+            ,trlr_seal4
+            ,driver_nam
+            ,driver_lic_num
+            ,tractor_num
+            ,arrdte
+            ,close_dte
+            ,dispatch_dte
+            ,trlr_moddte
+            ,trlr_mod_usr_id)
+        SELECT
+             record_key
+            ,operacion
+            ,estado
+            ,cambio_notificado
+            ,cerrada_con_errores
+            ,fecha_creacion
+            ,fecha_modificacion
+
+            ,ship_id
+            ,shpsts
+            ,shipment_moddte
+            ,shipment_mod_usr_id
+            ,trlr_id
+            ,trlr_stat
+            ,trlr_typ
+            ,trlr_seal1
+            ,trlr_seal2
+            ,trlr_seal3
+            ,trlr_seal4
+            ,driver_nam
+            ,driver_lic_num
+            ,tractor_num
+            ,arrdte
+            ,close_dte
+            ,dispatch_dte
+            ,trlr_moddte
+            ,trlr_mod_usr_id
+        FROM #source
+
+        INSERT INTO [$(eWms)].dbo.embarques_lineas
+            (record_key
+            ,line_key
+            ,ship_id
+            ,ship_line_id
+            ,dtlnum
             ,client_id
             ,wh_id
             ,ordnum
-            ,rmanum
-            ,ordtyp
-            ,bus_grp
-            ,stcust
-            ,wave_flg
-            ,adddte
-            ,moddte
-            ,mod_usr_id
             ,ordlin
             ,prtnum
-            ,invsts_prg
-            ,ordqty
+            ,linsts
             ,shpqty
-            ,remqty
-            ,ordlin_moddte
-            ,ordlin_mod_usr_id
-            ,canpck_candte
-            ,canpck_can_usr_id
-        FROM #source
-
+            ,lotnum
+            ,untqty
+            ,moddte
+            ,mod_usr_id)
+        SELECT
+             record_key
+            ,line_key
+            ,ship_id
+            ,ship_line_id
+            ,dtlnum
+            ,client_id
+            ,wh_id
+            ,ordnum
+            ,ordlin
+            ,prtnum
+            ,linsts
+            ,shpqty
+            ,lotnum
+            ,untqty
+            ,moddte
+            ,mod_usr_id
+        FROM #source_lineas
+        WHERE
+            ship_line_id IS NOT NULL
     END
 
     COMMIT TRANSACTION
@@ -107,26 +194,40 @@ BEGIN TRY
                 DROP TABLE #notificados
             END
 
-            SELECT TOP 1000 
-                id
+            SELECT DISTINCT
+                record_key,fecha_modificacion
             INTO #notificados
-            FROM #source 
+            FROM #source a
             WHERE 
                 cambio_notificado = 0
+            ORDER BY record_key
+            OFFSET 0 ROWS
+            FETCH NEXT 1000 ROWS ONLY;
             
-            IF NOT EXISTS(SELECT 1 FROM #notificados) BREAK
+            IF @@ROWCOUNT = 0 BREAK
+
+            BEGIN TRY
+                UPDATE a
+                SET a.cambio_notificado = 1
+                FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.embarques a
+                INNER JOIN #notificados b ON
+                    b.record_key = a.record_key
+                AND b.fecha_modificacion = a.fecha_modificacion
+                WHERE
+                    a.cambio_notificado = 0
+            END TRY
+            BEGIN CATCH
+                NOOP:
+            END CATCH
 
             UPDATE a
             SET a.cambio_notificado = 1
             FROM #source a
             INNER JOIN #notificados b ON
-                b.id = a.id
-
-            UPDATE a
-            SET a.cambio_notificado = 1
-            FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ordenes_salida a
-            INNER JOIN #notificados b ON
-                b.id = a.id
+                b.record_key = a.record_key
+            AND b.fecha_modificacion = a.fecha_modificacion
+            WHERE
+                a.cambio_notificado = 0
         END
     END
 

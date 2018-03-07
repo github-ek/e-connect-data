@@ -171,7 +171,7 @@ BEGIN TRY
 
         UPDATE a
         SET  a.id_orden_alistamiento = b.id_orden_alistamiento
-            ,a.numero_orden = CONCAT('EC-',b.id_orden_alistamiento,'-',a.numero_solicitud)
+            ,a.numero_orden = CONCAT('EC-',FORMAT(b.id_orden_alistamiento,'00000000'),'-',a.numero_solicitud)
         FROM #ordenes a 
         INNER JOIN @t b ON
             b.id_solicitud_orden = a.id_solicitud_orden

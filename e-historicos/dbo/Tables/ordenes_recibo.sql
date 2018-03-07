@@ -66,6 +66,7 @@
     [trlr_mod_usr_id]    NVARCHAR (40)  NOT NULL,
 
     CONSTRAINT [PK_ordenes_recibo] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [UK_ordenes_recibo_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [supnum] ASC, [invnum] ASC, [trknum] ASC, [invlin] ASC, [invsln] ASC, [seqnum] ASC)
+    CONSTRAINT [UK_ordenes_recibo_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [supnum] ASC, [invnum] ASC, [trknum] ASC, [invlin] ASC, [invsln] ASC, [seqnum] ASC),
+    CONSTRAINT [UK_ordenes_recibo_02] UNIQUE NONCLUSTERED ([record_key] ASC, [line_key] ASC)
 );
 

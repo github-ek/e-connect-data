@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[ordenes_recibo] (
     [id]                  BIGINT         NOT NULL,
-    [order_key]           NVARCHAR (200) NOT NULL,
+    [record_key]          NVARCHAR (200) NOT NULL,
     [line_key]            NVARCHAR (50)  NOT NULL,
-    [operacion]           NVARCHAR (1)  NOT NULL,
+    [operacion]           NVARCHAR (1)   NOT NULL,
     [estado]              NVARCHAR (50)  NOT NULL,
     [cambio_notificado]   BIT            NOT NULL,
     [cerrada_con_errores] BIT            NOT NULL,
@@ -66,4 +66,11 @@
 );
 
 
+
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [ix_ordenes_recibo_01]
+    ON [dbo].[ordenes_recibo]([po_num] ASC, [wh_id] ASC, [client_id] ASC);
 

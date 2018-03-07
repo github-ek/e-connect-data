@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarOrdenesDeRecibo]
 AS
+
 BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
@@ -36,8 +37,8 @@ BEGIN TRY
     
     --CONSOLIDACION #source_ord: Del origen, se toman los registros nuevos y/o modificados recientemente y aquellos que crucen contra el target (ABIERTAS en el destino)
 	BEGIN
-		IF OBJECT_ID('tempdb..#source_rcvlin') IS NOT NULL BEGIN
-			DROP TABLE #source_rcvlin
+		IF OBJECT_ID('tempdb..#source_rcvinv') IS NOT NULL BEGIN
+			DROP TABLE #source_rcvinv
 		END
 
         SELECT DISTINCT
@@ -46,13 +47,10 @@ BEGIN TRY
             ,a.supnum
             ,a.invnum
             ,a.trknum
-        INTO #source_rcvlin
-        FROM [$(ttcwmsprd)].dbo.rcvlin a
-        INNER JOIN dbo.clientes b ON
-            b.client_id = a.client_id
+        INTO #source_rcvinv
+        FROM [$(ttcwmsprd)].dbo.rcvinv a
         WHERE 0 = 0
         AND a.moddte >= @fecha_desde
-        AND a.moddte <= @fecha_hasta
 
 		IF OBJECT_ID('tempdb..#source_ord') IS NOT NULL BEGIN
 			DROP TABLE #source_ord
@@ -75,7 +73,7 @@ BEGIN TRY
                 ,a.supnum
                 ,a.invnum
                 ,a.trknum
-		    FROM #source_rcvlin a
+		    FROM #source_rcvinv a
         )
 		SELECT
             CAST('' AS NVARCHAR(1)) AS operacion,
@@ -91,7 +89,7 @@ BEGIN TRY
 		IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
 			DROP TABLE #source
 		END
-
+        
 		SELECT
              CAST(NULL AS BIGINT) AS id
             ,CONCAT(b.client_id,'|',b.wh_id,'|',b.supnum,'|',b.invnum,'|',b.trknum) AS record_key
@@ -109,7 +107,7 @@ BEGIN TRY
             ,b.invnum
             ,b.trknum
 
-            ,b.po_num
+            ,COALESCE(b.po_num,'') AS po_num
             ,b.invtyp
             ,b.invdte
             ,b.moddte
@@ -132,21 +130,21 @@ BEGIN TRY
             ,COALESCE(c.moddte,CAST('1900-01-01' AS DATETIME)) AS rcvlin_moddte
             ,COALESCE(c.mod_usr_id,'') AS rcvlin_mod_usr_id
 
-            ,d.rcvtrk_stat
+            ,COALESCE(d.rcvtrk_stat,'') AS rcvtrk_stat
             ,COALESCE(d.devcod,'') AS devcod
             ,COALESCE(d.clsdte,CAST('1900-01-01' AS DATETIME)) AS rcvtrk_clsdte
             ,COALESCE(d.moddte,CAST('1900-01-01' AS DATETIME)) AS rcvtrk_moddte
             ,COALESCE(d.mod_usr_id,'') AS rcvtrk_mod_usr_id
 
-            ,e.trlr_id
-            ,e.trlr_num
+            ,COALESCE(e.trlr_id,'') AS trlr_id
+            ,COALESCE(e.trlr_num,'') AS trlr_num
             ,COALESCE(e.trlr_stat,'') AS trlr_stat
             ,COALESCE(e.trlr_typ,'') AS trlr_typ
             ,COALESCE(e.trlr_size,0) AS trlr_size
             ,COALESCE(e.refrig_flg,0) AS refrig_flg
-            ,e.trlr_cod AS trlr_cod
+            ,COALESCE(e.trlr_cod,'') AS trlr_cod
             ,COALESCE(e.trlr_cond,'') AS trlr_cond
-            ,e.safe_sts
+            ,COALESCE(e.safe_sts,'') AS safe_sts
             ,COALESCE(e.carcod,'') AS carcod
             ,COALESCE(e.tractor_num,'') AS tractor_num
             ,COALESCE(e.driver_nam,'') AS driver_nam
@@ -174,10 +172,11 @@ BEGIN TRY
         AND c.supnum = b.supnum
         AND c.invnum = b.invnum
         AND c.trknum = b.trknum
-        INNER JOIN [$(ttcwmsprd)].dbo.rcvtrk d ON 
+
+        LEFT OUTER JOIN [$(ttcwmsprd)].dbo.rcvtrk d ON 
             d.wh_id = c.wh_id
         AND d.trknum = c.trknum
-        INNER JOIN [$(ttcwmsprd)].dbo.trlr e ON 
+        LEFT OUTER JOIN [$(ttcwmsprd)].dbo.trlr e ON 
             e.trlr_id = d.trlr_id
 
         CREATE UNIQUE INDEX ix_source_01 ON #source(client_id,wh_id,supnum,invnum,trknum,invlin,invsln,seqnum)
@@ -207,7 +206,8 @@ BEGIN TRY
             b.record_key = a.record_key
         AND b.line_key = a.line_key
         WHERE NOT (
-            b.moddte = a.moddte 
+            b.estado = a.estado
+        AND b.moddte = a.moddte 
         AND b.rcvlin_moddte = a.rcvlin_moddte
         AND b.rcvtrk_moddte = a.rcvtrk_moddte
         AND b.trlr_moddte = a.trlr_moddte

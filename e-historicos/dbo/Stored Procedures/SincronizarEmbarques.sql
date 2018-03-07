@@ -117,41 +117,6 @@ BEGIN TRY
 
         CREATE UNIQUE INDEX ix_source_01 ON #source(ship_id)
         CREATE UNIQUE INDEX ix_source_02 ON #source(record_key)
-
-        IF OBJECT_ID('tempdb..#source_lines') IS NOT NULL BEGIN
-			DROP TABLE #source_lines
-		END
-
-        SELECT
-             a.record_key
-            ,CONCAT(b.ship_line_id,'|',c.dtlnum) AS line_key
-
-            ,b.ship_id
-            ,b.ship_line_id
-            ,c.dtlnum
-
-            ,b.client_id
-            ,b.wh_id
-            ,b.ordnum
-            ,b.ordlin
-            ,c.prtnum
-            ,b.linsts
-
-            ,b.shpqty
-            ,c.lotnum
-            ,c.untqty
-
-            ,b.moddte
-            ,b.mod_usr_id
-        INTO #source_lines
-        FROM #source a
-        INNER JOIN [$(ttcwmsprd)].dbo.shipment_line b ON
-            b.ship_id = a.ship_id
-        INNER JOIN [$(ttcwmsprd)].dbo.invdtl c ON
-            c.ship_line_id = b.ship_line_id
-    
-        CREATE UNIQUE INDEX ix_source_lines_01 ON #source_lines(ship_id,ship_line_id,dtlnum)
-        CREATE UNIQUE INDEX ix_source_lines_02 ON #source_lines(record_key,line_key)
     END
 
     --DETECCION DE REGISTROS CERRADOS
@@ -175,7 +140,8 @@ BEGIN TRY
         INNER JOIN #target b ON
             b.record_key = a.record_key
         WHERE NOT (
-            b.shipment_moddte = a.shipment_moddte 
+            b.estado = a.estado
+        AND b.shipment_moddte = a.shipment_moddte 
         AND b.trlr_moddte = a.trlr_moddte)
         
         --Si no cruzan contra la tabla target por PK => CREATE
@@ -262,6 +228,44 @@ BEGIN TRY
         FROM cte_02 a
     END
     
+
+    BEGIN
+        IF OBJECT_ID('tempdb..#source_lines') IS NOT NULL BEGIN
+			DROP TABLE #source_lines
+		END
+
+        SELECT
+             a.record_key
+            ,CONCAT(b.ship_line_id,'|',c.dtlnum) AS line_key
+
+            ,b.ship_id
+            ,b.ship_line_id
+            ,c.dtlnum
+
+            ,b.client_id
+            ,b.wh_id
+            ,b.ordnum
+            ,b.ordlin
+            ,c.prtnum
+            ,b.linsts
+
+            ,b.shpqty
+            ,c.lotnum
+            ,c.untqty
+
+            ,b.moddte
+            ,b.mod_usr_id
+        INTO #source_lines
+        FROM #inserted a
+        INNER JOIN [$(ttcwmsprd)].dbo.shipment_line b ON
+            b.ship_id = a.ship_id
+        INNER JOIN [$(ttcwmsprd)].dbo.invdtl c ON
+            c.ship_line_id = b.ship_line_id
+    
+        CREATE UNIQUE INDEX ix_source_lines_01 ON #source_lines(ship_id,ship_line_id,dtlnum)
+        CREATE UNIQUE INDEX ix_source_lines_02 ON #source_lines(record_key,line_key)
+    END
+
     --ACTUALIZACION TARGET/LOGS
     BEGIN
         --Eliminar del destino todos los registros que esten en el consolidado de eliminados, excepto los errores por cambios posteriores al cierre. 

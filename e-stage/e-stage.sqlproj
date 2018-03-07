@@ -85,6 +85,7 @@
     <Build Include="tms\Tables\planillas_rutas.sql" />
     <Build Include="tms\Tables\programaciones_toursolver.sql" />
     <Build Include="tms\Tables\programaciones_manuales.sql" />
+    <Build Include="tms\Tables\planillas_rutacontrol.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

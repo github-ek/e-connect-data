@@ -145,7 +145,4 @@
       <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="e-historicos.refactorlog" />
-  </ItemGroup>
 </Project>

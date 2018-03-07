@@ -8,7 +8,7 @@
     [id_unidad_medida]                 BIGINT        NOT NULL,
     [unidades]                         INT           NOT NULL,
     [valor_unitario_declarado]         DECIMAL(10,2) NOT NULL, 
-    [lote]                             VARCHAR (30)  NOT NULL, 
+    [lote]                             VARCHAR (30)  NOT NULL DEFAULT '', 
 
     [id_unidad_medida_solicitada]      BIGINT        NOT NULL,
     [unidad_medida_solicitada_codigo_alterno]     VARCHAR (50)  NOT NULL,
@@ -16,8 +16,8 @@
     [factor_conversion]                INT           NOT NULL,
     [bodega_codigo_alterno]            VARCHAR (50)  NOT NULL,
     [estado_inventario_codigo_alterno] VARCHAR (50)  NOT NULL,
-    [bodega_traslado_codigo_alterno]            VARCHAR (50)  NOT NULL,
-    [estado_traslado_inventario_codigo_alterno] VARCHAR (50)  NOT NULL,
+    [bodega_traslado_codigo_alterno]            VARCHAR (50)  NOT NULL DEFAULT '',
+    [estado_traslado_inventario_codigo_alterno] VARCHAR (50)  NOT NULL DEFAULT '',
 
     [version]                          INT           NOT NULL DEFAULT 0,
     [usuario_creacion]                 VARCHAR (50)  NOT NULL,
