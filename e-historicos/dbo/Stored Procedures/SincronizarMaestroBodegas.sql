@@ -52,8 +52,11 @@ BEGIN TRY
         FROM #source a
         INNER JOIN dbo.bodegas b ON
             b.wh_id = a.wh_id
-        WHERE NOT (
-            a.moddte = b.moddte)     
+        WHERE NOT (1 = 1
+        AND a.adrnam = b.adrnam
+        AND a.adrln1 = b.adrln1
+        AND a.adrcty = b.adrcty
+        AND a.moddte = b.moddte)   
         
         UPDATE a
         SET a.operacion = 'C'

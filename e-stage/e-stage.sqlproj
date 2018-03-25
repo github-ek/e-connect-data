@@ -80,12 +80,13 @@
     <Build Include="Security\oms.sql" />
     <Build Include="Security\tms.sql" />
     <Build Include="Security\wms.sql" />
-    <Build Include="tms\Tables\base_liquidaciones.sql" />
-    <Build Include="tms\Tables\cumplidos_rutacontrol.sql" />
-    <Build Include="tms\Tables\planillas_rutas.sql" />
+    <Build Include="tms\Tables\_base_liquidaciones.sql" />
+    <Build Include="tms\Tables\_cumplidos_rutacontrol.sql" />
+    <Build Include="tms\Tables\_planillas_rutas.sql" />
     <Build Include="tms\Tables\programaciones_toursolver.sql" />
     <Build Include="tms\Tables\programaciones_manuales.sql" />
-    <Build Include="tms\Tables\planillas_rutacontrol.sql" />
+    <Build Include="tms\Tables\_planillas_rutacontrol.sql" />
+    <Build Include="tms\Tables\remesas_programadas.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

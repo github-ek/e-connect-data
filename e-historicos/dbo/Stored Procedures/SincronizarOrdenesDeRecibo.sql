@@ -200,7 +200,7 @@ BEGIN TRY
         UPDATE a
         SET a.id = b.id,
             a.operacion = 'U',
-            a.fecha_creacion = b.fecha_creacion
+            a.fecha_modificacion = b.fecha_modificacion
         FROM #source a
         INNER JOIN #target b ON
             b.record_key = a.record_key
@@ -225,23 +225,13 @@ BEGIN TRY
         LEFT OUTER JOIN #target b ON
             b.record_key = a.record_key
         AND b.line_key = a.line_key
+        LEFT OUTER JOIN dbo.ordenes_recibo c ON
+            c.record_key = a.record_key
+        AND c.line_key = a.line_key
+        AND c.estado = 'CERRADA'
         WHERE
             b.record_key IS NULL
-
-        --Un registro que hasta este punto corresponda a una operación CREATE (no cruzar contra el target), 
-        --se debe cruzar contra todas las ordenes en el destino para verificar que no este cruzando contra una orden CERRADA
-        --Las ordenes CERRADAS no se incluyen en el target, por tanto los registros que crucen serán modificaciones posteriores al cierre de la orden
-        --y serán un error. 
-        UPDATE a
-        SET a.id = b.id,
-            a.operacion = 'E',
-            a.fecha_creacion = b.fecha_creacion
-        FROM #source a
-        INNER JOIN dbo.ordenes_recibo b ON
-            b.record_key = a.record_key
-        AND b.line_key = a.line_key
-        WHERE
-            a.operacion = 'C'
+        AND c.record_key IS NULL
     END
 
 	--CONSOLIDACION DE REGISTROS inserted/deleted
@@ -278,31 +268,11 @@ BEGIN TRY
                 b.operacion IN  ('U') OR b.operacion IS NULL
             --Si un registro en target no cruza con source, es porque ha sido eliminado en el origen y deberá ser eliminado del destino
             --Si un registro en target cruza con source, y la operación es un UPDATE, deberá ser eliminado del destino y pasado al log
-        ),
-        cte_01 AS
-        (
-		    SELECT
-			    a.*
-		    FROM #source a
-		    WHERE
-			    a.operacion IN  ('E')
-            --Se incluyen los registros con errores (cambios despues de cerrada la orden) en este consolidado para luego incluirlo en el log.
-            --Aunque los registros con error han sido incluidos en este consolidado, estos casos no serán eliminados de la tabla destino.
-            --Se incluyen aqui porque todo lo "eliminado", se incluye luego en el log. 
-            --La idea es que en el log queden todos los cambios, pero en la tabla destino solo quedará el ultimo cambio antes del cierre de la orden
-        ),
-        cte_02 AS
-        (
-            SELECT * 
-            FROM cte_00 a
-            UNION
-            SELECT * 
-            FROM cte_01 a
         )
         SELECT
             *
         INTO #deleted
-        FROM cte_02 a
+        FROM cte_00 a
     END
 
     --ACTUALIZACION TARGET/LOGS
@@ -313,8 +283,6 @@ BEGIN TRY
 		FROM dbo.ordenes_recibo a
 		INNER JOIN #deleted b ON
 			b.id = a.id
-        WHERE
-            a.operacion NOT IN ('E')
         
         --CREATE
 		INSERT INTO dbo.ordenes_recibo

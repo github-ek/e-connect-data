@@ -17,6 +17,7 @@
 
     [shpqty]		        INT NOT NULL,
     [lotnum]		        NVARCHAR(25) NOT NULL,
+    [invsts]		        NVARCHAR(4) NOT NULL,
     [untqty]		        INT NOT NULL,
 
     [moddte]		        DATETIME NOT NULL,

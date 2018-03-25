@@ -20,7 +20,7 @@ BEGIN TRY
             SELECT
                  a.client_id
                 ,UPPER(b.adrnam) AS adrnam
-                ,COALESCE(UPPER(b.host_ext_id),'') AS host_ext_id
+                ,COALESCE(RTRIM(LTRIM(UPPER(b.host_ext_id))),'') AS host_ext_id
                 ,CAST(1 AS BIT) AS activo
             FROM [$(ttcwmsprd)].dbo.client a
             INNER JOIN [$(ttcwmsprd)].dbo.adrmst b ON
@@ -35,6 +35,8 @@ BEGIN TRY
 			a.*
 		INTO #source
 		FROM cte_00 a
+        WHERE
+            a.host_ext_id NOT LIKE '900987440%'
     END
 
     --MERGE

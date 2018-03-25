@@ -3,6 +3,8 @@ SET NOCOUNT ON;
 
 TRUNCATE TABLE dbo.InvTransito
 
+BEGIN TRAN
+
 INSERT INTO dbo.InvTransito (wh_id, arecod, stoloc, prt_client_id, prtnum, lodnum, adddate, untqty, schbat)
 select invlod.wh_id Almacen,
         aremst.arecod Area,
@@ -39,3 +41,5 @@ select invlod.wh_id Almacen,
         shipment_line.schbat,
         coalesce(invlod.lstmov, invdtl.lstmov)
   order by 7
+  
+  COMMIT TRAN

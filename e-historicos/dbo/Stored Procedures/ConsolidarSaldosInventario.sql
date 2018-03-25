@@ -50,6 +50,7 @@ BEGIN TRY
 		        COALESCE(c.inv_attr_str7,'') AS inv_attr_str7,
 		        d.stoloc,
                 a.lodnum,
+                c.orgcod,
                 c.cmpkey
             FROM [$(ttcwmsprd)].dbo.invlod a
             INNER JOIN [$(ttcwmsprd)].dbo.invsub b ON
@@ -113,7 +114,8 @@ BEGIN TRY
             ,expire_dte
             ,inv_attr_str7
             ,stoloc
-            ,lodnum)
+            ,lodnum
+            ,orgcod)
         SELECT
              @fecha_creacion
             ,@fecha_corte
@@ -129,6 +131,7 @@ BEGIN TRY
 		    ,inv_attr_str7
 		    ,stoloc
             ,lodnum
+            ,orgcod
         FROM #saldos_inventario a
         GROUP BY 
              prt_client_id
@@ -141,6 +144,7 @@ BEGIN TRY
 		    ,inv_attr_str7
 		    ,stoloc
             ,lodnum
+            ,orgcod
     END
 
     -------------------------------------------------------------------------------------------------------------------

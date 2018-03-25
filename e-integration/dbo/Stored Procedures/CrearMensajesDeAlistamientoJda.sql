@@ -130,7 +130,7 @@ BEGIN TRY
              a.id
             ,b.numero_linea
 
-            ,CAST(ROW_NUMBER() OVER(PARTITION BY a.id_orden_alistamiento ORDER BY b.numero_linea ASC) AS NVARCHAR(10)) AS ordlin
+            ,FORMAT(b.numero_linea,'0000') AS ordlin
             ,CAST('0000' AS NVARCHAR(10)) AS ordsln
             ,CAST(b.producto_codigo AS NVARCHAR(50)) AS prtnum
             ,b.unidades_solicitadas AS ordqty

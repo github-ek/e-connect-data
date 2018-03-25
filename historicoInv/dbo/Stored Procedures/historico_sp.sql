@@ -1,5 +1,7 @@
-﻿CREATE PROCEDURE historico_sp AS
+﻿CREATE PROCEDURE [dbo].[historico_sp] AS
 SET NOCOUNT ON;
+
+BEGIN TRAN
 
 INSERT INTO dbo.historico(prt_client_id,
 wh_id,
@@ -42,3 +44,5 @@ and e.stoare_flg = 1
 --order by 4,1,2,3
 group by a.prt_client_id,c.wh_id,a.prtnum,h.lngdsc,a.lotnum,cast(expire_dte As Date),a.invsts
 order by 1,2,3,4,5
+
+COMMIT TRAN

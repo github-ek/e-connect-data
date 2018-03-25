@@ -24,6 +24,7 @@ BEGIN TRY
             ,linsts
             ,shpqty
             ,lotnum
+            ,invsts
             ,untqty
             ,moddte
             ,mod_usr_id
@@ -159,6 +160,7 @@ BEGIN TRY
             ,linsts
             ,shpqty
             ,lotnum
+            ,invsts
             ,untqty
             ,moddte
             ,mod_usr_id)
@@ -176,6 +178,7 @@ BEGIN TRY
             ,linsts
             ,shpqty
             ,lotnum
+            ,invsts
             ,untqty
             ,moddte
             ,mod_usr_id

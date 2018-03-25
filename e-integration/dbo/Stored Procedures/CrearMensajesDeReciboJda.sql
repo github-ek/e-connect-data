@@ -50,7 +50,7 @@ BEGIN TRY
         SELECT 
              a.id
             
-            ,b.numero_linea
+            ,FORMAT(b.numero_linea,'0000') AS ordlin
             ,CAST(b.numero_linea AS NVARCHAR(10)) AS invlin
             ,CAST('0000' AS NVARCHAR(10)) AS invsln
             ,CAST(b.producto_codigo AS NVARCHAR(50)) AS prtnum

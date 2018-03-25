@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\solicitudes_atributos.sql" />
-    <Build Include="dbo\Tables\_solicitudes_manufactura_materiales.sql" />
     <Build Include="dbo\Tables\___ordenes_contactos.sql" />
     <Build Include="dbo\Tables\mensajes_manufacturas_jda.sql" />
     <Build Include="dbo\Tables\solicitudes_documentos.sql" />

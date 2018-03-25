@@ -4,7 +4,7 @@ BEGIN TRY
     --SET NOCOUNT ON;
 
     BEGIN TRANSACTION
-    /*
+
     BEGIN
         IF OBJECT_ID('tempdb..#mensajes') IS NOT NULL BEGIN
             DROP TABLE #mensajes
@@ -15,6 +15,11 @@ BEGIN TRY
             ,CAST(NULL AS BIGINT) AS id_mensaje
             ,a.id_orden_manufactura
             ,'NO_PROCESADO' AS estado
+            ,a.id_solicitud_orden
+
+            ,a.id_solicitud
+            ,b.codigo AS cliente_codigo
+            ,a.id_bodega
 
             ,c.codigo AS whse_id
             ,b.codigo_alterno_wms AS client_id
@@ -162,7 +167,6 @@ BEGIN TRY
         END
     END
 
-    */
 	COMMIT TRANSACTION
 END TRY
 BEGIN CATCH

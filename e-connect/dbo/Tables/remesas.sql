@@ -1,27 +1,22 @@
 ﻿CREATE TABLE [dbo].[remesas] (
     [id_remesa]                     BIGINT           IDENTITY (1, 1) NOT NULL,
     [tipo_remesa]                   VARCHAR (50)     NOT NULL,
+    [es_reprogramacion]             BIT              NOT NULL,
     [numero_remesa]                 VARCHAR (35)     NOT NULL,
     [estado]                        VARCHAR (50)     NOT NULL,
-
     [numero_solicitud]              VARCHAR (35)     NOT NULL,
-    [numero_remolque]               VARCHAR (30)     NOT NULL,
-
     [id_linea_negocio]              BIGINT           NOT NULL,
     [id_orden_transporte]           BIGINT           NULL,
     [id_bodega]                     BIGINT           NOT NULL,
     [id_cliente]                    BIGINT           NOT NULL,
     [id_servicio]                   BIGINT           NOT NULL,
-
     [id_tipo_ruta]                  BIGINT           NULL,
     [id_tipo_vehiculo]              BIGINT           NULL,
     [placa_programada]              VARCHAR (20)     NOT NULL,
     [placa]                         VARCHAR (20)     NOT NULL,
-
     [fecha_remesa]                  DATE             NOT NULL,
-    [hora_cita_minima]              TIME (0)      NOT NULL,
-    [hora_cita_maxima]              TIME (0)      NOT NULL,
-
+    [hora_cita_minima]              TIME (0)         NOT NULL,
+    [hora_cita_maxima]              TIME (0)         NOT NULL,
     [remitente_tipo_documento]      VARCHAR (20)     NOT NULL,
     [remitente_numero_documento]    VARCHAR (20)     NOT NULL,
     [remitente_nombre]              VARCHAR (100)    NOT NULL,
@@ -32,7 +27,6 @@
     [remitente_cy]                  DECIMAL (18, 15) NOT NULL,
     [remitente_telefonos]           VARCHAR (100)    NOT NULL,
     [remitente_contacto]            VARCHAR (100)    NOT NULL,
-
     [destinatario_tipo_documento]   VARCHAR (20)     NOT NULL,
     [destinatario_numero_documento] VARCHAR (20)     NOT NULL,
     [destinatario_nombre]           VARCHAR (100)    NOT NULL,
@@ -60,6 +54,9 @@
     CONSTRAINT [FK_remesas_servicios] FOREIGN KEY ([id_servicio]) REFERENCES [dbo].[servicios] ([id_servicio]),
     CONSTRAINT [FK_remesas_tipos_ruta] FOREIGN KEY ([id_tipo_ruta]) REFERENCES [dbo].[tipos_ruta] ([id_tipo_ruta]),
     CONSTRAINT [FK_remesas_tipos_vehiculo] FOREIGN KEY ([id_tipo_vehiculo]) REFERENCES [dbo].[tipos_vehiculo] ([id_tipo_vehiculo]),
-    CONSTRAINT [UK_remesas_01] UNIQUE NONCLUSTERED ([id_remesa] ASC, [id_cliente] ASC, [numero_solicitud] ASC)
+    CONSTRAINT [UK_remesas_01] UNIQUE NONCLUSTERED ([id_remesa] ASC, [id_cliente] ASC, [numero_solicitud] ASC),
+    CONSTRAINT [UK_remesas_02] UNIQUE NONCLUSTERED ([id_orden] ASC, [fecha_remesa] ASC, [placa] ASC)
 );
+
+
 

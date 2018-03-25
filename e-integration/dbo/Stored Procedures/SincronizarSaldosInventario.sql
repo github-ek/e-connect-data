@@ -8,8 +8,6 @@ BEGIN TRY
 	DECLARE @fecha_extraccion_actual DATETIME2(0)
 	DECLARE @fecha_extraccion_anterior DATETIME2(0)
 
-	--BEGIN TRANSACTION
-
 	--OBTENER FECHA DE ULTIMA EXTRACCION
 	BEGIN
 		SET @fecha_extraccion_actual = CAST(SYSDATETIME() AS DATE)
@@ -58,7 +56,8 @@ BEGIN TRY
                 ,expire_dte
                 ,inv_attr_str7
                 ,stoloc
-                ,lodnum)
+                ,lodnum
+                ,orgcod)
             SELECT
                  a.id
                 ,a.fecha_creacion
@@ -74,6 +73,7 @@ BEGIN TRY
                 ,a.inv_attr_str7
                 ,a.stoloc
                 ,a.lodnum
+                ,a.orgcod
             FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.saldos_inventario a
             WHERE
                 a.fecha_corte = @fecha_corte

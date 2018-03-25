@@ -4,6 +4,7 @@
     [numero_linea]             INT             NOT NULL,
     [id_producto]              BIGINT          NOT NULL,
     [producto_codigo]          VARCHAR (50)    NOT NULL,
+    [id_estado_inventario]     VARCHAR (4)     NOT NULL,
     [id_unidad_medida]         BIGINT          NOT NULL,
     [unidades_despachadas]     INT             NOT NULL,
     [largo]                    DECIMAL (12, 4) NOT NULL,
@@ -11,7 +12,7 @@
     [alto]                     DECIMAL (12, 4) NOT NULL,
     [peso]                     DECIMAL (12, 4) NOT NULL,
     [volumen]                  AS              (([largo]*[ancho])*[alto]),
-    [valor_unitario_declarado] DECIMAL (10, 2) NOT NULL,
+    [valor_unitario_declarado] INT             NOT NULL,
     [id_unidad_medida_caja]    BIGINT          NOT NULL,
     [factor_conversion]        INT             NOT NULL,
     [cajas_despachadas]        AS              (CONVERT([decimal](10,2),[unidades_despachadas])/CONVERT([decimal](10,2),[factor_conversion])),
@@ -31,4 +32,6 @@
     CONSTRAINT [FK_remesas_lineas_unidades_medida] FOREIGN KEY ([id_unidad_medida]) REFERENCES [dbo].[unidades_medida] ([id_unidad_medida]),
     CONSTRAINT [FK_remesas_lineas_unidades_medida_caja] FOREIGN KEY ([id_unidad_medida_caja]) REFERENCES [dbo].[unidades_medida] ([id_unidad_medida])
 );
+
+
 

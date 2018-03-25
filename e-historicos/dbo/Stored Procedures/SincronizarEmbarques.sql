@@ -37,12 +37,8 @@ BEGIN TRY
             SELECT
                 a.ship_id
             FROM [$(ttcwmsprd)].dbo.shipment_line a
-            INNER JOIN dbo.clientes b ON
-                b.client_id = a.client_id
-            AND b.activo = 1
             WHERE 0 = 0
             AND a.moddte >= @fecha_desde
-            AND a.moddte <= @fecha_hasta
         ),
         cte_01 AS
         (
@@ -135,7 +131,7 @@ BEGIN TRY
         UPDATE a
         SET a.id = b.id,
             a.operacion = 'U',
-            a.fecha_creacion = b.fecha_creacion
+            a.fecha_modificacion = b.fecha_modificacion
         FROM #source a
         INNER JOIN #target b ON
             b.record_key = a.record_key
@@ -150,22 +146,12 @@ BEGIN TRY
         FROM #source a
         LEFT OUTER JOIN #target b ON
             b.record_key = a.record_key
+        LEFT OUTER JOIN dbo.embarques c ON
+            c.record_key = a.record_key
+        AND c.estado = 'CERRADA'
         WHERE
             b.record_key IS NULL
-        
-        --Un registro que hasta este punto corresponda a una operación CREATE (no cruzar contra el target), 
-        --se debe cruzar contra todas las ordenes en el destino para verificar que no este cruzando contra una orden CERRADA
-        --Las ordenes CERRADAS no se incluyen en el target, por tanto los registros que crucen serán modificaciones posteriores al cierre de la orden
-        --y serán un error. 
-        UPDATE a
-        SET a.id = b.id,
-            a.operacion = 'E',
-            a.fecha_creacion = b.fecha_creacion
-        FROM #source a
-        INNER JOIN dbo.embarques b ON
-            b.record_key = a.record_key
-        WHERE
-            a.operacion = 'C'
+        AND c.record_key IS NULL
     END
 
 	--CONSOLIDACION DE REGISTROS inserted/deleted
@@ -201,31 +187,11 @@ BEGIN TRY
                 b.operacion IN  ('U') OR b.operacion IS NULL
             --Si un registro en target no cruza con source, es porque ha sido eliminado en el origen y deberá ser eliminado del destino
             --Si un registro en target cruza con source, y la operación es un UPDATE, deberá ser eliminado del destino y pasado al log
-        ),
-        cte_01 AS
-        (
-		    SELECT
-			    a.*
-		    FROM #source a
-		    WHERE
-			    a.operacion IN  ('E')
-            --Se incluyen los registros con errores (cambios despues de cerrada la orden) en este consolidado para luego incluirlo en el log.
-            --Aunque los registros con error han sido incluidos en este consolidado, estos casos no serán eliminados de la tabla destino.
-            --Se incluyen aqui porque todo lo "eliminado", se incluye luego en el log. 
-            --La idea es que en el log queden todos los cambios, pero en la tabla destino solo quedará el ultimo cambio antes del cierre de la orden
-        ),
-        cte_02 AS
-        (
-            SELECT * 
-            FROM cte_00 a
-            UNION
-            SELECT * 
-            FROM cte_01 a
         )
         SELECT
             *
         INTO #deleted
-        FROM cte_02 a
+        FROM cte_00 a
     END
     
 
@@ -251,6 +217,7 @@ BEGIN TRY
 
             ,b.shpqty
             ,c.lotnum
+            ,c.invsts
             ,c.untqty
 
             ,b.moddte
@@ -270,21 +237,17 @@ BEGIN TRY
     BEGIN
         --Eliminar del destino todos los registros que esten en el consolidado de eliminados, excepto los errores por cambios posteriores al cierre. 
         --De este modo en la tabla destino solo queda la version con la que se hizo el cierre de la orden.
-        DELETE b
+        DELETE c
 		FROM dbo.embarques a
-		INNER JOIN dbo.embarques_lineas b ON
+		INNER JOIN #deleted b ON
 			b.record_key = a.record_key
-		INNER JOIN #deleted c ON
+		INNER JOIN dbo.embarques_lineas c ON
 			c.record_key = a.record_key
-        WHERE
-            a.operacion NOT IN ('E')
 
 		DELETE a
 		FROM dbo.embarques a
 		INNER JOIN #deleted b ON
-			b.id = a.id
-        WHERE
-            a.operacion NOT IN ('E')
+			b.record_key = a.record_key
 
         --CREATE
 		INSERT INTO dbo.embarques
@@ -507,6 +470,7 @@ BEGIN TRY
 
             ,shpqty
             ,lotnum
+            ,invsts
             ,untqty
 
             ,moddte
@@ -528,6 +492,7 @@ BEGIN TRY
 
             ,shpqty
             ,lotnum
+            ,invsts
             ,untqty
 
             ,moddte

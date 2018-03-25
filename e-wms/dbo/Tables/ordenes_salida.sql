@@ -1,14 +1,13 @@
 ﻿CREATE TABLE [dbo].[ordenes_salida] (
     [id]                  BIGINT         NOT NULL,
-    [record_key]           NVARCHAR (200) NOT NULL,
+    [record_key]          NVARCHAR (200) NOT NULL,
     [line_key]            NVARCHAR (50)  NOT NULL,
-    [operacion]           NVARCHAR (1)  NOT NULL,
+    [operacion]           NVARCHAR (1)   NOT NULL,
     [estado]              NVARCHAR (50)  NOT NULL,
     [cambio_notificado]   BIT            NOT NULL,
     [cerrada_con_errores] BIT            NOT NULL,
     [fecha_creacion]      DATETIME       NOT NULL,
     [fecha_modificacion]  DATETIME       NOT NULL,
-
     [client_id]           NVARCHAR (32)  NOT NULL,
     [wh_id]               NVARCHAR (32)  NOT NULL,
     [ordnum]              NVARCHAR (35)  NOT NULL,
@@ -31,8 +30,11 @@
     [canpck_candte]       DATETIME       NOT NULL,
     [canpck_can_usr_id]   NVARCHAR (40)  NOT NULL,
     CONSTRAINT [PK_ordenes_salida] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [UK_ordenes_salida_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [ordnum] ASC, [ordlin] ASC)
+    CONSTRAINT [UK_ordenes_salida_01] UNIQUE NONCLUSTERED ([client_id] ASC, [wh_id] ASC, [ordnum] ASC, [ordlin] ASC),
+    CONSTRAINT [UK_ordenes_salida_02] UNIQUE NONCLUSTERED ([record_key] ASC, [line_key] ASC)
 );
+
+
 
 
 
