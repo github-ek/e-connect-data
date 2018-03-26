@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [map].[grupos_mapa] (
-    [id_grupo_mapa]        BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_grupo_mapa]        BIGINT        NOT NULL,
     [codigo]               VARCHAR (50)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [descripcion]          VARCHAR (200) NOT NULL,

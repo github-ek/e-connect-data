@@ -13,15 +13,16 @@ BEGIN TRY
 
         SELECT 
              a.*
-            ,ROW_NUMBER() OVER(PARTITION BY a.id_cliente, a.numero_orden ORDER BY a.numero_linea) AS orden
+            ,ROW_NUMBER() OVER(PARTITION BY a.id_cliente, a.numero_solicitud ORDER BY a.numero_linea) AS orden
             ,CASE WHEN b.id_solicitud IS NOT NULL THEN 1 ELSE 0 END AS solicitud_existente
         INTO #source
-        FROM [$(eStage)].oms.manufacturas a
+        FROM [$(eStage)].dbo.manufacturas a
         LEFT OUTER JOIN [$(eConnect)].dbo.solicitudes b ON
             b.id_cliente = a.id_cliente
-        AND b.numero_solicitud = a.numero_orden
+        AND b.numero_solicitud = a.numero_solicitud
         WHERE
             a.estado = 'VALIDADO'
+        AND a.id_archivo >= 400171
 
         IF OBJECT_ID('tempdb..#solicitudes') IS NOT NULL BEGIN
             DROP TABLE #solicitudes
@@ -31,9 +32,9 @@ BEGIN TRY
              IDENTITY(BIGINT,1,1) AS id
             ,CAST(NULL AS BIGINT) AS id_solicitud
             ,'MANUFACTURA' AS tipo_solicitud
-            ,a.numero_orden AS numero_solicitud
-            ,a.prefijo_orden AS prefijo
-            ,a.numero_orden_sin_prefijo AS numero_solicitud_sin_prefijo
+            ,a.numero_solicitud
+            ,a.prefijo
+            ,a.numero_solicitud_sin_prefijo
             ,'NO_PROCESADA' estado
 
             ,a.id_bodega
@@ -47,7 +48,7 @@ BEGIN TRY
             
             ,CAST(0 AS BIT) AS requiere_transporte
             ,CAST(0 AS BIT) AS requiere_recaudo
-            ,a.notas AS nota
+            ,a.nota
 
             ,a.usuario_creacion
             ,a.fecha_creacion
@@ -60,19 +61,6 @@ BEGIN TRY
         AND a.solicitud_existente = 0
         
         CREATE UNIQUE INDEX ix_solicitudes_01 ON #solicitudes(id_cliente,numero_solicitud)
-        
-        --INICIO TODO QUITAR
-        UPDATE a
-        SET
-            a.id_unidad_medida = b.id_unidad_medida
-        FROM #source a
-        LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas b ON
-            b.id_producto = a.id_producto
-        AND b.id_bodega = a.id_bodega
-        AND b.rcv_flg = 1
-        WHERE
-            a.id_unidad_medida IS NULL
-        --FIN TODO QUITAR
 
         IF OBJECT_ID('tempdb..#solicitudes_lineas') IS NOT NULL BEGIN
             DROP TABLE #solicitudes_lineas
@@ -100,7 +88,7 @@ BEGIN TRY
         FROM #solicitudes a
         INNER JOIN #source b ON
             b.id_cliente = a.id_cliente
-        AND b.numero_orden = a.numero_solicitud
+        AND b.numero_solicitud = a.numero_solicitud
         INNER JOIN [$(eConnect)].dbo.productos c ON
             c.id_producto = b.id_producto
         LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas d ON
@@ -257,7 +245,7 @@ BEGIN TRY
             ,a.[version] = a.[version] + 1
             ,a.fecha_modificacion = SYSDATETIME()
             ,a.usuario_modificacion = SYSTEM_USER
-        FROM [$(eStage)].oms.manufacturas a
+        FROM [$(eStage)].dbo.manufacturas a
         INNER JOIN #source b ON
             b.id = a.id
     END
@@ -266,6 +254,8 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()
-	ROLLBACK TRANSACTION
+    IF @@TRANCOUNT > 0 BEGIN
+	    ROLLBACK TRANSACTION
+    END
     ;THROW;
 END CATCH

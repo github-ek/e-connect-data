@@ -73,7 +73,7 @@ BEGIN TRY
         DECLARE @t AS TABLE(id_mensaje BIGINT,id_orden_recibo BIGINT)
         BEGIN
     
-            INSERT INTO [$(eConnect)].dbo.mensajes_recibo_jda
+            INSERT INTO [$(eStage)].dbo.mensajes_recibo_jda
                 (id_orden_recibo
                 ,estado
             
@@ -117,7 +117,7 @@ BEGIN TRY
             INNER JOIN @t b ON
                 b.id_orden_recibo = a.id_orden_recibo
 
-            INSERT INTO [$(eConnect)].dbo.mensajes_recibo_jda_lineas
+            INSERT INTO [$(eStage)].dbo.mensajes_recibo_jda_lineas
                 (id_mensaje
                 ,numero_linea
                 ,invlin
@@ -171,6 +171,8 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()
-	ROLLBACK TRANSACTION
+    IF @@TRANCOUNT > 0 BEGIN
+	    ROLLBACK TRANSACTION
+    END
     ;THROW;
 END CATCH

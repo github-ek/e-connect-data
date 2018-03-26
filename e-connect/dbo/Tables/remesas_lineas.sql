@@ -35,3 +35,10 @@
 
 
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_remesas_lineas_01]
+    ON [dbo].[remesas_lineas]([id_remesa] ASC);
+

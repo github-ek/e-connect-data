@@ -13,10 +13,14 @@
     [id_tipo_ruta]                  BIGINT           NULL,
     [id_tipo_vehiculo]              BIGINT           NULL,
     [placa_programada]              VARCHAR (20)     NOT NULL,
-    [placa]                         VARCHAR (20)     NOT NULL,
+    [fecha_programada]              DATE             NOT NULL,
+    [placa_despachada]              VARCHAR (20)     NOT NULL,
+    [fecha_despacho]                DATE             NULL,
+    [placa_remesa]                  VARCHAR (20)     NOT NULL,
     [fecha_remesa]                  DATE             NOT NULL,
     [hora_cita_minima]              TIME (0)         NOT NULL,
     [hora_cita_maxima]              TIME (0)         NOT NULL,
+    [es_servicio_dedicado]          BIT              NOT NULL,
     [remitente_tipo_documento]      VARCHAR (20)     NOT NULL,
     [remitente_numero_documento]    VARCHAR (20)     NOT NULL,
     [remitente_nombre]              VARCHAR (100)    NOT NULL,
@@ -38,6 +42,7 @@
     [destinatario_telefonos]        VARCHAR (100)    NOT NULL,
     [destinatario_contacto]         VARCHAR (100)    NOT NULL,
     [version]                       INT              CONSTRAINT [DF_remesas_version] DEFAULT ((0)) NOT NULL,
+    [mensaje_creado]                BIT              CONSTRAINT [DF_remesas_integrado] DEFAULT ((0)) NOT NULL,
     [usuario_creacion]              VARCHAR (50)     NOT NULL,
     [fecha_creacion]                DATETIME2 (0)    NOT NULL,
     [usuario_modificacion]          VARCHAR (50)     NOT NULL,
@@ -54,9 +59,10 @@
     CONSTRAINT [FK_remesas_servicios] FOREIGN KEY ([id_servicio]) REFERENCES [dbo].[servicios] ([id_servicio]),
     CONSTRAINT [FK_remesas_tipos_ruta] FOREIGN KEY ([id_tipo_ruta]) REFERENCES [dbo].[tipos_ruta] ([id_tipo_ruta]),
     CONSTRAINT [FK_remesas_tipos_vehiculo] FOREIGN KEY ([id_tipo_vehiculo]) REFERENCES [dbo].[tipos_vehiculo] ([id_tipo_vehiculo]),
-    CONSTRAINT [UK_remesas_01] UNIQUE NONCLUSTERED ([id_remesa] ASC, [id_cliente] ASC, [numero_solicitud] ASC),
-    CONSTRAINT [UK_remesas_02] UNIQUE NONCLUSTERED ([id_orden] ASC, [fecha_remesa] ASC, [placa] ASC)
+    CONSTRAINT [UK_remesas_01] UNIQUE NONCLUSTERED ([id_orden] ASC, [fecha_remesa] ASC, [placa_remesa] ASC)
 );
+
+
 
 
 

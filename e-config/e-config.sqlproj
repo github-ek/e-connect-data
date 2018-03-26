@@ -63,41 +63,10 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-    <Folder Include="dbo\Synonyms\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\configuraciones.sql" />
     <Build Include="dbo\Tables\grupos_configuracion.sql" />
-    <Build Include="dbo\Synonyms\dbo.wkohdr.sql" />
-    <Build Include="dbo\Synonyms\dbo.wkodtl.sql" />
-    <Build Include="dbo\Synonyms\dbo.wko_typ.sql" />
-    <Build Include="dbo\Synonyms\dbo.wh_uom.sql" />
-    <Build Include="dbo\Synonyms\dbo.wh.sql" />
-    <Build Include="dbo\Synonyms\dbo.supmst.sql" />
-    <Build Include="dbo\Synonyms\dbo.shipment_line.sql" />
-    <Build Include="dbo\Synonyms\dbo.rplwrk.sql" />
-    <Build Include="dbo\Synonyms\dbo.rimlin.sql" />
-    <Build Include="dbo\Synonyms\dbo.rimhdr.sql" />
-    <Build Include="dbo\Synonyms\dbo.prtmst.sql" />
-    <Build Include="dbo\Synonyms\dbo.prtftp_dtl.sql" />
-    <Build Include="dbo\Synonyms\dbo.prtftp.sql" />
-    <Build Include="dbo\Synonyms\dbo.prtdsc.sql" />
-    <Build Include="dbo\Synonyms\dbo.ord_line.sql" />
-    <Build Include="dbo\Synonyms\dbo.ord.sql" />
-    <Build Include="dbo\Synonyms\dbo.locmst.sql" />
-    <Build Include="dbo\Synonyms\dbo.invsub.sql" />
-    <Build Include="dbo\Synonyms\dbo.invlod.sql" />
-    <Build Include="dbo\Synonyms\dbo.invdtl.sql" />
-    <Build Include="dbo\Synonyms\dbo.hldhst.sql" />
-    <Build Include="dbo\Synonyms\dbo.dscmst.sql" />
-    <Build Include="dbo\Synonyms\dbo.cstmst.sql" />
-    <Build Include="dbo\Synonyms\dbo.client.sql" />
-    <Build Include="dbo\Synonyms\dbo.bomhdr.sql" />
-    <Build Include="dbo\Synonyms\dbo.bomdtl.sql" />
-    <Build Include="dbo\Synonyms\dbo.bldg_mst.sql" />
-    <Build Include="dbo\Synonyms\dbo.aremst.sql" />
-    <Build Include="dbo\Synonyms\dbo.alt_prtmst.sql" />
-    <Build Include="dbo\Synonyms\dbo.adrmst.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="e-config.dev.publish.xml" />
@@ -108,35 +77,21 @@
     <None Include="e-config.prd.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
-      <Name>ttcwmsprd</Name>
-      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
-      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
-      <Name>e-historicos</Name>
-      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
-      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SqlCmdVariable Include="eHistoricos">
       <DefaultValue>eHistoricos</DefaultValue>
       <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="historicoInv">
+      <DefaultValue>historicoInv</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
       <DefaultValue>ttcwmsprd</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>VIETNAM</DefaultValue>
-      <Value>$(SqlCmdVar__4)</Value>
+      <DefaultValue>172.31.48.17</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

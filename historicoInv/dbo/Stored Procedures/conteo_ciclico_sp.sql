@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[conteo_ciclico_sp] AS
 SET NOCOUNT ON;
 
-TRUNCATE TABLE DBO.conteo_ciclico
+TRUNCATE TABLE dbo.conteo_ciclico
 
 INSERT INTO dbo.conteo_ciclico (wh_id, cntbat, stoloc, prt_client_id, prtnum, lngdsc, conteomax, conteomin, trndte, mod_usr_id,
 tipo1, tipo2, tipo_recuento1, cantidad_recuento1, contar_usuario1, fecha_recuento1, id_contador1)

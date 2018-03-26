@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[control_Trabajo_sp] AS
 SET NOCOUNT ON;
 
-TRUNCATE TABLE DBO.CONTROL_TRABAJO
+TRUNCATE TABLE dbo.control_trabajo
 
-INSERT INTO dbo.Control_Trabajo (almacen,cod_operacion,estacion_trabajo,id_lista,nro_ola,
+INSERT INTO dbo.control_trabajo (almacen,cod_operacion,estacion_trabajo,id_lista,nro_ola,
 usuario_asig,usuario_recon,zona, ubicacion,cliente,fecha_add)
 select w.wh_id almacen,
         dc.lngdsc cod_operacion,

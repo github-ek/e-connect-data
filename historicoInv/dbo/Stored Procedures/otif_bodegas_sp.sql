@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[otif_bodegas_sp] AS
 SET NOCOUNT ON;
 
-TRUNCATE TABLE DBO.otif_bodegas
+TRUNCATE TABLE dbo.otif_bodegas
 
 INSERT INTO dbo.otif_bodegas (adddte, client_id, ordnum, rmanum, invsts_prg, lin_ord, cnt_ord, cnt_env,
 cnt_prg, cnt_stg, peso, cajas, schbat, trlr_num, cpodate, dispatch_date, ordtyp, stcust, wh_id)

@@ -15,7 +15,7 @@ BEGIN
 	        ,d.codigo AS servicio_codigo
             ,a.*
         INTO #mensajes
-        FROM [$(eConnect)].dbo.mensajes_recibo_jda a
+        FROM [$(eStage)].dbo.mensajes_recibo_jda a
         INNER JOIN [$(eConnect)].dbo.ordenes_recibo b ON
             b.id_orden_recibo = a.id_orden_recibo
         INNER JOIN [$(eConnect)].dbo.clientes c ON
@@ -24,14 +24,16 @@ BEGIN
             d.id_servicio = b.id_servicio
         WHERE
 	        a.estado = 'NO_PROCESADO'
+    END
 
+    BEGIN
 	    IF OBJECT_ID('tempdb..#ctrl_seg') IS NOT NULL BEGIN
             DROP TABLE #ctrl_seg
         END
 
         
         SELECT
-             id_orden_recibo
+             a.id_mensaje
 
             ,'ORDCOMP_ESB' AS trnnam
 		    ,'ESB2015.1' AS trnver
@@ -44,7 +46,7 @@ BEGIN
         END
 
 		SELECT
-             id_orden_recibo
+             a.id_mensaje
             
 			,'CABECERA' AS segnam
             ,'A' AS trntyp
@@ -62,7 +64,7 @@ BEGIN
 		END
 
 		SELECT
-			 id_orden_recibo
+			 a.id_mensaje
             
 			,'LINEA' AS segnam
 			,invlin
@@ -74,7 +76,7 @@ BEGIN
 			,inv_attr_str7
 		INTO #line_seg
 		FROM #mensajes a
-        INNER JOIN [$(eConnect)].dbo.mensajes_recibo_jda_lineas b ON
+        INNER JOIN [$(eStage)].dbo.mensajes_recibo_jda_lineas b ON
             b.id_mensaje = a.id_mensaje
     END
 
@@ -82,23 +84,21 @@ BEGIN
 	-- GENERAR UN DOCUMENTO XML POR CADA ORDEN
 	------------------------------------------------------------------------------------------------------
     BEGIN
-    	DECLARE @id_orden INT
+    	DECLARE @id_mensaje INT
         DECLARE @cliente_codigo VARCHAR(20)
         DECLARE @servicio_codigo VARCHAR(20)
-	    DECLARE @CLIENT_ID VARCHAR(100)
-	    DECLARE @INVNUM VARCHAR(100)
+        DECLARE @numero_orden VARCHAR(100)
 	    DECLARE @xml XML
 
-        DECLARE cursor_ordenes CURSOR LOCAL FOR  
+        DECLARE cursor_mensajes CURSOR LOCAL FOR  
         SELECT
-             a.id_orden_recibo
+             a.id_mensaje
             ,a.cliente_codigo
 	        ,a.servicio_codigo
-	        ,a.client_id
 	        ,a.invnum
         FROM #mensajes a
         ORDER BY
-            a.id_orden_recibo
+            a.id_mensaje
 
         DECLARE @DIRECTORIO_ENTRADAS VARCHAR(255)
         DECLARE @SYSDATE DATETIME2(0)
@@ -113,8 +113,8 @@ BEGIN
         WHERE
             a.codigo = 'wms.directorios.entradas'
 
-	    OPEN cursor_ordenes
-	    FETCH NEXT FROM cursor_ordenes INTO @id_orden, @cliente_codigo, @servicio_codigo, @CLIENT_ID, @INVNUM
+	    OPEN cursor_mensajes
+	    FETCH NEXT FROM cursor_mensajes INTO @id_mensaje, @cliente_codigo, @servicio_codigo, @numero_orden
 	    WHILE @@FETCH_STATUS = 0  
 	    BEGIN
 		    BEGIN TRY
@@ -146,11 +146,11 @@ BEGIN
 					        ,inv_attr_str7
 				        FROM #ctrl_seg AS ctrl_seg
 				        INNER JOIN #header_seg AS header_seg ON
-					        header_seg.id_orden_recibo = ctrl_seg.id_orden_recibo
+					        header_seg.id_mensaje = ctrl_seg.id_mensaje
 				        INNER JOIN #line_seg AS line_seg ON
-					        line_seg.id_orden_recibo = ctrl_seg.id_orden_recibo
+					        line_seg.id_mensaje = ctrl_seg.id_mensaje
 				        WHERE
-					        ctrl_seg.id_orden_recibo = @id_orden
+					        ctrl_seg.id_mensaje = @id_mensaje
 				        ORDER BY
 					        invnum,invlin
 				        FOR XML AUTO, ELEMENTS, ROOT('UC_RA_INB_IFD'), TYPE
@@ -168,9 +168,9 @@ BEGIN
 				    DECLARE @FILENAME_TRG VARCHAR(1024)
 				    DECLARE @DATA VARCHAR(MAX) = CAST(@xml AS VARCHAR(MAX))
 
-				    SET @FILENAME_XML = CONCAT('WMS-',@SYSDATE_STRING,'-',@servicio_codigo,'-',@cliente_codigo,'-',@INVNUM,'.XML')
-				    SET @FILENAME_TRG = CONCAT('WMS-',@SYSDATE_STRING,'-',@servicio_codigo,'-',@cliente_codigo,'-',@INVNUM,'.TRG')
-                    
+				    SET @FILENAME_XML = CONCAT('WMS-',@SYSDATE_STRING,'-',@servicio_codigo,'-',@cliente_codigo,'-',@numero_orden,'.XML')
+				    SET @FILENAME_TRG = CONCAT('WMS-',@SYSDATE_STRING,'-',@servicio_codigo,'-',@cliente_codigo,'-',@numero_orden,'.TRG')
+             
                     PRINT @DATA
                     PRINT @DIRECTORIO_ENTRADAS
                     PRINT @FILENAME_XML
@@ -181,7 +181,7 @@ BEGIN
 			    ------------------------------------------------------------------------------------------------------
 			    -- ACTUALIZAR ESTADO DE LAS ORDENES
 			    ------------------------------------------------------------------------------------------------------
-			    BEGIN
+			     BEGIN
 				    BEGIN TRANSACTION
 
                     UPDATE a
@@ -191,36 +191,24 @@ BEGIN
                         ,a.[version] = a.[version] + 1
                         ,a.fecha_modificacion = SYSDATETIME()
                         ,a.usuario_modificacion = SYSTEM_USER
-                    FROM [$(eConnect)].dbo.mensajes_recibo_jda a
+                    FROM [$(eStage)].dbo.mensajes_recibo_jda a
                     WHERE
-                        a.id_orden_recibo = @id_orden
-
-                    UPDATE a
-                    SET 
-                         a.estado = 'MENSAJE_ENVIADO'
-                        ,a.[version] = a.[version] + 1
-                        ,a.fecha_modificacion = SYSDATETIME()
-                        ,a.usuario_modificacion = SYSTEM_USER
-                    FROM [$(eConnect)].dbo.ordenes_recibo a
-                    WHERE
-                        a.id_orden_recibo = @id_orden
+                        a.id_mensaje = @id_mensaje
 
 				    COMMIT TRANSACTION
 			    END
 		    END TRY
 		    BEGIN CATCH
-                DECLARE @ERROR NVARCHAR(4000) = ERROR_MESSAGE()
-        
 			    IF @@TRANCOUNT > 0 BEGIN
 				    ROLLBACK TRANSACTION
 			    END;
-			    PRINT 'OCURRIO EL SIGUIENTE ERROR AL GENERAR LA ORDEN '+@INVNUM+':'+@ERROR
+                PRINT CONCAT('OCURRIO EL SIGUIENTE ERROR AL GENERAR LA ORDEN ',@numero_orden,':',ERROR_MESSAGE())
 		    END CATCH
             
-		    FETCH NEXT FROM cursor_ordenes INTO @id_orden, @cliente_codigo, @servicio_codigo, @CLIENT_ID, @INVNUM
+		    FETCH NEXT FROM cursor_mensajes INTO @id_mensaje, @cliente_codigo, @servicio_codigo, @numero_orden
 	    END 
 
-	    CLOSE cursor_ordenes  
-	    DEALLOCATE cursor_ordenes
+	    CLOSE cursor_mensajes
+	    DEALLOCATE cursor_mensajes
     END
 END

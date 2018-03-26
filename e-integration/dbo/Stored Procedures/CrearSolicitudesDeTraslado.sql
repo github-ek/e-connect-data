@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[CrearSolicitudesDeTraslado]
+    @id_archivo BIGINT = 0
 AS
 BEGIN TRY
     --SET NOCOUNT ON;
@@ -13,15 +14,18 @@ BEGIN TRY
 
         SELECT 
              a.*
-            ,ROW_NUMBER() OVER(PARTITION BY a.id_cliente, a.numero_orden ORDER BY a.numero_linea) AS orden
+            ,ROW_NUMBER() OVER(PARTITION BY a.id_cliente, a.numero_solicitud ORDER BY a.numero_linea) AS orden
             ,CASE WHEN b.id_solicitud IS NOT NULL THEN 1 ELSE 0 END AS solicitud_existente
         INTO #source
-        FROM [$(eStage)].oms.traslados a
+        FROM [$(eStage)].dbo.traslados a
         LEFT OUTER JOIN [$(eConnect)].dbo.solicitudes b ON
             b.id_cliente = a.id_cliente
-        AND b.numero_solicitud = a.numero_orden
+        AND b.numero_solicitud = a.numero_solicitud
         WHERE
             a.estado = 'VALIDADO'
+        --AND a.id_archivo = @id_archivo
+        AND a.id_archivo >= 400171
+
 
         IF OBJECT_ID('tempdb..#solicitudes') IS NOT NULL BEGIN
             DROP TABLE #solicitudes
@@ -31,17 +35,17 @@ BEGIN TRY
              IDENTITY(BIGINT,1,1) AS id
             ,CAST(NULL AS BIGINT) AS id_solicitud
             ,'TRASLADO' AS tipo_solicitud
-            ,a.numero_orden AS numero_solicitud
-            ,a.prefijo_orden AS prefijo
-            ,a.numero_orden_sin_prefijo AS numero_solicitud_sin_prefijo
+            ,a.numero_solicitud
+            ,a.prefijo
+            ,a.numero_solicitud_sin_prefijo
             ,'NO_PROCESADA' estado
 
-            ,a.id_bodega_origen AS id_bodega
-            ,a.id_bodega_destino AS id_bodega_traslado
+            ,a.id_bodega
+            ,a.id_bodega_traslado
             ,a.id_cliente
             ,a.id_servicio
             ,a.servicio_codigo_alterno
-            ,a.id_tercero
+            ,CAST(NULL AS BIGINT) AS id_tercero
             ,b.codigo AS tercero_identificacion
             ,b.nombre AS tercero_nombre
             ,CAST(NULL AS BIGINT) AS id_canal
@@ -63,7 +67,7 @@ BEGIN TRY
         INTO #solicitudes
         FROM #source a
         INNER JOIN [$(eConnect)].dbo.bodegas b ON
-            b.id_bodega = a.id_bodega_destino
+            b.id_bodega = a.id_bodega_traslado
         WHERE
             a.orden = 1
         AND a.solicitud_existente = 0
@@ -80,7 +84,7 @@ BEGIN TRY
             ,ROW_NUMBER() OVER(PARTITION BY a.id ORDER BY b.numero_linea) AS numero_linea
             ,c.id_producto
             ,c.codigo AS producto_codigo
-            ,b.id_estado_inventario_origen AS id_estado_inventario
+            ,b.id_estado_inventario
             ,e.id_unidad_medida
             ,b.cantidad / d.factor_conversion AS unidades
             ,CAST((b.valor_unitario_declarado / d.factor_conversion) AS DECIMAL(10,2)) AS valor_unitario_declarado
@@ -91,15 +95,15 @@ BEGIN TRY
             ,b.cantidad AS cantidad_solicitada
             ,d.factor_conversion
 
-            ,b.bodega_origen_codigo_alterno AS bodega_codigo_alterno
-            ,b.estado_inventario_origen_codigo_alterno AS estado_inventario_codigo_alterno
-            ,b.bodega_destino_codigo_alterno AS bodega_traslado_codigo_alterno
-            ,b.estado_inventario_destino_codigo_alterno AS estado_traslado_inventario_codigo_alterno
+            ,b.bodega_codigo_alterno
+            ,b.estado_inventario_codigo_alterno
+            ,b.bodega_traslado_codigo_alterno
+            ,b.estado_inventario_traslado_codigo_alterno
         INTO #solicitudes_lineas
         FROM #solicitudes a
         INNER JOIN #source b ON
             b.id_cliente = a.id_cliente
-        AND b.numero_orden = a.numero_solicitud
+        AND b.numero_solicitud = a.numero_solicitud
         INNER JOIN [$(eConnect)].dbo.productos c ON
             c.id_producto = b.id_producto
         LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas d ON
@@ -108,7 +112,7 @@ BEGIN TRY
         AND d.id_unidad_medida = b.id_unidad_medida
         LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas e ON
             e.id_producto = b.id_producto
-        AND e.id_bodega = b.id_bodega_origen
+        AND e.id_bodega = b.id_bodega
         AND e.rcv_flg = 1
 
         IF OBJECT_ID('tempdb..#solicitudes_transporte') IS NOT NULL BEGIN
@@ -281,7 +285,7 @@ BEGIN TRY
             ,b.bodega_codigo_alterno
             ,b.estado_inventario_codigo_alterno
             ,b.bodega_traslado_codigo_alterno
-            ,b.estado_traslado_inventario_codigo_alterno
+            ,b.estado_inventario_traslado_codigo_alterno
 
             ,a.usuario_creacion
             ,a.fecha_creacion
@@ -394,7 +398,7 @@ BEGIN TRY
             ,a.[version] = a.[version] + 1
             ,a.fecha_modificacion = SYSDATETIME()
             ,a.usuario_modificacion = SYSTEM_USER
-        FROM [$(eStage)].oms.traslados a
+        FROM [$(eStage)].dbo.traslados a
         INNER JOIN #source b ON
             b.id = a.id
     END
@@ -403,6 +407,8 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()
-	ROLLBACK TRANSACTION
+    IF @@TRANCOUNT > 0 BEGIN
+	    ROLLBACK TRANSACTION
+    END
     ;THROW;
 END CATCH

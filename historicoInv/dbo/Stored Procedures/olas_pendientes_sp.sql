@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[olas_pendientes_sp] AS
 SET NOCOUNT ON;
 
-TRUNCATE TABLE DBO.olas_pendientes
+TRUNCATE TABLE dbo.olas_pendientes
 
 INSERT INTO dbo.olas_pendientes (schbat, wh_id, adddte, numsls, totpcs, palvol, estwgt, batsts, client_id,
 appqty, pckqty, partes)

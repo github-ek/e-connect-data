@@ -66,7 +66,6 @@
   <ItemGroup>
     <Build Include="dbo\Tables\solicitudes_atributos.sql" />
     <Build Include="dbo\Tables\___ordenes_contactos.sql" />
-    <Build Include="dbo\Tables\mensajes_manufacturas_jda.sql" />
     <Build Include="dbo\Tables\solicitudes_documentos.sql" />
     <Build Include="dbo\Tables\___ordenes_notas.sql" />
     <Build Include="dbo\Tables\solicitudes_transporte.sql" />
@@ -103,34 +102,29 @@
     <Build Include="dbo\Tables\terceros.sql" />
     <Build Include="dbo\Tables\tipos_identificacion.sql" />
     <Build Include="dbo\Tables\unidades_medida.sql" />
-    <Build Include="dbo\Tables\mensajes_alistamiento_jda.sql" />
     <Build Include="dbo\Tables\ordenes_recibo.sql" />
     <Build Include="dbo\Tables\ordenes_manufactura.sql" />
     <Build Include="dbo\Tables\ordenes_alistamiento_lineas.sql" />
     <Build Include="dbo\Tables\solicitudes.sql" />
     <Build Include="dbo\Tables\ordenes_recibo_lineas.sql" />
     <Build Include="dbo\Tables\productos_medidas.sql" />
-    <Build Include="dbo\Tables\mensajes_recibo_jda_lineas.sql" />
     <Build Include="dbo\Tables\ordenes_manufactura_lineas.sql" />
     <Build Include="dbo\Tables\solicitudes_ordenes.sql" />
-    <Build Include="dbo\Tables\mensajes_alistamiento_jda_lineas.sql" />
     <Build Include="dbo\Tables\ordenes_alistamiento.sql" />
     <Build Include="dbo\Tables\tipos_atributo_solicitud.sql" />
     <Build Include="dbo\Stored Procedures\CrearOrdenesAlistamiento.sql" />
     <Build Include="dbo\Stored Procedures\CrearOrdenesReciboDeTraslados.sql" />
-    <Build Include="dbo\Tables\mensajes_recibo_jda.sql" />
     <Build Include="dbo\Tables\ordenes_recibo_lineas_confirmadas.sql" />
-    <Build Include="dbo\Tables\mensajes_abastecimientos_gws.sql" />
-    <Build Include="dbo\Tables\mensajes_abastecimientos_gws_lineas.sql" />
     <Build Include="dbo\Stored Procedures\CrearOrdenesManufactura.sql" />
     <Build Include="dbo\Tables\tipos_documento_solicitud.sql" />
-    <Build Include="dbo\Tables\mensajes_manufacturas_jda_lineas.sql" />
     <Build Include="dbo\Tables\embarques.sql" />
     <Build Include="dbo\Tables\embarques_lineas.sql" />
     <Build Include="dbo\Tables\tipos_vehiculo.sql" />
     <Build Include="dbo\Tables\remesas_lineas.sql" />
     <Build Include="dbo\Tables\remesas.sql" />
     <Build Include="dbo\Tables\ordenes_transporte.sql" />
+    <Build Include="dbo\Tables\poseedores_vehiculos.sql" />
+    <Build Include="dbo\Stored Procedures\CrearOrdenesManufacturaDeTraslados.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />

@@ -19,10 +19,10 @@
       <Value>historicoInv</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
-      <Value>ttcwmsprd</Value>
+      <Value>ttcwmsprdnew</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>VIETNAM</Value>
+      <Value>[172.31.48.17]</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

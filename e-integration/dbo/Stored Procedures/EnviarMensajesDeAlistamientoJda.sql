@@ -15,7 +15,7 @@ BEGIN
 	        ,d.codigo AS servicio_codigo
             ,a.*
         INTO #mensajes
-        FROM [$(eConnect)].dbo.mensajes_alistamiento_jda a
+        FROM [$(eStage)].dbo.mensajes_alistamiento_jda a
         INNER JOIN [$(eConnect)].dbo.ordenes_alistamiento b ON
             b.id_orden_alistamiento = a.id_orden_alistamiento
         INNER JOIN [$(eConnect)].dbo.clientes c ON
@@ -93,7 +93,7 @@ BEGIN
             ,pckgr4
 		INTO #line_seg
 		FROM #mensajes a
-        INNER JOIN [$(eConnect)].dbo.mensajes_alistamiento_jda_lineas b ON
+        INNER JOIN [$(eStage)].dbo.mensajes_alistamiento_jda_lineas b ON
             b.id_mensaje = a.id_mensaje
     END
 
@@ -228,7 +228,7 @@ BEGIN
                         ,a.[version] = a.[version] + 1
                         ,a.fecha_modificacion = SYSDATETIME()
                         ,a.usuario_modificacion = SYSTEM_USER
-                    FROM [$(eConnect)].dbo.mensajes_alistamiento_jda a
+                    FROM [$(eStage)].dbo.mensajes_alistamiento_jda a
                     WHERE
                         a.id_mensaje = @id_mensaje
 
@@ -236,12 +236,10 @@ BEGIN
 			    END
 		    END TRY
 		    BEGIN CATCH
-                DECLARE @ERROR NVARCHAR(4000) = ERROR_MESSAGE()
-        
 			    IF @@TRANCOUNT > 0 BEGIN
 				    ROLLBACK TRANSACTION
 			    END;
-			    PRINT 'OCURRIO EL SIGUIENTE ERROR AL GENERAR LA ORDEN '+@numero_orden+':'+@ERROR
+                PRINT CONCAT('OCURRIO EL SIGUIENTE ERROR AL GENERAR LA ORDEN ',@numero_orden,':',ERROR_MESSAGE())
 		    END CATCH
             
 		    FETCH NEXT FROM cursor_mensajes INTO @id_mensaje, @cliente_codigo, @servicio_codigo, @numero_orden

@@ -61,6 +61,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\productos.sql" />
@@ -75,6 +76,9 @@
     <Build Include="dbo\Tables\unidades_medida.sql" />
     <Build Include="dbo\Tables\embarques.sql" />
     <Build Include="dbo\Tables\embarques_lineas.sql" />
+    <Build Include="dbo\Views\retenciones.sql" />
+    <Build Include="dbo\Views\prom_salidas_mes.sql" />
+    <Build Include="dbo\Views\manufacturas.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />
@@ -83,5 +87,52 @@
     <None Include="e-wms.tst.publish.xml" />
     <None Include="e-wms.dev.publish.xml" />
     <None Include="e-wms.prd.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\historicoInv\historicoInv.sqlproj">
+      <Name>historicoInv</Name>
+      <Project>{6eb7734c-a50f-49ca-91c4-79f0377d0a7f}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>historicoInv</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
+      <Name>ttcwmsprd</Name>
+      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-connect\e-connect.sqlproj">
+      <Name>e-connect</Name>
+      <Project>{b61ce68b-f831-41d8-895b-212a9697457c}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConfig">
+      <DefaultValue>eConfig</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eConnect">
+      <DefaultValue>eConnect</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="historicoInv">
+      <DefaultValue>historicoInv</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <DefaultValue>ttcwmsprdnew</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <DefaultValue>172.31.48.17</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>
