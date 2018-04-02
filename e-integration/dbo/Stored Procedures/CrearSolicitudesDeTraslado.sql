@@ -108,7 +108,7 @@ BEGIN TRY
             c.id_producto = b.id_producto
         LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas d ON
             d.id_producto = b.id_producto
-        AND d.id_bodega = b.id_bodega_origen
+        AND d.id_bodega = b.id_bodega
         AND d.id_unidad_medida = b.id_unidad_medida
         LEFT OUTER JOIN [$(eConnect)].dbo.productos_medidas e ON
             e.id_producto = b.id_producto
