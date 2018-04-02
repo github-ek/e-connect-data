@@ -5,24 +5,10 @@
     <TargetDatabaseName>eConfig</TargetDatabaseName>
     <DeployScriptFileName>e-config.sql</DeployScriptFileName>
     <ProfileVersionNumber>1</ProfileVersionNumber>
-    <TargetConnectionString>Data Source=172.31.48.15;Persist Security Info=True;User ID=eConnectuser;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
+    <TargetConnectionString>Data Source=172.31.48.15;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <BlockWhenDriftDetected>False</BlockWhenDriftDetected>
     <RegisterDataTierApplication>False</RegisterDataTierApplication>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
   </PropertyGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="eHistoricos">
-      <Value>eHistoricos</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="historicoInv">
-      <Value>historicoInv</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="ttcwmsprd">
-      <Value>ttcwmsprd</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>192.168.150.51</Value>
-    </SqlCmdVariable>
-  </ItemGroup>
 </Project>

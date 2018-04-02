@@ -8,6 +8,20 @@
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
-    <DropObjectsNotInSource>True</DropObjectsNotInSource>
+    <DropObjectsNotInSource>False</DropObjectsNotInSource>
   </PropertyGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConnect">
+      <Value>eConnect</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="historicoInv">
+      <Value>historicoInv</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <Value>ttcwmsprdnew</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <Value>57DBWMS05</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
 </Project>

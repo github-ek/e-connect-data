@@ -11,18 +11,4 @@
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
   </PropertyGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="eHistoricos">
-      <Value>eHistoricos</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="historicoInv">
-      <Value>historicoInv</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="ttcwmsprd">
-      <Value>ttcwmsprdnew</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>[172.31.48.17]</Value>
-    </SqlCmdVariable>
-  </ItemGroup>
 </Project>

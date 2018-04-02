@@ -22,6 +22,9 @@
     <SqlCmdVariable Include="eIntegration">
       <Value>eIntegration</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eSilogtran">
+      <Value>eSilogtran</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eStage">
       <Value>eStage</Value>
     </SqlCmdVariable>
@@ -30,6 +33,12 @@
     </SqlCmdVariable>
     <SqlCmdVariable Include="historicoInv">
       <Value>historicoInv</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="INGLATERRA">
+      <Value>INGLATERRA</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="satelite">
+      <Value>Satelite</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
       <Value>ttcwmstst</Value>

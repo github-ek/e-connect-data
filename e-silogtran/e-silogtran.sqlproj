@@ -74,4 +74,7 @@
     <Build Include="dbo\Tables\migracion_servicios_dedicados_ene_mar_15.sql" />
     <Build Include="dbo\Tables\remesas_primera_migracion.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="e-silogtran.prd.publish.xml" />
+  </ItemGroup>
 </Project>

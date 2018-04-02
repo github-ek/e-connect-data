@@ -76,22 +76,4 @@
     <None Include="e-config.tst.publish.xml" />
     <None Include="e-config.prd.publish.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="eHistoricos">
-      <DefaultValue>eHistoricos</DefaultValue>
-      <Value>$(SqlCmdVar__3)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="historicoInv">
-      <DefaultValue>historicoInv</DefaultValue>
-      <Value>$(SqlCmdVar__5)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="ttcwmsprd">
-      <DefaultValue>ttcwmsprd</DefaultValue>
-      <Value>$(SqlCmdVar__1)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>172.31.48.17</DefaultValue>
-      <Value>$(SqlCmdVar__6)</Value>
-    </SqlCmdVariable>
-  </ItemGroup>
 </Project>

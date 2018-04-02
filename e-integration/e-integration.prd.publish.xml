@@ -4,11 +4,11 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>eIntegration</TargetDatabaseName>
     <DeployScriptFileName>e-integration.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=172.31.48.15;Persist Security Info=True;User ID=eConnectuser;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
+    <TargetConnectionString>Data Source=172.31.48.15;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
-    <DropObjectsNotInSource>True</DropObjectsNotInSource>
+    <DropObjectsNotInSource>False</DropObjectsNotInSource>
   </PropertyGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConfig">
@@ -23,6 +23,9 @@
     <SqlCmdVariable Include="eIntegration">
       <Value>eIntegration</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eSilogtran">
+      <Value>eSilogtran</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eStage">
       <Value>eStage</Value>
     </SqlCmdVariable>
@@ -32,11 +35,17 @@
     <SqlCmdVariable Include="historicoInv">
       <Value>historicoInv</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="INGLATERRA">
+      <Value>192.168.10.15</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="satelite">
+      <Value>Satelite</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
       <Value>ttcwmsprd</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>192.168.150.51</Value>
+      <Value>57DBWMS05</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>
