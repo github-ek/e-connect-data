@@ -20,4 +20,5 @@ TRUNCATE TABLE [$(eStage)].dbo.saldos_inventario
 DELETE FROM dbo.archivos_estados
 DELETE FROM dbo.archivos_errores
 DELETE FROM dbo.archivos
+SELECT 1
 END
