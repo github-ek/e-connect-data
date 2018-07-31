@@ -42,7 +42,7 @@
       <Value>Satelite</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
-      <Value>ttcwmsprd</Value>
+      <Value>ttcwmsprdnew</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
       <Value>57DBWMS05</Value>
