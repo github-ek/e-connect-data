@@ -13,9 +13,12 @@
     [inv_attr_str7]  NVARCHAR (100) NOT NULL,
     [stoloc]         NVARCHAR (20)  NOT NULL,
     [lodnum]         NVARCHAR (30)  NOT NULL,
-    [orgcod] NVARCHAR(25) NOT NULL, 
+    [orgcod]         NVARCHAR (25)  NOT NULL,
+    [prtstyle]       NVARCHAR (30)  NOT NULL,
     CONSTRAINT [PK_saldos_inventario] PRIMARY KEY CLUSTERED ([id] ASC)
 );
+
+
 
 
 GO

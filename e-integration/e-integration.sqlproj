@@ -61,9 +61,6 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-    <Folder Include="map\" />
-    <Folder Include="map\Tables\" />
-    <Folder Include="Security\" />
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
@@ -76,32 +73,13 @@
     <Build Include="dbo\Tables\archivos_estados.sql" />
     <Build Include="dbo\Tables\grupos_tipo_archivo.sql" />
     <Build Include="dbo\Tables\directorios.sql" />
-    <Build Include="map\Tables\mapas.sql" />
-    <Build Include="map\Tables\grupos_mapa.sql" />
     <Build Include="dbo\Tables\archivos.sql" />
-    <Build Include="map\Tables\mapas_valores.sql" />
-    <Build Include="Security\map.sql" />
-    <Build Include="dbo\Stored Procedures\CrearSolicitudesDeTraslado.sql" />
     <Build Include="dbo\Stored Procedures\Clean.sql" />
     <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesAlistamiento.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroBodegas.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroClientes.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeSalida.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroProductos.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroProductosMedidas.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarSaldosInventario.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroUbicaciones.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroUnidadesMedida.sql" />
-    <Build Include="dbo\Stored Procedures\CrearMensajesDeReciboJda.sql" />
     <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
-    <Build Include="dbo\Stored Procedures\EnviarMensajesDeReciboJda.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeRecibo.sql" />
     <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesReciboDeTraslados.sql" />
     <Build Include="dbo\Stored Procedures\CrearMensajesDeAbastecimientoGWS.sql" />
     <Build Include="dbo\Stored Procedures\EnviarMensajesDeAbastecimientoGws.sql" />
-    <Build Include="dbo\Stored Procedures\CrearMensajesDeManufacturaJda.sql" />
-    <Build Include="dbo\Stored Procedures\CrearMensajesDeAlistamientoJda.sql" />
-    <Build Include="dbo\Stored Procedures\EnviarMensajesDeAlistamientoJda.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroClientes.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroBodegas.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroUnidadesMedida.sql" />
@@ -110,15 +88,14 @@
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosMedidas.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosCodigos.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosAtributos.sql" />
-    <Build Include="dbo\Stored Procedures\CrearSolicitudesDeManufactura.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarEmbarques.sql" />
     <Build Include="dbo\Stored Procedures\DetectarCierreDeEmbarques.sql" />
-    <Build Include="dbo\Stored Procedures\ProcesarArchivosSolicitudes.sql" />
     <Build Include="dbo\Stored Procedures\ProcesarArchivosRemesasProgramadas.sql" />
-    <Build Include="dbo\Stored Procedures\CrearSolicitudesDeSalida.sql" />
     <Build Include="dbo\Stored Procedures\CrearRemesasProgramadas.sql" />
     <Build Include="dbo\Stored Procedures\CrearRemesasDespachoPrimeraVez.sql" />
     <Build Include="dbo\Stored Procedures\CrearMensajesDeRemesaSilogtran.sql" />
+    <Build Include="dbo\Tables\mapas_valores.sql" />
+    <Build Include="dbo\Tables\mapas.sql" />
+    <Build Include="dbo\Tables\grupos_mapa.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />
@@ -129,13 +106,6 @@
     <None Include="e-integration.prd.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\e-connect\e-connect.sqlproj">
-      <Name>e-connect</Name>
-      <Project>{b61ce68b-f831-41d8-895b-212a9697457c}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\e-stage\e-stage.sqlproj">
       <Name>e-stage</Name>
       <Project>{f5815067-f0b4-4cd2-8dec-df35eb5a3d75}</Project>
@@ -188,6 +158,13 @@
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eSilogtran</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-connect\e-connect.sqlproj">
+      <Name>e-connect</Name>
+      <Project>{b61ce68b-f831-41d8-895b-212a9697457c}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConfig">
@@ -196,6 +173,10 @@
     </SqlCmdVariable>
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>eConnect</DefaultValue>
+      <Value>$(SqlCmdVar__15)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="[$(eConnect)]">
+      <DefaultValue>[$(eConnect)]</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eHistoricos">
@@ -229,6 +210,11 @@
     <SqlCmdVariable Include="WMS_DB_SERVER">
       <DefaultValue>VIETNAM</DefaultValue>
       <Value>$(SqlCmdVar__8)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="[]">
+      <DefaultValue>
+      </DefaultValue>
+      <Value>$(SqlCmdVar__14)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

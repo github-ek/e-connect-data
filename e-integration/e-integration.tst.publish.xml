@@ -4,7 +4,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>eIntegration</TargetDatabaseName>
     <DeployScriptFileName>e-integration.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=COREA\MSSQLSERVER3;Persist Security Info=True;User ID=sa;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
+    <TargetConnectionString>Data Source=192.168.10.17;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
@@ -46,10 +46,10 @@
       <Value>Satelite</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
-      <Value>ttcwmsprdnew</Value>
+      <Value>ttcwmstst</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>172.31.48.17</Value>
+      <Value>HOLANDA</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

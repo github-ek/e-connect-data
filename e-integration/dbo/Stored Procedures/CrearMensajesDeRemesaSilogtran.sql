@@ -16,8 +16,8 @@ BEGIN TRY
             ,c.codigo
             ,b.valor AS codigo_silogtran
         INTO #mapa_clientes
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         INNER JOIN [$(eConnect)].dbo.clientes c ON
             c.codigo = b.clave
@@ -35,8 +35,8 @@ BEGIN TRY
             ,c.codigo
             ,b.valor AS codigo_silogtran
         INTO #mapa_departamentos
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         INNER JOIN [$(eConnect)].dbo.departamentos c ON
             c.codigo = b.clave
@@ -55,8 +55,8 @@ BEGIN TRY
             ,b.valor AS codigo_silogtran
             ,d.codigo_silogtran AS departamento_silogtran
         INTO #mapa_ciudades
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         INNER JOIN [$(eConnect)].dbo.ciudades c ON
             c.codigo = b.clave
@@ -75,8 +75,8 @@ BEGIN TRY
             ,c.codigo
             ,b.valor AS codigo_silogtran
         INTO #mapa_unidades_medida
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         INNER JOIN [$(eConnect)].dbo.unidades_medida c ON
             c.codigo = b.clave

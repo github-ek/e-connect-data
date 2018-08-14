@@ -10,6 +10,9 @@
     [idnqty]     INT           NOT NULL,
     [invtyp]     NVARCHAR (4)  NULL,
     [expire_dte] DATETIME      NULL,
-    [retcod]     NVARCHAR (4)  NULL
+    [retcod]     NVARCHAR (4)  NULL,
+    [rmanum]     AS            (case when [invnum] like '_C-%-%' then substring([invnum],(4)+patindex('%-%',substring([invnum],(4),(50))),(50))  end) PERSISTED
 );
+
+
 

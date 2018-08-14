@@ -83,22 +83,11 @@
     <Build Include="tms\Tables\programaciones_manuales.sql" />
     <Build Include="tms\Tables\_planillas_rutacontrol.sql" />
     <Build Include="tms\Tables\remesas_programadas.sql" />
-    <Build Include="dbo\Tables\traslados.sql" />
     <Build Include="dbo\Tables\salidas.sql" />
-    <Build Include="dbo\Tables\saldos_inventario.sql" />
-    <Build Include="dbo\Tables\recibos.sql" />
     <Build Include="dbo\Tables\mensajes_remesas_silogtran_lineas.sql" />
     <Build Include="dbo\Tables\mensajes_remesas_silogtran.sql" />
-    <Build Include="dbo\Tables\mensajes_recibo_jda_lineas.sql" />
-    <Build Include="dbo\Tables\mensajes_recibo_jda.sql" />
-    <Build Include="dbo\Tables\mensajes_manufacturas_jda_lineas.sql" />
-    <Build Include="dbo\Tables\mensajes_manufacturas_jda.sql" />
-    <Build Include="dbo\Tables\mensajes_alistamiento_jda_lineas.sql" />
-    <Build Include="dbo\Tables\mensajes_alistamiento_jda.sql" />
     <Build Include="dbo\Tables\mensajes_abastecimientos_gws_lineas.sql" />
     <Build Include="dbo\Tables\mensajes_abastecimientos_gws.sql" />
-    <Build Include="dbo\Tables\manufacturas.sql" />
-    <Build Include="dbo\Tables\destrucciones.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

@@ -56,7 +56,7 @@ BEGIN TRY
         AND a.adrnam = b.adrnam
         AND a.adrln1 = b.adrln1
         AND a.adrcty = b.adrcty
-        AND a.moddte = b.moddte)   
+        AND a.moddte = b.moddte)
         
         UPDATE a
         SET a.operacion = 'C'

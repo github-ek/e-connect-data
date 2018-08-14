@@ -16,6 +16,8 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [sl_smapalgbnddtfka]
     ON [dbo].[sl_o_ifd_sys_map_alg_bnd_dat]([alg_id] ASC, [in_bnd_var_id] ASC) WITH (FILLFACTOR = 90);

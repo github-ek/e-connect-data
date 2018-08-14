@@ -62,6 +62,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\productos.sql" />
@@ -79,6 +80,22 @@
     <Build Include="dbo\Views\retenciones.sql" />
     <Build Include="dbo\Views\prom_salidas_mes.sql" />
     <Build Include="dbo\Views\manufacturas.sql" />
+    <Build Include="dbo\Tables\__embarques_lineas_20180307.sql" />
+    <Build Include="dbo\Tables\__embarques_20180307.sql" />
+    <Build Include="dbo\Views\prom_salidas_mes_heinz.sql" />
+    <Build Include="dbo\Views\liq_alm_heinz_tot.sql" />
+    <Build Include="dbo\Views\liq_alm_heinz_3max.sql" />
+    <Build Include="dbo\Views\corte_dia_anterior.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarSaldosInventario.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeSalida.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarOrdenesDeRecibo.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEwmsUnidadesMedidas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroUbicaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestrosProductosMedidas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroProductos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroClientes.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEwmsMaestroBodegas.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarEmbarques.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />
@@ -112,11 +129,23 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
+      <Name>e-historicos</Name>
+      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>eConnect</DefaultValue>
       <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eHistoricos">
+      <DefaultValue>eHistoricos</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="historicoInv">
       <DefaultValue>historicoInv</DefaultValue>
@@ -127,8 +156,8 @@
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>172.31.48.17</DefaultValue>
-      <Value>$(SqlCmdVar__4)</Value>
+      <DefaultValue>WMS_DB_SERVER</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

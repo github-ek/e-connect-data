@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[solicitudes] (
+    [id_solicitud]            BIGINT        NOT NULL,
+    [numero_solicitud]        VARCHAR (30)  NOT NULL,
+    [fecha_solicitud]         DATETIME2 (0) NOT NULL,
+    [cambio_notificado]       BIT           NOT NULL,
+    [eliminada]               BIT           NOT NULL,
+    [numero_orden]            VARCHAR (35)  NOT NULL,
+    [id_bodega]               BIGINT        NOT NULL,
+    [id_cliente]              BIGINT        NOT NULL,
+    [id_servicio]             BIGINT        NOT NULL,
+    [tercero_identificacion]  VARCHAR (20)  NOT NULL,
+    [tercero_nombre]          VARCHAR (100) NOT NULL,
+    [id_canal]                BIGINT        NULL,
+    [canal_codigo_alterno]    VARCHAR (20)  NOT NULL,
+    [fecha_minima_solicitada] DATE          NOT NULL,
+    [fecha_maxima_solicitada] DATE          NOT NULL,
+    [requiere_transporte]     BIT           NOT NULL,
+    [id_ciudad]               BIGINT        NULL,
+    [direccion]               VARCHAR (150) NOT NULL,
+    [id_estado_distribucion]  VARCHAR (50)  NOT NULL,
+    [fecha_creacion]          DATETIME2 (0) NOT NULL,
+    [fecha_modificacion]      DATETIME2 (0) NOT NULL,
+    CONSTRAINT [PK_solicitudes] PRIMARY KEY CLUSTERED ([id_solicitud] ASC)
+);
+

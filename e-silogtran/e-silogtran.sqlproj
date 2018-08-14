@@ -76,5 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="e-silogtran.prd.publish.xml" />
+    <None Include="SqlSchemaComparePrd.scmp" />
   </ItemGroup>
 </Project>

@@ -27,7 +27,8 @@
          rplwrk.rplcnt,
          rplwrk.ftpcod,
          ord_line.parflg,
-         stop.car_move_id
+         stop.car_move_id,
+         cast(null as nvarchar(25) ) revlvl
     from shipment_line, 
          ord_line,
          rplwrk,
@@ -70,7 +71,8 @@ UNION
          rplwrk.rplcnt,
          rplwrk.ftpcod,
          0 parflg,
-         cast(null as nvarchar(10) ) car_move_id
+         cast(null as nvarchar(10) ) car_move_id,
+         wkodtl.revlvl
     from wkodtl, rplwrk
    where rplwrk.wkonum is not null
      and rplwrk.client_id is not null
@@ -110,7 +112,8 @@ UNION
          rplwrk.rplcnt,
          rplwrk.ftpcod,
          0 parflg,
-         cast(null as nvarchar(10) ) car_move_id
+         cast(null as nvarchar(10) ) car_move_id,
+         wkohdr.revlvl
     from wkohdr, rplwrk
    where rplwrk.wkonum is not null
      and rplwrk.client_id is not null

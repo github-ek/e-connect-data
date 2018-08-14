@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[consultas_solicitudes_lineas] (
+    [id_archivo]                       BIGINT        NOT NULL,
+    [id]                               BIGINT        NOT NULL,
+    [id_cliente]                       BIGINT        NULL,
+    [id_solicitud]                     INT           NULL,
+    [fecha_creacion]                   DATETIME2 (0) NOT NULL,
+    [destinatario_identificacion]      VARCHAR (20)  NOT NULL,
+    [destinatario_nombre]              VARCHAR (100) NOT NULL,
+    [id_ciudad]                        INT           NULL,
+    [direccion]                        VARCHAR (150) NOT NULL,
+    [destino]                          VARCHAR (100) NOT NULL,
+    [id_bodega]                        BIGINT        NULL,
+    [wh_id]                            VARCHAR (32)  NOT NULL,
+    [orden_wms]                        VARCHAR (35)  NOT NULL,
+    [id_producto]                      INT           NULL,
+    [id_unidad]                        INT           NULL,
+    [id_estado_inventario]             VARCHAR (50)  NULL,
+    [lote]                             VARCHAR (30)  NOT NULL,
+    [cantidad]                         INT           NOT NULL,
+    [valor_declarado_linea]            BIGINT        NOT NULL,
+    [id_estado_georeferenciacion]      VARCHAR (50)  NOT NULL,
+    [id_estado_planificacion_ruta]     VARCHAR (50)  NOT NULL,
+    [usuario_corte_planificacion_ruta] VARCHAR (50)  NOT NULL,
+    CONSTRAINT [FK_consultas_solicitudes_lineas_consultas_solicitudes] FOREIGN KEY ([id_archivo], [id]) REFERENCES [dbo].[consultas_solicitudes] ([id_archivo], [id]) ON DELETE CASCADE
+);
+

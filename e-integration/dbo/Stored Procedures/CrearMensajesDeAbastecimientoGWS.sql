@@ -14,8 +14,8 @@ BEGIN TRY
         SELECT
             b.clave, b.valor
         INTO #mapa_ciudades_sap
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         WHERE
             a.codigo = 'BODEGAS_WMS_CIUDADES_SAP'
@@ -27,8 +27,8 @@ BEGIN TRY
         SELECT
             b.clave, b.valor
         INTO #mapa_series_ciudades_sap
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         WHERE
             a.codigo = 'BODEGAS_WMS_SERIES_CIUDADES_SAP'
@@ -40,8 +40,8 @@ BEGIN TRY
         SELECT
             b.clave, b.valor
         INTO #mapa_bodegas_transito_sap
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         WHERE
             a.codigo = 'BODEGAS_WMS_BODEGAS_TRANSITO_SAP'
@@ -54,8 +54,8 @@ BEGIN TRY
         SELECT
             b.clave, b.valor
         INTO #mapa_proyectos_sap
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         WHERE
             a.codigo = 'BODEGAS_WMS_PROYECTOS_SAP'
@@ -67,8 +67,8 @@ BEGIN TRY
         SELECT
             b.clave, b.valor
         INTO #mapa_bodegas_sap
-        FROM map.mapas a
-        INNER JOIN map.mapas_valores b ON
+        FROM dbo.mapas a
+        INNER JOIN dbo.mapas_valores b ON
             b.id_mapa = a.id_mapa
         WHERE
             a.codigo = 'BODEGAS_ESTADOS_WMS_BODEGAS_SAP'

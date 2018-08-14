@@ -22,7 +22,7 @@ BEGIN TRY
             FROM dbo.ordenes_salida a
             WHERE
                 a.estado = 'ABIERTA'
-            AND a.fecha_creacion >= CAST(DATEADD(MONTH,-1,GETDATE()) AS DATE) 
+            AND a.fecha_creacion >= CAST(DATEADD(MONTH,-12,GETDATE()) AS DATE) 
         )
         SELECT
             a.*

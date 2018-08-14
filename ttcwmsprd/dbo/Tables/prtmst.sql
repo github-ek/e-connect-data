@@ -159,6 +159,8 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [prtmst_idx3]
     ON [dbo].[prtmst]([lodlvl] ASC) WITH (FILLFACTOR = 90);
@@ -663,4 +665,9 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Shelf Life 
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Time Code for the shelf life', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'prtmst', @level2type = N'COLUMN', @level2name = N'shelf_timecode';
+
+
+GO
+CREATE NONCLUSTERED INDEX [prtmst_idx5]
+    ON [dbo].[prtmst]([prdflg] ASC, [abccod] ASC) WITH (FILLFACTOR = 80);
 

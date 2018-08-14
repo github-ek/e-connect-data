@@ -109,6 +109,8 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [dlytrn_idx1]
     ON [dbo].[dlytrn]([trndte] ASC, [oprcod] ASC, [lodnum] ASC, [subnum] ASC, [dtlnum] ASC) WITH (FILLFACTOR = 90);
@@ -546,4 +548,9 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Service lev
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'The final srvlvl of the shipment/carrier move affected by this transaction', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'dlytrn', @level2type = N'COLUMN', @level2name = N'to_srvlvl';
+
+
+GO
+CREATE NONCLUSTERED INDEX [dlytrn_idx3]
+    ON [dbo].[dlytrn]([frstol] ASC, [wh_id] ASC, [movref] ASC, [actcod] ASC) WITH (FILLFACTOR = 80);
 

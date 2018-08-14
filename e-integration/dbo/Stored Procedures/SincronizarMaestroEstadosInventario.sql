@@ -33,7 +33,7 @@ BEGIN TRY
                 WHEN b.id_estado_inventario IS NULL      AND a.operacion IN ('U') THEN 'C'
                 ELSE a.operacion END AS operacion
 
-                ,b.id_estado_inventario
+                ,a.invsts AS id_estado_inventario
                 ,a.lngdsc AS nombre
                 ,'' AS descripcion
                 ,0 AS ordinal

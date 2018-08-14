@@ -111,6 +111,14 @@
     <Build Include="logs\Tables\embarques.sql" />
     <Build Include="dbo\Tables\embarques_lineas.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarEmbarques.sql" />
+    <Build Include="dbo\Tables\integraciones_actualizaciones.sql" />
+    <Build Include="dbo\Tables\saldos_inventario_proyectados.sql" />
+    <Build Include="dbo\Tables\integraciones_actualizaciones_errores.sql" />
+    <Build Include="dbo\Tables\causales_cancelacion_alistamientos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarDespachos.sql" />
+    <Build Include="dbo\Stored Procedures\SincronizarAlistamientos.sql" />
+    <Build Include="dbo\Stored Procedures\ConsolidarSaldosInventarioProyectadosPorCliente.sql" />
+    <Build Include="dbo\Stored Procedures\ConsolidarSaldosInventarioPorCliente.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

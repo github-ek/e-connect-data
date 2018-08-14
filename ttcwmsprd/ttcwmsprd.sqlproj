@@ -253,7 +253,6 @@
     <Build Include="dbo\Tables\prcl_shpr_rule_fld.sql" />
     <Build Include="dbo\Tables\sl_ifd_seg_sql_where.sql" />
     <Build Include="dbo\Tables\les_mnu_grp.sql" />
-    <Build Include="dbo\Tables\flr_pln_map.sql" />
     <Build Include="dbo\Tables\data_accs_grp_usr.sql" />
     <Build Include="dbo\Tables\wh_uom.sql" />
     <Build Include="dbo\Tables\cnfrm_serv_val.sql" />
@@ -332,7 +331,6 @@
     <Build Include="dbo\Tables\les_usr_ath.sql" />
     <Build Include="dbo\Tables\adrmst.sql" />
     <Build Include="dbo\Tables\help_fil_mst.sql" />
-    <Build Include="dbo\Tables\dda_field_map.sql" />
     <Build Include="dbo\Tables\wkodtl_note.sql" />
     <Build Include="dbo\Tables\cntgrp.sql" />
     <Build Include="dbo\Tables\trlr_usr.sql" />
@@ -354,7 +352,6 @@
     <Build Include="dbo\Tables\sl_col_domain.sql" />
     <Build Include="dbo\Tables\rplnum.sql" />
     <Build Include="dbo\Tables\profile_def_flds.sql" />
-    <Build Include="dbo\Tables\sl_o_ifd_sys_map.sql" />
     <Build Include="dbo\Tables\les_usr_graphics.sql" />
     <Build Include="dbo\Tables\aisle.sql" />
     <Build Include="dbo\Tables\hldhst.sql" />
@@ -599,7 +596,6 @@
     <Build Include="dbo\Tables\schreg.sql" />
     <Build Include="dbo\Tables\ptwy_last_loc.sql" />
     <Build Include="dbo\Tables\slot_attr_join.sql" />
-    <Build Include="dbo\Tables\locmap.sql" />
     <Build Include="dbo\Tables\sl_eo_seg_compl_sql.sql" />
     <Build Include="dbo\Tables\inv_snap.sql" />
     <Build Include="dbo\Tables\distro_id.sql" />
@@ -660,7 +656,6 @@
     <Build Include="dbo\Tables\question_response.sql" />
     <Build Include="dbo\Tables\srvusg.sql" />
     <Build Include="dbo\Tables\log_key.sql" />
-    <Build Include="dbo\Tables\sl_es_sap_loc_map.sql" />
     <Build Include="dbo\Tables\invadj.sql" />
     <Build Include="dbo\Tables\dlytrn.sql" />
     <Build Include="dbo\Tables\cst_wh_schedule.sql" />
@@ -750,7 +745,6 @@
     <Build Include="dbo\Tables\doc_rule_lvl.sql" />
     <Build Include="dbo\Tables\reacod.sql" />
     <Build Include="dbo\Tables\cstms_rttn.sql" />
-    <Build Include="dbo\Tables\wcs_evt_map.sql" />
     <Build Include="dbo\Tables\pcklst_seq_cri.sql" />
     <Build Include="dbo\Tables\carhdr.sql" />
     <Build Include="dbo\Tables\media_link.sql" />
@@ -866,7 +860,6 @@
     <Build Include="dbo\Tables\asset_slot.sql" />
     <Build Include="dbo\Tables\sesnum.sql" />
     <Build Include="dbo\Tables\supmst.sql" />
-    <Build Include="dbo\Tables\sl_i_ifd_evt_map.sql" />
     <Build Include="dbo\Tables\job_definition_exec.sql" />
     <Build Include="dbo\Tables\dsp_rule_id.sql" />
     <Build Include="dbo\Tables\retdtl.sql" />
@@ -944,5 +937,15 @@
     <Build Include="dbo\Views\alloc_search_hdr_view.sql" />
     <Build Include="dbo\Views\all_wko_notes_view.sql" />
     <Build Include="dbo\Views\all_notes_view.sql" />
+    <Build Include="dbo\Tables\wcs_evt_map_1.sql" />
+    <Build Include="dbo\Tables\sl_o_ifd_sys_map_1.sql" />
+    <Build Include="dbo\Tables\sl_i_ifd_evt_map_1.sql" />
+    <Build Include="dbo\Tables\sl_es_sap_loc_map_1.sql" />
+    <Build Include="dbo\Tables\locmap_1.sql" />
+    <Build Include="dbo\Tables\flr_pln_map_1.sql" />
+    <Build Include="dbo\Tables\dda_field_map_1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaComparePrd.scmp" />
   </ItemGroup>
 </Project>

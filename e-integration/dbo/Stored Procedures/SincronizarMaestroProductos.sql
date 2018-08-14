@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SincronizarMaestroProductos]
 AS
 BEGIN TRY
-	BEGIN TRANSACTION
-    
     --CONSOLIDAR SOURCE
     BEGIN
         IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
@@ -60,7 +58,7 @@ BEGIN TRY
         INTO #target
         FROM cte_00 a
     END
-
+    
     --DETECTAR INCONSISTENCIAS   
     BEGIN
         IF OBJECT_ID('tempdb..#inconsistencias') IS NOT NULL BEGIN
@@ -89,6 +87,8 @@ BEGIN TRY
         INNER JOIN #inconsistencias b ON
             b.id = a.id
     END
+
+	BEGIN TRANSACTION
     
     --ACTUALIZAR TARGET
     BEGIN
