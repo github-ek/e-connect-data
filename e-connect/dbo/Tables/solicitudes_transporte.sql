@@ -1,9 +1,8 @@
 ﻿CREATE TABLE [dbo].[solicitudes_transporte] (
-    [id_solicitud_transporte]                BIGINT        IDENTITY (1, 1) NOT NULL,
-    [id_solicitud]                           BIGINT        NOT NULL,
+    [id_solicitud_transporte]            BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_solicitud]                       BIGINT        NOT NULL,
     [id_tipo_ruta]                       BIGINT        NULL,
     [id_tipo_vehiculo]                   BIGINT        NULL,
-    
     [id_ciudad_remitente]                BIGINT        NOT NULL,
     [ciudad_remitente_codigo_alterno]    VARCHAR (50)  NOT NULL,
     [direccion_remitente]                VARCHAR (150) NOT NULL,
@@ -15,7 +14,6 @@
     [fecha_cita_remitente]               DATE          NULL,
     [hora_cita_minima_remitente]         TIME (0)      NULL,
     [hora_cita_maxima_remitente]         TIME (0)      NULL,
-    
     [id_ciudad_destinatario]             BIGINT        NOT NULL,
     [ciudad_destinatario_codigo_alterno] VARCHAR (50)  NOT NULL,
     [direccion_destinatario]             VARCHAR (150) NOT NULL,
@@ -27,8 +25,7 @@
     [fecha_cita_destinatario]            DATE          NULL,
     [hora_cita_minima_destinatario]      TIME (0)      NULL,
     [hora_cita_maxima_destinatario]      TIME (0)      NULL,
-
-    [version]                            INT           NOT NULL DEFAULT 0,
+    [version]                            INT           DEFAULT ((0)) NOT NULL,
     [usuario_creacion]                   VARCHAR (50)  NOT NULL,
     [fecha_creacion]                     DATETIME2 (0) NOT NULL,
     [usuario_modificacion]               VARCHAR (50)  NOT NULL,
@@ -40,8 +37,10 @@
     CONSTRAINT [FK_solicitudes_transporte_direcciones_remitente] FOREIGN KEY ([id_direccion_remitente]) REFERENCES [dbo].[direcciones] ([id_direccion]),
     CONSTRAINT [FK_solicitudes_transporte_puntos_destinatario] FOREIGN KEY ([id_punto_destinatario]) REFERENCES [dbo].[puntos] ([id_punto]),
     CONSTRAINT [FK_solicitudes_transporte_puntos_remitente] FOREIGN KEY ([id_punto_remitente]) REFERENCES [dbo].[puntos] ([id_punto]),
-    CONSTRAINT [FK_solicitudes_transporte_solicitudes] FOREIGN KEY ([id_solicitud]) REFERENCES [dbo].[solicitudes] ([id_solicitud]),
+    CONSTRAINT [FK_solicitudes_transporte_solicitudes] FOREIGN KEY ([id_solicitud]) REFERENCES [dbo].[solicitudes] ([id_solicitud]) ON DELETE CASCADE,
     CONSTRAINT [FK_solicitudes_transporte_tipos_ruta] FOREIGN KEY ([id_tipo_ruta]) REFERENCES [dbo].[tipos_ruta] ([id_tipo_ruta]),
     CONSTRAINT [FK_solicitudes_transporte_tipos_vehiculo] FOREIGN KEY ([id_tipo_vehiculo]) REFERENCES [dbo].[tipos_vehiculo] ([id_tipo_vehiculo])
 );
+
+
 

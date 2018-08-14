@@ -23,6 +23,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-silogtran", "e-silogtran\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "satelite", "satelite\satelite.sqlproj", "{C1B1001F-1B20-4751-840F-CA6482BB7567}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-conciliaciones", "e-conciliaciones\e-conciliaciones.sqlproj", "{D72FA721-8948-4032-A54C-0C723DF190EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,8 +91,17 @@ Global
 		{C1B1001F-1B20-4751-840F-CA6482BB7567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1B1001F-1B20-4751-840F-CA6482BB7567}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1B1001F-1B20-4751-840F-CA6482BB7567}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D72FA721-8948-4032-A54C-0C723DF190EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72FA721-8948-4032-A54C-0C723DF190EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72FA721-8948-4032-A54C-0C723DF190EE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D72FA721-8948-4032-A54C-0C723DF190EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72FA721-8948-4032-A54C-0C723DF190EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72FA721-8948-4032-A54C-0C723DF190EE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {402DB847-3A6D-437B-AA1A-472D24B42245}
 	EndGlobalSection
 EndGlobal

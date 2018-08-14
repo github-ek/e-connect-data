@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[conciliaciones_saldos_inventario] (
+    [id]                           BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_corte_saldo_inventario]    BIGINT        NOT NULL,
+    [bodega_codigo]                VARCHAR (32)  NOT NULL,
+    [producto_codigo]              VARCHAR (50)  NOT NULL,
+    [id_estado_conciliacion]       BIGINT        NOT NULL,
+    [id_bodega]                    BIGINT        NULL,
+    [id_producto]                  BIGINT        NULL,
+    [diferencia_opl_cliente]       AS            ([unidades_opl]-[unidades_cliente]),
+    [unidades_cliente]             INT           NOT NULL,
+    [unidades_opl]                 INT           NOT NULL,
+    [unidades_wms]                 INT           NOT NULL,
+    [unidades_en_proceso_despacho] INT           NOT NULL,
+    [unidades_en_proceso_recibo]   INT           NOT NULL,
+    [valor_unitario]               INT           NOT NULL,
+    [prtstyle]                     VARCHAR (30)  NULL,
+    [version]                      INT           CONSTRAINT [DF_conciliaciones_saldos_inventario_version] DEFAULT ((0)) NOT NULL,
+    [usuario_creacion]             VARCHAR (50)  NOT NULL,
+    [fecha_creacion]               DATETIME2 (0) NOT NULL,
+    [usuario_modificacion]         VARCHAR (50)  NOT NULL,
+    [fecha_modificacion]           DATETIME2 (0) NOT NULL,
+    CONSTRAINT [PK_conciliaciones_saldos_inventario_opl] PRIMARY KEY NONCLUSTERED ([id] ASC),
+    CONSTRAINT [FK_conciliaciones_saldos_inventario_cortes_saldos_inventario] FOREIGN KEY ([id_corte_saldo_inventario]) REFERENCES [dbo].[cortes_saldos_inventario] ([id_corte_saldo_inventario]) ON DELETE CASCADE,
+    CONSTRAINT [FK_conciliaciones_saldos_inventario_estados_conciliacion] FOREIGN KEY ([id_estado_conciliacion]) REFERENCES [dbo].[estados_conciliacion] ([id_estado_conciliacion]),
+    CONSTRAINT [UK_conciliaciones_saldos_inventario_opl_01] UNIQUE CLUSTERED ([id_corte_saldo_inventario] ASC, [bodega_codigo] ASC, [producto_codigo] ASC, [id_estado_conciliacion] ASC)
+);
+

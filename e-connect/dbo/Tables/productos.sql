@@ -3,7 +3,7 @@
     [id_cliente]           BIGINT        NOT NULL,
     [codigo]               VARCHAR (50)  NOT NULL,
     [nombre]               VARCHAR (250) NOT NULL,
-    [tipo_cobro]           VARCHAR (50) NOT NULL,
+    [tipo_cobro]           VARCHAR (50)  NOT NULL,
     [activo]               BIT           NOT NULL,
     [version]              INT           NOT NULL,
     [usuario_creacion]     VARCHAR (50)  NOT NULL,
@@ -14,4 +14,12 @@
     CONSTRAINT [FK_productos_clientes] FOREIGN KEY ([id_cliente]) REFERENCES [dbo].[clientes] ([id_cliente]),
     CONSTRAINT [UK_productos_01] UNIQUE NONCLUSTERED ([id_cliente] ASC, [codigo] ASC)
 );
+
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_productos_01]
+    ON [dbo].[productos]([id_producto] ASC)
+    INCLUDE([codigo], [nombre]);
 

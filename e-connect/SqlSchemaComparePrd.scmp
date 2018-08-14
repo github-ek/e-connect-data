@@ -2,15 +2,15 @@
 <SchemaComparison>
   <Version>10</Version>
   <SourceModelProvider>
+    <ConnectionBasedModelProvider>
+      <ConnectionString>Data Source=172.31.48.15;Initial Catalog=eConnect;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
+    </ConnectionBasedModelProvider>
+  </SourceModelProvider>
+  <TargetModelProvider>
     <ProjectBasedModelProvider>
       <ProjectGuid>{b61ce68b-f831-41d8-895b-212a9697457c}</ProjectGuid>
       <Name>e-connect</Name>
     </ProjectBasedModelProvider>
-  </SourceModelProvider>
-  <TargetModelProvider>
-    <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=172.31.48.15;Initial Catalog=eConnect;Persist Security Info=True;User ID=eConnectuser;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
-    </ConnectionBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>
     <SchemaCompareSettingsService>
@@ -185,6 +185,10 @@
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
+        <Name>IgnoreColumnOrder</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
         <Name>IgnoreLockHintsOnIndexes</Name>
         <Value>False</Value>
       </PropertyElementName>
@@ -294,11 +298,11 @@
       </PropertyElementName>
       <PropertyElementName>
         <Name>TargetDatabaseName</Name>
-        <Value>eConnect</Value>
+        <Value>e-connect_2</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TargetConnectionString</Name>
-        <Value>Data Source=172.31.48.15;Initial Catalog=eConnect;Persist Security Info=True;User ID=eConnectuser;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;Application Name="Microsoft SQL Server Data Tools, Schema Compare"</Value>
+        <Value>Integrated Security=True;Pooling=False;Connect Timeout=30</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TreatVerificationErrorsAsWarnings</Name>
@@ -936,6 +940,10 @@
         <Name>Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlUser</Name>
         <Value>ExcludedType</Value>
       </PropertyElementName>
+      <PropertyElementName>
+        <Name>Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlDefaultConstraint</Name>
+        <Value>ExcludedType</Value>
+      </PropertyElementName>
     </ConfigurationOptionsElement>
   </SchemaCompareSettingsService>
   <SchemaCompareViewSettings>
@@ -944,201 +952,223 @@
     <Filter>Equals_Objects,Not_Supported_Deploy</Filter>
   </SchemaCompareViewSettings>
   <ExcludedSourceElements>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>productos_medidas</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_productos_medidas_bodegas</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_productos_medidas_productos</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>ordenes_recibo_lineas</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_lineas_estados_inventario</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_lineas_ordenes_recibo</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_lineas_productos</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_lineas_unidades_medida</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>ordenes_recibo</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_bodegas</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_clientes</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_lineas_negocio</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_servicios</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_solicitudes</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_solicitudes_ordenes</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_recibo_terceros</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>ordenes_manufactura_lineas</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_lineas_estados_inventario</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_lineas_ordenes_manufactura</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_lineas_productos</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_lineas_unidades_medida</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>ordenes_manufactura</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_bodegas</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_clientes</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_lineas_negocio</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_servicios</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_solicitudes</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>FK_ordenes_manufactura_solicitudes_ordenes</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>ordenes_alistamiento_lineas</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_lineas_estados_inventario</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_lineas_ordenes_alistamiento</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_lineas_productos</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_lineas_unidades_medida</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>ordenes_alistamiento</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_bodegas</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_canales</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_clientes</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_lineas_negocio</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_servicios</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_solicitudes</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_solicitudes_ordenes</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>FK_ordenes_alistamiento_terceros</Name>
-    </SelectedItem>
-  </ExcludedSourceElements>
-  <ExcludedTargetElements>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>productos_medidas</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>ordenes_recibo_lineas</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>dbo</Name>
-      <Name>ordenes_recibo</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>ordenes_manufactura_lineas</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_lineas_estados_inventario</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_lineas_ordenes_alistamiento</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_lineas_productos</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_lineas_unidades_medida</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>ordenes_alistamiento</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_bodegas</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_canales</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_clientes</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_lineas_negocio</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_servicios</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_solicitudes</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_solicitudes_ordenes</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlForeignKeyConstraint, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>FK_ordenes_alistamiento_terceros</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>app</Name>
+      <Name>Mensajes</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>bodegas_ciudades_perifericas</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>despachos</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>ordenes_manufactura_lineas_bom</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>solicitudes_lineas_bom</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>subestados_inventario</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>tarifas_secundaria</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>tipos_promesa_entrega</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlSchema, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>app</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlSchema, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>bak</Name>
+    </SelectedItem>
+  </ExcludedSourceElements>
+  <ExcludedTargetElements>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>ordenes_recibo_lineas</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>dbo</Name>
+      <Name>ordenes_recibo</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>ordenes_manufactura</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
-      <Name>ordenes_alistamiento_lineas</Name>
+      <Name>ordenes_manufactura_lineas</Name>
     </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlTable, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>dbo</Name>
       <Name>ordenes_alistamiento</Name>
     </SelectedItem>
