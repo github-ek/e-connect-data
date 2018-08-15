@@ -113,6 +113,9 @@
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
-    <None Include="historicoInv.publish.xml" />
+    <None Include="historicoInv.publish.prd.xml" />
+    <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="historicoInv.publish.tst.xml" />
   </ItemGroup>
 </Project>

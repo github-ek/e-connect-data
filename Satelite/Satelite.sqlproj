@@ -70,4 +70,7 @@
     <Build Include="ordenes\Tables\des.sql" />
     <Build Include="ordenes\Security\crm.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaCompareTst.scmp" />
+  </ItemGroup>
 </Project>

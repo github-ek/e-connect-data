@@ -309,4 +309,8 @@
       <Value>$(SqlCmdVar__5)</Value>
     </SqlCmdVariable>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="SqlSchemaCompareTst.scmp" />
+  </ItemGroup>
 </Project>

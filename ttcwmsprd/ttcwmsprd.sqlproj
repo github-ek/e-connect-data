@@ -947,5 +947,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="SqlSchemaCompareTst.scmp" />
   </ItemGroup>
 </Project>
