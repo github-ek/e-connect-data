@@ -137,6 +137,13 @@
       <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
+      <Name>e-integration</Name>
+      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConnect">
@@ -147,6 +154,10 @@
       <DefaultValue>eHistoricos</DefaultValue>
       <Value>$(SqlCmdVar__6)</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegration">
+      <DefaultValue>eIntegration</DefaultValue>
+      <Value>$(SqlCmdVar__8)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="historicoInv">
       <DefaultValue>historicoInv</DefaultValue>
       <Value>$(SqlCmdVar__3)</Value>
@@ -156,7 +167,7 @@
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>WMS_DB_SERVER</DefaultValue>
+      <DefaultValue>57DBWMS05</DefaultValue>
       <Value>$(SqlCmdVar__7)</Value>
     </SqlCmdVariable>
   </ItemGroup>

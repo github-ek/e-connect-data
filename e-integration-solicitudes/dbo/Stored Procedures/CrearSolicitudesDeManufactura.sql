@@ -122,10 +122,10 @@ BEGIN TRY
 				,a.id_cliente
 				,a.id_estado_inventario
 
-				,c.codigo_alterno_wms AS CLIENT_ID
+				,c.codigo_alterno_wms AS client_id
 				,d.codigo AS WH_ID
 				,e.codigo AS PRTNUM
-				,CAST(a.cantidad AS NUMERIC(19,4)) AS WKOQTY
+				,CAST(a.cantidad AS NUMERIC(19,4)) AS wkoqty
 			FROM dbo.manufacturas a
 			INNER JOIN #source b ON
 				b.id_registro_stage = a.id
@@ -146,18 +146,18 @@ BEGIN TRY
 				,a.numero_linea
 
 				,a.id_cliente
-				,c.bomlin AS WKOLIN
+				,c.bomlin AS wkolin
 				,a.id_estado_inventario
 				
-				,c.PRTNUM AS producto_codigo
-				,c.CNSQTY AS BOM_CNSQTY
-				,a.WKOQTY*c.CNSQTY AS unidades
+				,c.prtnum AS producto_codigo
+				,c.cnsqty AS bom_cnsqty
+				,a.wkoqty*c.cnsqty AS unidades
 			FROM cte_00 a
-			LEFT OUTER JOIN [57DBWMS05].[ttcwmsprdnew].dbo.bomhdr b ON
+			LEFT OUTER JOIN [$(WMS_DB_SERVER)].[$(ttcwmsprd)].dbo.bomhdr b ON
 				b.client_id = a.client_id
 			AND b.wh_id = a.wh_id
 			AND b.prtnum = a.prtnum
-			LEFT OUTER JOIN [57DBWMS05].ttcwmsprdnew.dbo.bomdtl c ON
+			LEFT OUTER JOIN [$(WMS_DB_SERVER)].[$(ttcwmsprd)].dbo.bomdtl c ON
 				c.wh_id = b.wh_id
 			AND c.client_id = b.client_id
 			AND c.bomnum = b.bomnum
@@ -165,11 +165,11 @@ BEGIN TRY
 		cte_02 AS
 		(
 			SELECT 
-					b.id_registro_stage
+				 b.id_registro_stage
 				,b.numero_linea
 				
 				,a.id_cliente
-				,'0001' AS WKOLIN
+				,'0001' AS wkolin
 				,CASE c.codigo 
 				WHEN 'ESTAMPILLA' THEN 
 					CASE a.id_estado_inventario 
@@ -184,7 +184,7 @@ BEGIN TRY
 				ELSE a.id_estado_inventario END AS id_estado_inventario
 
 				,a.producto_codigo_alterno AS producto_codigo
-				,CAST(1 AS NUMERIC(19,4)) AS BOM_CNSQTY
+				,CAST(1 AS NUMERIC(19,4)) AS bom_cnsqty
 				,CAST(a.cantidad AS NUMERIC(19,4)) AS unidades
 			FROM dbo.manufacturas a
 			INNER JOIN #source b ON
@@ -300,7 +300,7 @@ BEGIN TRY
             ,a.[version] = a.[version] + 1
             ,a.fecha_modificacion = SYSDATETIME()
             ,a.usuario_modificacion = SYSTEM_USER
-        FROM [eIntegration].dbo.archivos a
+        FROM [$(eIntegration)].dbo.archivos a
         INNER JOIN cte_01 b ON
             b.id_archivo = a.id_archivo
     END

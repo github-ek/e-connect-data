@@ -35,9 +35,9 @@ BEGIN
         SELECT
              a.id_mensaje
 
-            ,'WO_TRAN' AS TRNNAM
-		    ,'2015.1' AS TRNVER
-            ,WH_ID AS WHSE_ID
+            ,'WO_TRAN' AS trnnam
+		    ,'2015.1' AS trnver
+            ,wh_id AS whse_id
         INTO #ctrl_seg
         FROM #mensajes a
 
@@ -48,19 +48,19 @@ BEGIN
 		SELECT
              a.id_mensaje
             
-			,'HEADER_SEG' AS SEGNAM
-            ,'A' AS TRNTYP
-            ,CLIENT_ID
-            ,CASE a.WKO_TYP WHEN 'DSESTAMPIL' THEN 'DSENSAMBLE' ELSE a.WKO_TYP END AS WKO_TYP
-            ,WKONUM
-            ,WKOREV
-            ,PRTNUM
-            ,INVSTS
-            ,WKOQTY
-            ,PRCPRI
-            ,PRCARE
-            ,PRDLIN
-            ,PRD_TOL_PCT
+			,'HEADER_SEG' AS segnam
+            ,'A' AS trntyp
+            ,client_id
+            ,CASE a.wko_typ WHEN 'DSESTAMPIL' THEN 'DSENSAMBLE' ELSE a.wko_typ END AS wko_typ
+            ,wkonum
+            ,wkorev
+            ,prtnum
+            ,invsts
+            ,wkoqty
+            ,prcpri
+            ,prcare
+            ,prdlin
+            ,prd_tol_pct
 		INTO #header_seg
 		FROM #mensajes a
 
@@ -72,17 +72,17 @@ BEGIN
 			 a.id_mensaje
             
 			,'LINE_SEG' AS segnam
-            ,b.WKOLIN
-            ,b.PRTNUM
-            ,FORMAT(b.LINQTY,'#0.####','en-US') AS LINQTY
-            ,FORMAT(b.BOM_CNSQTY,'#0.####','en-US') AS BOM_CNSQTY
-            ,a.CLIENT_ID AS PRT_CLIENT_ID
-            ,b.INVSTS
-            ,b.INVSTS_PRG
-            ,b.ORGCOD
-            ,b.LOTNUM
-            ,b.ORDINV
-            ,b.DTE_CODE
+            ,b.wkolin
+            ,b.prtnum
+            ,FORMAT(b.linqty,'#0.####','en-US') AS linqty
+            ,FORMAT(b.bom_cnsqty,'#0.####','en-US') AS bom_cnsqty
+            ,a.client_id AS prt_client_id
+            ,b.invsts
+            ,b.invsts_prg
+            ,b.orgcod
+            ,b.lotnum
+            ,b.ordinv
+            ,b.dte_code
 		INTO #line_seg
 		FROM #mensajes a
         INNER JOIN dbo.mensajes_manufactura_jda_lineas b ON
@@ -104,7 +104,7 @@ BEGIN
              a.id_mensaje
             ,a.cliente_codigo
 	        ,a.servicio_codigo
-	        ,a.WKONUM
+	        ,a.wkonum
         FROM #mensajes a
         ORDER BY
             a.id_mensaje
@@ -118,7 +118,7 @@ BEGIN
         
         SELECT
             @DIRECTORIO_ENTRADAS = a.valor
-        FROM [eConfig].dbo.configuraciones a
+        FROM [$(eConfig)].dbo.configuraciones a
         WHERE
             a.codigo = 'wms.directorios.entradas'
 
@@ -132,37 +132,37 @@ BEGIN
 					    @xml =
                         (
                         SELECT
-                             TRNNAM
-                            ,TRNVER
-                            ,WHSE_ID
+                             trnnam
+                            ,trnver
+                            ,whse_id
 
-                            ,HEADER_SEG.SEGNAM
-                            ,HEADER_SEG.TRNTYP
-                            ,HEADER_SEG.CLIENT_ID
-                            ,HEADER_SEG.PRCPRI
-                            ,HEADER_SEG.WKONUM
-                            ,HEADER_SEG.WKOREV
-                            ,HEADER_SEG.PRTNUM
-                            ,HEADER_SEG.WKOQTY
-                            ,HEADER_SEG.PRD_TOL_PCT
-                            ,HEADER_SEG.PRCARE
-                            ,HEADER_SEG.INVSTS
-                            ,HEADER_SEG.PRDLIN
-                            ,HEADER_SEG.WKO_TYP
+                            ,HEADER_SEG.segnam
+                            ,HEADER_SEG.trntyp
+                            ,HEADER_SEG.client_id
+                            ,HEADER_SEG.prcpri
+                            ,HEADER_SEG.wkonum
+                            ,HEADER_SEG.wkorev
+                            ,HEADER_SEG.prtnum
+                            ,HEADER_SEG.wkoqty
+                            ,HEADER_SEG.prd_tol_pct
+                            ,HEADER_SEG.prcare
+                            ,HEADER_SEG.invsts
+                            ,HEADER_SEG.prdlin
+                            ,HEADER_SEG.wko_typ
 
-                            ,LINE_SEG.SEGNAM
-                            ,LINE_SEG.WKOLIN
-                            ,LINE_SEG.PRTNUM
-                            ,LINE_SEG.LINQTY
-                            ,LINE_SEG.BOM_CNSQTY
+                            ,LINE_SEG.segnam
+                            ,LINE_SEG.wkolin
+                            ,LINE_SEG.prtnum
+                            ,LINE_SEG.linqty
+                            ,LINE_SEG.bom_cnsqty
 
-                            ,LINE_SEG.PRT_CLIENT_ID
-                            ,LINE_SEG.INVSTS
-                            ,LINE_SEG.INVSTS_PRG
-                            ,LINE_SEG.ORGCOD
-                            ,LINE_SEG.LOTNUM
-                            ,LINE_SEG.ORDINV
-                            ,LINE_SEG.DTE_CODE
+                            ,LINE_SEG.prt_client_id
+                            ,LINE_SEG.invsts
+                            ,LINE_SEG.invsts_prg
+                            ,LINE_SEG.orgcod
+                            ,LINE_SEG.lotnum
+                            ,LINE_SEG.ordinv
+                            ,LINE_SEG.dte_code
                         FROM #ctrl_seg AS CTRL_SEG
                         INNER JOIN #header_seg AS HEADER_SEG ON
                             HEADER_SEG.id_mensaje = CTRL_SEG.id_mensaje
@@ -171,7 +171,7 @@ BEGIN
                         WHERE
                             CTRL_SEG.id_mensaje = @id_mensaje
                         ORDER BY
-                            WKOLIN
+                            wkolin
                         FOR XML AUTO, ELEMENTS, ROOT('WO_INB_IFD'), TYPE
                     )
 
@@ -192,8 +192,8 @@ BEGIN
                     PRINT @DATA
                     PRINT @DIRECTORIO_ENTRADAS
                     PRINT @FILENAME_XML
-				    EXECUTE [eIntegration].dbo.WriteStringToFile @DATA, @DIRECTORIO_ENTRADAS, @FILENAME_XML
-				    EXECUTE [eIntegration].dbo.WriteStringToFile 'TRG', @DIRECTORIO_ENTRADAS, @FILENAME_TRG
+				    EXECUTE [$(eIntegration)].dbo.WriteStringToFile @DATA, @DIRECTORIO_ENTRADAS, @FILENAME_XML
+				    EXECUTE [$(eIntegration)].dbo.WriteStringToFile 'TRG', @DIRECTORIO_ENTRADAS, @FILENAME_TRG
 			    END
 
 			    ------------------------------------------------------------------------------------------------------

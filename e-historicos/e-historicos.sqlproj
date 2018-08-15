@@ -134,7 +134,7 @@
       <Value>$(SqlCmdVar__4)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
-      <DefaultValue>ttcwmsprd</DefaultValue>
+      <DefaultValue>ttcwmsprdnew</DefaultValue>
       <Value>$(SqlCmdVar__5)</Value>
     </SqlCmdVariable>
   </ItemGroup>

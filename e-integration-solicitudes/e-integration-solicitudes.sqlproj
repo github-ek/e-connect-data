@@ -271,8 +271,27 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-config\e-config.sqlproj">
+      <Name>e-config</Name>
+      <Project>{609e6200-dbe9-49e6-bb9c-71ad502998bb}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConfig</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
+      <Name>ttcwmsprd</Name>
+      <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <SqlCmdVariable Include="eConfig">
+      <DefaultValue>eConfig</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>eConnect</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
@@ -280,6 +299,14 @@
     <SqlCmdVariable Include="eIntegration">
       <DefaultValue>eIntegration</DefaultValue>
       <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <DefaultValue>ttcwmsprd</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <DefaultValue>WMS_DB_SERVER</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

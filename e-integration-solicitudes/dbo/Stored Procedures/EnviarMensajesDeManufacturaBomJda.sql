@@ -35,9 +35,9 @@ BEGIN
         SELECT
              a.id_mensaje
 
-            ,'WO_TRAN' AS TRNNAM
-		    ,'2015.1' AS TRNVER
-            ,WH_ID AS WHSE_ID
+            ,'WO_TRAN' AS trnnam
+		    ,'2015.1' AS trnver
+            ,wh_id AS whse_id
         INTO #ctrl_seg
         FROM #mensajes a
 
@@ -48,19 +48,19 @@ BEGIN
 		SELECT
              a.id_mensaje
             
-			,'HEADER_SEG' AS SEGNAM
-            ,'A' AS TRNTYP
-            ,CLIENT_ID
-            ,CASE a.WKO_TYP WHEN 'DSESTAMPIL' THEN 'DSENSAMBLE' ELSE a.WKO_TYP END AS WKO_TYP
-            ,WKONUM
-            ,WKOREV
-            ,PRTNUM
-            ,INVSTS
-            ,WKOQTY
-            ,PRCPRI
-            ,PRCARE
-            ,PRDLIN
-            ,PRD_TOL_PCT
+			,'HEADER_SEG' AS segnam
+            ,'A' AS trntyp
+            ,client_id
+            ,CASE a.wko_typ WHEN 'DSESTAMPIL' THEN 'DSENSAMBLE' ELSE a.wko_typ END AS wko_typ
+            ,wkonum
+            ,wkorev
+            ,prtnum
+            ,invsts
+            ,wkoqty
+            ,prcpri
+            ,prcare
+            ,prdlin
+            ,prd_tol_pct
 		INTO #header_seg
 		FROM #mensajes a
 
@@ -72,18 +72,18 @@ BEGIN
 			 a.id_mensaje
             
 			,'LINE_SEG' AS segnam
-            ,b.WKOLIN
-            ,b.PRTNUM
-            ,FORMAT(b.LINQTY,'#0.####','en-US') AS LINQTY
-            ,FORMAT(b.BOM_CNSQTY,'#0.####','en-US') AS BOM_CNSQTY
-            ,a.CLIENT_ID AS PRT_CLIENT_ID
-            ,b.INVSTS
-            ,b.INVSTS_PRG
-            ,b.ORGCOD
-            ,b.LOTNUM
-            ,b.ORDINV
-            ,b.DTE_CODE
-            ,b.RULE_NAM
+            ,b.wkolin
+            ,b.prtnum
+            ,FORMAT(b.linqty,'#0.####','en-US') AS linqty
+            ,FORMAT(b.bom_cnsqty,'#0.####','en-US') AS bom_cnsqty
+            ,a.client_id AS prt_client_id
+            ,b.invsts
+            ,b.invsts_prg
+            ,b.orgcod
+            ,b.lotnum
+            ,b.ordinv
+            ,b.dte_code
+            ,b.rule_nam
 		INTO #line_seg
 		FROM #mensajes a
         INNER JOIN dbo.mensajes_manufactura_jda_lineas b ON
@@ -95,10 +95,10 @@ BEGIN
 
 		SELECT
 			 a.id_mensaje
-            ,b.WKOLIN
+            ,b.wkolin
             
 			,'ALLOC_RULE_HDR' AS segnam
-            ,b.RULE_NAM
+            ,b.rule_nam
 		INTO #wo_line_alloc_rule_hdr_seg
 		FROM #mensajes a
         INNER JOIN dbo.mensajes_manufactura_jda_lineas b ON
@@ -115,7 +115,7 @@ BEGIN
         (
 		    SELECT
 			     a.id_mensaje
-                ,b.WKOLIN
+                ,b.wkolin
             
                 ,b.rule_nam
                 ,b.lotnum
@@ -130,9 +130,9 @@ BEGIN
         (
             SELECT
                  b.id_mensaje
-                ,b.WKOLIN
+                ,b.wkolin
             
-                ,ROW_NUMBER() OVER(PARTITION BY b.id_mensaje,b.WKOLIN ORDER BY b.field_name) AS seqnum
+                ,ROW_NUMBER() OVER(PARTITION BY b.id_mensaje,b.wkolin ORDER BY b.field_name) AS seqnum
                 ,b.rule_nam
                 ,b.field_name
                 ,b.[value]
@@ -143,7 +143,7 @@ BEGIN
         )
 		SELECT
 			 a.id_mensaje
-            ,a.WKOLIN
+            ,a.wkolin
             
 			,'ALLOC_RULE_DTL' AS segnam
             ,a.rule_nam
@@ -171,7 +171,7 @@ BEGIN
              a.id_mensaje
             ,a.cliente_codigo
 	        ,a.servicio_codigo
-	        ,a.WKONUM
+	        ,a.wkonum
         FROM #mensajes a
         ORDER BY
             a.id_mensaje
@@ -185,7 +185,7 @@ BEGIN
         
         SELECT
             @DIRECTORIO_ENTRADAS = a.valor
-        FROM [eConfig].dbo.configuraciones a
+        FROM [$(eConfig)].dbo.configuraciones a
         WHERE
             a.codigo = 'wms.directorios.entradas'
     
@@ -202,49 +202,49 @@ BEGIN
 
 
                         SELECT
-                             TRNNAM
-                            ,TRNVER
-                            ,WHSE_ID
+                             trnnam
+                            ,trnver
+                            ,whse_id
 
-                            ,HEADER_SEG.SEGNAM
-                            ,HEADER_SEG.TRNTYP
-                            ,HEADER_SEG.CLIENT_ID
-                            ,HEADER_SEG.PRCPRI
-                            ,HEADER_SEG.WKONUM
-                            ,HEADER_SEG.WKOREV
-                            ,HEADER_SEG.PRTNUM
-                            ,HEADER_SEG.WKOQTY
-                            ,HEADER_SEG.PRD_TOL_PCT
-                            ,HEADER_SEG.PRCARE
-                            ,HEADER_SEG.INVSTS
-                            ,HEADER_SEG.PRDLIN
-                            ,HEADER_SEG.WKO_TYP
+                            ,HEADER_SEG.segnam
+                            ,HEADER_SEG.trntyp
+                            ,HEADER_SEG.client_id
+                            ,HEADER_SEG.prcpri
+                            ,HEADER_SEG.wkonum
+                            ,HEADER_SEG.wkorev
+                            ,HEADER_SEG.prtnum
+                            ,HEADER_SEG.wkoqty
+                            ,HEADER_SEG.prd_tol_pct
+                            ,HEADER_SEG.prcare
+                            ,HEADER_SEG.invsts
+                            ,HEADER_SEG.prdlin
+                            ,HEADER_SEG.wko_typ
 
-                            ,LINE_SEG.SEGNAM
-                            ,LINE_SEG.WKOLIN
-                            ,LINE_SEG.PRTNUM
-                            ,LINE_SEG.LINQTY
-                            ,LINE_SEG.BOM_CNSQTY
+                            ,LINE_SEG.segnam
+                            ,LINE_SEG.wkolin
+                            ,LINE_SEG.prtnum
+                            ,LINE_SEG.linqty
+                            ,LINE_SEG.bom_cnsqty
 
-                            ,LINE_SEG.PRT_CLIENT_ID
-                            ,LINE_SEG.INVSTS
-                            ,LINE_SEG.INVSTS_PRG
-                            ,LINE_SEG.ORGCOD
-                            ,LINE_SEG.RULE_NAM
-                            ,LINE_SEG.LOTNUM
-                            ,LINE_SEG.ORDINV
-                            ,LINE_SEG.DTE_CODE
+                            ,LINE_SEG.prt_client_id
+                            ,LINE_SEG.invsts
+                            ,LINE_SEG.invsts_prg
+                            ,LINE_SEG.orgcod
+                            ,LINE_SEG.rule_nam
+                            ,LINE_SEG.lotnum
+                            ,LINE_SEG.ordinv
+                            ,LINE_SEG.dte_code
 
-                            ,WO_LINE_ALLOC_RULE_HDR_SEG.SEGNAM
-                            ,WO_LINE_ALLOC_RULE_HDR_SEG.RULE_NAM
+                            ,WO_LINE_ALLOC_RULE_HDR_SEG.segnam
+                            ,WO_LINE_ALLOC_RULE_HDR_SEG.rule_nam
 
-                            ,WO_LINE_ALLOC_RULE_DTL_SEG.SEGNAM
-                            ,WO_LINE_ALLOC_RULE_DTL_SEG.RULE_NAM
-                            ,WO_LINE_ALLOC_RULE_DTL_SEG.SEQNUM
-                            ,WO_LINE_ALLOC_RULE_DTL_SEG.FIELD_NAME
-                            ,WO_LINE_ALLOC_RULE_DTL_SEG.GRPOPR
-                            ,WO_LINE_ALLOC_RULE_DTL_SEG.OPERATOR
-                            ,WO_LINE_ALLOC_RULE_DTL_SEG.[VALUE]
+                            ,WO_LINE_ALLOC_RULE_DTL_SEG.segnam
+                            ,WO_LINE_ALLOC_RULE_DTL_SEG.rule_nam
+                            ,WO_LINE_ALLOC_RULE_DTL_SEG.seqnum
+                            ,WO_LINE_ALLOC_RULE_DTL_SEG.field_name
+                            ,WO_LINE_ALLOC_RULE_DTL_SEG.grpopr
+                            ,WO_LINE_ALLOC_RULE_DTL_SEG.operator
+                            ,WO_LINE_ALLOC_RULE_DTL_SEG.[value]
                         FROM #ctrl_seg AS CTRL_SEG
                         INNER JOIN #header_seg AS HEADER_SEG ON
                             HEADER_SEG.id_mensaje = CTRL_SEG.id_mensaje
@@ -252,14 +252,14 @@ BEGIN
                             LINE_SEG.id_mensaje = HEADER_SEG.id_mensaje
                         LEFT OUTER JOIN #wo_line_alloc_rule_hdr_seg AS WO_LINE_ALLOC_RULE_HDR_SEG ON
                             WO_LINE_ALLOC_RULE_HDR_SEG.id_mensaje = LINE_SEG.id_mensaje
-                        AND WO_LINE_ALLOC_RULE_HDR_SEG.WKOLIN = LINE_SEG.WKOLIN
+                        AND WO_LINE_ALLOC_RULE_HDR_SEG.wkolin = LINE_SEG.wkolin
                         LEFT OUTER JOIN #wo_line_alloc_rule_dtl_seg AS WO_LINE_ALLOC_RULE_DTL_SEG ON
                             WO_LINE_ALLOC_RULE_DTL_SEG.id_mensaje = WO_LINE_ALLOC_RULE_HDR_SEG.id_mensaje
-                        AND WO_LINE_ALLOC_RULE_DTL_SEG.WKOLIN = WO_LINE_ALLOC_RULE_HDR_SEG.WKOLIN
+                        AND WO_LINE_ALLOC_RULE_DTL_SEG.wkolin = WO_LINE_ALLOC_RULE_HDR_SEG.wkolin
                         WHERE
                             CTRL_SEG.id_mensaje = @id_mensaje
                         ORDER BY
-                            WKOLIN
+                            LINE_SEG.wkolin
                         FOR XML AUTO, ELEMENTS, ROOT('WO_INB_IFD'), TYPE
                     )
 
@@ -283,8 +283,8 @@ BEGIN
                     PRINT @DATA
                     PRINT @DIRECTORIO_ENTRADAS
                     PRINT @FILENAME_XML
-				    EXECUTE [eIntegration].dbo.WriteStringToFile @DATA, @DIRECTORIO_ENTRADAS, @FILENAME_XML
-				    EXECUTE [eIntegration].dbo.WriteStringToFile 'TRG', @DIRECTORIO_ENTRADAS, @FILENAME_TRG
+				    EXECUTE [$(eIntegration)].dbo.WriteStringToFile @DATA, @DIRECTORIO_ENTRADAS, @FILENAME_XML
+				    EXECUTE [$(eIntegration)].dbo.WriteStringToFile 'TRG', @DIRECTORIO_ENTRADAS, @FILENAME_TRG
 			    END
 
 			    ------------------------------------------------------------------------------------------------------

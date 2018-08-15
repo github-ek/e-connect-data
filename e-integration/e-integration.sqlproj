@@ -74,28 +74,10 @@
     <Build Include="dbo\Tables\grupos_tipo_archivo.sql" />
     <Build Include="dbo\Tables\directorios.sql" />
     <Build Include="dbo\Tables\archivos.sql" />
-    <Build Include="dbo\Stored Procedures\Clean.sql" />
-    <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesAlistamiento.sql" />
-    <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
-    <Build Include="dbo\Stored Procedures\DetectarCierreDeOrdenesReciboDeTraslados.sql" />
-    <Build Include="dbo\Stored Procedures\CrearMensajesDeAbastecimientoGWS.sql" />
-    <Build Include="dbo\Stored Procedures\EnviarMensajesDeAbastecimientoGws.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroClientes.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroBodegas.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroUnidadesMedida.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroEstadosInventario.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductos.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosMedidas.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosCodigos.sql" />
-    <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosAtributos.sql" />
-    <Build Include="dbo\Stored Procedures\DetectarCierreDeEmbarques.sql" />
-    <Build Include="dbo\Stored Procedures\ProcesarArchivosRemesasProgramadas.sql" />
-    <Build Include="dbo\Stored Procedures\CrearRemesasProgramadas.sql" />
-    <Build Include="dbo\Stored Procedures\CrearRemesasDespachoPrimeraVez.sql" />
-    <Build Include="dbo\Stored Procedures\CrearMensajesDeRemesaSilogtran.sql" />
     <Build Include="dbo\Tables\mapas_valores.sql" />
     <Build Include="dbo\Tables\mapas.sql" />
     <Build Include="dbo\Tables\grupos_mapa.sql" />
+    <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />
@@ -106,20 +88,6 @@
     <None Include="e-integration.prd.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\e-stage\e-stage.sqlproj">
-      <Name>e-stage</Name>
-      <Project>{f5815067-f0b4-4cd2-8dec-df35eb5a3d75}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eStage</DatabaseSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-wms\e-wms.sqlproj">
-      <Name>e-wms</Name>
-      <Project>{717dab89-d6e8-4324-945e-a3ac4a02bd37}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eWms</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
       <Name>e-historicos</Name>
       <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
@@ -128,13 +96,6 @@
       <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
     </ProjectReference>
-    <ProjectReference Include="..\e-config\e-config.sqlproj">
-      <Name>e-config</Name>
-      <Project>{609e6200-dbe9-49e6-bb9c-71ad502998bb}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eConfig</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
       <Name>ttcwmsprd</Name>
       <Project>{0679373d-2f0a-4864-8180-1c981ea43bf5}</Project>
@@ -142,21 +103,6 @@
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\satelite\satelite.sqlproj">
-      <Name>satelite</Name>
-      <Project>{c1b1001f-1b20-4751-840f-ca6482bb7567}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>satelite</DatabaseSqlCmdVariable>
-      <ServerSqlCmdVariable>INGLATERRA</ServerSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-silogtran\e-silogtran.sqlproj">
-      <Name>e-silogtran</Name>
-      <Project>{72e8b2da-f755-4ca3-b9c3-668760fb4d68}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eSilogtran</DatabaseSqlCmdVariable>
     </ProjectReference>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
       <Name>e-connect</Name>
@@ -167,54 +113,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SqlCmdVariable Include="eConfig">
-      <DefaultValue>eConfig</DefaultValue>
-      <Value>$(SqlCmdVar__6)</Value>
-    </SqlCmdVariable>
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>eConnect</DefaultValue>
       <Value>$(SqlCmdVar__15)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="[$(eConnect)]">
-      <DefaultValue>[$(eConnect)]</DefaultValue>
-      <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eHistoricos">
       <DefaultValue>eHistoricos</DefaultValue>
       <Value>$(SqlCmdVar__4)</Value>
     </SqlCmdVariable>
-    <SqlCmdVariable Include="eSilogtran">
-      <DefaultValue>eSilogtran</DefaultValue>
-      <Value>$(SqlCmdVar__13)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="eStage">
-      <DefaultValue>eStage</DefaultValue>
-      <Value>$(SqlCmdVar__2)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="eWms">
-      <DefaultValue>eWms</DefaultValue>
-      <Value>$(SqlCmdVar__3)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="INGLATERRA">
-      <DefaultValue>INGLATERRA</DefaultValue>
-      <Value>$(SqlCmdVar__12)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="satelite">
-      <DefaultValue>satelite</DefaultValue>
-      <Value>$(SqlCmdVar__11)</Value>
-    </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
-      <DefaultValue>ttcwmsprd</DefaultValue>
+      <DefaultValue>ttcwmsprdnew</DefaultValue>
       <Value>$(SqlCmdVar__7)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <DefaultValue>VIETNAM</DefaultValue>
+      <DefaultValue>57DBWMS05</DefaultValue>
       <Value>$(SqlCmdVar__8)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="[]">
-      <DefaultValue>
-      </DefaultValue>
-      <Value>$(SqlCmdVar__14)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

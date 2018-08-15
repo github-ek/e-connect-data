@@ -108,7 +108,7 @@ BEGIN
         
         SELECT
             @DIRECTORIO_ENTRADAS = a.valor
-        FROM [eConfig].dbo.configuraciones a
+        FROM [$(eConfig)].dbo.configuraciones a
         WHERE
             a.codigo = 'wms.directorios.entradas'
 
@@ -173,8 +173,8 @@ BEGIN
                     PRINT @DATA
                     PRINT @DIRECTORIO_ENTRADAS
                     PRINT @FILENAME_XML
-				    EXECUTE [eIntegration].dbo.WriteStringToFile @DATA, @DIRECTORIO_ENTRADAS, @FILENAME_XML
-				    EXECUTE [eIntegration].dbo.WriteStringToFile 'TRG', @DIRECTORIO_ENTRADAS, @FILENAME_TRG
+				    EXECUTE [$(eIntegration)].dbo.WriteStringToFile @DATA, @DIRECTORIO_ENTRADAS, @FILENAME_XML
+				    EXECUTE [$(eIntegration)].dbo.WriteStringToFile 'TRG', @DIRECTORIO_ENTRADAS, @FILENAME_TRG
 			    END
 
 			    ------------------------------------------------------------------------------------------------------

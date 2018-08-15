@@ -84,7 +84,7 @@ BEGIN TRY
                 ,b.adr_id AS BT_HOST_ADR_ID
                 ,a.ordinal
             FROM cte_00 a
-            INNER JOIN [57DBWMS05].[ttcwmsprdnew].dbo.cstmst b ON
+            INNER JOIN [$(WMS_DB_SERVER)].[$(ttcwmsprd)].dbo.cstmst b ON
                 b.client_id = a.client_id
             AND b.cstnum = a.cstnum
         )
@@ -172,8 +172,8 @@ BEGIN TRY
                  b.clave
                 ,b.valor
                 ,LEN(b.clave) - LEN(REPLACE(b.clave,'%','')) AS prioridad
-            FROM  [eIntegration].map.mapas a
-            INNER JOIn [eIntegration].map.mapas_valores b ON
+            FROM  [$(eIntegration)].dbo.mapas a
+            INNER JOIn [$(eIntegration)].dbo.mapas_valores b ON
                 b.id_mapa = a.id_mapa
             WHERE
                 a.codigo = 'ORDINV'

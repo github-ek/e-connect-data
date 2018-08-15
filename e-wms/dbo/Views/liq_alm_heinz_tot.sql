@@ -77,7 +77,7 @@ FROM (SELECT
                 ,COUNT( DISTINCT a.[stoloc]) AS [Conteo de ubicaciones]
                 ,CEILING(SUM(CAST(a.[untqty] AS FLOAT))/CAST(e.factor_conversion AS FLOAT)) as  [Ubicaciones calc round2]
 
-        FROM [$(WMS_DB_SERVER)].[$(historicoInv)].[dbo].[corteInv_Hist] a
+        FROM [$(WMS_DB_SERVER)].[$(historicoInv)].[dbo].[corteinv_hist] a
             LEFT OUTER JOIN dbo.clientes b ON 
                        a.prt_client_id = b.client_id
             LEFT OUTER JOIN dbo.productos c ON 

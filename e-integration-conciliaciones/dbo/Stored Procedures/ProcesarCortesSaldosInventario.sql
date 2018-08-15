@@ -45,7 +45,7 @@ BEGIN
             BEGIN TRY
 				SELECT @id_corte_saldo_inventario, @id_corte_saldo_inventario, @fecha_corte, @prt_client_id
 
-                EXEC [57DBWMS05].[eHistoricos].dbo.ConsolidarSaldosInventarioPorCliente @fecha_corte, @prt_client_id
+                EXEC [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.ConsolidarSaldosInventarioPorCliente @fecha_corte, @prt_client_id
 
 				---------------------------------------------------------------------------
 				-- COPIAR SALDOS WMS
@@ -64,7 +64,7 @@ BEGIN
                         ,a.prtstyle
 						,SUM(a.untqty) AS unidades_wms
 					INTO #saldos_wms
-					FROM [57DBWMS05].[eHistoricos].dbo.saldos_inventario a
+					FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.saldos_inventario a
 					WHERE 1 = 1
 					AND a.fecha_corte = @fecha_corte
 					AND a.prt_client_id = @prt_client_id
@@ -85,7 +85,7 @@ BEGIN
 						,a.invsts AS id_estado_inventario
 						,SUM(a.ordqty) AS unidades_en_proceso_despacho
 					INTO #salidas_en_proceso
-					FROM [57DBWMS05].[historicoInv].dbo.pedidos_pendientes_lineas a
+					FROM [$(WMS_DB_SERVER)].[$(historicoInv)].dbo.pedidos_pendientes_lineas a
 					WHERE 1 = 1
 					AND a.fecha = @fecha_corte
 					AND a.prt_client_id = @prt_client_id

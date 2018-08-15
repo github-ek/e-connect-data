@@ -200,6 +200,14 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>tactic_stage</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\satelite\satelite.sqlproj">
+      <Name>satelite</Name>
+      <Project>{c1b1001f-1b20-4751-840f-ca6482bb7567}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>satelite</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>INGLATERRA</ServerSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConnect">
@@ -209,6 +217,14 @@
     <SqlCmdVariable Include="eIntegration">
       <DefaultValue>eIntegration</DefaultValue>
       <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="INGLATERRA">
+      <DefaultValue>INGLATERRA</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="satelite">
+      <DefaultValue>satelite</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="tactic_stage">
       <DefaultValue>tactic_stage</DefaultValue>
