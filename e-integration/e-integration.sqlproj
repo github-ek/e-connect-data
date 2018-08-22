@@ -70,7 +70,6 @@
     <Build Include="dbo\Tables\llaves.sql" />
     <Build Include="dbo\Tables\llaves_campos.sql" />
     <Build Include="dbo\Tables\archivos_errores.sql" />
-    <Build Include="dbo\Tables\archivos_estados.sql" />
     <Build Include="dbo\Tables\grupos_tipo_archivo.sql" />
     <Build Include="dbo\Tables\directorios.sql" />
     <Build Include="dbo\Tables\archivos.sql" />

@@ -78,5 +78,7 @@
     <None Include="e-silogtran.prd.publish.xml" />
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="e-silogtran.tst.publish.xml" />
+    <None Include="SqlSchemaCompareDev.scmp" />
   </ItemGroup>
 </Project>

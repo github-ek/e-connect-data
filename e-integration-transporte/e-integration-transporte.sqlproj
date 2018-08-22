@@ -273,5 +273,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="e-integration-transporte.tst.publish.xml" />
+    <None Include="SqlSchemaCompareDev.scmp" />
+    <None Include="e-integration-transporte.dev.publish.xml" />
   </ItemGroup>
 </Project>

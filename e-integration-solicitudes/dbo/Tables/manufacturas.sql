@@ -18,7 +18,7 @@
     [bodega_codigo_alterno]            VARCHAR (50)  NOT NULL,
     [estado_inventario_codigo_alterno] VARCHAR (50)  NOT NULL,
     [lote]                             VARCHAR (30)  NOT NULL,
-    [requiere_bom]                     BIT           NULL,
+    [requiere_bom]                     BIT           NOT NULL,
     [id_cliente]                       BIGINT        NULL,
     [id_servicio]                      BIGINT        NULL,
     [id_producto]                      BIGINT        NULL,
@@ -32,4 +32,6 @@
     [usuario_modificacion]             VARCHAR (50)  NOT NULL,
     CONSTRAINT [PK_manufacturas] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80)
 );
+
+
 

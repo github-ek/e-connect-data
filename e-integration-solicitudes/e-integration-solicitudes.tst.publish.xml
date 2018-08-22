@@ -2,19 +2,21 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>eWms</TargetDatabaseName>
-    <DeployScriptFileName>e-wms.sql</DeployScriptFileName>
+    <TargetDatabaseName>eIntegrationSolicitudes</TargetDatabaseName>
+    <DeployScriptFileName>e-integration-solicitudes.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=192.168.10.17;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
-    <GenerateSmartDefaults>True</GenerateSmartDefaults>
   </PropertyGroup>
   <ItemGroup>
+    <SqlCmdVariable Include="eConfig">
+      <Value>eConfig</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eConnect">
       <Value>eConnect</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eHistoricos">
-      <Value>eHistoricos</Value>
+      <Value>eHistorico</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eIntegration">
       <Value>eIntegration</Value>

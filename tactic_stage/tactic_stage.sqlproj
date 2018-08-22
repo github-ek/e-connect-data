@@ -190,6 +190,7 @@
   <ItemGroup>
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="tactic_stage.tst.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
