@@ -24,7 +24,7 @@ BEGIN TRY
 
             ,d.codigo AS whse_id
             ,b.codigo_alterno_wms AS client_id
-            ,'TRS' AS ordtyp
+            ,'RET' AS ordtyp
             ,a.numero_orden AS ordnum
             ,'ordnum' AS shipby
             ,RTRIM(LTRIM(c.numero_solicitud_sin_prefijo)) AS rmanum
