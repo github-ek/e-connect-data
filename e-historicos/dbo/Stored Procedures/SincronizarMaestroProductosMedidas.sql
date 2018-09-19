@@ -4,8 +4,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
-
     EXECUTE dbo.GetFechasIntegracion 'PRODUCTOS_MEDIDAS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION SOURCE
@@ -74,9 +72,9 @@ BEGIN TRY
         AND b.prtnum = a.prtnum
         AND b.wh_id = a.wh_id
         AND b.uomcod = a.uomcod
-        WHERE NOT (
-            a.last_upd_dt = b.last_upd_dt
-        AND a.prtftp_last_upd_user_id = b.prtftp_last_upd_user_id)     
+        --WHERE NOT (
+        --    a.last_upd_dt = b.last_upd_dt
+        --AND a.prtftp_last_upd_user_id = b.prtftp_last_upd_user_id)     
         
         UPDATE a
         SET a.operacion = 'C'
@@ -178,6 +176,8 @@ BEGIN TRY
 		INTO #inserted
 		FROM cte_00 a
     END
+
+    BEGIN TRANSACTION
 
     --ACTUALIZACION TARGET/LOGS
     BEGIN

@@ -4,8 +4,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
-
     EXECUTE dbo.GetFechasIntegracion 'CLIENTES', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION SOURCE
@@ -124,6 +122,8 @@ BEGIN TRY
 		INTO #inserted
 		FROM cte_00 a
     END
+
+    BEGIN TRANSACTION
 
     --ACTUALIZACION TARGET/LOGS
     BEGIN

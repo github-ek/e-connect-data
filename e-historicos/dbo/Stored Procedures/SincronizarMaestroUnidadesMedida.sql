@@ -4,7 +4,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
 
     EXECUTE dbo.GetFechasIntegracion 'UNIDADES_MEDIDA', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
@@ -122,6 +121,7 @@ BEGIN TRY
 		FROM cte_00 a
     END
 
+    BEGIN TRANSACTION
     --ACTUALIZACION TARGET/LOGS
     BEGIN
 		DELETE a

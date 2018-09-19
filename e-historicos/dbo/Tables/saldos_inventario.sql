@@ -15,6 +15,7 @@
     [lodnum]         NVARCHAR (30)  NOT NULL,
     [orgcod]         NVARCHAR (25)  NOT NULL,
     [prtstyle]       NVARCHAR (30)  NOT NULL,
+    [hld_flg] INT NULL, 
     CONSTRAINT [PK_saldos_inventario] PRIMARY KEY CLUSTERED ([id] ASC)
 );
 

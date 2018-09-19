@@ -5,8 +5,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
-
     EXECUTE dbo.GetFechasIntegracion 'RECIBOS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION TARGET: Las ordenes que continúan ABIERTAS en la tabla destino
@@ -274,6 +272,8 @@ BEGIN TRY
         INTO #deleted
         FROM cte_00 a
     END
+
+    BEGIN TRANSACTION
 
     --ACTUALIZACION TARGET/LOGS
     BEGIN

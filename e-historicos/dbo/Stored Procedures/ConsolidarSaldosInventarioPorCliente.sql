@@ -30,7 +30,8 @@ BEGIN TRY
 		        d.stoloc,
                 a.lodnum,
                 c.orgcod,
-                c.cmpkey
+                c.cmpkey,
+				c.hld_flg
             FROM [$(ttcwmsprd)].dbo.invlod a
             INNER JOIN [$(ttcwmsprd)].dbo.invsub b ON
                 a.lodnum = b.lodnum
@@ -121,7 +122,8 @@ BEGIN TRY
             ,stoloc
             ,lodnum
             ,orgcod
-            ,prtstyle)
+            ,prtstyle
+			,hld_flg)
         SELECT
              @fecha_creacion
             ,@fecha_corte
@@ -139,6 +141,7 @@ BEGIN TRY
             ,lodnum
             ,orgcod
             ,prtstyle
+			,hld_flg
         FROM #saldos_inventario a
         GROUP BY 
              prt_client_id
@@ -153,6 +156,7 @@ BEGIN TRY
             ,lodnum
             ,orgcod
             ,prtstyle
+			,hld_flg
     END
 
     SELECT SYSDATETIME(),'INSERT INTO dbo.saldos_inventario'

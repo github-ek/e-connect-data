@@ -12,17 +12,17 @@ BEGIN TRY
 	        DROP TABLE #corte
         END
 
-        --SELECT
-        --     CAST('DESPACHOS' AS VARCHAR(50)) AS integracion 
-        --    ,@fecha_desde AS fecha_ultima_sincronizacion
-        --    ,@fecha_hasta AS fecha_sincronizacion
-        --INTO #corte
-
         SELECT
              CAST('ALISTAMIENTOS' AS VARCHAR(50)) AS integracion 
-            ,CAST('2018-01-01' AS DATETIME) AS fecha_ultima_sincronizacion
-            ,CAST(GETDATE() AS DATETIME) AS fecha_sincronizacion
+            ,DATEADD(HOUR,-1,@fecha_desde) AS fecha_ultima_sincronizacion
+            ,@fecha_hasta AS fecha_sincronizacion
         INTO #corte
+
+        --SELECT
+        --     CAST('ALISTAMIENTOS' AS VARCHAR(50)) AS integracion 
+        --    ,CAST('2018-01-01' AS DATETIME) AS fecha_ultima_sincronizacion
+        --    ,CAST(GETDATE() AS DATETIME) AS fecha_sincronizacion
+        --INTO #corte
     END
 
 	--CONSOLIDACION #source_shipment: Del origen, se toman los registros nuevos y/o modificados recientemente y aquellos que crucen contra el target (ABIERTAS en el destino)
@@ -178,6 +178,8 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     SELECT ERROR_MESSAGE()
-	ROLLBACK TRANSACTION
+    IF @@TRANCOUNT > 0 BEGIN
+	    ROLLBACK TRANSACTION
+    END
     ;THROW;
 END CATCH

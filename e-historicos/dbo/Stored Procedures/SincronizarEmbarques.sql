@@ -4,8 +4,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
-
     EXECUTE dbo.GetFechasIntegracion 'EMBARQUES', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION TARGET: Los embarques que continúan ABIERTAS en la tabla destino
@@ -232,6 +230,8 @@ BEGIN TRY
         CREATE UNIQUE INDEX ix_source_lines_01 ON #source_lines(ship_id,ship_line_id,dtlnum)
         CREATE UNIQUE INDEX ix_source_lines_02 ON #source_lines(record_key,line_key)
     END
+
+    BEGIN TRANSACTION
 
     --ACTUALIZACION TARGET/LOGS
     BEGIN

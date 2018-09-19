@@ -4,7 +4,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
 
     EXECUTE dbo.GetFechasIntegracion 'PRODUCTOS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
@@ -73,8 +72,8 @@ BEGIN TRY
         INNER JOIN dbo.productos b ON
             b.prt_client_id = a.prt_client_id
         AND b.prtnum = a.prtnum
-        WHERE NOT (
-            a.moddte = b.moddte)     
+        --WHERE NOT (
+        --    a.moddte = b.moddte)     
         
         UPDATE a
         SET a.operacion = 'C'
@@ -153,6 +152,7 @@ BEGIN TRY
 		FROM cte_00 a
     END
 
+    BEGIN TRANSACTION
     --ACTUALIZACION TARGET/LOGS
     BEGIN
 		DELETE a

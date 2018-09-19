@@ -4,7 +4,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
 
     EXECUTE dbo.GetFechasIntegracion 'SALIDAS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
@@ -317,6 +316,7 @@ BEGIN TRY
         FROM cte_00 a
     END
     
+    BEGIN TRANSACTION
     --ACTUALIZACION TARGET/LOGS
     BEGIN
         --Eliminar del destino todos los registros que esten en el consolidado de eliminados, excepto los errores por cambios posteriores al cierre. 

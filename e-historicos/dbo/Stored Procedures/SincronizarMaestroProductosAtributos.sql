@@ -4,8 +4,6 @@ BEGIN TRY
 	DECLARE @fecha_desde DATETIME
 	DECLARE @fecha_hasta DATETIME
 
-    BEGIN TRANSACTION
-
     EXECUTE dbo.GetFechasIntegracion 'PRODUCTOS_ATRIBUTOS', @fecha_desde OUTPUT, @fecha_hasta OUTPUT
 
     --CONSOLIDACION SOURCE
@@ -60,7 +58,8 @@ BEGIN TRY
             a.dte_code = b.dte_code      
         AND a.lotflg = b.lotflg
         AND a.untcst = b.untcst
-        AND a.moddte = b.moddte)
+        /*
+        AND a.moddte = b.moddte*/)
         
         UPDATE a
         SET a.operacion = 'C'
@@ -141,6 +140,8 @@ BEGIN TRY
 		INTO #inserted
 		FROM cte_00 a
     END
+
+    BEGIN TRANSACTION
 
     --ACTUALIZACION TARGET/LOGS
     BEGIN
