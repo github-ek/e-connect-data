@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[configuraciones] (
-    [id_configuracion]       BIGINT         IDENTITY (1, 1) NOT NULL,
+    [id_configuracion]       BIGINT         NOT NULL,
     [id_grupo_configuracion] BIGINT         NOT NULL,
     [codigo]                 VARCHAR (50)   NOT NULL,
     [valor]                  VARCHAR (1000) NOT NULL,

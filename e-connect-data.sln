@@ -9,8 +9,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-connect", "e-connect\e-co
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-integration", "e-integration\e-integration.sqlproj", "{ECD814BF-DEE5-4572-B2D7-958C4F981F06}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-stage", "e-stage\e-stage.sqlproj", "{F5815067-F0B4-4CD2-8DEC-DF35EB5A3D75}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-wms", "e-wms\e-wms.sqlproj", "{717DAB89-D6E8-4324-945E-A3AC4A02BD37}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-historicos", "e-historicos\e-historicos.sqlproj", "{32293019-2186-4431-9BB1-25EE163D5144}"
@@ -18,8 +16,6 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ttcwmsprd", "ttcwmsprd\ttcwmsprd.sqlproj", "{0679373D-2F0A-4864-8180-1C981EA43BF5}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "historicoInv", "historicoInv\historicoInv.sqlproj", "{6EB7734C-A50F-49CA-91C4-79F0377D0A7F}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-silogtran", "e-silogtran\e-silogtran.sqlproj", "{72E8B2DA-F755-4CA3-B9C3-668760FB4D68}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "satelite", "satelite\satelite.sqlproj", "{C1B1001F-1B20-4751-840F-CA6482BB7567}"
 EndProject
@@ -57,12 +53,6 @@ Global
 		{ECD814BF-DEE5-4572-B2D7-958C4F981F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECD814BF-DEE5-4572-B2D7-958C4F981F06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECD814BF-DEE5-4572-B2D7-958C4F981F06}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{F5815067-F0B4-4CD2-8DEC-DF35EB5A3D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5815067-F0B4-4CD2-8DEC-DF35EB5A3D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5815067-F0B4-4CD2-8DEC-DF35EB5A3D75}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{F5815067-F0B4-4CD2-8DEC-DF35EB5A3D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5815067-F0B4-4CD2-8DEC-DF35EB5A3D75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5815067-F0B4-4CD2-8DEC-DF35EB5A3D75}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{717DAB89-D6E8-4324-945E-A3AC4A02BD37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{717DAB89-D6E8-4324-945E-A3AC4A02BD37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{717DAB89-D6E8-4324-945E-A3AC4A02BD37}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -87,12 +77,6 @@ Global
 		{6EB7734C-A50F-49CA-91C4-79F0377D0A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EB7734C-A50F-49CA-91C4-79F0377D0A7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EB7734C-A50F-49CA-91C4-79F0377D0A7F}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{72E8B2DA-F755-4CA3-B9C3-668760FB4D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72E8B2DA-F755-4CA3-B9C3-668760FB4D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72E8B2DA-F755-4CA3-B9C3-668760FB4D68}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{72E8B2DA-F755-4CA3-B9C3-668760FB4D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72E8B2DA-F755-4CA3-B9C3-668760FB4D68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72E8B2DA-F755-4CA3-B9C3-668760FB4D68}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{C1B1001F-1B20-4751-840F-CA6482BB7567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1B1001F-1B20-4751-840F-CA6482BB7567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1B1001F-1B20-4751-840F-CA6482BB7567}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

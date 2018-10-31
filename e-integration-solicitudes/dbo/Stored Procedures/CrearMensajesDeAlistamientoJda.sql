@@ -3,8 +3,6 @@ AS
 BEGIN TRY
     --SET NOCOUNT ON;
 
-    BEGIN TRANSACTION
-
     BEGIN
         IF OBJECT_ID('tempdb..#mensajes') IS NOT NULL BEGIN
             DROP TABLE #mensajes
@@ -24,7 +22,10 @@ BEGIN TRY
 
             ,d.codigo AS whse_id
             ,b.codigo_alterno_wms AS client_id
-            ,'RET' AS ordtyp
+            ,CASE c.tipo_solicitud 
+             WHEN 'SALIDA' THEN 'RET' 
+             WHEN 'TRASLADO' THEN 'TRS'
+             ELSE 'RET' END AS ordtyp
             ,a.numero_orden AS ordnum
             ,'ordnum' AS shipby
             ,RTRIM(LTRIM(c.numero_solicitud_sin_prefijo)) AS rmanum
@@ -172,8 +173,8 @@ BEGIN TRY
                  b.clave
                 ,b.valor
                 ,LEN(b.clave) - LEN(REPLACE(b.clave,'%','')) AS prioridad
-            FROM  [$(eIntegration)].dbo.mapas a
-            INNER JOIn [$(eIntegration)].dbo.mapas_valores b ON
+            FROM  dbo.mapas a
+            INNER JOIn dbo.mapas_valores b ON
                 b.id_mapa = a.id_mapa
             WHERE
                 a.codigo = 'ORDINV'
@@ -198,7 +199,9 @@ BEGIN TRY
         WHERE
             a.orden = 1
     END
-    
+   
+    BEGIN TRANSACTION
+ 
     --CREACION DE LOS MENSAJES
     BEGIN
         DECLARE @t AS TABLE(id_orden_alistamiento BIGINT, id_mensaje BIGINT)

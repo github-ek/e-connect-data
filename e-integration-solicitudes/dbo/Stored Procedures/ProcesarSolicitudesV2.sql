@@ -10,7 +10,7 @@ BEGIN
         WITH
         cte_00 AS
         (
-            SELECT 'SALIDA' AS tipo_solicitud,a.integracion, a.correlacion FROM dbo.solicitudes_despacho a WHERE a.estado_integracion = 'VALIDADO'
+            SELECT DISTINCT 'SALIDA' AS tipo_solicitud,a.integracion, a.correlacion FROM dbo.integraciones_actualizaciones a WHERE a.estado_integracion = 'VALIDADO' AND a.integracion = 'SOLICITUDES_SALIDAS_GWS'
         )
         SELECT DISTINCT
             a.tipo_solicitud, a.integracion, a.correlacion 

@@ -71,8 +71,12 @@ BEGIN TRY
 			c.id_producto = b.id_producto
 		AND c.id_bodega = b.id_bodega
 		AND c.rcv_flg = 1
+        INNER JOIN dbo.integraciones_actualizaciones z ON
+            z.integracion = a.integracion
+        AND z.id_externo = a.id_externo
+        AND z.correlacion = a.correlacion
         WHERE
-            a.estado_integracion = 'VALIDADO'
+            z.estado_integracion = 'VALIDADO'
         AND a.integracion = @integracion
 		AND a.correlacion = @correlacion
 
@@ -164,13 +168,13 @@ BEGIN TRY
 
 		--ACTUALIZACION DE LOS REGISTROS EN STAGE
 		BEGIN
-			UPDATE a
-			SET  a.estado_integracion = CASE WHEN b.id_solicitud IS NOT NULL THEN 'PROCESADO' ELSE 'DESCARTADO' END
-				,a.[version] = a.[version] + 1
-				,a.fecha_modificacion = SYSDATETIME()
-			FROM dbo.solicitudes_despacho a
-			INNER JOIN #source b ON
-				b.id_registro_stage = a.id_solicitud_despacho
+			--UPDATE a
+			--SET  a.estado_integracion = CASE WHEN b.id_solicitud IS NOT NULL THEN 'PROCESADO' ELSE 'DESCARTADO' END
+   --             ,a.[version] = a.[version] + 1
+			--	,a.fecha_modificacion = SYSDATETIME()
+			--FROM dbo.solicitudes_despacho a
+			--INNER JOIN #source b ON
+			--	b.id_registro_stage = a.id_solicitud_despacho
 
 			UPDATE a
 			SET  a.estado_integracion = CASE WHEN b.id_solicitud IS NOT NULL THEN 'PROCESADO' ELSE 'DESCARTADO' END

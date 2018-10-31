@@ -3,8 +3,6 @@ AS
 BEGIN TRY
     --SET NOCOUNT ON;
 
-    BEGIN TRANSACTION
-
     --CONSOLIDACION DE INFORMACION DE NUEVAS ORDENES
     BEGIN
         IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
@@ -92,6 +90,8 @@ BEGIN TRY
         INNER JOIN [$(eConnect)].dbo.solicitudes_lineas b ON
             b.id_solicitud = a.id_solicitud
     END
+
+    BEGIN TRANSACTION
 
     --CREACION DE LAS ORDENES
     BEGIN

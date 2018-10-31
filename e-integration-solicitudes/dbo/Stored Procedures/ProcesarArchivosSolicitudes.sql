@@ -33,7 +33,7 @@ BEGIN
                 END ELSE IF @tipo_solicitud = 'RECIBO' BEGIN
                     SELECT @tipo_solicitud, @id_archivo
                     UPDATE a SET estado = 'PROCESADO' FROM dbo.recibos a WHERE a.estado = 'VALIDADO' AND a.id_archivo = @id_archivo
-                    UPDATE a SET estado = 'PROCESADO' FROM [$(eIntegration)].dbo.archivos a WHERE a.id_archivo = @id_archivo
+                    UPDATE a SET estado = 'PROCESADO' FROM dbo.archivos a WHERE a.id_archivo = @id_archivo
                 END ELSE IF @tipo_solicitud = 'MANUFACTURA' BEGIN
                     SELECT @tipo_solicitud, @id_archivo
 					EXEC dbo.CrearSolicitudesDeManufactura @id_archivo

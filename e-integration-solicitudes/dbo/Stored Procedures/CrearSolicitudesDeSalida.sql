@@ -185,7 +185,7 @@ BEGIN TRY
             ,a.[version] = a.[version] + 1
             ,a.fecha_modificacion = SYSDATETIME()
             ,a.usuario_modificacion = SYSTEM_USER
-        FROM [$(eIntegration)].dbo.archivos a
+        FROM dbo.archivos a
         INNER JOIN cte_01 b ON
             b.id_archivo = a.id_archivo
     END

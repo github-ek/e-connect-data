@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[integraciones_actualizaciones] (
-    [id_integracion_actualizacion] BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id] BIGINT        NOT NULL,
     [integracion]                  VARCHAR (50)  NOT NULL,
-    [id_externo]                   VARCHAR (100) NOT NULL,
     [correlacion]                  VARCHAR (100) NOT NULL,
-    [estado_externo]               VARCHAR (50)  NOT NULL,
+    [id_externo]                   VARCHAR (100) NOT NULL,
     [estado_integracion]           VARCHAR (50)  NOT NULL,
+    [subestado_integracion]        VARCHAR (50)  NOT NULL,
     [estado_notificacion]          VARCHAR (50)  NULL,
     [entradas_en_cola]             INT           NOT NULL,
     [arg0]                         VARCHAR (100) NULL,
@@ -21,7 +21,10 @@
     [version]                      INT           CONSTRAINT [DF_integraciones_actualizaciones_version] DEFAULT ((0)) NOT NULL,
     [fecha_creacion]               DATETIME2 (0) NOT NULL,
     [fecha_modificacion]           DATETIME2 (0) NOT NULL,
-    CONSTRAINT [PK_integraciones_actualizaciones] PRIMARY KEY CLUSTERED ([id_integracion_actualizacion] ASC),
+    [estado_externo]               VARCHAR (50)  NULL,
+    CONSTRAINT [PK_integraciones_actualizaciones] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [UK_integraciones_actualizaciones_01] UNIQUE NONCLUSTERED ([integracion] ASC, [id_externo] ASC)
 );
+
+
 

@@ -124,6 +124,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Sequences\" />
+    <Folder Include="dbo\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\mensajes_manufactura_jda_lineas.sql">
@@ -279,6 +280,45 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Tables\ordenes_alistamiento_lotes.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\ordenes_alistamiento_lineas.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\ordenes_alistamiento_cancelaciones.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\ordenes_alistamiento.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\documentos_solicitudes_lineas.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\documentos_solicitudes.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\OrdenesDeAlistamientoEnStageLineas.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\OrdenesDeAlistamientoEnStage.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Sequences\hibernate_sequence.sql" />
+    <Build Include="dbo\Tables\archivos.sql" />
+    <Build Include="dbo\Tables\archivos_errores.sql" />
+    <Build Include="dbo\Tables\grupos_mapa.sql" />
+    <Build Include="dbo\Tables\integraciones.sql" />
+    <Build Include="dbo\Tables\mapas.sql" />
+    <Build Include="dbo\Tables\mapas_valores.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
@@ -287,13 +327,6 @@
       <Private>True</Private>
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
-    </ProjectReference>
-    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
-      <Name>e-integration</Name>
-      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
     </ProjectReference>
     <ProjectReference Include="..\e-config\e-config.sqlproj">
       <Name>e-config</Name>
@@ -310,6 +343,13 @@
       <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
+      <Name>e-integration</Name>
+      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConfig">
@@ -321,8 +361,8 @@
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eIntegration">
-      <DefaultValue>eIntegration</DefaultValue>
-      <Value>$(SqlCmdVar__2)</Value>
+      <DefaultValue>e-integration</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
       <DefaultValue>ttcwmsprd</DefaultValue>
@@ -340,5 +380,8 @@
     <None Include="e-integration-solicitudes.prd.publish.xml" />
     <None Include="SqlSchemaCompareDev.scmp" />
     <None Include="e-integration-solicitudes.dev.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="e-integration-solicitudes.refactorlog" />
   </ItemGroup>
 </Project>

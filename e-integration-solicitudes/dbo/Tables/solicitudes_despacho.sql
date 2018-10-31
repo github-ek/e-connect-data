@@ -1,9 +1,8 @@
 ﻿CREATE TABLE [dbo].[solicitudes_despacho] (
-    [id_solicitud_despacho]        BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_solicitud_despacho]        BIGINT        NOT NULL,
     [integracion]                  VARCHAR (50)  NOT NULL,
-    [id_externo]                   VARCHAR (100) NOT NULL,
     [correlacion]                  VARCHAR (100) NOT NULL,
-    [estado_integracion]           VARCHAR (50)  NOT NULL,
+    [id_externo]                   VARCHAR (100) NOT NULL,
     [cliente_codigo_alterno]       VARCHAR (50)  NOT NULL,
     [servicio_codigo_alterno]      VARCHAR (50)  NOT NULL,
     [numero_solicitud]             VARCHAR (20)  NOT NULL,
@@ -40,4 +39,6 @@
     [fecha_modificacion]           DATETIME2 (0) NOT NULL,
     CONSTRAINT [PK_solicitudes_despacho] PRIMARY KEY CLUSTERED ([id_solicitud_despacho] ASC)
 );
+
+
 
