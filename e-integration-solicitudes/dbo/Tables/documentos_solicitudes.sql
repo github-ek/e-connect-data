@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[documentos_solicitudes] (
-    [id_documento_solicitud]        BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_documento_solicitud]        BIGINT         NOT NULL,
     [integracion]                   VARCHAR (50)  NOT NULL,
     [id_externo]                    VARCHAR (100) NOT NULL,
     [correlacion]                   VARCHAR (100) NOT NULL,

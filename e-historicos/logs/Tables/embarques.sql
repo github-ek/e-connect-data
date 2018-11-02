@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [logs].[embarques]
 (
-    [id_log]                    BIGINT IDENTITY (1, 1) NOT NULL,
+    [id_log]                    BIGINT  NOT NULL,
     [id]                        BIGINT NOT NULL,
     [record_key]            NVARCHAR(30) NOT NULL,
     [operacion]             NVARCHAR (1) NOT NULL,

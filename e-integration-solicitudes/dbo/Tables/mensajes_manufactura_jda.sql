@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[mensajes_manufactura_jda] (
-    [id_mensaje]           BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_mensaje]           BIGINT         NOT NULL,
     [id_orden_manufactura] BIGINT        NOT NULL,
     [numero_linea]         INT           NOT NULL,
     [estado]               VARCHAR (50)  NOT NULL,

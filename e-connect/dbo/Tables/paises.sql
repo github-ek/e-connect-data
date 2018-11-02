@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[paises] (
-    [id_pais]              BIGINT           IDENTITY (1, 1) NOT NULL,
+    [id_pais]              BIGINT           NOT NULL,
     [codigo]               VARCHAR (20)     NOT NULL,
     [nombre]               VARCHAR (100)    NOT NULL,
     [cx]                   DECIMAL (18, 15) NULL,

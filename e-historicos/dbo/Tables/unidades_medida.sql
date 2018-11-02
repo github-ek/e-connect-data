@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[unidades_medida] (
-    [id]                 BIGINT IDENTITY (1, 1) NOT NULL,
+    [id]                 BIGINT  NOT NULL,
     [operacion]          NVARCHAR (1) NOT NULL,
     [cambio_notificado]  BIT NOT NULL DEFAULT 0,
     [fecha_creacion]     DATETIME       NOT NULL,

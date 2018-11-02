@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[bodegas] (
-    [id_bodega]            BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_bodega]            BIGINT        NOT NULL,
     [codigo]               VARCHAR (32)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [id_ciudad]            BIGINT        NULL,

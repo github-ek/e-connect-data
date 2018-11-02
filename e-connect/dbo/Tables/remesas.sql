@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[remesas] (
-    [id_remesa]                     BIGINT           IDENTITY (1, 1) NOT NULL,
+    [id_remesa]                     BIGINT           NOT NULL,
     [tipo_remesa]                   VARCHAR (50)     NOT NULL,
     [es_reprogramacion]             BIT              NOT NULL,
     [numero_remesa]                 VARCHAR (35)     NOT NULL,

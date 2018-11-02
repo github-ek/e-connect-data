@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[puntos] (
-    [id_punto]             BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_punto]             BIGINT        NOT NULL,
     [id_tercero]           BIGINT        NOT NULL,
     [codigo]               VARCHAR (20)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,

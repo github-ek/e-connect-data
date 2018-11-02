@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [logs].[productos_atributos]
 (
-    [id_log]             BIGINT         IDENTITY (1, 1) NOT NULL,
+    [id_log]             BIGINT          NOT NULL,
     [id]                 BIGINT         NOT NULL,
     [operacion]          NVARCHAR (1) NOT NULL,
     [cambio_notificado]  BIT NOT NULL,

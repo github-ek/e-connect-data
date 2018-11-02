@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ordenes_alistamiento_cancelaciones] (
-    [id]                          BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id]                          BIGINT         NOT NULL,
     [id_orden_alistamiento_linea] BIGINT        NOT NULL,
     [prtnum]                      VARCHAR (50)  NOT NULL,
     [cancod]                      VARCHAR (40)  NOT NULL,

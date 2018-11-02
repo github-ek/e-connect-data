@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ciudades] (
-    [id_ciudad]             BIGINT           IDENTITY (1, 1) NOT NULL,
+    [id_ciudad]             BIGINT           NOT NULL,
     [id_departamento]       BIGINT           NOT NULL,
     [codigo]                VARCHAR (20)     NOT NULL,
     [codigo_centro_poblado] VARCHAR (20)     NOT NULL,

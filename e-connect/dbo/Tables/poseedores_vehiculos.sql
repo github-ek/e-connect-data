@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[poseedores_vehiculos] (
-    [id_poseedor_vehiculo]  BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_poseedor_vehiculo]  BIGINT        NOT NULL,
     [codigo]                VARCHAR (20)  NOT NULL,
     [nombre]                VARCHAR (100) NOT NULL,
     [tipo_identificacion]   VARCHAR (20)  NOT NULL,

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ordenes_recibo_lineas] (
-    [id]                       BIGINT          IDENTITY (1, 1) NOT NULL,
+    [id]                       BIGINT          NOT NULL,
     [id_orden_recibo]          BIGINT          NOT NULL,
     [numero_linea]             INT             NOT NULL,
 

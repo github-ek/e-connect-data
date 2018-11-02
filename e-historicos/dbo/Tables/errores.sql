@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[integraciones_actualizaciones_errores] (
-    [id]                           BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id]                           BIGINT         NOT NULL,
     [id_integracion_actualizacion] BIGINT        NOT NULL,
     [codigo]                       VARCHAR (50)  NOT NULL,
     [mensaje]                      VARCHAR (MAX) NOT NULL,

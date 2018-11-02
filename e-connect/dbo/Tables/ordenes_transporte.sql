@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ordenes_transporte] (
-    [id_remesa_transporte]          BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_remesa_transporte]          BIGINT        NOT NULL,
     [id_orden_transporte]           BIGINT        NOT NULL,
     [id_tipo_documento]             VARCHAR (20)  NOT NULL,
     [numero_documento]              VARCHAR (20)  NOT NULL,

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[departamentos] (
-    [id_departamento]      BIGINT           IDENTITY (1, 1) NOT NULL,
+    [id_departamento]      BIGINT           NOT NULL,
     [id_pais]              BIGINT           NOT NULL,
     [codigo]               VARCHAR (20)     NOT NULL,
     [nombre]               VARCHAR (100)    NOT NULL,

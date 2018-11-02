@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[mensajes_recibo_jda] (
-    [id_mensaje]               BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_mensaje]               BIGINT         NOT NULL,
     [id_orden_recibo]          BIGINT        NOT NULL,
     [estado]                   VARCHAR (50)  NOT NULL,
     [fecha_envio]              DATETIME2 (0) NULL,

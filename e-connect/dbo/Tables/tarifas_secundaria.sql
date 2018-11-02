@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[tarifas_secundaria] (
-    [id_tarifa_secundaria]                   BIGINT          IDENTITY (1, 1) NOT NULL,
+    [id_tarifa_secundaria]                   BIGINT          NOT NULL,
     [id_cliente]                             BIGINT          NOT NULL,
     [id_bodega]                              BIGINT          NOT NULL,
     [nombre]                                 VARCHAR (100)   NOT NULL,

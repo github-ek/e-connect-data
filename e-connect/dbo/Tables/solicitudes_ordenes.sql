@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[solicitudes_ordenes] (
-    [id_solicitud_orden]   BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_solicitud_orden]   BIGINT        NOT NULL,
     [tipo_solicitud]       VARCHAR (50)  NOT NULL,
     [id_solicitud]         BIGINT        NOT NULL,
     [tipo_orden]           VARCHAR (50)  NOT NULL,

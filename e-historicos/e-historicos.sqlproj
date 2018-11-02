@@ -113,7 +113,7 @@
     <Build Include="dbo\Stored Procedures\SincronizarEmbarques.sql" />
     <Build Include="dbo\Tables\integraciones_actualizaciones.sql" />
     <Build Include="dbo\Tables\saldos_inventario_proyectados.sql" />
-    <Build Include="dbo\Tables\integraciones_actualizaciones_errores.sql" />
+    <Build Include="dbo\Tables\errores.sql" />
     <Build Include="dbo\Tables\causales_cancelacion_alistamientos.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarDespachos.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarAlistamientos.sql" />

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[tipos_ruta] (
-    [id_tipo_ruta]         BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_tipo_ruta]         BIGINT        NOT NULL,
     [codigo]               VARCHAR (20)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [descripcion]          VARCHAR (200) NOT NULL,

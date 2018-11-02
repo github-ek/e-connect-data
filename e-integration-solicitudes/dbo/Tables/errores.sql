@@ -1,10 +1,10 @@
-﻿CREATE TABLE [dbo].[integraciones_errores] (
+﻿CREATE TABLE [dbo].[errores] (
     [id]                  BIGINT        NOT NULL,
     [integracion]         VARCHAR (50)  NOT NULL,
     [correlacion]         VARCHAR (100) NOT NULL,
     [id_externo]          VARCHAR (100) NOT NULL,
-    [estado_notificacion] VARCHAR (50)  NULL,
-    [fecha_notificacion]  DATETIME2 (0) NULL,
+    [estado_notificacion] VARCHAR (50)  NOT NULL,
+    [fecha_notificacion]  DATETIME2 (0) NOT NULL,
     [codigo]              VARCHAR (100) NOT NULL,
     [mensaje]             VARCHAR (MAX) NOT NULL,
     [arg0]                VARCHAR (100) NULL,
@@ -20,7 +20,7 @@
     [version]             INT           CONSTRAINT [DF_integraciones_actualizaciones_errores_version] DEFAULT ((0)) NOT NULL,
     [fecha_creacion]      DATETIME2 (0) NOT NULL,
     [fecha_modificacion]  DATETIME2 (0) NOT NULL,
-    CONSTRAINT [PK_integraciones_actualizaciones_errores] PRIMARY KEY CLUSTERED ([id] ASC)
+    CONSTRAINT [PK_errores] PRIMARY KEY CLUSTERED ([id] ASC)
 );
 
 

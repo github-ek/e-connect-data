@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ordenes_alistamiento] (
-    [id_orden_alistamiento] BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_orden_alistamiento] BIGINT         NOT NULL,
     [integracion]           VARCHAR (50)  NOT NULL,
     [id_externo]            VARCHAR (100) NOT NULL,
     [correlacion]           VARCHAR (100) NOT NULL,

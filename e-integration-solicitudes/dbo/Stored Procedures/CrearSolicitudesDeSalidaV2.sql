@@ -71,7 +71,7 @@ BEGIN TRY
 			c.id_producto = b.id_producto
 		AND c.id_bodega = b.id_bodega
 		AND c.rcv_flg = 1
-        INNER JOIN dbo.integraciones_actualizaciones z ON
+        INNER JOIN dbo.actualizaciones z ON
             z.integracion = a.integracion
         AND z.id_externo = a.id_externo
         AND z.correlacion = a.correlacion
@@ -181,7 +181,7 @@ BEGIN TRY
 				,a.estado_notificacion = 'NOTIFICAR'
 				,a.[version] = a.[version] + 1
 				,a.fecha_modificacion = SYSDATETIME()
-			FROM dbo.integraciones_actualizaciones a
+			FROM dbo.actualizaciones a
 			INNER JOIN #source b ON
 				b.integracion = a.integracion
 			AND b.correlacion = a.correlacion

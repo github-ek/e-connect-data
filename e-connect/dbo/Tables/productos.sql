@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[productos] (
-    [id_producto]          BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_producto]          BIGINT        NOT NULL,
     [id_cliente]           BIGINT        NOT NULL,
     [codigo]               VARCHAR (50)  NOT NULL,
     [nombre]               VARCHAR (250) NOT NULL,

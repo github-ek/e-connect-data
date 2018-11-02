@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ordenes_manufactura] (
-    [id_orden_manufactura]    BIGINT          IDENTITY (1, 1) NOT NULL,
+    [id_orden_manufactura]    BIGINT          NOT NULL,
     [tipo_orden]               VARCHAR (50)  NOT NULL,
     [numero_orden]             VARCHAR(20)  NOT NULL,
     [estado]                   VARCHAR(50)   NOT NULL,

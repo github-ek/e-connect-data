@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ordenes_recibo] (
-    [id]                 BIGINT IDENTITY (1, 1) NOT NULL,
+    [id]                 BIGINT  NOT NULL,
 	[record_key]          NVARCHAR(200) NOT NULL,
 	[line_key]           NVARCHAR(50) NOT NULL,
     [operacion]          NVARCHAR (1) NOT NULL,

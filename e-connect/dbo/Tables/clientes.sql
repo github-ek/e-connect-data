@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[clientes] (
-    [id_cliente]              BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_cliente]              BIGINT        NOT NULL,
     [codigo]                  VARCHAR (32)  NOT NULL,
     [nombre]                  VARCHAR (100) NOT NULL,
     [tipo_identificacion]     VARCHAR (20)  CONSTRAINT [DF__clientes__tipo_i__15702A09] DEFAULT ('NI') NOT NULL,

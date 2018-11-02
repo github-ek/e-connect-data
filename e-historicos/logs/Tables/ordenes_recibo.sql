@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [logs].[ordenes_recibo] (
-    [id_log]             BIGINT         IDENTITY (1, 1) NOT NULL,
+    [id_log]             BIGINT          NOT NULL,
     [id]                 BIGINT         NOT NULL,
 	[record_key]          NVARCHAR(200) NOT NULL,
 	[line_key]           NVARCHAR(50) NOT NULL,

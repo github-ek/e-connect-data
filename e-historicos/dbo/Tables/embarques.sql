@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[embarques]
 (
-	[id]                    BIGINT IDENTITY (1, 1) NOT NULL,
+	[id]                    BIGINT  NOT NULL,
     [record_key]            NVARCHAR(30) NOT NULL,
     [operacion]             NVARCHAR (1) NOT NULL,
     [estado]                NVARCHAR (50) NOT NULL,

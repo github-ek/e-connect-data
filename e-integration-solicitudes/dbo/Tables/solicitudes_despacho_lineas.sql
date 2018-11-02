@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[solicitudes_despacho_lineas] (
-    [id]                               BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id]                               BIGINT         NOT NULL,
     [id_solicitud_despacho]            BIGINT        NOT NULL,
     [numero_linea]                     INT           NOT NULL,
     [numero_linea_externo]             VARCHAR (50)  NOT NULL,

@@ -264,11 +264,11 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Tables\integraciones_errores.sql">
+    <Build Include="dbo\Tables\errores.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Tables\integraciones_actualizaciones.sql">
+    <Build Include="dbo\Tables\actualizaciones.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -315,10 +315,6 @@
     <Build Include="dbo\Sequences\hibernate_sequence.sql" />
     <Build Include="dbo\Tables\archivos.sql" />
     <Build Include="dbo\Tables\archivos_errores.sql" />
-    <Build Include="dbo\Tables\grupos_mapa.sql" />
-    <Build Include="dbo\Tables\integraciones.sql" />
-    <Build Include="dbo\Tables\mapas.sql" />
-    <Build Include="dbo\Tables\mapas_valores.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
@@ -380,8 +376,5 @@
     <None Include="e-integration-solicitudes.prd.publish.xml" />
     <None Include="SqlSchemaCompareDev.scmp" />
     <None Include="e-integration-solicitudes.dev.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="e-integration-solicitudes.refactorlog" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[remesas_lineas] (
-    [id]                       BIGINT          IDENTITY (1, 1) NOT NULL,
+    [id]                       BIGINT          NOT NULL,
     [id_remesa]                BIGINT          NOT NULL,
     [numero_linea]             INT             NOT NULL,
     [id_producto]              BIGINT          NOT NULL,

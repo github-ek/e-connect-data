@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[embarques]
 (
-    [id_embarque]                       BIGINT IDENTITY (1, 1) NOT NULL,
+    [id_embarque]                       BIGINT NOT NULL,
     [numero_embarque]                   VARCHAR (30)  NOT NULL,
     [estado]                            VARCHAR(50)   NOT NULL,
     

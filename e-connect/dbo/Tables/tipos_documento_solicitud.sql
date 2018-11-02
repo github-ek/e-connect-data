@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[tipos_documento]
 (
-    [id_tipo_documento]         BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_tipo_documento]         BIGINT        NOT NULL,
     [codigo]               VARCHAR (20)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [descripcion]          VARCHAR (200) NOT NULL,

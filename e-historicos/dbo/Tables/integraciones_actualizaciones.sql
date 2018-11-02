@@ -23,9 +23,9 @@
     CONSTRAINT [PK_integraciones_actualizaciones] PRIMARY KEY CLUSTERED ([id_integracion_actualizacion] ASC),
     CONSTRAINT [UK_integraciones_actualizaciones_01] UNIQUE NONCLUSTERED ([integracion] ASC, [id_externo] ASC)
 );
-
-
 GO
+
 CREATE NONCLUSTERED INDEX [IX_integraciones_actualizaciones_01]
     ON [dbo].[integraciones_actualizaciones]([integracion] ASC, [estado_actualizacion] ASC, [fecha_sincronizacion] ASC);
+GO
 

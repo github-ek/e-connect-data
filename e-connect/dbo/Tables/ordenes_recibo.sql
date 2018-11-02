@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ordenes_recibo] 
 (
-    [id_orden_recibo]         BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_orden_recibo]         BIGINT        NOT NULL,
     [numero_orden]             VARCHAR(50)  NOT NULL,
     [estado]                   VARCHAR(50)   NOT NULL,
     [id_linea_negocio]         BIGINT        NOT NULL,

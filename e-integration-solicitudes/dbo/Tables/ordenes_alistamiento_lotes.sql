@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ordenes_alistamiento_lotes] (
-    [id]                          BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id]                          BIGINT         NOT NULL,
     [id_orden_alistamiento_linea] BIGINT        NOT NULL,
     [prtnum]                      VARCHAR (50)  NOT NULL,
     [invsts]                      VARCHAR (4)   NOT NULL,

@@ -173,8 +173,8 @@ BEGIN TRY
                  b.clave
                 ,b.valor
                 ,LEN(b.clave) - LEN(REPLACE(b.clave,'%','')) AS prioridad
-            FROM  dbo.mapas a
-            INNER JOIn dbo.mapas_valores b ON
+            FROM  [$(eIntegration)].dbo.mapas a
+            INNER JOIn [$(eIntegration)].dbo.mapas_valores b ON
                 b.id_mapa = a.id_mapa
             WHERE
                 a.codigo = 'ORDINV'

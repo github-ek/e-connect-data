@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[saldos_inventario_proyectados] (
-    [id]                           BIGINT         IDENTITY (1, 1) NOT NULL,
+    [id]                           BIGINT          NOT NULL,
     [fecha_creacion]               DATETIME2 (7)  NOT NULL,
     [fecha_corte]                  DATE           NULL,
     [prt_client_id]                NVARCHAR (32)  NULL,

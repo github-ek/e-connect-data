@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[despachos] (
-    [id_despacho]                     BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_despacho]                     BIGINT        NOT NULL,
     [numero_embarque]                 VARCHAR (30)  NOT NULL,
     [estado]                          VARCHAR (50)  NOT NULL,
     [id_bodega]                       BIGINT        NOT NULL,

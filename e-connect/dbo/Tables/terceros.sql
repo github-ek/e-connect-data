@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[terceros] (
-    [id_tercero]            BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_tercero]            BIGINT        NOT NULL,
     [id_cliente]            BIGINT        NOT NULL,
     [tipo_identificacion]   VARCHAR (20)  NOT NULL,
     [numero_identificacion] VARCHAR (20)  NOT NULL,

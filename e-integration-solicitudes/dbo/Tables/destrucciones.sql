@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[destrucciones] (
-    [id]                               BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id]                               BIGINT         NOT NULL,
     [id_archivo]                       BIGINT        NOT NULL,
     [estado]                           VARCHAR (50)  NOT NULL,
     [numero_linea]                     INT           NOT NULL,

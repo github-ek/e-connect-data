@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[solicitudes_atributos] (
-    [id]                         BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id]                         BIGINT        NOT NULL,
     [id_solicitud]               BIGINT        NOT NULL,
     [numero_linea]               INT           NULL,
     [id_tipo_atributo_solicitud] BIGINT        NOT NULL,

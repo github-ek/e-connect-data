@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[direcciones] (
-    [id_direccion]            BIGINT           IDENTITY (1, 1) NOT NULL,
+    [id_direccion]            BIGINT           NOT NULL,
     [estado]                  VARCHAR (50)     NOT NULL,
     [id_cliente]              BIGINT           NOT NULL,
     [tercero_codigo_alterno]  VARCHAR (20)     NOT NULL,

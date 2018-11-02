@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[tipos_promesa_entrega] (
-    [id_promesa_entrega]   BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_promesa_entrega]   BIGINT        NOT NULL,
     [codigo]               VARCHAR (20)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [descripcion]          VARCHAR (200) NOT NULL,
