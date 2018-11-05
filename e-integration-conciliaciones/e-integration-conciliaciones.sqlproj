@@ -159,13 +159,6 @@
     <None Include="e-integration-conciliaciones.dev.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
-      <Name>e-integration</Name>
-      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\e-conciliaciones\e-conciliaciones.sqlproj">
       <Name>e-conciliaciones</Name>
       <Project>{d72fa721-8948-4032-a54c-0c723df190ee}</Project>
@@ -203,6 +196,13 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-integration\e-integration-config.sqlproj">
+      <Name>e-integration-config</Name>
+      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

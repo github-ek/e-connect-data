@@ -186,13 +186,6 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
     </ProjectReference>
-    <ProjectReference Include="..\e-integration\e-integration.sqlproj">
-      <Name>e-integration</Name>
-      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\tactic_stage\tactic_stage.sqlproj">
       <Name>tactic_stage</Name>
       <Project>{73d129f1-106e-4671-80b0-f6ddcc2f2d41}</Project>
@@ -231,6 +224,13 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>historicoInv</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-integration\e-integration-config.sqlproj">
+      <Name>e-integration-config</Name>
+      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-config", "e-config\e-conf
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-connect", "e-connect\e-connect.sqlproj", "{B61CE68B-F831-41D8-895B-212A9697457C}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-integration", "e-integration\e-integration.sqlproj", "{ECD814BF-DEE5-4572-B2D7-958C4F981F06}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-integration-config", "e-integration\e-integration-config.sqlproj", "{ECD814BF-DEE5-4572-B2D7-958C4F981F06}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-wms", "e-wms\e-wms.sqlproj", "{717DAB89-D6E8-4324-945E-A3AC4A02BD37}"
 EndProject

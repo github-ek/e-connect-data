@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>e_integration</Name>
+    <Name>e-integration-config</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</ProjectGuid>
@@ -25,6 +25,7 @@
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TargetDatabase>e-integration-config</TargetDatabase>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -66,13 +67,10 @@
   <ItemGroup>
     <Build Include="dbo\Tables\tipos_archivo.sql" />
     <Build Include="dbo\Tables\campos.sql" />
-    <Build Include="dbo\Tables\integraciones.sql" />
     <Build Include="dbo\Tables\llaves.sql" />
     <Build Include="dbo\Tables\llaves_campos.sql" />
-    <Build Include="dbo\Tables\archivos_errores.sql" />
     <Build Include="dbo\Tables\grupos_tipo_archivo.sql" />
     <Build Include="dbo\Tables\directorios.sql" />
-    <Build Include="dbo\Tables\archivos.sql" />
     <Build Include="dbo\Tables\mapas_valores.sql" />
     <Build Include="dbo\Tables\mapas.sql" />
     <Build Include="dbo\Tables\grupos_mapa.sql" />
@@ -82,9 +80,9 @@
     <None Include="SqlSchemaCompareDev.scmp" />
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
-    <None Include="e-integration.tst.publish.xml" />
-    <None Include="e-integration.dev.publish.xml" />
-    <None Include="e-integration.prd.publish.xml" />
+    <None Include="e-integration-config.tst.publish.xml" />
+    <None Include="e-integration-config.dev.publish.xml" />
+    <None Include="e-integration-config.prd.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
