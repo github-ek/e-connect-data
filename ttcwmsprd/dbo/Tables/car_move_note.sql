@@ -10,6 +10,8 @@
 );
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'The carrier move note table defines notes for a particular carrier move. A carrier move associates shipments together into a trailer', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'car_move_note';
 
@@ -33,6 +35,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Note Text.'
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'TM Note Line. This is used to convert the 132 character note line that TM uses
    to the 40 character note line that is used in WM/d.', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'car_move_note', @level2type = N'COLUMN', @level2name = N'tms_notlin';
+
+
 
 
 GO

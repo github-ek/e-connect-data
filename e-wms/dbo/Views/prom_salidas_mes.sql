@@ -32,7 +32,7 @@ SELECT a.[client_id]
       ,SUM(a.[ordqty]) ordqty
       ,SUM(a.[shpqty]) shpqty
       ,CAST(SUM(a.[shpqty]) AS FLOAT)/e.factor_conversion cajas
-  FROM [$(WMS_DB_SERVER)].[$(historicoInv)].dbo.[despachos_hist] a
+  FROM [$(WMS_DB_SERVER)].[$(historicoInv)].dbo.[despachos_Hist] a
             LEFT OUTER JOIN dbo.clientes b ON 
                        a.client_id = b.client_id
             LEFT OUTER JOIN dbo.productos c ON 

@@ -11,7 +11,7 @@ BEGIN
 		SELECT DISTINCT
 			a.id_archivo
 		FROM dbo.planillas_rutacontrol a
-		INNER JOIN [$(eIntegration)].dbo.archivos b ON
+		INNER JOIN dbo.archivos b ON
 			b.id_archivo = a.id_archivo
 		AND b.estado = 'VALIDADO'
 		GROUP BY

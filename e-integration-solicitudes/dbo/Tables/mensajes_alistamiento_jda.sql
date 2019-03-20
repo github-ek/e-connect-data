@@ -1,7 +1,11 @@
 ﻿CREATE TABLE [dbo].[mensajes_alistamiento_jda] (
-    [id_mensaje]               BIGINT         NOT NULL,
+    [id_mensaje]               BIGINT        NOT NULL,
     [id_orden_alistamiento]    BIGINT        NOT NULL,
-    [estado]                   VARCHAR (50)  NOT NULL,
+    [id_externo]               VARCHAR (100) NOT NULL,
+    [estado_mensaje]           VARCHAR (50)  NOT NULL,
+    [cliente_codigo]           VARCHAR (32)  NOT NULL,
+    [servicio_codigo]          VARCHAR (20)  NOT NULL,
+    [datos]                    VARCHAR (MAX) NULL,
     [fecha_envio]              DATETIME2 (0) NULL,
     [fecha_confirmacion_envio] DATETIME2 (0) NULL,
     [whse_id]                  NVARCHAR (32) NOT NULL,
@@ -26,4 +30,6 @@
     [fecha_modificacion]       DATETIME2 (0) NOT NULL,
     CONSTRAINT [PK_mensajes_alistamiento_jda] PRIMARY KEY CLUSTERED ([id_mensaje] ASC) WITH (FILLFACTOR = 80)
 );
+
+
 

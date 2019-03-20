@@ -4,6 +4,7 @@
     [codigo]               VARCHAR (20)     NOT NULL,
     [nombre]               VARCHAR (100)    NOT NULL,
     [nombre_alterno]       VARCHAR (100)    NOT NULL,
+    [codigo_alterno_tms]   VARCHAR (50)     NULL,
     [cx]                   DECIMAL (18, 15) NULL,
     [cy]                   DECIMAL (18, 15) NULL,
     [ordinal]              INT              NOT NULL,
@@ -18,4 +19,6 @@
     CONSTRAINT [UK_departamentos_01] UNIQUE NONCLUSTERED ([codigo] ASC),
     CONSTRAINT [UK_departamentos_02] UNIQUE NONCLUSTERED ([nombre] ASC)
 );
+
+
 

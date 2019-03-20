@@ -3,7 +3,6 @@ CREATE PROCEDURE [dbo].[CrearCorteSaldosCliente]
 	@id_archivo BIGINT
 AS
 BEGIN TRY
-	BEGIN TRANSACTION
 		BEGIN
 
 			IF OBJECT_ID('tempdb..#source') IS NOT NULL BEGIN
@@ -35,16 +34,8 @@ BEGIN TRY
 			FROM #source a
 		END
 
-		BEGIN
-			UPDATE a
-			SET  a.estado = 'PROCESADO'
-				,a.usuario_modificacion = SYSTEM_USER
-				,a.fecha_modificacion = SYSDATETIME()
-			FROM [$(eIntegration)].dbo.archivos a
-			INNER JOIN #corte b ON
-				b.id_archivo = a.id_archivo
-		END
-		
+	    BEGIN TRANSACTION
+
 		IF NOT EXISTS (
 			SELECT 
 				1
@@ -148,6 +139,16 @@ BEGIN TRY
 			INNER JOIN #corte b ON
 				b.id_archivo = a.id_archivo 
 		END	
+
+		BEGIN
+			UPDATE a
+			SET  a.estado = 'PROCESADO'
+				,a.usuario_modificacion = SYSTEM_USER
+				,a.fecha_modificacion = SYSDATETIME()
+			FROM dbo.archivos a
+			INNER JOIN #corte b ON
+				b.id_archivo = a.id_archivo
+		END
 
 	COMMIT TRANSACTION 
 END TRY

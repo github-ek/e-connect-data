@@ -12,7 +12,7 @@ BEGIN
 		SELECT
 			a.id_archivo
 		FROM dbo.consultas_solicitudes a
-		INNER JOIN [$(eIntegration)].dbo.archivos b ON
+		INNER JOIN dbo.archivos b ON
 			b.id_archivo = a.id_archivo
 		AND b.estado = 'ESTRUCTURA_VALIDA'
 		GROUP BY

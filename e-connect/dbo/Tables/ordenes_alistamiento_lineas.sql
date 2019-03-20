@@ -7,14 +7,12 @@
     [id_estado_inventario]  VARCHAR (4)   NOT NULL,
     [id_unidad_medida]      BIGINT        NOT NULL,
     [unidades_solicitadas]  INT           NOT NULL,
-    [unidades_despachadas]  INT           NOT NULL,
-    [unidades_canceladas]   INT           NOT NULL,
     [lote]                  VARCHAR (30)  NOT NULL,
     [predistribucion]       VARCHAR (200) NOT NULL,
-    [version]               INT           DEFAULT ((0)) NOT NULL,
-    [usuario_creacion]      VARCHAR (50)  DEFAULT ('') NOT NULL,
+    [version]               INT           CONSTRAINT [DF__tmp_ms_xx__versi__7CE47361] DEFAULT ((0)) NOT NULL,
+    [usuario_creacion]      VARCHAR (50)  CONSTRAINT [DF__tmp_ms_xx__usuar__7DD8979A] DEFAULT ('') NOT NULL,
     [fecha_creacion]        DATETIME2 (0) NOT NULL,
-    [usuario_modificacion]  VARCHAR (50)  DEFAULT ('') NOT NULL,
+    [usuario_modificacion]  VARCHAR (50)  CONSTRAINT [DF__tmp_ms_xx__usuar__7ECCBBD3] DEFAULT ('') NOT NULL,
     [fecha_modificacion]    DATETIME2 (0) NOT NULL,
     CONSTRAINT [PK_ordenes_alistamiento_lineas] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80),
     CONSTRAINT [FK_ordenes_alistamiento_lineas_estados_inventario] FOREIGN KEY ([id_estado_inventario]) REFERENCES [dbo].[estados_inventario] ([id_estado_inventario]),
@@ -23,6 +21,8 @@
     CONSTRAINT [FK_ordenes_alistamiento_lineas_unidades_medida] FOREIGN KEY ([id_unidad_medida]) REFERENCES [dbo].[unidades_medida] ([id_unidad_medida]),
     CONSTRAINT [UK_ordenes_alistamiento_lineas_01] UNIQUE NONCLUSTERED ([id_orden_alistamiento] ASC, [numero_linea] ASC)
 );
+
+
 
 
 

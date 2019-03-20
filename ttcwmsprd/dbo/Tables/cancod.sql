@@ -24,6 +24,8 @@
 );
 
 
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [cancod_voc_cod_ck]
     ON [dbo].[cancod]([voc_cod] ASC) WITH (FILLFACTOR = 90);
@@ -53,6 +55,8 @@ GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Indicates which cancel codes get cycle counts generated when any pick is
    cacelled, and control whether the work is released right away or could be released at a later
    time.', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'cancod', @level2type = N'COLUMN', @level2name = N'cyc_cnt_cod';
+
+
 
 
 GO

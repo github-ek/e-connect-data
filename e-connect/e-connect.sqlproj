@@ -65,6 +65,8 @@
     <Folder Include="app\" />
     <Folder Include="app\Tables\" />
     <Folder Include="Security\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Sequences\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\solicitudes_atributos.sql" />
@@ -102,7 +104,6 @@
     <Build Include="dbo\Tables\ordenes_recibo_lineas.sql" />
     <Build Include="dbo\Tables\productos_medidas.sql" />
     <Build Include="dbo\Tables\ordenes_manufactura_lineas.sql" />
-    <Build Include="dbo\Tables\solicitudes_ordenes.sql" />
     <Build Include="dbo\Tables\ordenes_alistamiento.sql" />
     <Build Include="dbo\Tables\tipos_atributo_solicitud.sql" />
     <Build Include="dbo\Tables\ordenes_recibo_lineas_confirmadas.sql" />
@@ -123,6 +124,22 @@
     <Build Include="dbo\Tables\bodegas_ciudades_perifericas.sql" />
     <Build Include="app\Tables\Mensajes.sql" />
     <Build Include="Security\app.sql" />
+    <Build Include="dbo\Tables\tipos_wms_orden.sql" />
+    <Build Include="dbo\Tables\tipos_wms_integracion.sql" />
+    <Build Include="dbo\Tables\tipos_tarifa.sql" />
+    <Build Include="dbo\Tables\tipos_solicitud.sql" />
+    <Build Include="dbo\Tables\tipos_producto.sql" />
+    <Build Include="dbo\Tables\tipos_naturaleza_producto.sql" />
+    <Build Include="dbo\Tables\servicios_tipos_wms_orden.sql" />
+    <Build Include="dbo\Tables\ordenes_transporte_lineas_alistadas.sql" />
+    <Build Include="dbo\Tables\ordenes_transporte_lineas.sql" />
+    <Build Include="dbo\Tables\ordenes_alistamiento_lotes.sql" />
+    <Build Include="dbo\Tables\ordenes_alistamiento_lineas_alistadas.sql" />
+    <Build Include="dbo\Tables\ordenes_alistamiento_cancelaciones.sql" />
+    <Build Include="dbo\Tables\centros_costo.sql" />
+    <Build Include="dbo\Tables\bodegas_virtuales.sql" />
+    <Build Include="dbo\Views\ordenes_transporte_base_remesas.sql" />
+    <Build Include="dbo\Sequences\hibernate_sequence.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />

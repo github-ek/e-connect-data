@@ -14,6 +14,8 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [blng_prd_idx1]
     ON [dbo].[blng_prd]([nxt_blng_dat] ASC) WITH (FILLFACTOR = 90);
@@ -66,4 +68,6 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Second Bill
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Refers to the length of the optional period defind for a billing service
    type of anniversary storage.', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'blng_prd', @level2type = N'COLUMN', @level2name = N'opt_prd_num_days';
+
+
 

@@ -4,6 +4,7 @@
     [codigo]               VARCHAR (20)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [descripcion]          VARCHAR (200) NOT NULL,
+    [codigo_alterno_tms]   VARCHAR (50)  NOT NULL,
     [ordinal]              INT           NOT NULL,
     [activo]               BIT           NOT NULL,
     [version]              INT           NOT NULL,
@@ -16,4 +17,6 @@
     CONSTRAINT [UK_tipos_remesa_01] UNIQUE NONCLUSTERED ([codigo] ASC),
     CONSTRAINT [UK_tipos_remesa_02] UNIQUE NONCLUSTERED ([nombre] ASC)
 );
+
+
 

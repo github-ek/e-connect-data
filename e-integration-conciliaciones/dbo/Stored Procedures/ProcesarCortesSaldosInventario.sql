@@ -60,7 +60,7 @@ BEGIN
 						,MIN(a.fecha_creacion) AS fecha_corte_opl
 						,a.wh_id AS bodega_codigo
 						,a.prtnum AS producto_codigo
-						,a.invsts AS id_estado_inventario
+						,CONCAT(a.wh_id,'-',a.invsts) AS id_estado_inventario
                         ,a.prtstyle
 						,SUM(a.untqty) AS unidades_wms
 					INTO #saldos_wms
@@ -82,7 +82,7 @@ BEGIN
 					SELECT
 						 a.wh_id AS bodega_codigo
 						,a.prtnum AS producto_codigo
-						,a.invsts AS id_estado_inventario
+						,CONCAT(a.wh_id,'-',a.invsts) AS id_estado_inventario
 						,SUM(a.ordqty) AS unidades_en_proceso_despacho
 					INTO #salidas_en_proceso
 					FROM [$(WMS_DB_SERVER)].[$(historicoInv)].dbo.pedidos_pendientes_lineas a
@@ -125,22 +125,8 @@ BEGIN
 				-- REALIZAR CRUCE DATOS CLIENTE VS OPL
 				---------------------------------------------------------------------------
 				BEGIN TRANSACTION
+				
 				BEGIN
-					---------------------------------------------------------------------------
-					-- BLOQUEAR CORTE 
-					---------------------------------------------------------------------------
-					BEGIN
-						UPDATE a
-						SET  a.fecha_corte_opl = b.fecha_corte_opl
-							,a.estado = 'PROCESADO'
-							,a.version = a.version + 1
-							,a.usuario_modificacion = SYSTEM_USER
-							,a.fecha_modificacion = SYSDATETIME()
-						FROM [$(eConciliaciones)].dbo.cortes_saldos_inventario a
-						INNER JOIN #corte b ON
-							b.id_corte_saldo_inventario = a.id_corte_saldo_inventario
-					END
-
 					---------------------------------------------------------------------------
 					-- CONSOLIDAR MAPA
 					---------------------------------------------------------------------------
@@ -426,6 +412,21 @@ BEGIN
 							,SYSDATETIME() AS fecha_modificacion
 						FROM #conciliaciones_saldos_inventario
 					END
+				
+                	---------------------------------------------------------------------------
+					-- ACTUALIZAR CORTE 
+					---------------------------------------------------------------------------
+					BEGIN
+						UPDATE a
+						SET  a.fecha_corte_opl = b.fecha_corte_opl
+							,a.estado = 'PROCESADO'
+							,a.version = a.version + 1
+							,a.usuario_modificacion = SYSTEM_USER
+							,a.fecha_modificacion = SYSDATETIME()
+						FROM [$(eConciliaciones)].dbo.cortes_saldos_inventario a
+						INNER JOIN #corte b ON
+							b.id_corte_saldo_inventario = a.id_corte_saldo_inventario
+					END                
 				END
 
 				COMMIT TRANSACTION

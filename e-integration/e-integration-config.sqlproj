@@ -75,6 +75,7 @@
     <Build Include="dbo\Tables\mapas.sql" />
     <Build Include="dbo\Tables\grupos_mapa.sql" />
     <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
+    <Build Include="dbo\Tables\integraciones.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

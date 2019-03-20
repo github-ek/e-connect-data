@@ -147,7 +147,7 @@ BEGIN TRY
             WHERE
                 id_cliente IS NOT NULL AND id_solicitud IS NULL
         )
-        INSERT INTO [$(eIntegration)].dbo.archivos_errores
+        INSERT INTO dbo.archivos_errores
             (id_archivo
             ,numero_linea
             ,codigo
@@ -195,7 +195,7 @@ BEGIN TRY
             ,a.[version] = a.[version] + 1
             ,a.fecha_modificacion = SYSDATETIME()
             ,a.usuario_modificacion = SYSTEM_USER
-        FROM [$(eIntegration)].dbo.archivos a
+        FROM dbo.archivos a
         INNER JOIN cte_01 b ON
             b.id_archivo = a.id_archivo
 

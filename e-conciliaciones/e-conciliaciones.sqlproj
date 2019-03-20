@@ -63,6 +63,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\productos_excluidos.sql" />
@@ -71,6 +72,7 @@
     <Build Include="dbo\Tables\estados_conciliacion.sql" />
     <Build Include="dbo\Tables\cortes_saldos_inventario_cliente.sql" />
     <Build Include="dbo\Tables\cortes_saldos_inventario.sql" />
+    <Build Include="dbo\Functions\dbo.GetProductos.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaComparePrd.scmp" />
@@ -79,5 +81,20 @@
     <None Include="e-conciliaciones.prd.publish.xml" />
     <None Include="e-conciliaciones.tst.publish.xml" />
     <None Include="e-conciliaciones.dev.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\e-connect\e-connect.sqlproj">
+      <Name>e-connect</Name>
+      <Project>{b61ce68b-f831-41d8-895b-212a9697457c}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConnect">
+      <DefaultValue>eConnect</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

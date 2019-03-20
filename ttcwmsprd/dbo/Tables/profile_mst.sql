@@ -14,9 +14,13 @@
 );
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'This table contains the definition data and settings 
     for a given profile. Note opt_nam and usr_id cannot both be assigned', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'profile_mst';
+
+
 
 
 GO

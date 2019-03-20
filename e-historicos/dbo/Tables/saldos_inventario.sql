@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[saldos_inventario] (
-    [id]             BIGINT          NOT NULL,
+    [id]             BIGINT         IDENTITY (1, 1) NOT NULL,
     [fecha_creacion] DATETIME       NOT NULL,
     [fecha_corte]    DATE           NOT NULL,
     [prt_client_id]  NVARCHAR (32)  NOT NULL,
@@ -15,9 +15,11 @@
     [lodnum]         NVARCHAR (30)  NOT NULL,
     [orgcod]         NVARCHAR (25)  NOT NULL,
     [prtstyle]       NVARCHAR (30)  NOT NULL,
-    [hld_flg] INT NULL, 
+    [hld_flg]        INT            NULL,
     CONSTRAINT [PK_saldos_inventario] PRIMARY KEY CLUSTERED ([id] ASC)
 );
+
+
 
 
 

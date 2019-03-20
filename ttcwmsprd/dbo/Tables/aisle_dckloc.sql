@@ -16,9 +16,13 @@
 );
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'The aisle_dckloc table is used to store the association of dock doors to
     staging lanes to aisles for receiving dock doors (dckmode = R) and also the association of aisles to dock doors to staging lnaes for shipping dock doors (dckmode = S).', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'aisle_dckloc';
+
+
 
 
 GO

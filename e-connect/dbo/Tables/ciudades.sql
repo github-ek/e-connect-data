@@ -5,6 +5,7 @@
     [codigo_centro_poblado] VARCHAR (20)     NOT NULL,
     [nombre]                VARCHAR (100)    NOT NULL,
     [nombre_alterno]        VARCHAR (100)    NOT NULL,
+    [codigo_alterno_tms]    VARCHAR (50)     NULL,
     [cx]                    DECIMAL (18, 15) NULL,
     [cy]                    DECIMAL (18, 15) NULL,
     [ordinal]               INT              NOT NULL,
@@ -19,4 +20,6 @@
     CONSTRAINT [UK_ciudades_01] UNIQUE NONCLUSTERED ([codigo] ASC),
     CONSTRAINT [UK_ciudades_02] UNIQUE NONCLUSTERED ([nombre_alterno] ASC)
 );
+
+
 

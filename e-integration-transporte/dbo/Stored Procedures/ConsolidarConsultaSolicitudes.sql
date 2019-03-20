@@ -9,7 +9,7 @@ BEGIN TRY
 			SET  a.estado = 'PROCESADO'
 				,a.usuario_modificacion = SYSTEM_USER
 				,a.fecha_modificacion = SYSDATETIME()
-			FROM [$(eIntegration)].dbo.archivos a
+			FROM dbo.archivos a
             WHERE
 				a.id_archivo = @id_archivo
 
@@ -74,12 +74,12 @@ BEGIN TRY
 	            ,COALESCE(b.usuario_corte_planificacion_ruta,'') COLLATE SQL_Latin1_General_CP1_CI_AS AS usuario_corte_planificacion_ruta
             INTO #base
             FROM #source a
-            INNER JOIN [$(INGLATERRA)].[$(satelite)].ordenes.ordenes b ON
+            INNER JOIN [$(INGLATERRA)].[$(Satelite)].ordenes.ordenes b ON
 	            b.numero_documento_orden_cliente = a.numero_documento_orden_cliente
             AND b.id_cliente = a.id_cliente
-            INNER JOIN [$(INGLATERRA)].[$(satelite)].ordenes.lineas_orden c ON
+            INNER JOIN [$(INGLATERRA)].[$(Satelite)].ordenes.lineas_orden c ON
 	            c.id_orden = b.id_orden
-            LEFT OUTER JOIN [$(INGLATERRA)].[$(satelite)].crm.destinatarios_remitentes d ON
+            LEFT OUTER JOIN [$(INGLATERRA)].[$(Satelite)].crm.destinatarios_remitentes d ON
 	            d.id_destinatario_remitente = b.id_destinatario_remitente_destinatario
 		END
         

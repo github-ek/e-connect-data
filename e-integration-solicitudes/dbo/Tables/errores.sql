@@ -4,7 +4,7 @@
     [correlacion]         VARCHAR (100) NOT NULL,
     [id_externo]          VARCHAR (100) NOT NULL,
     [estado_notificacion] VARCHAR (50)  NOT NULL,
-    [fecha_notificacion]  DATETIME2 (0) NOT NULL,
+    [fecha_notificacion]  DATETIME2 (0) NULL,
     [codigo]              VARCHAR (100) NOT NULL,
     [mensaje]             VARCHAR (MAX) NOT NULL,
     [arg0]                VARCHAR (100) NULL,
@@ -22,6 +22,8 @@
     [fecha_modificacion]  DATETIME2 (0) NOT NULL,
     CONSTRAINT [PK_errores] PRIMARY KEY CLUSTERED ([id] ASC)
 );
+
+
 
 
 

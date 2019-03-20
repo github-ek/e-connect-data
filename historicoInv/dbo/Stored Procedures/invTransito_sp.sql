@@ -41,5 +41,5 @@ select invlod.wh_id Almacen,
         shipment_line.schbat,
         coalesce(invlod.lstmov, invdtl.lstmov)
   order by 7
-  
+
   COMMIT TRAN

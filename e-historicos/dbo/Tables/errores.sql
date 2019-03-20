@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[integraciones_actualizaciones_errores] (
-    [id]                           BIGINT         NOT NULL,
+    [id]                           BIGINT        IDENTITY (1, 1) NOT NULL,
     [id_integracion_actualizacion] BIGINT        NOT NULL,
     [codigo]                       VARCHAR (50)  NOT NULL,
     [mensaje]                      VARCHAR (MAX) NOT NULL,
@@ -19,4 +19,6 @@
     CONSTRAINT [PK_integraciones_actualizaciones_errores] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [FK_integraciones_actualizaciones_errores_integraciones_actualizaciones] FOREIGN KEY ([id_integracion_actualizacion]) REFERENCES [dbo].[integraciones_actualizaciones] ([id_integracion_actualizacion]) ON DELETE CASCADE
 );
+
+
 

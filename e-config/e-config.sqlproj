@@ -69,11 +69,10 @@
     <Build Include="dbo\Tables\grupos_configuracion.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="e-config.dev.publish.xml" />
-    <None Include="SqlSchemaCompareDev.scmp" />
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="e-config.tst.publish.xml" />
     <None Include="e-config.prd.publish.xml" />
+    <None Include="SqlSchemaCompareDev.scmp" />
   </ItemGroup>
 </Project>

@@ -110,13 +110,13 @@ BEGIN
             FROM #despachos_hist a
         )
         DELETE a
-        FROM dbo.despachos_hist a
+        FROM dbo.despachos_Hist a
         INNER JOIN cte_00 b ON
             b.client_id = a.client_id
         AND b.wh_id = a.wh_id
         AND b.ordnum = a.ordnum
 
-        INSERT INTO dbo.despachos_hist 
+        INSERT INTO dbo.despachos_Hist 
             (trlr_num
             ,client_id
             ,wh_id

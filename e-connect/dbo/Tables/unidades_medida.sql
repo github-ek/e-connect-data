@@ -3,6 +3,7 @@
     [codigo]               VARCHAR (20)  NOT NULL,
     [nombre]               VARCHAR (100) NOT NULL,
     [descripcion]          VARCHAR (200) NOT NULL,
+    [codigo_alterno_tms]   VARCHAR (50)  NULL,
     [ordinal]              INT           NOT NULL,
     [activo]               BIT           NOT NULL,
     [version]              INT           NOT NULL,
@@ -14,4 +15,6 @@
     CONSTRAINT [UK_unidades_medida_01] UNIQUE NONCLUSTERED ([codigo] ASC),
     CONSTRAINT [UK_unidades_medida_02] UNIQUE NONCLUSTERED ([nombre] ASC)
 );
+
+
 

@@ -10,6 +10,8 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [sys_audit_auddte]
     ON [dbo].[sys_audit]([auddte] ASC) WITH (FILLFACTOR = 90);
@@ -43,6 +45,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'TCP address
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Used to indicate the type of audit records. Current known types: I - Interactve,
     U - User Authentication', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'sys_audit', @level2type = N'COLUMN', @level2name = N'aud_typ';
+
+
 
 
 GO

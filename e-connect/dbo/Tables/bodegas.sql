@@ -5,6 +5,8 @@
     [id_ciudad]            BIGINT        NULL,
     [direccion]            VARCHAR (150) NOT NULL,
     [id_direccion]         BIGINT        NULL,
+    [contacto]             VARCHAR (50)  NULL,
+    [telefono]             VARCHAR (50)  NULL,
     [ordinal]              INT           NOT NULL,
     [activo]               BIT           NOT NULL,
     [version]              INT           NOT NULL,
@@ -17,6 +19,8 @@
     CONSTRAINT [FK_bodegas_direcciones] FOREIGN KEY ([id_direccion]) REFERENCES [dbo].[direcciones] ([id_direccion]),
     CONSTRAINT [UK_bodegas_01] UNIQUE NONCLUSTERED ([codigo] ASC)
 );
+
+
 
 
 

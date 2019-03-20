@@ -141,11 +141,11 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Stored Procedures\CrearOrdenesReciboDeTraslados.sql">
+    <Build Include="dbo\Tables\archivos_errores.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Stored Procedures\CrearOrdenesManufacturaDeTraslados.sql">
+    <Build Include="dbo\Tables\archivos.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -155,8 +155,8 @@
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="e-integration-conciliaciones.prd.publish.xml" />
-    <None Include="e-integration-conciliaciones.tst.publish.xml" />
     <None Include="e-integration-conciliaciones.dev.publish.xml" />
+    <None Include="e-integration-conciliaciones.tst.publish.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-conciliaciones\e-conciliaciones.sqlproj">

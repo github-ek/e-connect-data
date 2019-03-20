@@ -10,9 +10,13 @@
 );
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'This table contains the definition data and settings 
     for a given criteria for a given profile.', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'criteria_mst';
+
+
 
 
 GO

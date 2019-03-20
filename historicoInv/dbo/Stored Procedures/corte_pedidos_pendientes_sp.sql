@@ -1,13 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[corte_pedidos_pendientes_sp]
-    @fecha DATE = NULL
-AS
+     @fecha_corte DATE = DATE
+	,@prt_client_id VARCHAR(32)
+WITH RECOMPILE AS
 SET NOCOUNT ON;
 BEGIN
     -------------------------------------------------------------------------------------------------------------------
     -- Inicializando valores por defecto
     -------------------------------------------------------------------------------------------------------------------
-    IF @fecha IS NULL BEGIN
-        SET @fecha = CAST(GETDATE() AS DATE)
+    IF @fecha_corte IS NULL BEGIN
+        SET @fecha_corte = CAST(GETDATE() AS DATE)
     END
 
     -------------------------------------------------------------------------------------------------------------------
@@ -17,17 +18,20 @@ BEGIN
         DELETE a
         FROM dbo.corte_wh_clientes a
         WHERE
-            a.fecha = @fecha
+            a.fecha = @fecha_corte
+		AND a.prt_client_id = @prt_client_id
 
         DELETE a
         FROM dbo.pedidos_pendientes_lineas a
         WHERE
-            a.fecha = @fecha
+            a.fecha = @fecha_corte
+		AND a.prt_client_id = @prt_client_id
 
         DELETE a
         FROM dbo.pedidos_pendientes_lineas_sin_stage a
         WHERE
-            a.fecha = @fecha
+            a.fecha = @fecha_corte
+		AND a.prt_client_id = @prt_client_id
     END
 
     -------------------------------------------------------------------------------------------------------------------
@@ -42,7 +46,8 @@ BEGIN
 		    ,wh_id
 	    FROM dbo.corteinv_hist a
         WHERE
-            a.fecha = @fecha
+            a.fecha = @fecha_corte
+		AND a.prt_client_id = @prt_client_id
     END
 
     -------------------------------------------------------------------------------------------------------------------
@@ -61,7 +66,7 @@ BEGIN
             ,ordqty
             ,fecha_creacion)
         SELECT
-             @fecha AS fecha
+             @fecha_corte AS fecha
             ,b.prt_client_id
             ,b.wh_id
             ,a.ordnum
@@ -91,8 +96,9 @@ BEGIN
             AND c.client_id = a.client_id
             AND c.ordnum = a.ordnum
         )
-        AND a.adddte >= DATEADD(DAY,-30,@fecha)
-        AND a.adddte < @fecha
+        AND a.adddte >= DATEADD(DAY,-30,@fecha_corte)
+        AND a.adddte < @fecha_corte
+		AND a.client_id = @prt_client_id
         --L CARGANDO: CARGANDO EL CARRO
         --D CARGADO: LE FALTA CERRAR LA PUERTA
         --C CARGA COMPLETA: SE FUE EL CARRO
@@ -113,7 +119,7 @@ BEGIN
             ,ordqty
             ,fecha_creacion)
         SELECT
-             @fecha AS fecha
+             @fecha_corte AS fecha
             ,b.prt_client_id
             ,b.wh_id
             ,a.ordnum
@@ -143,8 +149,9 @@ BEGIN
             AND c.client_id = a.client_id
             AND c.ordnum = a.ordnum
         )
-        AND a.adddte >= DATEADD(DAY,-30,@fecha)
-        AND a.adddte < @fecha
+        AND a.adddte >= DATEADD(DAY,-30,@fecha_corte)
+        AND a.adddte < @fecha_corte
+		AND a.client_id = @prt_client_id
         --L CARGANDO: CARGANDO EL CARRO
         --D CARGADO: LE FALTA CERRAR LA PUERTA
         --C CARGA COMPLETA: SE FUE EL CARRO

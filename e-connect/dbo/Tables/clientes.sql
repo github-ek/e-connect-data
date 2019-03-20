@@ -7,6 +7,7 @@
     [digito_verificacion]     VARCHAR (1)   NOT NULL,
     [id_empresa]              BIGINT        NOT NULL,
     [codigo_alterno_wms]      VARCHAR (32)  NOT NULL,
+    [codigo_alterno_tms]      VARCHAR (50)  NULL,
     [habilitado_conciliacion] BIT           CONSTRAINT [DF_clientes_habilitado_conciliacion] DEFAULT ((0)) NOT NULL,
     [activo]                  BIT           CONSTRAINT [DF__clientes__activo__16644E42] DEFAULT ((1)) NOT NULL,
     [version]                 INT           CONSTRAINT [DF__clientes__versio__1758727B] DEFAULT ((0)) NOT NULL,
@@ -20,6 +21,8 @@
     CONSTRAINT [UK_clientes_02] UNIQUE NONCLUSTERED ([nombre] ASC),
     CONSTRAINT [UK_clientes_03] UNIQUE NONCLUSTERED ([numero_identificacion] ASC)
 );
+
+
 
 
 
