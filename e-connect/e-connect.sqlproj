@@ -140,6 +140,12 @@
     <Build Include="dbo\Tables\bodegas_virtuales.sql" />
     <Build Include="dbo\Views\ordenes_transporte_base_remesas.sql" />
     <Build Include="dbo\Sequences\hibernate_sequence.sql" />
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion_lineas_alistadas.sql" />
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion_lineas.sql" />
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion_errores.sql" />
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion.sql" />
+    <Build Include="dbo\Tables\cargue_actas_wms.sql" />
+    <Build Include="dbo\Tables\cargue_actas.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />

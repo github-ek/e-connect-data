@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[corteinv_hist] (
+﻿CREATE TABLE [dbo].[corteInv_Hist] (
     [fecha]          DATE           DEFAULT (CONVERT([date],sysdatetime())) NULL,
     [prt_client_id]  NVARCHAR (32)  NULL,
     [wh_id]          NVARCHAR (32)  NULL,
@@ -16,5 +16,5 @@
 
 GO
 CREATE NONCLUSTERED INDEX [IX_corteInv_Hist_01]
-    ON [dbo].[corteinv_hist]([fecha] ASC, [prt_client_id] ASC, [wh_id] ASC);
+    ON [dbo].[corteInv_Hist]([fecha] ASC, [prt_client_id] ASC, [wh_id] ASC);
 

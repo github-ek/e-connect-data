@@ -165,18 +165,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Stored Procedures\ProcesarArchivoRutaControl.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\ProcesarArchivosRutaControl.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\ProcesarArchivoRemesasSecundariaEstadoFinal.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="dbo\Tables\archivos_errores.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -281,7 +269,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />
-    <None Include="SqlSchemaCompareDev.scmp" />
-    <None Include="e-integration-transporte.publish.xml" />
+    <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="e-integration-transporte.tst.publish.xml" />
+    <None Include="e-integration-transporte.prd.publish.xml" />
   </ItemGroup>
 </Project>

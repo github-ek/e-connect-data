@@ -104,6 +104,10 @@
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosCodigos.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroProductosMedidas.sql" />
     <Build Include="dbo\Stored Procedures\SincronizarMaestroUnidadesMedida.sql" />
+    <Build Include="dbo\Views\tarifas_heinz_maq.sql" />
+    <Build Include="dbo\Views\tarifas_gws_maq.sql" />
+    <Build Include="dbo\Views\retencion_bi.sql" />
+    <Build Include="dbo\Views\Fechas_festivos.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />

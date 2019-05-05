@@ -57,7 +57,9 @@ BEGIN TRY
                 ,inv_attr_str7
                 ,stoloc
                 ,lodnum
-                ,orgcod)
+                ,orgcod
+                ,prtstyle
+                ,hld_flg)
             SELECT
                  a.id
                 ,a.fecha_creacion
@@ -74,6 +76,8 @@ BEGIN TRY
                 ,a.stoloc
                 ,a.lodnum
                 ,a.orgcod
+                ,a.prtstyle
+                ,a.hld_flg
             FROM [$(WMS_DB_SERVER)].[$(eHistoricos)].dbo.saldos_inventario a
             WHERE
                 a.fecha_corte = @fecha_corte

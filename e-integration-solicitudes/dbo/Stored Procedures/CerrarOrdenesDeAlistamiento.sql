@@ -36,16 +36,16 @@ BEGIN TRY
             ,c.numero_orden
             ,CASE WHEN c.id_orden_alistamiento IS NOT NULL THEN 1 ELSE 0 END AS match_orden
             ,CASE WHEN b.id_bodega = c.id_bodega THEN 1 ELSE 0 END AS match_bodega
-            ,CASE WHEN c.estado_orden = 'MENSAJE_CREADO' THEN 1 ELSE 0 END AS match_estado_orden
+            ,CASE WHEN c.estado_orden = 'CREACION_CONFIRMADA' THEN 1 ELSE 0 END AS match_estado_orden
         INTO #ordenes
         FROM #source a
-        INNER JOIN dbo.ordenes_alistamiento b ON
+        INNER JOIN dbo.ordenes_alistamiento_ord b ON
             b.integracion = a.integracion
         AND b.id_externo = a.id_externo
         LEFT OUTER JOIN [$(eConnect)].dbo.ordenes_alistamiento c ON
             c.id_cliente = b.id_cliente
         AND c.numero_orden = b.ordnum
-
+		
         IF OBJECT_ID('tempdb..#ordenes_lineas_alistadas') IS NOT NULL BEGIN
             DROP TABLE #ordenes_lineas_alistadas
         END
@@ -81,7 +81,7 @@ BEGIN TRY
         FROM #ordenes a
         INNER JOIN [$(eConnect)].dbo.ordenes_alistamiento_lineas b ON
             b.id_orden_alistamiento = a.id_orden_alistamiento
-        LEFT OUTER JOIN dbo.ordenes_alistamiento_lineas c ON
+        LEFT OUTER JOIN dbo.ordenes_alistamiento_shipment_line c ON
             c.id_orden = a.id_orden
         AND c.numero_linea = b.numero_linea
         WHERE
@@ -103,7 +103,7 @@ BEGIN TRY
             ,b.numero_linea
         INTO #ordenes_lineas_alistadas_sobrantes
         FROM #ordenes a
-        INNER JOIN dbo.ordenes_alistamiento_lineas b ON
+        INNER JOIN dbo.ordenes_alistamiento_shipment_line b ON
             b.id_orden = a.id_orden
         AND b.numero_linea = b.numero_linea
         LEFT OUTER JOIN [$(eConnect)].dbo.ordenes_alistamiento_lineas c ON
@@ -135,7 +135,7 @@ BEGIN TRY
             ,b.candte
         INTO #ordenes_cancelaciones
         FROM #ordenes_lineas_alistadas a
-        INNER JOIN dbo.ordenes_alistamiento_cancelaciones b ON
+        INNER JOIN dbo.ordenes_alistamiento_canpck b ON
             b.id_orden_linea = a.id_orden_linea
         WHERE
             a.match_linea = 1
@@ -162,7 +162,7 @@ BEGIN TRY
             ,b.orgcod
         INTO #ordenes_lotes
         FROM #ordenes_lineas_alistadas a
-        INNER JOIN dbo.ordenes_alistamiento_lotes b ON
+        INNER JOIN dbo.ordenes_alistamiento_invdtl b ON
             b.id_orden_linea = a.id_orden_linea
         WHERE
             a.match_linea = 1
@@ -370,6 +370,7 @@ BEGIN TRY
     BEGIN TRANSACTION
     
     BEGIN
+		--FINALIZAR MENSAJE
         UPDATE a
         SET  a.estado_mensaje = 'PROCESADO'
             ,a.fecha_confirmacion_envio = SYSDATETIME()
@@ -380,20 +381,60 @@ BEGIN TRY
         INNER JOIN #ordenes b ON
             b.id_orden_alistamiento = a.id_orden_alistamiento
 
-        UPDATE a
-        SET a.estado_orden = 'STAGE', a.[version] = a.[version] + 1, a.usuario_modificacion = SYSTEM_USER, a.fecha_modificacion = SYSDATETIME()
-        FROM [$(eConnect)].dbo.ordenes_alistamiento a
+		--ACTUALIZAR EL ESTADO DE LA INTEGRACION DE LA ORDEN DE ALISTAMIENTO EN CASO EXITOSO
+		UPDATE a
+        SET  a.estado_integracion = 'PROCESADO'
+			,a.subestado_integracion = ''
+			,a.estado_notificacion = 'SIN_NOVEDAD'
+			,a.reintentos = 0
+			,a.[version] = a.[version] + 1
+			,a.fecha_modificacion = SYSDATETIME()
+        FROM dbo.actualizaciones a
         INNER JOIN #ordenes b ON
-            b.id_orden_alistamiento = a.id_orden_alistamiento
+            a.integracion = b.integracion
+        AND a.id_externo = b.numero_orden
 
+		--ACTUALIZAR EL ESTADO DE LA INTEGRACION DE LA ORDEN DE ALISTAMIENTO EN CASO DE ERROR
+		;WITH
+        cte_00 AS
+        (
+            SELECT DISTINCT
+                 a.integracion
+                ,a.id_externo
+            FROM #errores a
+        )
+        UPDATE a
+        SET  a.estado_integracion = 'ERROR_VALIDACION'
+            ,a.subestado_integracion = 'INCONSISTENCIA_WMS'
+        FROM actualizaciones a
+        INNER JOIN cte_00 b ON
+            b.integracion = a.integracion
+        AND b.id_externo = a.id_externo
+
+		--ACTUALIZAR EL ESTADO DE LA INTEGRACION DE LA SOLICITUD. ESTO ESTA AQUI PARA PERMITIR QUE LA INTEGRACION DE GWS NOTIFIQUE AL SISTEMA DE GWS. 
+		--REALMENTE ESTO DEBERIA 
+		--SER NOTIFICADO A LOS FLUJOS INTERESADOS MEDIANTE EL PATRON OBSERVER
+		--O
+		--EL FLUJO INTERESADO DEBERIA CONSULTAR LAS ORDENES EN STAGE. NO TODOS LOS CLIENTES ESTAN INTERESADOS EN CONOCER QUE LA ORDEN DE ALISTAMIENTO HA QUEDADO EN STAGE
         UPDATE c
-        SET c.subestado_integracion = 'STAGE'
+        SET  c.subestado_integracion = 'STAGE'
+			,c.estado_notificacion = 'NOTIFICAR'
         FROM #ordenes a
         INNER JOIN [$(eConnect)].dbo.solicitudes b ON
             b.id_solicitud = a.id_solicitud
         INNER JOIN dbo.actualizaciones c ON
             c.integracion = b.integracion
         AND c.id_externo = b.id_externo
+
+		--DEJAR EN STAGE LA ORDEN DE ALISTAMIENTO
+        UPDATE a
+        SET  a.estado_orden = 'STAGE'
+			,a.[version] = a.[version] + 1
+			,a.usuario_modificacion = SYSTEM_USER
+			,a.fecha_modificacion = SYSDATETIME()
+        FROM [$(eConnect)].dbo.ordenes_alistamiento a
+        INNER JOIN #ordenes b ON
+            b.id_orden_alistamiento = a.id_orden_alistamiento
 
         INSERT INTO [$(eConnect)].dbo.ordenes_alistamiento_lineas_alistadas
             (id
@@ -480,30 +521,6 @@ BEGIN TRY
             ,SYSTEM_USER AS usuario_modificacion
             ,SYSDATETIME() AS fecha_modificacion
         FROM #ordenes_lotes
-
-        ;WITH
-        cte_00 AS
-        (
-            SELECT DISTINCT
-                 a.integracion
-                ,a.id_externo
-            FROM #errores a
-        )
-        UPDATE a
-        SET  a.estado_integracion = 'ERROR_VALIDACION'
-            ,a.subestado_integracion = 'INCONSISTENCIA_WMS'
-        FROM actualizaciones a
-        INNER JOIN cte_00 b ON
-            b.integracion = a.integracion
-        AND b.id_externo = a.id_externo
-
-        UPDATE a
-        SET  a.estado_integracion = 'CARGADO'
-            ,a.subestado_integracion = ''
-        FROM actualizaciones a
-        INNER JOIN #ordenes b ON
-            b.integracion = a.integracion
-        AND b.id_externo = a.id_externo
     END
 
     COMMIT TRANSACTION

@@ -1,9 +1,4 @@
-﻿-- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE FUNCTION [dbo].[OrdenesAlistamientoCreadas]() 
+﻿CREATE FUNCTION [dbo].[OrdenesAlistamientoCreadas]() 
 RETURNS TABLE 
 AS
 RETURN 

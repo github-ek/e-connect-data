@@ -69,7 +69,7 @@
     <Build Include="dbo\Tables\historico.sql" />
     <Build Include="dbo\Tables\pedidos_pendientes_lineas_sin_stage.sql" />
     <Build Include="dbo\Tables\despachos_hist.sql" />
-    <Build Include="dbo\Tables\corteinv_hist.sql" />
+    <Build Include="dbo\Tables\corteInv_Hist.sql" />
     <Build Include="dbo\Tables\pedidos_pendientes.sql" />
     <Build Include="dbo\Tables\control_trabajo.sql" />
     <Build Include="dbo\Tables\otif_bodegas.sql" />

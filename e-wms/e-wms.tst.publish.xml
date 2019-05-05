@@ -4,7 +4,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>eWms</TargetDatabaseName>
     <DeployScriptFileName>e-wms.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=192.168.10.17;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
+    <TargetConnectionString>Data Source=EC2AMAZ-OU1CVJM;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
@@ -26,7 +26,7 @@
       <Value>ttcwmstst</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>HOLANDA</Value>
+      <Value>192.168.10.16</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

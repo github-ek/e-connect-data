@@ -64,6 +64,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Functions\" />
     <Folder Include="dbo\Sequences\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\suscripciones.sql" />
@@ -74,6 +75,12 @@
     <Build Include="dbo\Functions\OrdenDeAlistamientoCancelaciones.sql" />
     <Build Include="dbo\Functions\OrdenDeAlistamientoLotes.sql" />
     <Build Include="dbo\Sequences\hibernate_sequence.sql" />
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion_lineas_alistadas.sql" />
+    <Build Include="dbo\Functions\ActasIngredionEnStage.sql" />
+    <Build Include="dbo\Stored Procedures\LimpiarSuscripcionesOrdenesAlistamientoActasIngredion.sql" />
+    <Build Include="dbo\Stored Procedures\DetectarCreacionOrdenesAlistamientoActasIngredion.sql" />
+    <Build Include="dbo\Stored Procedures\DetectarAlistamientoOrdenesAlistamientoActasIngredion.sql" />
+    <Build Include="dbo\Stored Procedures\CrearSuscripcionesOrdenesAlistamientoActasIngredion.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ttcwmsprd\ttcwmsprd.sqlproj">
@@ -113,6 +120,9 @@
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
+    <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="e-integration-ordenes.prd.publish.xml" />
+    <None Include="e-integration-ordenes.tst.publish.xml" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ordenes_alistamiento] (
+﻿CREATE TABLE [dbo].[ordenes_alistamiento_ord] (
     [id_orden]              BIGINT        NOT NULL,
     [integracion]           VARCHAR (50)  NOT NULL,
     [id_externo]            VARCHAR (100) NOT NULL,
@@ -13,8 +13,6 @@
     [version]               INT           NOT NULL,
     [fecha_creacion]        DATETIME2 (0) NOT NULL,
     [fecha_modificacion]    DATETIME2 (0) NOT NULL,
-    CONSTRAINT [PK_ordenes_alistamiento] PRIMARY KEY CLUSTERED ([id_orden] ASC)
+    CONSTRAINT [PK_ordenes_alistamiento_ord] PRIMARY KEY CLUSTERED ([id_orden] ASC)
 );
-
-
 

@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[mensajes_ordenes_transporte_lineas] (
+    [id_mensaje]                    BIGINT          IDENTITY (1, 1) NOT NULL,
+    [fecha_creacion]                DATETIME2 (7)   NOT NULL,
+    [fecha_modificacion]            DATETIME2 (7)   NULL,
+    [id_producto_econnect]          BIGINT          NULL,
+    [codigo_producto]               VARCHAR (50)    NULL,
+    [producto_nombre]               VARCHAR (250)   NULL,
+    [producto_codigoministerio]     VARCHAR (50)    NULL,
+    [naturaleza_carga]              VARCHAR (50)    NULL,
+    [tipo_producto]                 VARCHAR (50)    NULL,
+    [codigo_empaque]                VARCHAR (50)    NULL,
+    [peso]                          DECIMAL (12, 4) NULL,
+    [peso_bruto]                    DECIMAL (12, 4) NULL,
+    [cantidad]                      INT             NULL,
+    [volumen]                       DECIMAL (12, 4) NULL,
+    [valor_declarado]               DECIMAL (12, 2) NULL,
+    [descripcion_detalle_remesa]    VARCHAR (82)    NULL,
+    [predistribucion]               VARCHAR (200)   NULL,
+    [factor_conversion]             DECIMAL (12, 4) NULL,
+    [cantidad_embalaje]             DECIMAL (12, 4) NULL,
+    [lote]                          VARCHAR (186)   NULL,
+    [estado_inventario_nombre]      VARCHAR (50)    NULL,
+    [fecha_vencimiento]             VARCHAR (30)    NULL,
+    [id_mensaje_ordenes_transporte] BIGINT          NULL,
+    CONSTRAINT [PK_mensajes_ordenes_transporte_lineas] PRIMARY KEY CLUSTERED ([id_mensaje] ASC),
+    CONSTRAINT [FK_mensajes_ordenes_transporte_lineas_mensajes_ordenes_transporte] FOREIGN KEY ([id_mensaje_ordenes_transporte]) REFERENCES [dbo].[mensajes_ordenes_transporte] ([id_mensaje])
+);
+

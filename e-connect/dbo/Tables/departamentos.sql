@@ -4,7 +4,7 @@
     [codigo]               VARCHAR (20)     NOT NULL,
     [nombre]               VARCHAR (100)    NOT NULL,
     [nombre_alterno]       VARCHAR (100)    NOT NULL,
-    [codigo_alterno_tms]   VARCHAR (50)     NULL,
+    [codigo_alterno_tms]   VARCHAR (100)     NULL,
     [cx]                   DECIMAL (18, 15) NULL,
     [cy]                   DECIMAL (18, 15) NULL,
     [ordinal]              INT              NOT NULL,

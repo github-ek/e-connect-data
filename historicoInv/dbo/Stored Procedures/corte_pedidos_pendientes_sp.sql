@@ -44,7 +44,7 @@ BEGIN
 		     fecha
 		    ,prt_client_id
 		    ,wh_id
-	    FROM dbo.corteinv_hist a
+	    FROM dbo.corteInv_Hist a
         WHERE
             a.fecha = @fecha_corte
 		AND a.prt_client_id = @prt_client_id

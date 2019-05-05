@@ -1,9 +1,4 @@
-﻿-- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE FUNCTION [dbo].[OrdenDeAlistamiento](
+﻿CREATE FUNCTION [dbo].[OrdenDeAlistamiento](
      @client_id	nvarchar(32)
     ,@ordnum nvarchar(35)
     ,@wh_id	nvarchar(32)

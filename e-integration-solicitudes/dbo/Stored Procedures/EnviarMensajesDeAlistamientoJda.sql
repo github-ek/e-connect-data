@@ -93,7 +93,8 @@ BEGIN
 	-- GENERAR UN DOCUMENTO XML POR CADA ORDEN
 	------------------------------------------------------------------------------------------------------
     BEGIN
-    	DECLARE @id_mensaje INT
+    	DECLARE @id_mensaje BIGINT
+		DECLARE @id_orden_alistamiento BIGINT
         DECLARE @cliente_codigo VARCHAR(20)
         DECLARE @servicio_codigo VARCHAR(20)
 	    DECLARE @numero_orden VARCHAR(100)
@@ -102,6 +103,7 @@ BEGIN
         DECLARE cursor_mensajes CURSOR LOCAL FOR  
         SELECT
              a.id_mensaje
+			,a.id_orden_alistamiento
             ,a.cliente_codigo
 	        ,a.servicio_codigo
 	        ,a.ordnum
@@ -118,12 +120,12 @@ BEGIN
         
         SELECT
             @DIRECTORIO_ENTRADAS = a.valor
-        FROM [$(eConfig)].dbo.configuraciones a
+        FROM [eConfig].dbo.configuraciones a
         WHERE
             a.codigo = 'wms.directorios.entradas'
 
 	    OPEN cursor_mensajes
-	    FETCH NEXT FROM cursor_mensajes INTO @id_mensaje, @cliente_codigo, @servicio_codigo, @numero_orden
+	    FETCH NEXT FROM cursor_mensajes INTO @id_mensaje, @id_orden_alistamiento, @cliente_codigo, @servicio_codigo, @numero_orden
 	    WHILE @@FETCH_STATUS = 0  
 	    BEGIN
 			BEGIN
@@ -221,6 +223,17 @@ BEGIN
                     FROM dbo.mensajes_alistamiento_jda a
                     WHERE
                         a.id_mensaje = @id_mensaje
+
+					UPDATE a
+					SET  a.estado_orden = 'MENSAJE_ENVIADO'
+
+						,a.[version] = a.[version] + 1
+						,a.fecha_modificacion = SYSDATETIME()
+						,a.usuario_modificacion = SYSTEM_USER
+					FROM [$(eConnect)].dbo.ordenes_alistamiento a
+					WHERE
+						a.id_orden_alistamiento = @id_orden_alistamiento
+					AND a.estado_orden = 'MENSAJE_CREADO'
 			    END
 		    END TRY
 		    BEGIN CATCH
@@ -237,7 +250,7 @@ BEGIN
                         a.id_mensaje = @id_mensaje
 		    END CATCH
             
-		    FETCH NEXT FROM cursor_mensajes INTO @id_mensaje, @cliente_codigo, @servicio_codigo, @numero_orden
+		    FETCH NEXT FROM cursor_mensajes INTO @id_mensaje, @id_orden_alistamiento, @cliente_codigo, @servicio_codigo, @numero_orden
 	    END 
 
 	    CLOSE cursor_mensajes

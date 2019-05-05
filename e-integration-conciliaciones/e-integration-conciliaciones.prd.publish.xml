@@ -7,4 +7,27 @@
     <TargetConnectionString>Data Source=172.31.48.15;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
   </PropertyGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConciliaciones">
+      <Value>eConciliaciones</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eConnect">
+      <Value>eConnect</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eHistoricos">
+      <Value>eHistorico</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegration">
+      <Value>eIntegration</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="historicoInv">
+      <Value>historicoInv</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <Value>ttcwmsprdnew</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <Value>57DBWMS05</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
 </Project>

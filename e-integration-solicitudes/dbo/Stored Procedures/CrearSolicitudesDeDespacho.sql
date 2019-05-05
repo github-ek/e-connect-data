@@ -8,6 +8,9 @@ BEGIN TRY
             DROP TABLE #solicitudes
         END
 
+		;WITH
+		cte_00 AS
+		(
         SELECT DISTINCT
              b.id_solicitud_despacho 
             ,CAST(NULL AS BIGINT) AS id_solicitud
@@ -49,7 +52,6 @@ BEGIN TRY
             ,b.fecha_modificacion
 
             ,CASE WHEN d.id_solicitud IS NOT NULL THEN 1 ELSE 0 END AS solicitud_existente
-        INTO #solicitudes
         FROM dbo.actualizaciones a
         INNER JOIN dbo.solicitudes_despacho b ON
             b.integracion = a.integracion
@@ -68,9 +70,24 @@ BEGIN TRY
         AND f.codigo = 'SALIDA'
         WHERE
             a.estado_integracion = 'VALIDADO'
-        AND a.integracion = @integracion
+		AND a.integracion = @integracion
 		AND a.correlacion = @correlacion
-
+		),
+		cte_01 AS
+		(
+			SELECT
+				 a.*
+				,ROW_NUMBER() OVER(PARTITION BY id_cliente,numero_solicitud ORDER BY id_solicitud_despacho) AS orden
+			FROM cte_00 a
+		)
+		SELECT
+			a.*
+		INTO #solicitudes
+		FROM cte_01 a
+		WHERE
+			a.orden = 1
+		--			
+        
         --TODO DETECTAR SOLICITUDES CON ERRORES Y MARCARLAS COMO ERROR
         --DUPLICADAS POR DATOS QUE DEBIERAN SER UNICOS
         --EXISTENTES EN LA BASE DE DATOS 
@@ -199,6 +216,87 @@ BEGIN TRY
         WHERE
             b.numero_orden_compra <> ''
     END
+
+	BEGIN
+        IF OBJECT_ID('tempdb..#errores_registros_existentes') IS NOT NULL BEGIN
+            DROP TABLE #errores_registros_existentes
+        END
+
+		SELECT
+			 a.id_solicitud
+			,a.integracion
+			,a.correlacion
+			,a.id_externo
+			
+			,'SOLICITUD DUPLICADO' AS codigo
+			,CONCAT('La solicitud ',a.numero_solicitud,' de tipo ',b.tipo_solicitud,', ya existe y fue creada el dia ',FORMAT(b.fecha_creacion,'yyyy-MM-dd HH:mm','es-CO')) AS mensaje
+		INTO #errores_registros_existentes
+		FROM #solicitudes a
+        LEFT OUTER JOIN [$(eConnect)].dbo.solicitudes b ON
+            b.id_cliente = a.id_cliente
+        AND b.numero_solicitud = a.numero_solicitud
+		WHERE
+			a.solicitud_existente = 1
+
+		BEGIN TRANSACTION
+
+			UPDATE a
+			SET  a.estado_integracion = 'ERROR_VALIDACION' 
+				,a.estado_notificacion = 'NOTIFICAR'
+				,a.[version] = a.[version] + 1
+				,a.fecha_modificacion = SYSDATETIME()
+			FROM dbo.actualizaciones a
+			INNER JOIN #errores_registros_existentes b ON
+				b.integracion = a.integracion
+			AND b.correlacion = a.correlacion
+			AND b.id_externo = a.id_externo
+
+			INSERT INTO errores
+				(id
+				,integracion
+				,correlacion
+				,id_externo
+				,estado_notificacion
+				,codigo
+				,mensaje
+				,version
+				,fecha_creacion
+				,fecha_modificacion)
+			SELECT
+				 NEXT VALUE FOR [$(eConnect)].dbo.hibernate_sequence AS id
+				,integracion
+				,correlacion
+				,id_externo
+				,'NOTIFICAR' AS estado_notificacion
+				,codigo
+				,mensaje
+				,0 AS version
+				,SYSDATETIME() AS fecha_creacion
+				,SYSDATETIME() AS fecha_modificacion
+			FROM #errores_registros_existentes
+
+			DELETE a
+			FROM #solicitudes a
+			INNER JOIN #errores_registros_existentes b ON
+				b.id_solicitud = a.id_solicitud
+
+			DELETE a
+			FROM #solicitudes_lineas a
+			INNER JOIN #errores_registros_existentes b ON
+				b.id_solicitud = a.id_solicitud
+
+			DELETE a
+			FROM #solicitudes_transporte a
+			INNER JOIN #errores_registros_existentes b ON
+				b.id_solicitud = a.id_solicitud
+
+			DELETE a
+			FROM #solicitudes_documentos a
+			INNER JOIN #errores_registros_existentes b ON
+				b.id_solicitud = a.id_solicitud
+
+		COMMIT TRANSACTION
+	END
 
 	BEGIN
 		BEGIN TRANSACTION
@@ -430,7 +528,7 @@ BEGIN TRY
         FROM #solicitudes_documentos
 
 		UPDATE a
-		SET  a.estado_integracion = CASE WHEN b.solicitud_existente = 0 THEN 'CARGADO' ELSE 'DESCARTADO' END
+		SET  a.estado_integracion = 'CARGADO'
 			,a.estado_notificacion = 'NOTIFICAR'
 			,a.[version] = a.[version] + 1
 			,a.fecha_modificacion = SYSDATETIME()

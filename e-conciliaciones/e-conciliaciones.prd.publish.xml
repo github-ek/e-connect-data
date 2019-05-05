@@ -11,4 +11,9 @@
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <GenerateSmartDefaults>True</GenerateSmartDefaults>
   </PropertyGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConnect">
+      <Value>eConnect</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
 </Project>

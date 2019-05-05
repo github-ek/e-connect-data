@@ -1,9 +1,4 @@
-﻿-- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE FUNCTION [dbo].[OrdenesAlistamientoEnStage]() 
+﻿CREATE FUNCTION [dbo].[OrdenesAlistamientoEnStage]() 
 RETURNS TABLE 
 AS
 RETURN 
@@ -26,7 +21,7 @@ RETURN
     (
         SELECT DISTINCT
              a.id_externo
-            ,CASE WHEN c.shpsts IN ('C','S','B') THEN 'STAGE' ELSE c.shpsts END AS shpsts
+            ,CASE WHEN c.shpsts IN ('C','S') THEN 'STAGE' ELSE c.shpsts END AS shpsts
         FROM cte_00 a
         INNER JOIN [$(ttcwmsprd)].dbo.shipment_line b ON
             b.client_id = a.client_id
@@ -34,6 +29,7 @@ RETURN
         AND b.ordnum = a.ordnum
         INNER JOIN [$(ttcwmsprd)].dbo.shipment c ON
             c.ship_id = b.ship_id
+		AND c.shpsts NOT IN ('B')
     )
     SELECT
          a.id_externo

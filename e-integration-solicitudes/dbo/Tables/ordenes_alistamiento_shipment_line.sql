@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ordenes_alistamiento_lineas] (
+﻿CREATE TABLE [dbo].[ordenes_alistamiento_shipment_line] (
     [id_orden_linea]       BIGINT        NOT NULL,
     [id_orden]             BIGINT        NOT NULL,
     [ordlin]               VARCHAR (10)  NOT NULL,
@@ -13,9 +13,7 @@
     [version]              INT           NOT NULL,
     [fecha_creacion]       DATETIME2 (0) NOT NULL,
     [fecha_modificacion]   DATETIME2 (0) NOT NULL,
-    CONSTRAINT [PK_ordenes_alistamiento_lineas] PRIMARY KEY CLUSTERED ([id_orden_linea] ASC),
-    CONSTRAINT [FK_ordenes_alistamiento_lineas_ordenes_alistamiento] FOREIGN KEY ([id_orden]) REFERENCES [dbo].[ordenes_alistamiento] ([id_orden]) ON DELETE CASCADE
+    CONSTRAINT [PK_ordenes_alistamiento_shipment_line] PRIMARY KEY CLUSTERED ([id_orden_linea] ASC),
+    CONSTRAINT [FK_ordenes_alistamiento_shipment_line_ordenes_alistamiento_ord] FOREIGN KEY ([id_orden]) REFERENCES [dbo].[ordenes_alistamiento_ord] ([id_orden]) ON DELETE CASCADE
 );
-
-
 

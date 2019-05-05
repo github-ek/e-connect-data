@@ -166,15 +166,15 @@ BEGIN TRY
     -------------------------------------------------------------------------------------------------------------------
     BEGIN
         DELETE a
-        FROM [$(historicoInv)].dbo.corteinv_hist a
+        FROM [$(historicoInv)].dbo.corteInv_Hist a
         WHERE
             a.fecha = @fecha_corte
 		AND a.prt_client_id = @prt_client_id
 
-        SELECT SYSDATETIME(),'DELETE FROM FROM [$(historicoInv)].dbo.corteinv_hist a'
+        SELECT SYSDATETIME(),'DELETE FROM FROM [$(historicoInv)].dbo.corteInv_Hist a'
 
 
-        INSERT INTO [$(historicoInv)].dbo.corteinv_hist 
+        INSERT INTO [$(historicoInv)].dbo.corteInv_Hist 
             (fecha
             ,prt_client_id
             ,wh_id
@@ -205,7 +205,7 @@ BEGIN TRY
             a.fecha_corte = @fecha_corte
 		AND a.prt_client_id = @prt_client_id
 
-        SELECT SYSDATETIME(),'INSERT INTO [$(historicoInv)].dbo.corteinv_hist'
+        SELECT SYSDATETIME(),'INSERT INTO [$(historicoInv)].dbo.corteInv_Hist'
 
 		EXEC [$(historicoInv)].[dbo].[corte_pedidos_pendientes_sp] @fecha_corte, @prt_client_id
 

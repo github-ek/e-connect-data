@@ -17,6 +17,6 @@
     [fecha_creacion]     DATETIME2 (0) CONSTRAINT [DF__suscripci__fecha__1920BF5C] DEFAULT (sysdatetime()) NOT NULL,
     [fecha_modificacion] DATETIME2 (0) CONSTRAINT [DF__suscripci__fecha__1A14E395] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_suscripciones] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80),
-    CONSTRAINT [UK_suscripciones_01] UNIQUE NONCLUSTERED ([suscripcion] ASC, [id_externo] ASC) WITH (FILLFACTOR = 80)
+    CONSTRAINT [UK_suscripciones_01] UNIQUE NONCLUSTERED ([id_externo] ASC, [suscripcion] ASC) WITH (FILLFACTOR = 80)
 );
 

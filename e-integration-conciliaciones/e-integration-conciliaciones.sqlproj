@@ -156,7 +156,7 @@
     <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="e-integration-conciliaciones.prd.publish.xml" />
     <None Include="e-integration-conciliaciones.dev.publish.xml" />
-    <None Include="e-integration-conciliaciones.tst.publish.publish.xml" />
+    <None Include="e-integration-conciliaciones.tst.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-conciliaciones\e-conciliaciones.sqlproj">
