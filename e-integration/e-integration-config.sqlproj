@@ -76,14 +76,14 @@
     <Build Include="dbo\Tables\grupos_mapa.sql" />
     <Build Include="dbo\Stored Procedures\WriteStringToFile.sql" />
     <Build Include="dbo\Tables\integraciones.sql" />
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion_lineas_alistadas.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareDev.scmp" />
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
-    <None Include="e-integration-config.tst.publish.xml" />
-    <None Include="e-integration-config.dev.publish.xml" />
     <None Include="e-integration-config.prd.publish.xml" />
+    <None Include="e-integration-config.tst.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">

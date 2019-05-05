@@ -120,7 +120,7 @@ BEGIN
         
         SELECT
             @DIRECTORIO_ENTRADAS = a.valor
-        FROM [eConfig].dbo.configuraciones a
+        FROM [$(eConfig)].dbo.configuraciones a
         WHERE
             a.codigo = 'wms.directorios.entradas'
 

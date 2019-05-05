@@ -30,6 +30,7 @@ BEGIN TRY
         WHERE
             a.fecha_corte = @fecha_corte
         AND a.prt_client_id = @prt_client_id
+		AND a.stoloc NOT LIKE 'LIN%'
         GROUP BY
              fecha_corte
             ,prt_client_id

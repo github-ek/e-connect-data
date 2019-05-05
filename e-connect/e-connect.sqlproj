@@ -146,6 +146,7 @@
     <Build Include="dbo\Tables\solicitudes_actas_ingredion.sql" />
     <Build Include="dbo\Tables\cargue_actas_wms.sql" />
     <Build Include="dbo\Tables\cargue_actas.sql" />
+    <Build Include="dbo\Tables\pdfmetadata.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />

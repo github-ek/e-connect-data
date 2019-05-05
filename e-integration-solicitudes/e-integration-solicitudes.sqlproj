@@ -295,6 +295,34 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion_lineas_alistadas.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion_lineas.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Tables\solicitudes_actas_ingredion.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\ActasIngredionAlistadas.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\CrearSuscripcionesOrdenesAlistamientoActasIngredion.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\ConfirmarCreacionOrdenesAlistamientoActasIngredion.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\ConfirmarAlistamientoOrdenesAlistamientoActasIngredion.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
@@ -326,6 +354,14 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eIntegration</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-integration-ordenes\e-integration-ordenes.sqlproj">
+      <Name>e-integration-ordenes</Name>
+      <Project>{46d88a35-3ed7-4c50-af80-db94e4577ac5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegrationOrdenes</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConfig">
@@ -340,20 +376,21 @@
       <DefaultValue>e-integration</DefaultValue>
       <Value>$(SqlCmdVar__6)</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegrationOrdenes">
+      <DefaultValue>eIntegrationOrdenes</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
       <DefaultValue>ttcwmsprd</DefaultValue>
       <Value>$(SqlCmdVar__4)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
       <DefaultValue>WMS_DB_SERVER</DefaultValue>
-      <Value>$(SqlCmdVar__5)</Value>
+      <Value>$(SqlCmdVar__10)</Value>
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
-    <None Include="e-integration-solicitudes.tst.publish.xml" />
-    <None Include="e-integration-solicitudes.prd.publish.xml" />
-    <None Include="e-integration-solicitudes.dev.publish.xml" />
   </ItemGroup>
 </Project>

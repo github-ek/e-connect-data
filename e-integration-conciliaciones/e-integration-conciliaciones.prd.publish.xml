@@ -4,7 +4,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>eIntegrationConciliaciones</TargetDatabaseName>
     <DeployScriptFileName>e-integration-conciliaciones.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=172.31.48.15;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
+    <TargetConnectionString>Data Source=172.31.48.20;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
   </PropertyGroup>
   <ItemGroup>
@@ -15,10 +15,10 @@
       <Value>eConnect</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eHistoricos">
-      <Value>eHistorico</Value>
+      <Value>eHistoricos</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eIntegration">
-      <Value>eIntegration</Value>
+      <Value>eIntegrationConfig</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="historicoInv">
       <Value>historicoInv</Value>
@@ -27,7 +27,7 @@
       <Value>ttcwmsprdnew</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>57DBWMS05</Value>
+      <Value>172.31.48.17</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>
