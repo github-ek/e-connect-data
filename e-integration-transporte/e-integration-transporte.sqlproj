@@ -182,13 +182,6 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eConnect</DatabaseSqlCmdVariable>
     </ProjectReference>
-    <ProjectReference Include="..\tactic_stage\tactic_stage.sqlproj">
-      <Name>tactic_stage</Name>
-      <Project>{73d129f1-106e-4671-80b0-f6ddcc2f2d41}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>tactic_stage</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\satelite\satelite.sqlproj">
       <Name>satelite</Name>
       <Project>{c1b1001f-1b20-4751-840f-ca6482bb7567}</Project>

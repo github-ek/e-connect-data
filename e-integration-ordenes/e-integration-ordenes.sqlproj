@@ -90,13 +90,6 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>ttcwmsprd</DatabaseSqlCmdVariable>
     </ProjectReference>
-    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
-      <Name>e-historicos</Name>
-      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
-    </ProjectReference>
     <ProjectReference Include="..\historicoInv\historicoInv.sqlproj">
       <Name>historicoInv</Name>
       <Project>{6eb7734c-a50f-49ca-91c4-79f0377d0a7f}</Project>
@@ -104,18 +97,25 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>historicoInv</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
+      <Name>e-historicos</Name>
+      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eHistoricos">
       <DefaultValue>eHistoricos</DefaultValue>
-      <Value>$(SqlCmdVar__2)</Value>
+      <Value>$(SqlCmdVar__4)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="historicoInv">
       <DefaultValue>historicoInv</DefaultValue>
       <Value>$(SqlCmdVar__3)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="ttcwmsprd">
-      <DefaultValue>ttcwmsprd</DefaultValue>
+      <DefaultValue>ttcwmsprdnew</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
   </ItemGroup>

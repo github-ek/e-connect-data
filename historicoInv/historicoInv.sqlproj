@@ -115,6 +115,6 @@
   <ItemGroup>
     <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="SqlSchemaComparePrd.scmp" />
-    <None Include="historicoInv.tst.publish.xml" />
+    <None Include="historicoInv.publish.xml" />
   </ItemGroup>
 </Project>

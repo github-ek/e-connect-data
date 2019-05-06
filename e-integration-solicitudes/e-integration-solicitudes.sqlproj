@@ -323,6 +323,38 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Stored Procedures\EnviarMensajesDeReciboJda.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\EnviarMensajesDeManufacturaJda.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\EnviarMensajesDeManufacturaBomJda.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\CrearOrdenesReciboDeTraslados.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\CrearOrdenesManufactura.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\CrearMensajesDeReciboJda.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\CrearMensajesDeManufacturaJda.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\CalcularOrdInv.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
@@ -362,6 +394,14 @@
       <DatabaseSqlCmdVariable>eIntegrationOrdenes</DatabaseSqlCmdVariable>
       <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">
+      <Name>e-historicos</Name>
+      <Project>{32293019-2186-4431-9bb1-25ee163d5144}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eHistoricos</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>WMS_DB_SERVER</ServerSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConfig">
@@ -371,6 +411,10 @@
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>eConnect</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eHistoricos">
+      <DefaultValue>eHistoricos</DefaultValue>
+      <Value>$(SqlCmdVar__11)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="eIntegration">
       <DefaultValue>e-integration</DefaultValue>
@@ -386,11 +430,13 @@
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
       <DefaultValue>WMS_DB_SERVER</DefaultValue>
-      <Value>$(SqlCmdVar__10)</Value>
+      <Value>$(SqlCmdVar__12)</Value>
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="SqlSchemaCompareTst.scmp" />
+    <None Include="e-integration-solicitudes.prd.publish.xml" />
+    <None Include="e-integration-solicitudes.tst.publish.xml" />
   </ItemGroup>
 </Project>

@@ -33,7 +33,7 @@ BEGIN
         FROM [$(eConnect)].dbo.solicitudes_actas_ingredion a
         INNER JOIN #base b ON
             b.id_solicitud_acta = a.id_solicitud_acta
-        INNER JOIN [$(eConnect)].dbo.bodegas c ON
+        INNER JOIN eConnect.dbo.bodegas c ON
             c.codigo = b.wh_id
 
         SET @success = 1
