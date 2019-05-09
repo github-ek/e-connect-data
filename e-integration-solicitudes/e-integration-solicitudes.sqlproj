@@ -355,6 +355,8 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Tables\piloto_bodegas_habilitadas.sql" />
+    <Build Include="dbo\Stored Procedures\piloto_RechazarSolicitudesDeCedisNoHabilitados.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
