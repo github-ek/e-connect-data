@@ -40,7 +40,7 @@ BEGIN TRY
             ,b.femi AS fecha_minima_solicitada
             ,b.fema AS fecha_maxima_solicitada
             ,b.homi AS hora_minima_solicitada
-            ,b.homi AS hora_maxima_solicitada
+            ,b.homa AS hora_maxima_solicitada
 
             ,CAST(1 AS BIT) AS requiere_transporte
             ,CAST(0 AS BIT) AS requiere_recaudo
