@@ -2,12 +2,17 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>eConnect</TargetDatabaseName>
-    <DeployScriptFileName>e-connect.sql</DeployScriptFileName>
+    <TargetDatabaseName>eMasterData</TargetDatabaseName>
+    <DeployScriptFileName>e-master-data.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=192.168.10.20;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
-    <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
-    <GenerateSmartDefaults>True</GenerateSmartDefaults>
-    <DropObjectsNotInSource>True</DropObjectsNotInSource>
   </PropertyGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConnect">
+      <Value>eConnect</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegrationSolicitudes">
+      <Value>eIntegrationSolicitudes</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
 </Project>

@@ -64,7 +64,7 @@ BEGIN TRY
 				,fecha_creacion
 				,fecha_modificacion)
 			SELECT
-				 NEXT VALUE FOR [$(eConnect)].dbo.hibernate_sequence AS id
+				 NEXT VALUE FOR dbo.hibernate_sequence AS id
 				,integracion
 				,correlacion
 				,id_externo

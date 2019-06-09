@@ -84,6 +84,8 @@
     <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="e-integration-config.prd.publish.xml" />
     <None Include="e-integration-config.tst.publish.xml" />
+    <None Include="e-integration-config.plt.publish.xml" />
+    <None Include="e-integration-config.dev.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-historicos\e-historicos.sqlproj">

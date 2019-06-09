@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseName>eIntegrationConciliaciones</TargetDatabaseName>
+    <DeployScriptFileName>e-integration-conciliaciones.sql</DeployScriptFileName>
+    <TargetConnectionString>Data Source=192.168.10.20;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
+    <ProfileVersionNumber>1</ProfileVersionNumber>
+  </PropertyGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="eConciliaciones">
+      <Value>eConciliaciones</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eConnect">
+      <Value>eConnect</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eHistoricos">
+      <Value>eHistoricos</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegration">
+      <Value>eIntegrationConfig</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="historicoInv">
+      <Value>historicoInv</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <Value>ttcwmstst</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <Value>192.168.10.16</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+</Project>

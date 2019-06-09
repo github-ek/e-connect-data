@@ -74,5 +74,7 @@
     <None Include="e-config.tst.publish.xml" />
     <None Include="e-config.prd.publish.xml" />
     <None Include="SqlSchemaCompareDev.scmp" />
+    <None Include="e-config.plt.publish.xml" />
+    <None Include="e-config.dev.publish.xml" />
   </ItemGroup>
 </Project>

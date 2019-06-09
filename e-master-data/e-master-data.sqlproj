@@ -102,4 +102,8 @@
       <Value>$(SqlCmdVar__2)</Value>
     </SqlCmdVariable>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="e-master-data.plt.publish.xml" />
+    <None Include="e-master-data.dev.publish.xml" />
+  </ItemGroup>
 </Project>

@@ -2,10 +2,10 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>eConciliaciones</TargetDatabaseName>
+    <TargetDatabaseName>pConciliaciones</TargetDatabaseName>
     <DeployScriptFileName>e-conciliaciones.sql</DeployScriptFileName>
     <ProfileVersionNumber>1</ProfileVersionNumber>
-    <TargetConnectionString>Data Source=192.168.10.20;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
+    <TargetConnectionString>Data Source=172.31.48.15;Persist Security Info=True;User ID=developer;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <BlockWhenDriftDetected>False</BlockWhenDriftDetected>
     <RegisterDataTierApplication>False</RegisterDataTierApplication>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
@@ -13,7 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <SqlCmdVariable Include="eConnect">
-      <Value>eConnect</Value>
+      <Value>pConnect</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

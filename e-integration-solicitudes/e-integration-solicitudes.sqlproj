@@ -125,6 +125,7 @@
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Sequences\" />
     <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Synonyms\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\mensajes_manufactura_jda_lineas.sql">
@@ -357,6 +358,9 @@
     </Build>
     <Build Include="dbo\Tables\piloto_bodegas_habilitadas.sql" />
     <Build Include="dbo\Stored Procedures\piloto_RechazarSolicitudesDeCedisNoHabilitados.sql" />
+    <Build Include="dbo\Synonyms\mapas_valores.sql" />
+    <Build Include="dbo\Synonyms\mapas.sql" />
+    <Build Include="dbo\Synonyms\grupos_mapa.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
@@ -440,5 +444,7 @@
     <None Include="SqlSchemaCompareTst.scmp" />
     <None Include="e-integration-solicitudes.prd.publish.xml" />
     <None Include="e-integration-solicitudes.tst.publish.xml" />
+    <None Include="e-integration-solicitudes.plt.publish.xml" />
+    <None Include="e-integration-solicitudes.dev.publish.xml" />
   </ItemGroup>
 </Project>

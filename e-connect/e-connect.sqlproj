@@ -155,5 +155,6 @@
     <None Include="e-connect.dev.publish.xml" />
     <None Include="e-connect.prd.publish.xml" />
     <None Include="SqlSchemaComparePrd.scmp" />
+    <None Include="e-connect.plt.publish.xml" />
   </ItemGroup>
 </Project>

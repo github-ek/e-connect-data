@@ -265,5 +265,7 @@
     <None Include="SqlSchemaComparePrd.scmp" />
     <None Include="e-integration-transporte.tst.publish.xml" />
     <None Include="e-integration-transporte.prd.publish.xml" />
+    <None Include="e-integration-transporte.plt.publish.xml" />
+    <None Include="e-integration-transporte.dev.publish.xml" />
   </ItemGroup>
 </Project>
