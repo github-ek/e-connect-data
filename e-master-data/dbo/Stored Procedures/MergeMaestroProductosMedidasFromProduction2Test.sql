@@ -1,8 +1,6 @@
 ﻿
 CREATE PROCEDURE [dbo].[MergeMaestroProductosMedidasFromProduction2Test] AS
 BEGIN
-	SET NOCOUNT OFF;
-
     BEGIN TRY
 
         BEGIN
@@ -13,7 +11,7 @@ BEGIN
             SELECT
                  a.*
             INTO #productos_medidas
-            FROM [$(EC_DB_SERVER_LEGADO)].[$(eConnectLegado)].dbo.productos_medidas a
+            FROM [$(SERVER_MASTER_DATA)].[$(eConnectMasterData)].dbo.productos_medidas a
 
             DELETE a
             FROM #productos_medidas a

@@ -3,10 +3,9 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION
 
-        --clientes(Satelite)
         BEGIN
             MERGE [$(eConnect)].dbo.clientes AS t
-            USING [$(EC_DB_SERVER_LEGADO)].[$(eConnectLegado)].dbo.clientes AS s ON 
+            USING [$(SERVER_MASTER_DATA)].[$(eConnectMasterData)].dbo.clientes AS s ON 
                 s.id_cliente = t.id_cliente
             WHEN MATCHED AND NOT (0 = 0
             AND t.codigo                = s.codigo

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-config", "e-config\e-config.sqlproj", "{609E6200-DBE9-49E6-BB9C-71AD502998BB}"
 EndProject
@@ -32,6 +32,14 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-integration-ordenes", "e-integration-ordenes\e-integration-ordenes.sqlproj", "{46D88A35-3ED7-4C50-AF80-DB94E4577AC5}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-master-data", "e-master-data\e-master-data.sqlproj", "{5BABE0B9-4502-4D3D-ABA0-4BC55E75F4A3}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-connect-master-data", "e-connect-master-data\e-connect-master-data.sqlproj", "{65422459-F6A5-4EA1-A29A-C0D5FE6B91C5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-conciliaciones-master-data", "e-conciliaciones-master-data\e-conciliaciones-master-data.sqlproj", "{75682977-32B9-4789-8F53-B55941974548}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "satelite-e-master-data", "satelite-e-master-data\satelite-e-master-data.sqlproj", "{FEF84EC5-71A4-4F8B-AB71-D9B592F96110}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "e-integration-config-master-data", "e-integration-config-master-data\e-integration-config-master-data.sqlproj", "{DAB87379-50AF-48FF-A31E-E0044326A8C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +137,30 @@ Global
 		{5BABE0B9-4502-4D3D-ABA0-4BC55E75F4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BABE0B9-4502-4D3D-ABA0-4BC55E75F4A3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BABE0B9-4502-4D3D-ABA0-4BC55E75F4A3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{65422459-F6A5-4EA1-A29A-C0D5FE6B91C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65422459-F6A5-4EA1-A29A-C0D5FE6B91C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65422459-F6A5-4EA1-A29A-C0D5FE6B91C5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{65422459-F6A5-4EA1-A29A-C0D5FE6B91C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65422459-F6A5-4EA1-A29A-C0D5FE6B91C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65422459-F6A5-4EA1-A29A-C0D5FE6B91C5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{75682977-32B9-4789-8F53-B55941974548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75682977-32B9-4789-8F53-B55941974548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75682977-32B9-4789-8F53-B55941974548}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{75682977-32B9-4789-8F53-B55941974548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75682977-32B9-4789-8F53-B55941974548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75682977-32B9-4789-8F53-B55941974548}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FEF84EC5-71A4-4F8B-AB71-D9B592F96110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF84EC5-71A4-4F8B-AB71-D9B592F96110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF84EC5-71A4-4F8B-AB71-D9B592F96110}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FEF84EC5-71A4-4F8B-AB71-D9B592F96110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF84EC5-71A4-4F8B-AB71-D9B592F96110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF84EC5-71A4-4F8B-AB71-D9B592F96110}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DAB87379-50AF-48FF-A31E-E0044326A8C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB87379-50AF-48FF-A31E-E0044326A8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB87379-50AF-48FF-A31E-E0044326A8C5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DAB87379-50AF-48FF-A31E-E0044326A8C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB87379-50AF-48FF-A31E-E0044326A8C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB87379-50AF-48FF-A31E-E0044326A8C5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

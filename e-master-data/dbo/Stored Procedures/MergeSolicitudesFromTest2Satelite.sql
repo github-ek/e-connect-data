@@ -321,7 +321,7 @@ BEGIN
 	END CATCH
 
 	BEGIN TRY
-		INSERT INTO [192.168.10.15].eMasterData.dbo.ordenes
+		INSERT INTO [$(SERVER_MASTER_DATA)].[$(SateliteMasterData)].dbo.ordenes
 			(id_solicitud
 			,estado_integracion
 			,id_orden
@@ -425,7 +425,7 @@ BEGIN
 			,usuario_actualizacion
 		FROM #ordenes
 
-		INSERT INTO [192.168.10.15].eMasterData.dbo.lineas_orden
+		INSERT INTO [$(SERVER_MASTER_DATA)].[$(SateliteMasterData)].dbo.lineas_orden
 			(id_solicitud
 			,numero_item
 			,notas

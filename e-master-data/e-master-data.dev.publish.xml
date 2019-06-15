@@ -8,11 +8,59 @@
     <ProfileVersionNumber>1</ProfileVersionNumber>
   </PropertyGroup>
   <ItemGroup>
+    <SqlCmdVariable Include="eConciliaciones">
+      <Value>eConciliaciones</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eConciliacionesMasterData">
+      <Value>eConciliaciones</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eConfig">
+      <Value>eConfig</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eConnect">
       <Value>eConnect</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eConnectMasterData">
+      <Value>eConnect</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eHistoricos">
+      <Value>eHistoricos</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegration">
+      <Value>e-integration</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegrationConfig">
+      <Value>eIntegrationConfig</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegrationConfigMasterData">
+      <Value>eIntegration</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegrationOrdenes">
+      <Value>eIntegrationOrdenes</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eIntegrationSolicitudes">
       <Value>eIntegrationSolicitudes</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="historicoInv">
+      <Value>historicoInv</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="INGLATERRA">
+      <Value>192.168.10.15</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="satelite">
+      <Value>Satelite</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SateliteMasterData">
+      <Value>eMasterData</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SERVER_MASTER_DATA">
+      <Value>172.31.48.15</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ttcwmsprd">
+      <Value>ttcwmstst</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="WMS_DB_SERVER">
+      <Value>HOLANDA</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

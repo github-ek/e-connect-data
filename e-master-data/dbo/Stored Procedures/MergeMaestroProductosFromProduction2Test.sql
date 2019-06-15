@@ -1,8 +1,6 @@
 ﻿
 CREATE PROCEDURE [dbo].[MergeMaestroProductosFromProduction2Test] AS
 BEGIN
-	SET NOCOUNT ON;
-
     BEGIN TRY
         IF OBJECT_ID('tempdb..#productos') IS NOT NULL BEGIN
             DROP TABLE #productos
@@ -11,7 +9,7 @@ BEGIN
         SELECT
             *
         INTO #productos
-        FROM [$(EC_DB_SERVER_LEGADO)].[$(eConnectLegado)].dbo.productos a
+        FROM [$(SERVER_MASTER_DATA)].[$(eConnectMasterData)].dbo.productos a
         WHERE
         NOT (id_cliente = 18 AND codigo = '310228')
    

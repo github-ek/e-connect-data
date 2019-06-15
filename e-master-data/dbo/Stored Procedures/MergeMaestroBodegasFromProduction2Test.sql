@@ -1,15 +1,12 @@
 ﻿
 CREATE PROCEDURE [dbo].[MergeMaestroBodegasFromProduction2Test] AS
 BEGIN
-	SET NOCOUNT ON;
-
     BEGIN TRY
         BEGIN TRANSACTION
 
-        --bodegas(Satelite)
 	    BEGIN
             MERGE [$(eConnect)].dbo.bodegas AS t
-            USING [$(EC_DB_SERVER_LEGADO)].[$(eConnectLegado)].dbo.bodegas AS s ON 
+            USING [$(SERVER_MASTER_DATA)].[$(eConnectMasterData)].dbo.bodegas AS s ON 
                 s.id_bodega = t.id_bodega
             WHEN MATCHED AND NOT (0 = 0
             AND t.codigo                    = s.codigo

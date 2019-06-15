@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[ordenes_recibo_lineas_confirmadas] (
+    [id]                    BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_orden_recibo]       BIGINT        NOT NULL,
+    [numero_linea]          INT           NOT NULL,
+    [linea_original]        INT           NOT NULL,
+    [id_producto]           BIGINT        NOT NULL,
+    [producto_codigo]       VARCHAR (50)  NOT NULL,
+    [id_estado_inventario]  VARCHAR (4)   NOT NULL,
+    [id_unidad_medida]      BIGINT        NOT NULL,
+    [unidades_solicitadas]  INT           NOT NULL,
+    [unidades_recibidas]    INT           NOT NULL,
+    [unidades_conformes]    INT           NOT NULL,
+    [unidades_no_conformes] INT           NOT NULL,
+    [unidades_faltantes]    INT           NOT NULL,
+    [unidades_sobrantes]    INT           NOT NULL,
+    [version]               INT           DEFAULT ((0)) NOT NULL,
+    [usuario_creacion]      VARCHAR (50)  NOT NULL,
+    [fecha_creacion]        DATETIME2 (0) NOT NULL,
+    [usuario_modificacion]  VARCHAR (50)  NOT NULL,
+    [fecha_modificacion]    DATETIME2 (0) NOT NULL,
+    CONSTRAINT [PK_ordenes_recibo_lineas_confirmadas] PRIMARY KEY CLUSTERED ([id] ASC) WITH (FILLFACTOR = 80),
+    CONSTRAINT [FK_ordenes_recibo_lineas_confirmadas_estados_inventario] FOREIGN KEY ([id_estado_inventario]) REFERENCES [dbo].[estados_inventario] ([id_estado_inventario]),
+    CONSTRAINT [FK_ordenes_recibo_lineas_confirmadas_productos] FOREIGN KEY ([id_producto]) REFERENCES [dbo].[productos] ([id_producto]),
+    CONSTRAINT [FK_ordenes_recibo_lineas_confirmadas_recibo] FOREIGN KEY ([id_orden_recibo]) REFERENCES [dbo].[ordenes_recibo] ([id_orden_recibo]),
+    CONSTRAINT [FK_ordenes_recibo_lineas_confirmadas_unidades_medida] FOREIGN KEY ([id_unidad_medida]) REFERENCES [dbo].[unidades_medida] ([id_unidad_medida]),
+    CONSTRAINT [UK_ordenes_recibo_lineas_confirmadas_01] UNIQUE NONCLUSTERED ([id_orden_recibo] ASC, [numero_linea] ASC)
+);
+

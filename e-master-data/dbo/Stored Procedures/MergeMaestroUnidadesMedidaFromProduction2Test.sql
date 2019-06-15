@@ -1,15 +1,12 @@
 ﻿
 CREATE PROCEDURE [dbo].[MergeMaestroUnidadesMedidaFromProduction2Test] AS
 BEGIN
-	SET NOCOUNT ON;
-
     BEGIN TRY
         BEGIN TRANSACTION
 
-        --unidades(Satelite)
 	    BEGIN
             MERGE [$(eConnect)].dbo.unidades_medida AS t
-            USING [$(EC_DB_SERVER_LEGADO)].[$(eConnectLegado)].dbo.unidades_medida AS s ON 
+            USING [$(SERVER_MASTER_DATA)].[$(eConnectMasterData)].dbo.unidades_medida AS s ON 
                 s.id_unidad_medida = t.id_unidad_medida
             WHEN MATCHED AND NOT (0 = 0
             AND t.codigo                    = s.codigo

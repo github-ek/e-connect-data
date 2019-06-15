@@ -11,29 +11,11 @@
     <SqlCmdVariable Include="eConnect">
       <Value>eConnect</Value>
     </SqlCmdVariable>
-    <SqlCmdVariable Include="eHistoricos">
-      <Value>eHistoricos</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="eIntegration">
-      <Value>eIntegrationConfig</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="historicoInv">
-      <Value>historicoInv</Value>
-    </SqlCmdVariable>
     <SqlCmdVariable Include="INGLATERRA">
       <Value>192.168.10.15</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="satelite">
       <Value>Satelite</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="tactic_stage">
-      <Value>tactic_stage</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="ttcwmsprd">
-      <Value>ttcwmstst</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>192.168.10.16</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

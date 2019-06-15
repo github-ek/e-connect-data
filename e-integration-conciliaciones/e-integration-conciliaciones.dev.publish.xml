@@ -27,7 +27,7 @@
       <Value>ttcwmstst</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="WMS_DB_SERVER">
-      <Value>192.168.10.16</Value>
+      <Value>HOLANDA</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

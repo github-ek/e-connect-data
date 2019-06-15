@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[estados_conciliacion] (
-    [id_estado_conciliacion] BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_estado_conciliacion] BIGINT         NOT NULL,
     [codigo]                 VARCHAR (100)  NOT NULL,
     [nombre]                 VARCHAR (100) NOT NULL,
     [descripcion]            VARCHAR (200) NOT NULL,

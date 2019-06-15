@@ -1,15 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[MergeMaestroEstadosInventarioFromProduction2Test] AS
 BEGIN
-	SET NOCOUNT ON;
-
     BEGIN TRY
         BEGIN TRANSACTION
 
-        --estados_inventario
 	    BEGIN
 
             MERGE [$(eConnect)].dbo.estados_inventario AS t
-            USING [$(EC_DB_SERVER_LEGADO)].[$(eConnectLegado)].dbo.estados_inventario AS s ON 
+            USING [$(SERVER_MASTER_DATA)].[$(eConnectMasterData)].dbo.estados_inventario AS s ON 
                 s.id_estado_inventario = t.id_estado_inventario
             WHEN MATCHED AND NOT (0 = 0
 		    AND t.nombre                    = s.nombre

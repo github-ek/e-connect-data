@@ -1,2 +1,2 @@
-﻿CREATE SYNONYM [dbo].[grupos_mapa] FOR [eIntegrationConfig].[dbo].[grupos_mapa];
+﻿CREATE SYNONYM [dbo].[grupos_mapa] FOR [$(eIntegration)].[dbo].[grupos_mapa];
 

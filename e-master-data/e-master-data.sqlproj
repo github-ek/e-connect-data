@@ -75,6 +75,30 @@
     <Build Include="dbo\Stored Procedures\MergeMaestroUnidadesMedidaFromProduction2Test.sql" />
     <Build Include="dbo\Stored Procedures\MergeSolicitudesFromTest2Satelite.sql" />
     <Build Include="dbo\Stored Procedures\MergeOrdenesDeTransporte.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroEmpresasFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroPaisesFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroDepartamentosFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroCiudadesFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroProductosAtributosFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroProductosCodigosFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroCanalesFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroTiposIdentificacionFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroSubEstadosInventarioFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroBodegasCiudadesPerifericasFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroBodegasVirtualesFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroLineasNegocioFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroUnidadesNegocioFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroTiposRutaFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroTiposRemesaFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroTiposPromesaEntregaFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroTarifasSecundariaFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroConciliacionesEstadosConciliacionFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroConciliacionesProductosExcluidosFromProduction2Test.sql" />
+    <None Include="datos-e-config-dev.sql" />
+    <None Include="datos-e-config-prd.sql" />
+    <None Include="datos-e-connect-prd.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroIntegrationConfigMapasFromProduction2Test.sql" />
+    <Build Include="dbo\Stored Procedures\MergeMaestroIntegrationConfigTiposArchivoFromProduction2Test.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\e-connect\e-connect.sqlproj">
@@ -91,19 +115,97 @@
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
       <DatabaseSqlCmdVariable>eIntegrationSolicitudes</DatabaseSqlCmdVariable>
     </ProjectReference>
+    <ProjectReference Include="..\e-connect-master-data\e-connect-master-data.sqlproj">
+      <Name>e-connect-master-data</Name>
+      <Project>{65422459-f6a5-4ea1-a29a-c0d5fe6b91c5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConnectMasterData</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>SERVER_MASTER_DATA</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-conciliaciones-master-data\e-conciliaciones-master-data.sqlproj">
+      <Name>e-conciliaciones-master-data</Name>
+      <Project>{75682977-32b9-4789-8f53-b55941974548}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConciliacionesMasterData</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>SERVER_MASTER_DATA</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-conciliaciones\e-conciliaciones.sqlproj">
+      <Name>e-conciliaciones</Name>
+      <Project>{d72fa721-8948-4032-a54c-0c723df190ee}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eConciliaciones</DatabaseSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\satelite-e-master-data\satelite-e-master-data.sqlproj">
+      <Name>satelite-e-master-data</Name>
+      <Project>{fef84ec5-71a4-4f8b-ab71-d9b592f96110}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>SateliteMasterData</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>SERVER_MASTER_DATA</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-integration-config-master-data\e-integration-config-master-data.sqlproj">
+      <Name>e-integration-config-master-data</Name>
+      <Project>{dab87379-50af-48ff-a31e-e0044326a8c5}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegrationConfigMasterData</DatabaseSqlCmdVariable>
+      <ServerSqlCmdVariable>SERVER_MASTER_DATA</ServerSqlCmdVariable>
+    </ProjectReference>
+    <ProjectReference Include="..\e-integration\e-integration-config.sqlproj">
+      <Name>e-integration-config</Name>
+      <Project>{ecd814bf-dee5-4572-b2d7-958c4f981f06}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>eIntegrationConfig</DatabaseSqlCmdVariable>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <SqlCmdVariable Include="eConciliaciones">
+      <DefaultValue>eConciliaciones</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eConciliacionesMasterData">
+      <DefaultValue>eConciliaciones</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eConnect">
       <DefaultValue>eConnect</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="eConnectMasterData">
+      <DefaultValue>eConnect</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegrationConfig">
+      <DefaultValue>eIntegrationConfig</DefaultValue>
+      <Value>$(SqlCmdVar__14)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="eIntegrationConfigMasterData">
+      <DefaultValue>eIntegration</DefaultValue>
+      <Value>$(SqlCmdVar__12)</Value>
+    </SqlCmdVariable>
     <SqlCmdVariable Include="eIntegrationSolicitudes">
       <DefaultValue>eIntegrationSolicitudes</DefaultValue>
-      <Value>$(SqlCmdVar__2)</Value>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="INGLATERRA">
+      <DefaultValue>192.168.10.15</DefaultValue>
+      <Value>$(SqlCmdVar__9)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SateliteMasterData">
+      <DefaultValue>eMasterData</DefaultValue>
+      <Value>$(SqlCmdVar__10)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SERVER_MASTER_DATA">
+      <DefaultValue>172.31.48.15</DefaultValue>
+      <Value>$(SqlCmdVar__13)</Value>
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
-    <None Include="e-master-data.plt.publish.xml" />
     <None Include="e-master-data.dev.publish.xml" />
+    <None Include="e-master-data.plt.publish.xml" />
   </ItemGroup>
 </Project>

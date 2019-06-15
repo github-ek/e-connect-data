@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[cargue_actas] (
+    [periodo]                VARCHAR (50)    NOT NULL,
+    [acta]                   VARCHAR (20)    NOT NULL,
+    [planta]                 VARCHAR (100)   NULL,
+    [bodega]                 VARCHAR (100)   NOT NULL,
+    [fecha_inicial]          DATE            NOT NULL,
+    [fecha_final]            DATE            NOT NULL,
+    [id]                     BIGINT          NULL,
+    [codigo_programa]        BIGINT          NULL,
+    [programas]              VARCHAR (100)   NOT NULL,
+    [codigo_regional]        BIGINT          NULL,
+    [regional]               VARCHAR (50)    NOT NULL,
+    [centro_zonal]           VARCHAR (100)   NOT NULL,
+    [codigo_municipio_punto] BIGINT          NULL,
+    [municipio_punto]        VARCHAR (100)   NOT NULL,
+    [direccion]              VARCHAR (150)   NOT NULL,
+    [codigo_punto_entrega]   BIGINT          NOT NULL,
+    [punto_entrega]          VARCHAR (100)   NOT NULL,
+    [responsable_principal]  VARCHAR (150)   NOT NULL,
+    [responsable_suplente]   VARCHAR (150)   NOT NULL,
+    [telefono]               BIGINT          NOT NULL,
+    [producto]               VARCHAR (100)   NULL,
+    [kilos]                  DECIMAL (14, 1) NULL,
+    [cantidad]               DECIMAL (14, 1) NULL,
+    [fecha_creacion]         DATETIME2 (0)   NOT NULL
+);
+
